@@ -1,0 +1,69 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/inicio.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+<div class="right_col" role="main">
+  
+    <div class="clearfix"></div>
+    <br><br>
+    <br> <br><br> <div class="row">
+      <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="x_panel">
+              <div class="x_title">
+                  <h2>Inicio de Session</h2>
+                  <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+  <!-- /contenido cambiante en la demas paginas -->
+  <form  method="POST" >
+    {% csrf_token%}
+    
+    <div class="form-group">
+       {% if form.non_field_errors %}
+           {% for error in form.non_field_errors %}
+               <div class="alert alert-danger alert-dismissible" role="alert">
+                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                   </button>
+                   <strong>Advertencia:</strong> {{error}}
+               </div>
+           {% endfor %}
+       {% endif%}
+       <label>Usuario</label>
+       {{form.username}}
+        <!--<input type="email" class="form-control" placeholder="Ingrese el correo" name="username">-->
+    </div>
+    <div class="form-group">
+       <label>Contraseña</label>
+       {{form.password}}
+        <!--<input type="password" class="form-control" placeholder="Ingrese la Contraseña" name="password">-->
+    </div>
+    <button type="submit" class="btn btn-success">Inciar Sesion</button>
+<p class="text-center">
+    <a href="{% url 'reset_password' %}"> ¿Has olvidado la contraseña? </a>
+</p>   
+</form>
+  
+  
+
+                  
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+
+{% endblock %}

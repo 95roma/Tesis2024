@@ -1,0 +1,119 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}
+<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %} SOLICITUD DE CREDITO PARA PERSONAS NATURALES {% endblock titulo %}
+<!-- /el titulo del formulario-->
+{% block uno %}<li><a href="">para seleccionar desde base</a></li>  {% endblock uno %}
+<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}
+<!-- /Para el menu de formulario em la llave-->
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel"> 
+      <div class="x_content">
+        <br />
+        <div class="row">
+            <h4 class="">Para familias con ingresos provenientes de empleos y/o remesa familiares </h4>
+          </div>
+          <form id="contact" name="contact" action="registrarDetalle" method="post" autocomplete="off">{% csrf_token %}
+            <input type="hidden" id="id" name="id" value="{{Perfil.id}}">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <h4>Fecha del dia</h4>
+                <div class="form-group form-animate-text " style="margin-top:0px !important;">
+                  <input type="text" class="form-text" disabled id="fechadia" name="fechadia" maxlength="50"
+                    placeholder="Fecha" required>
+                  <span class="bar"></span>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Agencia</h4>
+                  <input type="text" class="form-text" disabled value="{{Perfil.zona.zona.agencia.nombre}}"  id="agencia" name="agencia" required>
+                  <span class="bar"></span>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Municipio</h4>
+                <input type="text" class="form-text" disabled value="{{Perfil.municipio}}"  id="municipio" name="municipio" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Comunidad</h4>
+                <input type="text" class="form-text"  id="comunidad" name="comunidad" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>&Aacute;rea</h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Urbana:
+                <input type="radio" class="flat" name="area" id="genderM" value="Urbana" checked="" required /> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Rural:
+                <input type="radio" class="flat" name="area" id="genderF" value="Rural" />
+                <span class="bar"></span>
+            </div>
+        </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12 col-md-offset-2">
+                <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+                    style="width:200px; height:40px;">Siguente</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+            </div>
+        </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+            {% if messages %}
+            {% for mens in messages %}
+            <div class="alert alert-dismissible alert-success">
+              <button type="button" class="close" date-dismiss="alert">&times;</button>
+              <strong class="text-dark"> {{mens}}</strong>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endblock %}
+            <!-- /cerrar el bloque de contenido-->
+
+            {% block js %}
+            <!-- bloque para validaciones de input-->
+            <script type="text/javascript">
+              $(function () {
+                $(window).load(function () {
+                  var fecha = new Date();
+                var f = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+                document.getElementById("fechadia").value = f;
+
+
+                });
+              });
+              function fecha() {  
+                alert("paso " + f);
+              }
+
+            </script>
+            {% endblock %}

@@ -1,0 +1,191 @@
+
+<div>
+ 
+  <input type="hidden" id="iddg" name="iddg" value="{{s.id}}">
+  <div class="x_title">
+    <div class="row">
+      <h2 style="text-align: center;">{{sol.0.perfil.get.nombres}} {{sol.0.perfil.get.apellidos}} </h2>
+    </div><br>
+    <div class="row">
+      <h4 class="">Datos  de la Empresa o Lugar en que Genera sus Ingresos </h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Nombre de la Empresa o Negocio</h4>
+        <input type="text" class="form-text" id="nombreneg" name="nombreneg" value="{{sol.1.lugarTrabajo}}" disabled required>
+        <span class="bar"></span>
+      </div>
+  </div>
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Cargo que Desempeña</h4>
+        <input type="text" class="form-text" id="cargode" name="cargode" value=""  required>
+        <span class="bar"></span>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Teléfono</h4>
+      <input type="text" class="form-text" id="telefono" name="telefono" value="{{sol.1.telefonoMicr}}" onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 " maxlength="9" minlength="9" disabled required>
+      <span class="bar"></span>
+    </div>
+</div>
+  <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+       <h4>Fax</h4>
+      <input type="text" class="form-text mask-fax" id="faxde" name="faxde" onkeypress="validarfax('faxde');return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " value=""  >
+      <span class="bar"></span>
+    </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Tiempo de Laborar</h4>
+    <input type="text" class="form-text" id="tiempolab" name="tiempolab" value=""  required>
+    <span class="bar"></span>
+  </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+<div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Actividad del Negocio(c a)</h4>
+  <input type="text" class="form-text" id="actividadneg" name="actividadneg" value=""   >
+  <span class="bar"></span>
+  </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Principales Proveedores(c a)</h4>
+    <input type="text" class="form-text" id="principrov" name="principrov" value=""    >
+    <span class="bar"></span>
+  </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Dirección</h4> 
+    <input type="text" class="form-text" id="direccionde" name="direccionde" value=""   required>
+    <span class="bar"></span>
+  </div>
+  </div>
+</div>
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Cantón</h4>
+    <input type="text" class="form-text" id="cantonde" name="cantonde" value=""   >
+    <span class="bar"></span>
+  </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Departamento</h4>
+    
+    <select id="departamentode" class="form-text" name="departamentode"  onchange="cambiarMun()" required> 
+      <option value="0" selected disabled>SELECCIONE DEPARTAMENTO... </option> 
+      
+      {% for d in departamento %}
+          <option value="{{d.id}}" >{{d.nombre_depto}}</option>
+      {% endfor %}
+  </select>
+    <span class="bar"></span>
+  </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    
+  <h4>Municipio</h4>
+       <select name="municipiode" id="municipiode" class="form-text" required> 
+          <option value="-">    
+            </select> 
+    <span class="bar"></span>
+  </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Pais</h4>
+    <input type="text" class="form-text" id="paisde" name="paisde" value="El Salvador " disabled   required>
+    <span class="bar"></span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:0px !important;">
+      <h4>Rango de Ingresos Mensuales por salario o negocio</h4>
+      <input type="text" class="form-text" id="rangoing" name="rangoing" value=""  required>
+      <span class="bar"></span>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-6 col-xs-6">
+    <h4>Otros Ingresos:</h4>
+     </div>
+  <div class="col-md-2 col-sm-6 col-xs-6">
+    <div class="form-group form-animate-text " style="margin-top:0px !important;">
+     
+      <div class="col-md-6 col-sm-5 col-xs-4">
+        <p>Si:<input type="radio" name="otingresos" id="otingresos" value="Si" onchange="habdesO(this.value)"
+            required />
+        </p>
+      </div>
+      <div class="col-md-6 col-sm-5 col-xs-4">
+        <p>No:<input type="radio" name="otingresos" id="otingresos" value="No" checked onchange="habdesO(this.value)"
+            required /></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+<div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+<div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Procedencia</h4>
+  <input type="text" class="form-text"  id="procedencia" name="procedencia" value="" disabled >
+  <span class="bar"></span>
+</div>
+</div>
+   <div class="col-md-4 col-sm-6 col-xs-6">
+      <h4>¿Recibe Remesas Familiares?</h4>
+       </div>
+    <div class="col-md-1 col-sm-2 col-xs-4">
+      <p>Si: <input type="radio"  name="remesas" id="remesas" value="Si"  onchange="habdesR(this.value);"  required /></p>
+    </div><div class="col-md-1 col-sm-2 col-xs-4">
+      <p>No: <input type="radio"  name="remesas" id="remesas" value="No" checked onchange="habdesR(this.value);" required /></p>
+    </div>                
+   </div>
+  <BR>
+   <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Nombre del Remitente</h4>
+        <input type="text" class="form-text" id="nombreremit" name="nombreremit" value=""  disabled >
+        <span class="bar"></span>
+      </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Parentesco</h4>
+      <input type="text" class="form-text" id="parentesco" name="parentesco" value=""  disabled >
+      <span class="bar"></span>
+    </div>
+  </div>
+</div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Pais de origen de la Remesa</h4>
+        <input type="text" class="form-text" id="paisorgr" name="paisorgr" value=""   disabled>
+        <span class="bar"></span>
+      </div>
+  </div>
+</div>
+<input type="hidden" id="passDE" name="passDE" value="0">
+</div>
+
+

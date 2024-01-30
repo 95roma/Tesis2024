@@ -1,0 +1,131 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Login{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar de Usuarios   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+<form id="editarusuario" name="usuario" action="/editarusuario/" method="POST" autocomplete="off">{% csrf_token %}
+    <div class="row"><!--primer row  del formulario -->
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <input type="hidden" id="iduser" name="iduser" value="{{usuario.iduser}}">
+            <h4>Nombre</h4>
+            <input type="text" class="form-text" id="nombre" name="nombre" value="{{usuario.nombre}}" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Correo</h4>
+            <input type="text" class="form-text" id="correo" name="correo" value="{{usuario.correo}}" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    </div>
+    <div class="row"><!--primer row  del formulario -->
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Contraseña</h4>
+                <input type="password" class="form-text" id="contra" name="contra" value="{{usuario.password}}" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Cargo</h4>
+                <div class="col-md-9 col-sm-9 ">
+                    <select class="form-control" id="cargo" name="cargo" required >
+                        
+                        <option value=1>Gerente</option>
+                        <option value=2>Oficial de credito</option>
+                        
+                    </select>
+                </div>
+                <span class="bar"></span>
+            </div>
+        </div>
+        </div>
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    $(function(){
+        $('#contact').validate({
+
+      errorElement: "em",
+      errorPlacement: function(error, element) {
+        $(element.parent("div").addClass("form-animate-error"));
+        error.appendTo(element.parent("div"));
+      },
+      
+            rules :{
+                
+                nombre : {
+                    required : true,
+                    minlength : 3,
+                    maxlength : 9
+                },
+               correo: {
+                    required : true,
+                    minlength : 5,
+                    maxlength : 15
+                },
+                contrasena: {
+                    required : true,
+                    minlength : 10,
+                    maxlength : 15
+                },
+                cargo: {
+                    required : true,
+                    minlength : 3,
+                    maxlength : 8
+                }
+            },
+            messages : {
+                
+                nombre : {
+                    required : "<h2>Debe ingresar un nombre</h2>",
+                    minlength : "<h2>EL nombre debe tener un minimo de 3 caracteres</h2>",
+                    maxlength : "<h2>EL nombre debe tener un maximo de 9 caracteres</h2>"
+                },
+                 correo : {
+                    required : "<h2>Debe ingresar un correo</h2>",
+                    minlength : "<h2>EL correo debe tener un minimo de 5 caracteres</h2>",
+                    maxlength : "<h2>EL correo debe tener un maximo de 15 caracteres</h2>"
+                },
+                 contrasena : {
+                    required : "<h2>Debe ingresar una contraseña</h2>",
+                    minlength : "<h2>LA contraseña debe tener un minimo de 10 caracteres</h2>",
+                    maxlength : "<h2>LA contraseña debe tener un maximo de 15 caracteres</h2>"
+                },
+                 cargo : {
+                    required : "<h2>Debe seleccionar un cargo</h2>",
+                    minlength : "<h2>EL cargo debe tener un minimo de 3 caracteres</h2>",
+                    maxlength : "<h2>EL cargoo debe tener un maximo de 8 caracteres</h2>"
+                }
+            }
+        });    
+    });
+</script>
+{% endblock %}

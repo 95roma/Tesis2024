@@ -1,0 +1,94 @@
+
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+
+{% block titulo %}Grafica solicitudes Por Mes{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}<li><a href="{% url 'listarSN'%}">Listar SN</a></li>   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+        
+        <div class="col-md-12 col-sm-12 col-xs-12">        
+          <form id="contact" name="contact" method="post" autocomplete="off">{% csrf_token %}
+            <input type="hidden" id="bandera" name="bandera">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Selecciones un mes</h4>
+                    <div class="col-md-10 col-sm-10 ">
+                        <select class="form-text" id="meses" name="meses" onclick="cambiarMes()"  required >
+                            <option  selected></option>
+                            <option value="1" >Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Agosto</option>
+                        </select>
+                    </div>
+                    <span class="bar"></span>
+                </div>
+            </div>
+            <div class="x_content">
+                <canvas id="densityChart" width="400" height="200"></canvas> 
+               <!--<canvas id="mybarChart"></canvas>--> 
+              </div>   
+      </form>
+    </div>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+var densityCanvas = document.getElementById("densityChart");
+
+Chart.defaults.global.defaultFontFamily = "Lato";//tipo de letra
+Chart.defaults.global.defaultFontSize = 20;//tamaño de la letra
+
+var densityData = {
+  label: 'Nùmero de Perfiles Por mes',
+  colorByPoint:true,
+  data: ['{{meses|safe}}'],
+  backgroundColor:[
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)',
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)'
+      ], // Color de fondo de las barras del grafico
+  borderColor: [
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)',
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)'
+      ], // Color del borde de las barras
+  borderWidth: 2,// Ancho del borde de las barras
+  hoverBorderWidth: 0
+};
+
+var barChart = new Chart(densityCanvas, {
+  type: 'bar',
+  data: {
+    labels: ["En", "Fe", "Mar", "Abr", "Ma", "Ju", "Jul","Ag", "Sep","Oc","Nov","Dic"],
+    datasets: [densityData]
+  }
+});
+</script>
+{% endblock %}

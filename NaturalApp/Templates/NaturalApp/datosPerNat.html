@@ -1,0 +1,285 @@
+<input type="hidden" id="idCliente" name="idCliente" value="{{cliente.id}}{{soli.0.perfil.get.id}}">
+<input type="hidden" id="idC" name="idC" value="{{soli.2.id}}">
+
+<div style="overflow: hidden !important;">
+  <!-- tabla para datos generales del solicitante-->
+  
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+<h2>DATOS DE SOLICITANTE</h2> <h3><span ></span></h3>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conyuge:
+          <div class="iradio_flat-green ">
+            {% if soli.2.tipo == "conyuge" %}
+            <input type="radio" class="flat" checked name="tipoSN" value="conyuge" required>
+            {% else %}
+            <input type="radio" class="flat" checked name="tipoSN" value="conyuge" required>
+            {% endif %}
+            <ins class="iCheck-helper"></ins>
+          </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Codeudor:
+          <div class="iradio_flat-green ">
+            {% if soli.2.tipo == "codeudor" %}
+            <input type="radio" class="flat" checked name="tipoSN" value="codeudor" required>
+            {% else %}
+            <input type="radio" class="flat" name="tipoSN" value="codeudor" required>
+            {% endif %}
+            <ins class="iCheck-helper"></ins>
+
+          </div>
+          <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre del solicitante</h4>
+            <input type="text" class="form-text" id="nombreS" name="nombreS"
+              value="{{soli.0.perfil.nombres}}  {{cliente.nombres}} " maxlength="50" placeholder="" disabled required>
+          <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Nombre del Fiador</h4>
+          <input type="text" class="form-text" id="nombreC" name="nombreC" maxlength="50" value="{{soli.2.nombrefia}}"
+              required>
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+
+  <!-- Apellidos -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Apellido del solicitante</h4>
+            <input type="text" class="form-text" id="apellidoS" name="apellidoS" maxlength="50"
+              value="{{soli.0.perfil.apellidos}} {{cliente.apellidos}}" disabled placeholder="" required>
+              <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Apellido del Fiador</h4>
+          <input type="text" class="form-text" id="apellidoC" name="apellidoC" maxlength="50"
+              value="{{soli.2.apellidofia}}" required>
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+
+  <!-- DUI -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>DUI del solicitante</h4>
+            <input type="text" class="form-text" id="duiS" name="duiS" value="{{soli.0.perfil.dui}}{{cliente.dui}}"
+              onkeypress="du('duiS');return event.charCode>=48 && event.charCode<=57 " maxlength="10" minlength="10"
+              required disabled>
+              <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>DUI del Fiador</h4>
+          <input type="text" class="form-text" id="duiC" name="duiC" value="{{soli.2.duifia}}"
+              onkeypress="du('duiC');return event.charCode>=48 && event.charCode<=57 " maxlength="10" minlength="10"
+              required>
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+
+  <!-- Lugar y fecha de expedicion -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Lugar y fecha de expedición DUI del solicitante</h4>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <input type="text" class="form-text" id="lugExS" name="lugExS" maxlength="20" minlength="3"
+              value="{{soli.1.lugarduiC}}" required>
+            
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <input type="date" class="form-text" id="fechExS" name="fechExS" maxlength="10" 
+          value="{{soli.1.fechaduiC|date:'Y-m-d'}}" onchange="validarFechaExp(this)">
+          <span class="bar"></span>
+      </div>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Lugar y fecha de expedición DUI del Fiador</h4>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-text" id="lugExC" name="lugExC" maxlength="20" minlength="4"
+                value="{{soli.2.lugarduifia}}" required>
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <input type="date" class="form-text" id="fechExC" name="fechExC" maxlength="10"
+          value="{{soli.2.fechaduifia|date:'Y-m-d'}}" onchange="validarFechaExp(this)" required>
+     
+          <span class="bar"></span>
+      </div>
+  </div>   
+    </div>
+  </div>
+
+  <!-- Lugar y fecha de nacimiento -->
+<div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Lugar y fecha de nacimiento del solicitante</h4>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <input type="text" class="form-text" id="lughNaS" name="lugNaS" maxlength="50"  minlength="4"
+              value="{{soli.1.lugarnaciC}}" required>
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <input type="date" class="form-text" id="fechNaS" name="fechNaS" maxlength="10" disabled
+                value="{{cliente.fechan|date:'Y-m-d'}}{{soli.0.perfil.fechan|date:'Y-m-d'}}" onchange="validarFechaNacN(this)" required>
+                <span class="bar"></span>
+      </div>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Lugar y fecha de nacimiento del Fiador</h4>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-text" id="lugNaC" name="lugNaC" maxlength="50" minlength="4"
+                value="{{soli.2.lugarnacifia}}" required>
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <input type="date" class="form-text" id="fechNaC" name="fechNaC" maxlength="10" 
+                value="{{soli.2.fechanacifia|date:'Y-m-d'}}" onchange="validarFechaNacN(this)"  required>
+          <span class="bar"></span>
+      </div>
+  </div>   
+    </div>
+  </div>
+  <!-- EDAD -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Edad del solicitante</h4>
+            <input type="text" class="form-text" disabled
+              onkeypress="return event.charCode>=48 && event.charCode<=57" id="edadS" name="edadS" maxlength="2"
+              value="{{soli.0.perfil.edad}}{{cliente.edad}}" placeholder="" required>
+              <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Edad del Fiador</h4>
+          <input type="text" class="form-text" disabled
+              onkeypress="return event.charCode>=48 && event.charCode<=57 " id="edadC" name="edadC" maxlength="2"
+              value="{{soli.2.edadfia}}" required>
+              <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <!-- Estado civil -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Estado Civil del solicitante</h4>
+        <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+        style="padding-bottom:0px !important;">
+        <select class="form-text" id="estadoCivilS" name="estadoCivilS">
+          <option value="casado/a">Casado/a</option>
+          <option value="concubinato/a">Concubinato/a</option>
+          <option value="divorciado/a">Divorciado/a</option>
+          <option value="soltero/a">Soltero/a</option>
+          <option value="separación en proceso judicial">Separación en proceso judicial</option>
+          <option value="viudo/a">Viudo/a</option>
+        </select>
+
+      </div>
+          <span class="bar"></span>
+      </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Estado Civil del Fiador</h4>
+      <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+      style="padding-bottom:0px !important;">
+      <select class="form-text" id="estadoCivilC" name="estadoCivilC">
+        <option value="casado/a">Casado/a</option>
+        <option value="concubinato/a">Concubinato/a</option>
+        <option value="divorciado/a">Divorciado/a</option>
+        <option value="soltero/a">Soltero/a</option>
+        <option value="separación en proceso judicial">Separación en proceso judicial</option>
+        <option value="viudo/a">Viudo/a</option>
+      </select>
+    </div>
+        <span class="bar"></span>
+    </div>
+</div>
+     
+  </div>
+  <!-- GEnero -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Género del solicitante</h4>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Femenino:
+              <input type="radio" class="flat" name="generoS"  value="Femenino"  required checked /> 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Masculino:
+              <input type="radio" class="flat" name="generoS"  value="Masculino" />
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Género del Fiador</h4>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Femenino:
+          <input type="radio" class="flat" name="generoC" id="generoC"  value="Femenino" checked="" required /> 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Masculino:
+          <input type="radio" class="flat" name="generoC" id="generoC"  value="Masculino" />
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <!-- Profecion -->
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Profesión u oficio del solicitante</h4>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+            style="padding-bottom:0px !important;">
+            <input type="text" list="ocupaciones" disabled class="form-text" id="profecionS" name="profecionS" maxlength="50"
+              value="{{soli.0.perfil.idocu.ocupacion}}{{cliente.idocu.ocupacion}}" placeholder="" required>
+              <datalist id="ocupaciones"  >
+                {% include "TesisApp/ocupaciones.html" %}
+            </datalist>
+          </div>
+          <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Profesión u oficio del Fiador</h4>
+          <input type="text" list="ocupaciones"   class="form-text" id="profecionC" name="profecionC" maxlength="50"
+          value="{{soli.2.profefia}}" required>
+        <datalist id="ocupaciones"  >
+          {% include "TesisApp/ocupaciones.html" %}
+      </datalist>
+      <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  
+  <input type="hidden" id="passDPN" name="passDPN" value="0">
+  <input type="hidden" id="passDPNC" name="passDPNC" value="0">
+</div><!-- / fin tabla para datos generales del solicitante-->

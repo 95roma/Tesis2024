@@ -1,0 +1,1136 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Presupuesto de Mejoramiento de Vivienda{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" date-dismiss="alert">&times;</button>
+  <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos Generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="selected" isdone="1" rel="1">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Registro de Materiales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="2">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Registro de Mano de Obra</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="2">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Registro de Otros</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-5" class="done" isdone="1" rel="2">
+        <span class="step_no">5</span>
+        <span class="step_descr"><small>Especificaciones</small> </span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="stepContainer" style="overflow: hidden !important;">
+    <form id="presupuesto" name="presupuesto" action="" method="post" autocomplete="off">{% csrf_token %}
+      <input type="hidden" id="ids" name="ids" value="{{s.id}}">
+      <input type="hidden" id="idp" name="idp" value="{{s.perfil.id}}">
+
+      <input type="hidden" id="mt1" name="mt1" value="1">
+      <input type="hidden" id="mt2" name="mt2" value="0">
+      <input type="hidden" id="mt3" name="mt3" value="0">
+      <input type="hidden" id="mt4" name="mt4" value="0">
+      <input type="hidden" id="mt5" name="mt5" value="0">
+
+
+      <div id="step-1" class="content" style="display: block;">
+        <div class="x_title">
+          <div class="row">
+            <h4 class="">Datos Generales </h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Nombre del Cliente</h4>
+              <input type="text" disabled class="form-text" id="nombrec" name="nombrec"
+                value="{{s.perfil.nombres}} {{s.perfil.apellidos}}" required>
+              <span class="bar"></span>
+
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Fecha</h4>
+              <input type="date" class="form-text" id="fechap" name="fechap" onchange="validarFecha(this)" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Municipio del Mejoramiento</h4>
+              <input disabled type="text" class="form-text" id="municipiom" name="municipiom"
+                value="{{s.perfil.municipio.distri}}"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Agencia</h4>
+              <input disabled type="text" class="form-text" id="agencia" name="agencia"
+                value="{{s.perfil.Agencia.nombre}}" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Dirección del Proyecto</h4>
+              <input disabled type="text" class="form-text" id="direccionp" name="direccionp" value="{{do.direExacta}}"
+                required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Dias estimados para la construcción de la obra</h4>
+              <input type="text" onchange="validarDias(this.value)" class="form-text" id="diasest" name="diasest"
+                required onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              <span class="bar"></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Mejora a Realizar</h4>
+              <input type="text" class="form-text" id="mejorar" name="mejorar"
+                 required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+        {% include "PresupuestoApp/presupuestomt.html" %}
+      </div>
+      <div id="step-3" class="content" style="display: none; overflow: hidden !important;">
+        {% include "PresupuestoApp/presupuestomo.html" %}
+      </div>
+      <div id="step-4" class="content" style="display: none; overflow: hidden !important;">
+        {% include "PresupuestoApp/presupuestoot.html" %}
+      </div>
+      <div id="step-5" class="content" style="display: none; overflow: hidden !important;">
+        {% include "PresupuestoApp/presupuestoesp.html" %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+  var subtotal = 1;
+  var indiceMo = 1; //indice mano de obra
+  var indiceOtro = 1;
+  let button = document.getElementById('btnagregar');
+  let buttonMO = document.getElementById('btnagregarmo');
+  let buttonOtro = document.getElementById('btnagregar-otro');
+  $('#btnCancelarmo').fadeOut();
+  $('#btnCancelar-otro').fadeOut();
+
+
+  $(document).ready(function () {
+    //agregar fecha de hoy al campo fecha
+    //let fecha = new Date();
+    //let ff = ""
+    //if ((fecha.getMonth()) >= 9) {
+    //  ff = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+    //} else {
+    //  ff = fecha.getFullYear() + "-0" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+    //}
+    //document.getElementById("fechap").value = ff;
+
+    $("#fin").click(function () {
+      event.preventDefault(); 
+
+      //document.getElementById("passAE").value = '1'
+      //document.getElementById("passGN").value = '1'
+      let vmt1 = document.getElementById("mt1").value
+      let vmt2 = document.getElementById("mt2").value
+      let vmt3 = document.getElementById("mt3").value
+      let vmt4 = document.getElementById("mt4").value
+      let vmt5 = document.getElementById("mt5").value
+
+      var jsonArraydts = enviarDatos();
+      //console.log("jsonArray datos",jsonArraydts )
+
+      //if(Number(vmt2)===1){
+      var jsonArraytbmt = enviarTablaMt();
+      //  console.log("jsonArray tb1",jsonArraytbmt )
+      //}
+
+      var jsonArraytmo = enviarTablaMo();
+      //console.log("jsonArray tb2",jsonArraytmo )
+
+      var jsonArrayot = enviarTablaOt();
+      //console.log("jsonArray tb3",jsonArrayot )
+
+
+      var jsonArrayepf = enviarEspecif();
+      //console.log("jsonArray tb4",jsonArrayepf )
+      //
+      //if (validarDatosA()) {
+      //  if (validarDatosG()) {
+      //    document.presupuesto.submit()
+
+      //  }
+      //}
+
+
+      let idperf= document.getElementById("idp").value 
+      var passD = validarD();
+
+    if($("#presupuesto").valid() && passD === 1){ 
+      $.ajax({
+        headers: { 'X-CSRFToken': "{{csrf_token}}" },
+        url: "/PresupuestoApp/registrarP/",
+        data: { 'valoresig': jsonArraydts, 'valorestmt': jsonArraytbmt, 'valorestmo': jsonArraytmo, 'valorestot': jsonArrayot, 'valoresesp': jsonArrayepf },
+        type: "POST",
+        success: function (r) {
+          console.log("success", r)
+          document.presupuesto.submit()
+          window.location.href='../../../ClienteApp/listaClientes/administrarPerfil/'+idperf;
+        },
+        error: function (jqXHR, textStatus, error) {
+          console.log(error)
+        },
+        complete: function (xhr, status) {
+         // window.location.href = '/PresupuestoApp/listaPM/';
+          console.log("finalizado")
+        }
+      })
+    
+      }else{
+          alertE("Debe Registrar Datos Validos!");  
+          return false; // Evita el envío del formulario si la validación falla
+      }
+
+
+    });
+
+  });
+
+  function validarD() {
+    if (document.getElementById("fechap").value != "" &&
+      document.getElementById("diasest").value != "" &&
+      document.getElementById("mejorar").value != "" &&
+      document.getElementById("subtotal").value != "" &&
+      document.getElementById("total").value != "" 
+      
+    ) {
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+
+    $.validator.addMethod("numero", function (value, element) {
+      return /^[0-9,.]*$/i.test(value);
+    }, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+    $.validator.addMethod("letrasn", function(value, element) {
+      return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+    }, "<h2>Ingrese un valor valido ..</h2>");
+
+    $("#presupuesto").validate({
+      errorElement: "em",
+      errorPlacement: function (error, element) {
+        $(element.parent("div").addClass("form-animate-error"));
+        error.appendTo(element.parent("div"));
+      },
+      success: function (label) {
+        $(label.parent("div").removeClass("form-animate-error"));
+      },
+
+      rules: {
+        fechap: {
+          required: true      
+        },
+        diasest: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 10
+        },
+
+        mejorar: {
+          minlength: 5,
+          required: true,
+          letrasn: true,
+          maxlength: 200
+        },
+        
+        preciom: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        cantidadm: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        preciomo: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        cantidadmo: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        precioo: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        cantidado: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+
+        subtotal: {
+          required: true,      
+        },
+        asistenciatc: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        comisionot: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        consultabc: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        cancelarsp: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        primerac: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        total: {
+          required: true,      
+        },
+        notas: {
+          minlength: 5,
+          required: false,
+          letrasn: true,
+          maxlength: 500
+        },
+
+
+      },
+      messages: {
+        fechap: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        },
+        diasest: {
+          required: "<h2>Debe ingresar los dias estimados</h2>",
+          minlength: "<h2>Los dias estimados debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>Los dias estimados debe tener un maximo de 10 digitos</h2>"
+        },
+        mejorar: {
+          required: "<h2>Debe ingresar la mejora a realizar</h2>",
+          minlength: "<h2>La mejora a realizar debe tener un minimo de 5 digitos</h2>",
+          maxlength: "<h2>La mejora a realizar debe tener un maximo de 200 digitos</h2>"
+        },
+        preciom: {
+          required: "<h2>Debe ingresar el precio</h2>",
+          minlength: "<h2>EL precio debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL precio debe tener un maximo de 10 digitos</h2>"
+        },
+        cantidadm: {
+          required: "<h2>Debe ingresar la cantidad</h2>",
+          minlength: "<h2>La cantidad debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La cantidad debe tener un maximo de 10 digitos</h2>"
+        },
+        preciomo: {
+          required: "<h2>Debe ingresar el precio</h2>",
+          minlength: "<h2>EL precio debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL precio debe tener un maximo de 10 digitos</h2>"
+        },
+        cantidadmo: {
+          required: "<h2>Debe ingresar la cantidad</h2>",
+          minlength: "<h2>La cantidad debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La cantidad debe tener un maximo de 10 digitos</h2>"
+        },
+        precioo: {
+          required: "<h2>Debe ingresar el precio</h2>",
+          minlength: "<h2>EL precio debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL precio debe tener un maximo de 10 digitos</h2>"
+        },
+        cantidado: {
+          required: "<h2>Debe ingresar la cantidad</h2>",
+          minlength: "<h2>La cantidad debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La cantidad debe tener un maximo de 10 digitos</h2>"
+        },
+        subTotal: {
+          required: "<h2>Debe ingresar el sub total</h2>",
+        },
+        asistenciatc: {
+          required: "<h2>Debe ingresar la asistencia tecnica</h2>",
+          minlength: "<h2>La asistencia tecnica debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La asistencia tecnica debe tener un maximo de 10 digitos</h2>"
+        },
+
+        comisionot: {
+          required: "<h2>Debe ingresar la comisión por otorgamiento</h2>",
+          minlength: "<h2>La comisión por otorgamiento debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La comisión por otorgamiento debe tener un maximo de 10 digitos</h2>"
+        },
+
+        consultabc: {
+          required: "<h2>Debe ingresar la consulta buro de credito c</h2>",
+          minlength: "<h2>La consulta buro de credito debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La consulta buro de credito debe tener un maximo de 10 digitos</h2>"
+        },
+
+        cancelarsp: {
+          required: "<h2>Debe ingresar el saldo pendiente</h2>",
+          minlength: "<h2>El saldo pendiente debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El saldo pendiente debe tener un maximo de 10 digitos</h2>"
+        },
+        primerac: {
+          required: "<h2>Debe ingresar la primera cuota </h2>",
+          minlength: "<h2>La primera cuota debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La primera cuota  debe tener un maximo de 10 digitos</h2>"
+        },
+
+        total: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        },
+        notas: {
+          required: "<h2>Debe ingresar las notas</h2>",
+          minlength: "<h2>Las notas debe tener un minimo de 5 digitos</h2>",
+          maxlength: "<h2>Las notas debe tener un maximo de 500 digitos</h2>"
+        },
+
+      }
+    });
+
+  
+  //funciones para materiales
+  function AgregarTabla() {
+    var precio = document.getElementById("preciom").value
+    var cantidad = document.getElementById("cantidadm").value
+    var descripcion = document.getElementById("descripcionm").value
+    var unidad = document.getElementById("unidadm").value
+    if (precio != "" && cantidad != "") {
+      if (descripcion != "" && unidad != "") {
+        AgregarTabla2()
+      } else {
+        alertE("Seleccione un material!!")
+      }
+    } else {
+      alertE("Ingrese precio unitario y cantidad!!")
+    }
+
+  }
+
+  function cargarMateriall() {
+    let mat = document.presupuesto.nombrem.value
+    let opciones = document.querySelectorAll('#materiales-list option');
+    for (let i = 0; i < opciones.length; i++) {
+      // Si el nombre tecleado es igual al de la opción
+      if (mat == opciones[i].innerText) {
+        // Asignar ID y salir del ciclo
+        mat = opciones[i].dataset.id;
+        break;
+      }
+    }
+
+
+    if (comprobarexistencia(mat) == false) {
+      $.ajax({
+        url: "/PresupuestoApp/presupuestos/?idmaterial=" + mat,
+        type: "get",
+        headers: { "X-CSRFToken": '{{ csrf_token }}' },
+        dataType: "json",
+        success: function (response) {
+          document.getElementById("idmat").value = mat
+          document.getElementById("nombm").value = response[0].fields.nombre
+          document.getElementById("descripcionm").value = response[0].fields.descripcion
+          document.getElementById("unidadm").value = response[0].fields.unidad
+          document.getElementById("preciom").value = ""
+          document.getElementById("cantidadm").value = ""
+
+        },
+        error: function (error) {
+          console.log("cargarMaterial", error);
+        }
+      });
+    }
+
+  }
+
+  function comprobarexistencia(id) {
+    bandera = false
+    $("#pmaterialesMod tr").each(function (index) {
+      var self = $(this)
+      var idpk = self.find("td:eq(0)").text().trim()
+
+      if (id == idpk) {
+        bandera = true
+        var preciounidad = self.find("td:eq(4)").text().trim()
+        var cantidad = self.find("td:eq(5)").text().trim()
+        editarMaterial(id, preciounidad, cantidad)
+      }
+    });
+    return bandera
+  }
+
+  function editarMaterial(mat, precio, cantidad) {
+    $.ajax({
+      url: "/PresupuestoApp/presupuestos/?idmaterial=" + mat,
+      type: "get",
+      headers: { "X-CSRFToken": '{{ csrf_token }}' },
+      dataType: "json",
+      success: function (response) {
+        console.log("cargarMaterialMod", response);
+        console.log(response[0].fields)
+        document.getElementById("idmat").value = mat
+        document.getElementById("nombm").value = response[0].fields.nombre
+        document.getElementById("descripcionm").value = response[0].fields.descripcion
+        document.getElementById("unidadm").value = response[0].fields.unidad
+        document.getElementById("preciom").value = precio
+        document.getElementById("cantidadm").value = cantidad
+        document.getElementById("nombrem").value = response[0].fields.nombre
+        button.innerText = button.textContent = 'Actualizar';
+
+      },
+      error: function (error) {
+        console.log("cargarMaterial", error);
+      }
+    });
+  }
+
+  function AgregarTabla2() {
+    var idmt = document.getElementById("idmat").value
+    var nmat = document.getElementById("nombm").value
+    var dmat = document.getElementById("descripcionm").value
+    var umat = document.getElementById("unidadm").value
+    //var totalMaterial = document.getElementById("total-material").value;
+    var pmat = parseFloat(document.getElementById("preciom").value).toFixed(2);
+    var cmat = document.getElementById("cantidadm").value
+    let subTotal = parseFloat(pmat).toFixed(2) * parseFloat(cmat).toFixed(2);
+    let bandera = false;
+    document.getElementById("mt1").value = 0
+    document.getElementById("mt2").value = 1
+
+    $("#pmateriales tr").each(function (index) {
+      var self = $(this)
+      var idpk = self.find("td:eq(0)").text().trim()
+      if (Number(idmt) === Number(idpk)) {
+        let preciouni = parseFloat(pmat)
+        let cant = parseInt(cmat)
+        let subtotals = (parseFloat(subTotal).toFixed(2))
+        bandera = true;
+        self.find("td:eq(4)").text(preciouni)
+        self.find("td:eq(5)").text(cant)
+        self.find("td:eq(6)").text(subtotals.toFixed(2))
+
+      }
+    });
+    if (bandera === false) {
+      var fila = '<tr id="' + idmt + '"><td>' + idmt + '</td><td>' + nmat + '</td><td>' + dmat + '</td><td>' +
+        umat + '</td><td>' + pmat + '</td><td>' + cmat + '</td><td>' + subTotal.toFixed(2) +
+        '</td><td><button type="button" class="btn btn-danger" onclick="remove(this)">Quitar</button>' +
+        '<button type="button" class="btn btn-info" onclick="editarMaterial(' + idmt + ',' + pmat + ',' + cmat + ')">Editar</button></td></tr>';
+
+      //var fila = '<tr id="row"><td>' + idmt + '</td><td>' + nmat + '</td><td>' + dmat + '</td><td>' + umat + '</td><td>' + pmat + '</td><td>' + cmat + '</td><td>' + subTotal + '</td><td><button type="button" class="btn btn-danger"  onclick="remove(this)" >Quitar</button></td></tr>'; //esto seria lo que contendria la fila 
+      // $('#pmateriales tbody:first').after(fila);  $('#Table1 > tbody')').children('tbody') ="pmateriales"
+      $('#pmateriales tbody').append(fila);
+      var nFilas = $("#pmateriales tbody").length;
+    }
+
+    document.getElementById("descripcionm").value = "";
+    document.getElementById("unidadm").value = "";
+    document.getElementById("preciom").value = "";
+    document.getElementById("cantidadm").value = "";
+    document.getElementById("nombrem").value = "";
+    button.innerText = button.textContent = 'Agregar';
+    actualizaTotalMaterial()
+
+  }
+
+  function actualizaTotalMaterial() {
+    var total = 0
+    $("#pmateriales tr").each(function (index) {
+
+      var sub = $(this).find("td:eq(6)").text().trim();
+      if (parseFloat(sub))
+        total = total + parseFloat(sub);
+    });
+    document.getElementById("totalmaterial").value = total.toFixed(2);
+    actualizarSubtotalMod()
+  }
+  //fin funciones materiales
+
+  // Funciones tabla mano de otra 
+  function editarManoO(id, desc, unidad, precio, cantidad) {
+    document.getElementById("descripcionmo").value = desc
+    document.getElementById("unidadmo").value = unidad
+    document.getElementById("preciomo").value = precio
+    document.getElementById("cantidadmo").value = cantidad
+    document.getElementById("idManoObraMod").value = id
+    buttonMO.innerText = button.textContent = 'Actualizar';
+    $('#btnCancelarmo').fadeIn();//document.getElementById("btnCancelar-mo").style.display = 'true';
+
+  }
+
+  function actualizaTotalMD() {// actualiza el total de mano de obra
+    var total = 0
+    $("#pmano tr").each(function (index) {
+
+      var sub = $(this).find("td:eq(5)").text().trim();
+      if (parseFloat(sub))
+        total = total + parseFloat(sub);
+    });
+    document.getElementById("totalMD").value = total;
+    actualizarSubtotalMod()
+  }
+
+  function AgregarTablaMO() { //agrega a la tabla mano de obra
+
+    var dmo = document.getElementById("descripcionmo").value
+    var umo = document.getElementById("unidadmo").value
+    var pmo = document.getElementById("preciomo").value
+    var cmo = document.getElementById("cantidadmo").value
+    var id = document.getElementById("idManoObraMod").value
+    let subTotal = parseFloat(pmo) * parseFloat(cmo);
+    if (dmo == "" || umo == "" || pmo == "" || cmo == "") {
+      alertA("Complete los campos")
+    } else {
+      if (pmo <= 0) {
+        alertA("El precio tiene que ser mayor que 0")
+        document.getElementById("preciomo").focus();
+      } else {
+        if (cmo <= 0) {
+          alertA("La cantidad tiene que ser mayor que 0")
+          document.getElementById("cantidadmo").focus();
+        } else {
+          var bandera = false;
+
+          $("#pmano tr").each(function (index) {
+            var self = $(this)
+            var idfila = self.attr('id')
+
+            if ((Number(id) === Number(idfila))) {
+              var decripcion = self.find("td:eq(1)").text().trim()
+              var unidad = self.find("td:eq(2)").text().trim()
+              var pu = self.find("td:eq(3)").text().trim()
+              var cantidad = self.find("td:eq(4)").text().trim()
+              self.find("td:eq(1)").text(dmo)
+              self.find("td:eq(2)").text(umo)
+              self.find("td:eq(3)").text(pmo)
+              self.find("td:eq(4)").text(cmo)
+              self.find("td:eq(5)").text(pmo * cmo)
+              bandera = true;
+            }
+          });
+
+          if (bandera == false) {
+            var filamo = '<tr id="' + indiceMo + '"><td>' + id + '</td><td>' + dmo + '</td><td>' +
+              umo + '</td><td>' + pmo + '</td><td>' + cmo + '</td><td>' + subTotal.toFixed(2) +
+              '</td><td><button type="button" onclick="remove(this)" class="btn btn-danger btn_remove">Quitar</button>' +
+              '<button type="button" class="btn btn-info bnt_edit" onclick="editarManoO(' + "'" + indiceMo + "','" + dmo + "'," + "'" + umo + "'," + "'" + pmo + "'," + "'" + cmo + "'" + ')">Editar</button></td></tr>'; //esto seria lo que contendria la fila
+            $('#pmano tbody').append(filamo);
+            //agrega al buscador
+            $('#manObra-list').prepend("<option data-id='" + indiceMo + "' >" + dmo + "</option>");
+            indiceMo++;
+
+          }
+          buttonMO.innerText = button.textContent = 'Agregar';
+          $('#btnCancelarmo').fadeOut();
+          document.getElementById("idManoObraMod").value =  indiceMo;
+          document.getElementById("descripcionmo").value = "";
+          document.getElementById("unidadmo").value = "";
+          document.getElementById("preciomo").value = "";
+          document.getElementById("cantidadmo").value = "";
+          document.getElementById("descripcionmo").focus();
+          actualizaTotalMD(); // Actualizar el valor del input
+        }
+      }
+    }
+
+  }
+
+  function cargarMO() {//busca segun descripcion
+    let desc = document.modPresupuesto.bscrMO.value
+    let opciones = document.querySelectorAll('#manObra-list option');
+
+    for (let i = 0; i < opciones.length; i++) {//esto poque no muestra el id en el buscador
+
+      if (desc == opciones[i].innerText) {// Si el nombre tecleado es igual al de la opción
+
+        desc = opciones[i].dataset.id; // Asignar ID y salir del ciclo
+        break;
+      }
+    }
+
+    ObtenerManObra(desc)
+  }
+
+  function ObtenerManObra(id) {
+    $("#pmano tr").each(function (index) {
+      var self = $(this)
+      var idfila = self.attr('id')
+
+      if ((Number(id) === Number(idfila))) {
+        let decripcion = self.find("td:eq(1)").text().trim()
+        let unidad = self.find("td:eq(2)").text().trim()
+        let pu = self.find("td:eq(3)").text().trim()
+        let cantidad = self.find("td:eq(4)").text().trim()
+
+        document.getElementById("idManoObraMod").value = id
+        document.getElementById("descripcionmo").value = decripcion
+        document.getElementById("unidadmo").value = unidad
+        document.getElementById("preciomo").value = pu
+        document.getElementById("cantidadmo").value = cantidad
+        document.getElementById("descripcionmo").focus();
+        buttonMO.innerText = button.textContent = 'Actualizar';
+        $('#btnCancelar-mo').fadeIn();
+
+      }
+    });
+  }
+
+  function cancelar() {
+    document.getElementById("descripcionmo").value = ""
+    document.getElementById("unidadmo").value = ""
+    document.getElementById("preciomo").value = ""
+    document.getElementById("cantidadmo").value = ""
+    buttonMO.innerText = button.textContent = 'Agregar';
+    document.getElementById("btnCancelarmo").style.display = 'none';
+
+  }
+
+  //fin
+  //funciones para otros
+  function AgregarTablaOt() {
+    var id = document.getElementById("idOtro").value
+    var dmato = document.getElementById("descripciono").value
+    var umato = document.getElementById("unidado").value
+    var pmato = document.getElementById("precioo").value
+    var cmato = document.getElementById("cantidado").value
+    let subTotal = parseFloat(pmato) * parseFloat(cmato);
+    //contador para asignar id al boton que borrara la fila
+    if (dmato == "" || umato == "" || pmato == "" || cmato == "") {
+      alertA("Complete los campos")
+    } else {
+      if (pmato <= 0) {
+        alertA("El precio tiene que ser mayor que 0")
+        document.getElementById("precioo").focus();
+      } else {
+        if (cmato <= 0) {
+          alertA("La cantidad tiene que ser mayor que 0")
+          document.getElementById("cantidado").focus();
+        } else {
+          var bandera = false;
+
+          $("#potros tr").each(function (index) {
+            var self = $(this)
+            var idfila = self.attr('id')
+            //alert(idfila +' '+index)
+            if ((Number(id) === Number(idfila))) {
+              self.find("td:eq(1)").text(dmato)
+              self.find("td:eq(2)").text(umato)
+              self.find("td:eq(3)").text(pmato)
+              self.find("td:eq(4)").text(cmato)
+              self.find("td:eq(5)").text(pmato * cmato)
+              bandera = true;//editarMaterial(id, preciounidad, cantidad)
+            }
+          });
+
+          if (bandera == false) {
+
+            //alert(indiceOtro+' id='+id+' dmato='+" "+dmato+' u'+umato+" p"+pmato+" c="+cmato)
+            var fila = '<tr id="' + indiceOtro + '"><td>' + id + '</td><td>' + dmato + '</td><td>' + umato +
+              '</td><td>' + pmato + '</td><td>' + cmato + '</td><td>' + subTotal.toFixed(2) +
+              '</td><td><button type="button" onclick="removeOtros(this)"class="btn btn-danger btn_remove">Quitar</button>' +
+              '<button type="button" class="btn btn-info bnt_edit" onclick="editarOtros(' + "'" + indiceOtro +
+              "','" + dmato + "'," + "'" + umato + "'," + "'" + pmato + "'," + "'" + cmato + "'" +
+              ')">Editar</button></td></tr>';
+
+            $('#potros tbody').append(fila);
+            $('#otros-list').prepend("<option data-id='" + indiceOtro + "' >" + dmato + "</option>");
+            indiceOtro++
+          }
+          buttonOtro.innerText = button.textContent = 'Agregar';
+          $('#btnCancelar-otro').fadeOut();;
+          document.getElementById("idOtro").value =  indiceOtro
+          document.getElementById("descripciono").value = "";
+          document.getElementById("unidado").value = "";
+          document.getElementById("precioo").value = "";
+          document.getElementById("cantidado").value = "";
+          document.getElementById("bscrOtros").value = "";
+          document.getElementById("descripciono").focus();
+          
+          actualizaTotalOtros() // Actualizar el valor del input
+        }
+      }
+    }
+
+
+  }
+
+  function editarOtros(id, desc, unidad, precio, cantidad) {
+    document.getElementById("descripciono").value = desc
+    document.getElementById("unidado").value = unidad
+    document.getElementById("precioo").value = precio
+    document.getElementById("cantidado").value = cantidad
+    document.getElementById("idOtro").value = id
+    buttonOtro.innerText = button.textContent = 'Actualizar';
+    $('#btnCancelar-otro').fadeIn();//document.getElementById("btnCancelar-mo").style.display = 'true';
+
+  }
+
+  function actualizaTotalOtros() {// actualiza el total de mano de obra
+    var total = 0
+    $("#potros tr").each(function (index) {
+
+      var sub = $(this).find("td:eq(5)").text().trim();
+      if (parseFloat(sub))
+        total = total + parseFloat(sub);
+    });
+    document.getElementById("totalOtros").value = total;
+    actualizarSubtotalMod()
+  }
+
+  function cancelarOtro() {
+    document.getElementById("descripciono").value = ""
+    document.getElementById("unidado").value = ""
+    document.getElementById("precioo").value = ""
+    document.getElementById("cantidado").value = ""
+    buttonOtro.innerText = button.textContent = 'Agregar';
+    document.getElementById("btnCancelar-otro").style.display = 'none';
+
+  }
+
+  function cargarOtros() {
+    let desc = document.modPresupuesto.bscrOtros.value
+    let opciones = document.querySelectorAll('#otros-list option');
+
+    for (let i = 0; i < opciones.length; i++) {//esto poque no muestra el id en el buscador
+
+      if (desc == opciones[i].innerText) {// Si el nombre tecleado es igual al de la opción
+
+        desc = opciones[i].dataset.id; // Asignar ID y salir del ciclo
+        break;
+      }
+    }
+
+    ObtenerOtros(desc)
+  }
+
+  function ObtenerOtros(id) {
+    $("#potros tr").each(function (index) {
+      var self = $(this)
+      var idfila = self.attr('id')
+
+      if ((Number(id) === Number(idfila))) {
+        let decripcion = self.find("td:eq(1)").text().trim()
+        let unidad = self.find("td:eq(2)").text().trim()
+        let pu = self.find("td:eq(3)").text().trim()
+        let cantidad = self.find("td:eq(4)").text().trim()
+
+        document.getElementById("idOtro").value = id
+        document.getElementById("descripciono").value = decripcion
+        document.getElementById("unidado").value = unidad
+        document.getElementById("precioo").value = pu
+        document.getElementById("cantidado").value = cantidad
+        document.getElementById("descripciono").focus();
+        buttonOtro.innerText = button.textContent = 'Actualizar';
+        $('#btnCancelar-otro').fadeIn();
+
+      }
+    });
+  }
+//fin
+
+  function actualizarSubtotalMod() {
+    let materiales = parseFloat(document.getElementById("totalmaterial").value)
+    let manoObra = parseFloat(document.getElementById("totalMD").value)
+    let otros = parseFloat(document.getElementById("totalOtros").value)
+    
+    let total = materiales + manoObra + otros
+    $("#subtotal").val(total.toFixed(2)); // Actualizar el valor del input con el subtotal total
+    calculartotalp()
+  }
+
+
+  function enviarDatos() {
+    var arrayLisd = [];
+    let ids = document.getElementById("ids").value || "";
+    let fecha = document.getElementById("fechap").value ;
+    let mejora = document.getElementById("mejorar").value || "";
+    let diases = document.getElementById("diasest").value || "";
+
+    var infd = { 'ids': ids, 'fecha': fecha, 'mejora': mejora, 'diases': diases }
+    arrayLisd.push(infd);
+    var jsonArraydt = JSON.stringify(arrayLisd)
+    return jsonArraydt;
+
+
+    //console.log("jsonArray 3",arrayList )
+    //console.log("stringify",JSON.parse(jsonArray))
+
+
+  }
+
+  function enviarTablaMt() {
+
+    var arrayList = [];
+    //var idsol=document.getElementById("ids").value;
+    console.log("jsonArray", arrayList)
+    $("#pmateriales tbody >tr").each(function () {
+      var self = $(this)
+      var idtabla = self.find("td:eq(0)").text().trim()
+      var mat = self.find("td:eq(1)").text().trim()
+      var desc = self.find("td:eq(2)").text().trim()
+      var unidad = self.find("td:eq(3)").text().trim()
+      var preciounidad = self.find("td:eq(4)").text().trim()
+      var cantidad = self.find("td:eq(5)").text().trim()
+      var subtotal = self.find("td:eq(6)").text().trim();
+      var result = mat + " " + desc
+
+      var datos = { "idm": parseInt(idtabla), "preciouni": parseFloat(preciounidad), "cantidad": parseInt(cantidad), "subtotal": parseFloat(subtotal) }
+      arrayList.push(datos);
+
+    });
+    var jsonArray = JSON.stringify(arrayList)
+    return jsonArray;
+  }
+
+  function enviarTablaMo() {
+
+    var arrayListmo = [];
+
+    $("#pmano tbody >tr").each(function () {
+      var self = $(this)
+      // var idtabla = self.find("td:eq(0)").text().trim()
+      var desc = self.find("td:eq(1)").text().trim()
+      var unidad = self.find("td:eq(2)").text().trim()
+      var preciou = self.find("td:eq(3)").text().trim()
+      var cantidad = self.find("td:eq(4)").text().trim()
+      var subtotal = self.find("td:eq(5)").text().trim()
+      console.log(desc)
+      console.log(unidad)
+      console.log(preciou)
+
+      var datosmo = { "descripc": desc, "unidad": unidad, "preciouni": parseFloat(preciou), "cantidad": parseInt(cantidad), "subtotal": parseFloat(subtotal) }
+      arrayListmo.push(datosmo);
+
+    });
+    var jsonArraymo = JSON.stringify(arrayListmo)
+    console.log(jsonArraymo)
+    return jsonArraymo;
+
+
+  }
+
+  function enviarTablaOt() {
+
+    var arrayListot = [];
+
+    $("#potros tbody >tr").each(function () {
+      var self = $(this)
+      // var idtabla = self.find("td:eq(0)").text().trim()
+      var desc = self.find("td:eq(1)").text().trim()
+      var unidad = self.find("td:eq(2)").text().trim()
+      var preciou = self.find("td:eq(3)").text().trim()
+      var cantidad = self.find("td:eq(4)").text().trim()
+      var subtotal = self.find("td:eq(5)").text().trim()
+
+      var datosot = { "descripc": desc, "unidad": unidad, "preciouni": parseFloat(preciou), "cantidad": parseInt(cantidad), "subtotal": parseFloat(subtotal) }
+      arrayListot.push(datosot);
+
+    });
+    var jsonArrayot = JSON.stringify(arrayListot)
+    return jsonArrayot;
+
+
+  }
+
+  function enviarEspecif() {
+    var arrayLisesp = [];
+    let subtotal = document.getElementById("subtotal").value || "";
+    let asistenciatc = document.getElementById("asistenciatc").value || "";
+    let comisionot = document.getElementById("comisionot").value || "";
+    let consultabc = document.getElementById("consultabc").value || "";
+    let cancelarsp = document.getElementById("cancelarsp").value || "";
+    let primerac = document.getElementById("cancelarsp").value || "";
+    let total = document.getElementById("cancelarsp").value || "";
+    let notas = document.getElementById("cancelarsp").value || "";
+
+
+    var infdesp = { 'subtotal': subtotal, 'asistenciatc': asistenciatc, 'comisionot': comisionot, 'consultabc': consultabc, 'cancelarsp': cancelarsp, 'primerac': primerac, 'total': total, 'notas': notas }
+    arrayLisesp.push(infdesp);
+    var jsonArrayesp = JSON.stringify(arrayLisesp)
+    return jsonArrayesp;
+
+
+    //console.log("jsonArray 3",arrayList )
+    //console.log("stringify",JSON.parse(jsonArray))
+
+
+  }
+
+  function validarFecha(fecha) {
+    //alert(fecha.value)
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  function calculartotalp() {
+    var v1 = parseFloat(document.getElementById("subtotal").value);
+    var v2 = parseFloat(document.getElementById("asistenciatc").value);
+    var v3 = parseFloat(document.getElementById("comisionot").value);
+    var v4 = parseFloat(document.getElementById("consultabc").value);
+    var v5 = parseFloat(document.getElementById("cancelarsp").value);
+    var v6 = parseFloat(document.getElementById("primerac").value);
+
+    if (isNaN(v1)) {
+      v1 = 0
+    }
+    if (isNaN(v2)) {
+      v2 = 0
+    }
+    if (isNaN(v3)) {
+      v3 = 0
+    }
+    if (isNaN(v4)) {
+      v4 = 0
+    }
+    if (isNaN(v5)) {
+      v5 = 0
+    }
+    if (isNaN(v6)) {
+      v6 = 0
+    }
+    document.getElementById("total").value = v1 + v2 + v3 + v4 + v5 + v6;
+
+  }
+
+  function remove(button) {//elimiar elemento de tabla otro
+    var fila = $(button).closest('tr');
+    fila.remove();
+    actualizaTotalMaterial();
+    actualizaTotalMD();
+  }
+
+  function removeOtros(button) {//elimiar elemento de tabla otro
+    var fila = $(button).closest('tr');
+    fila.remove();    
+    actualizaTotalOtros();
+  }
+
+
+  function validarDias(dias) {
+    if (dias <= 0) {
+      alertA("Ingrese un numero de dias valido")
+      document.getElementById("diasest").value = ""
+    }
+  }
+
+  function validarNumero(n) {
+    if (n.value<= 0) {
+      alertA("Ingrese un numero valido")
+      n.value = ""
+    }
+  }
+
+  function validarDescripMejora(descripcion) {
+    if (descripcion.length <= 3) {
+      alertA("Detalle mas la mejora a realizar")
+      document.getElementById("mejorar").value = ""
+    }
+  }
+
+</script>
+{% endblock %}

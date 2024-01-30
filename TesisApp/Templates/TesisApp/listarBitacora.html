@@ -1,0 +1,155 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Listado de municipios por Departamento{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+<style type="text/css">
+  .align-right {
+    text-align: right;
+    max-width: 80px
+  }
+
+  .align-left {
+    text-align: left;
+    max-width: 80px
+  }
+
+  .align-center {
+    text-align: center;
+    max-width: 80px
+  }
+</style>
+<form id="contact" name="contact" action="registrarDocu/"  enctype="multipart/form-data" method="post"
+  autocomplete="off">{% csrf_token %}
+  
+
+ 
+ 
+  <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Fecha de inicio</h4>
+      <input class="form-control" type="date" name="fecha_inicio" id="fecha_inicio"  required>
+      
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Fecha de fin</h4>
+      <input class="form-control" type="date" name="fecha_fin" id="fecha_fin" required>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-12 col-xs-12">
+    
+      <h4>Buscar </h4>
+      <button type="button" class="form-control" id="search-button" onclick="cargarLista()"><i class="fa fa-search" aria-hidden="true"></i></button>
+      
+  </div>
+  
+  
+</form>
+
+<p></p>
+<table id="table-bitacora" class="table table-striped table-bordered"
+  style="th.dt-center, td.dt-center { text-align: center; }">
+  <thead>
+    <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+      <th>
+        <center>#</center>
+      </th>
+      <th>
+        <center>Fecha</center>
+      </th>
+      <th>
+        <center>Actividad</center>
+      </th>
+      <th>
+        <center>Tipo</center>
+      </th>
+      <th>
+        <center>Usuario</center>
+      </th>
+     
+      <!--th colspan="1">
+        <center>Accion</center>
+      </th-->
+
+
+    </tr>
+  </thead>
+
+
+  <tbody id="grupo" name="grupo" style="color: #000000; ">
+    {% for b in bitacora %}
+    <tr>
+      <td align="center" style="cursor:pointer">{{forloop.counter}}</td>
+      <td align="center" style="cursor:pointer">{{ b.fechaHora|date:"d/m/Y h:i A" }}</td>
+      <td align="center" style="cursor:pointer">{{b.actividad}}</td>
+      <td align="center" style="cursor:pointer">{{b.nivel}}</td>
+      <td align="center" style="cursor:pointer">{{b.idusuario.nombre}} {{b.idusuario.apellido}}</td>
+      <!--td  align="center" style="cursor:pointer"><a href="/DireccionApp/modiDepto/{{d.id}}" class="btn btn-info"><img src="{% static 'TesisApp/images/edit.png' %}"style="width:25px">Editar</a></td-->
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+{% block js %}
+<script>
+  $(document).ready(function () {
+    $('#table-bitacora').DataTable({
+      responsive: true,
+      language: {
+        url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+      }
+    });
+  });
+  
+  var rangos = JSON.parse('{{ ran_json|escapejs }}');
+  
+  
+  function cargarLista() {
+    let ini = document.getElementById('fecha_inicio').value;
+    let fin = document.getElementById('fecha_fin').value
+    //alert("entro"+ ini)
+    $('#table-bitacora').dataTable().fnClearTable(true);	//limpio la tabla
+        
+    $.ajax({
+      url: "../../fechas/?ini=" + ini + "&fin=" + fin,
+      type: "get",
+      headers: { "X-CSRFToken": '{{ csrf_token }}' },
+      dataType: "json",
+      success: function (listaDepa) {
+        
+        for (i = 0; i < listaDepa.length; i++) {
+          $('#table-bitacora').dataTable().fnAddData([
+            "<center>" + (i + 1) + "</center>",
+            "<center>" + moment.utc(listaDepa[i].fecha).format('DD/MM/YYYY hh:mm A')  + "</center>",
+            "<center>" + listaDepa[i].actividad + "</center>",
+            "<center>" + listaDepa[i].tipo + "</center>",
+            "<center>" + listaDepa[i].usu + "</center>",
+            "<center>" +
+            '<a href="/DireccionApp/modiMuni/' + listaDepa[i].id +
+            '" class="btn btn-info"><i class="fa fa-refresh"></i>Editar</a>' + "</center>"]
+          );
+        }
+
+
+
+      },
+      error: function (error) {
+        console.log("cargarMaterial", error);
+      }
+    });
+  }
+
+
+
+</script>
+
+
+{% endblock %}

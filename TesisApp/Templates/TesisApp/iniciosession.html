@@ -1,0 +1,71 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/inicio.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+<div class="right_col" role="main">
+  
+    <div class="clearfix"></div>
+    <br><br>
+    <br> <br><br> <div class="row">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+          <div class="x_panel">
+              <div class="x_title">
+                  <h2>Inicio de Session</h2>
+                  <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+  <!-- /contenido cambiante en la demas paginas -->
+  <form id="agencia" name="agencia" action="/home/" method="post" autocomplete="off">{% csrf_token %}
+    <div class="row">
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Correo</h4>
+            <input type="text" class="form-text" id="username" name="username" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Contrase&ntilde;a</h4>
+            <input type="password" id="password" name="password" class="form-text" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    
+    </div>
+        
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+         
+           
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+        </div>
+    </div>
+</form>
+  
+  
+
+                  
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+
+{% endblock %}

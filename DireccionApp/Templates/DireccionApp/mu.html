@@ -1,0 +1,8 @@
+{% for d in Muni %}
+<tr>
+  <td align="center" style="cursor:pointer">{{forloop.counter}}</td>
+  <td align="center" style="cursor:pointer">{{d.nombre_muni}}</td>
+  <td  align="center" style="cursor:pointer"><a href="/DireccionApp/modiMuni/{{d.idmuni}}" class="btn btn-info"><i class="fa fa-refresh"></i>Editar</a></td>
+
+</tr>
+{% endfor %}

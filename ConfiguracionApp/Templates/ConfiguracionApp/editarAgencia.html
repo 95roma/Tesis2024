@@ -1,0 +1,351 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Editar Agencia{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+<form id="agenciaMod" name="agenciaMod" action="../../modificarAgencia/" method="post" autocomplete="off">{% csrf_token %}
+    <input type="hidden" id="idAg" name="idAg" value="{{agencia.id}}">
+    <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4> Nombre</h4>
+            <input type="text" class="form-text" value="{{agencia.nombre}}" id="nombre" name="nombre" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Direccion</h4>
+            <input type="text" class="form-text" value="{{agencia.direccion}}" id="direccion" name="direccion" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Telefono</h4>
+            <input type="text" class="form-text" value="{{agencia.telefono}}"
+                onkeypress=" tel('telefono');return event.charCode>=48 && event.charCode<=57 " maxlength="9"
+                minlength="9" id="telefono" name="telefono" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Segundo telefono</h4>
+            <input type="text" class="form-text" value="{{agencia.telefono2}}" id="telefonodos" name="telefonodos"
+                onkeypress=" tel('telefono');return event.charCode>=48 && event.charCode<=57 " maxlength="9"
+                minlength="9" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Departamento</h4>
+            <select id="departamento" class="form-text" name="departamento" onchange="cambiarMunicipioMod()" required>
+                <option value="-0" selected disabled>SELECCIONE DEPARTAMENTO... </option>
+                {% for d in Departamento %}
+                <option value="{{d.nombre_depto}}">{{d.nombre_depto}}</option>
+                {% endfor %}
+            </select>
+
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Municipio</h4>
+            <select name="municipioe" id="municipioe" onchange="cambiarDistritoMod()" class="form-text" required>
+                <option value="-">-</option>
+            </select>
+
+            <span class="bar"></span>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Distrito</h4>
+            <select name="distrito" id="distritoMod" class="form-text" required>
+                <option value="-">-
+            </select>
+
+            <span class="bar"></span>
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+        </div>
+    </div>
+</form>
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    $(window).load(//funcin para selecionar los valores de los selects por defecto al cargar la pagina
+        function () {
+
+            $('#departamento option[value="' + "{{agencia.departamento}}" + '"]').prop('selected', true);
+            cambiarMunicipioMod()
+            $('#municipioe option[value="' + "{{agencia.municipio}}" + '"]').prop('selected', true);
+            cambiarDistritoMod()
+            $('#distrito option[value="' + "{{agencia.distrito}}" + '"]').prop('selected', true);
+            
+        }
+    )
+
+    $(document).ready(function(){
+
+$.validator.addMethod("letras", function(value, element) {
+ return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ.]*$/i.test(value);
+}, "<h2>Ingrese sólo letras ..</h2>");
+
+$.validator.addMethod("dire", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª#@&%-.]*$/i.test(value);
+}, "<h2>Ingrese una dirección valida ..</h2>");
+
+$.validator.addMethod("validartelefono", function(value, element) {
+ return  /^[7|6|2]\d{3}-\d{4}$/.test(value);
+}, "Ingrese correctamente el teléfono ****-****, que comience con 7,6 ó 2");
+
+$("#agenciaMod").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+            rules :{
+                
+                nombre : {
+                    required : true,
+                    minlength : 3,
+                    maxlength : 50,
+                    letras:true,
+                },
+                direccion: {
+                    required : true,
+                    minlength : 8,
+                    maxlength : 100,
+                    dire:true,
+                },
+                telefono:{
+                    minlength:9,
+                    required: true,
+                    validartelefono:true,
+                    maxlength:9,
+                
+                },
+                departamento: {
+                    required : true,
+                },
+                distrito: {
+                    required : true,
+                },
+            },
+            messages : {
+                
+                nombre : {
+                    required : "<h2>Debe ingresar un nombre para la agencia!</h2>",
+                    minlength : "<h2>El nombre debe tener un minimo de 3 caracteres</h2>",
+                    maxlength : "<h2>El nombre debe tener un maximo de 50 caracteres</h2>"
+                },
+                direccion : {
+                    required : "<h2>Debe ingresar una direccion valida!</h2>",
+                    minlength : "<h2>La direccion debe tener un minimo de 8 caracteres</h2>",
+                    maxlength : "<h2>El nombre debe tener un maximo de 50 caracteres</h2>"
+                },
+                telefono:{
+                    required : "<h2>Debe ingresar el Teléfono</h2>",
+                    minlength : "<h2>EL teléfono debe tener un minimo de 9 caracteres</h2>",
+                    maxlength : "<h2>EL teléfono debe tener un maximo de 9 caracteres</h2>"
+                },
+                departamento:{
+                    required : "<h2>Debe seleccionar el Departamento</h2>",
+                },
+                distrito:{
+                    required : "<h2>Debe seleccionar el Distrito</h2>",
+                },
+                }
+        });   
+        
+        $("#btnguardar").click(function(){
+            if($("#agenciaMod").valid()){
+                validar()
+            }else{
+            alertE("Debe Registrar Datos Validos!"); 
+            return false;
+            }
+            });// fin de btnguardar
+
+
+    });
+
+    
+
+    function validar() {
+        let distrito = document.getElementById('distrito').value
+        let tel = document.getElementById('telefono').value;
+
+        if (validarDistrito(distrito) == false) {
+            alertA("Seleccione un distrito para continuar");
+            return 0
+        }
+        if (document.getElementById('direccion').value == "") {
+            alertA("Ingrese una direccion para continuar");
+            return 0
+        }
+        if (tel == "") {
+            alertA("Ingrese un numero telefonico para continuar");
+            return 0
+        }
+        if (document.getElementById('nombre').value == "") {
+            alertA("Ingrese un nombre de agencia para continuar");
+            return 0
+        }
+
+        var muni = document.getElementsByName('dir');
+        var telefonos = document.getElementsByName('tels');
+        var telefonos2 = document.getElementsByName('tels2');
+
+        var direccion = document.getElementById('distrito').value + ' ' + document.getElementById('direccion').value;
+
+        var tel2 = document.getElementById('telefonodos').value;
+
+        var bandera = 0;
+        for (i = 0; i < muni.length; i++) {
+            if (muni[i].value == direccion) {
+                bandera = 1
+            }
+        }
+        if (tel == tel2) {
+            bandera = 2
+        } else {
+            for (i = 0; i < telefonos.length; i++) {
+                if (telefonos[i].value == tel) {
+                    bandera = 3
+                }
+            }
+            if (tel2 != "") {
+                for (i = 0; i < telefonos2.length; i++) {
+                    if (telefonos2[i].value == tel2) {
+                        bandera = 4
+                    }
+                }
+            }
+        }
+
+        switch (bandera) {
+            case 0:
+                document.agencia.submit();
+                //alertC("Agencia registrada");
+                break;
+            case 1:
+                alertE("Error direccion ya registrada");
+                break;
+            case 2:
+                alertE("Error numeros telefonicos no pueden ser iguales");
+                break;
+            case 3:
+                alertE("Error telefono ya registrado en otra agencia");
+                break;
+            case 4:
+                alertE("Error segundo telefono ya registrado en otra agencia");
+                break;
+        }
+
+
+
+    }
+
+    function validarDistrito(distrito) {
+        if (distrito == "-")
+            return false
+        return true
+    }
+
+    function tel(id){
+      var num=  document.getElementById(id).value.length;
+      var primer = document.getElementById(id).value;
+      if(num==4)
+      document.getElementById(id).value=document.getElementById(id).value+'-';
+
+      if(num==1 ){
+        if( primer=='2' || primer=='7' || primer=="6")
+           return
+           else {
+            document.getElementById(id).value="";
+            document.getElementById(id).title = "El Telefono debe comenzar con 2, 6 o 7";
+                      
+            
+            } 
+      }
+      
+     
+    }
+
+
+    function cambiarMunicipioMod() {
+
+        let depa = document.agenciaMod.departamento[document.agenciaMod.departamento.selectedIndex].value
+        if(depa !="-0"){
+            let url = '../../municipio/?departamento=' + depa;
+            fetch(url)
+            .then(function (result) {
+                return result.text();
+            })
+            .then(function (result) {
+                document.getElementById('municipioe').innerHTML = result;
+                cambiarDistritoMod();
+            });
+        }
+        
+        
+
+    }
+
+    function cambiarDistritoMod() {
+        let mun = document.agenciaMod.municipioe[document.agenciaMod.municipioe.selectedIndex].value
+        if(mun !="-"){
+            let url = '../../distrito/?municipio=' + mun;
+        fetch(url)
+            .then(function (result) {
+                return result.text();
+            })
+            .then(function (result) {
+                document.getElementById('distritoMod').innerHTML = result;
+            });
+        }
+        
+
+    }
+
+</script>
+{% endblock %}

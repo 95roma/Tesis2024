@@ -1,0 +1,174 @@
+
+
+body{
+  color: #3c7d77;
+}
+
+h2{
+  color: #3c7d77;
+}
+
+.row{
+display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+/*.input-field{
+  color: #034a43;
+}
+*/.input-field .prefix.active {
+  color: #034a43;
+}
+
+/*=================Form===============*/
+.form-animate-text .form-text,.form-animate-text .form-text:focus {
+  width: 100%; 
+/* border: none !important;   es el codigo que quita lo solido al input*/
+  border-bottom: 1px solid #ddd !important;/* cambia el grosor y  color de la linea*/
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  -ms-border-radius: 0px !important;
+  -o-border-radius: 0px !important;
+  border-radius: 0px !important;
+  padding: 10px;
+}
+
+.form-group.form-animate-text {
+  position: relative;
+  margin-bottom: 15px;/*cambiar tamaño de margen entre inputs*/
+}
+
+.form-group.form-animate-text .form-text {
+  font-size: 17px;/* el tamaño de la letras del input*/
+  padding: 1px 1px 1px 1px;
+  display: block;
+  width: 100%;
+  border: none;
+  background:none;
+  border-bottom: 1px solid #757575;
+  height: 23px;  /* altura de inputs*/
+}
+
+.form-group.form-animate-text .form-text:focus {
+  outline: none;
+}
+
+.form-group.form-animate-text.form-animate-error .bar:before,.form-group.form-animate-text.form-animate-error .bar:after{
+  background-color: #F9A107 !important;/*cambiar color de la linea para error */
+  width: 50%;
+}
+
+
+.form-group.form-animate-text .bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.form-group.form-animate-text .bar:before,
+.bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #02b3db;/*cambiar color de la linea de bueno */
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+
+.form-group.form-animate-text .bar:before {
+  left: 50%;
+}
+
+.form-group.form-animate-text .bar:after {
+  right: 50%;
+}
+
+.form-group.form-animate-text .form-text:focus ~ .bar:before,
+.form-text:focus ~ .bar:after {
+  width: 50%;
+}
+
+.btn-primary,
+  .label-primary,
+  .alert-primary,
+  .badge-primary {
+    color: #fff !important;
+    border: none !important;
+    background-color: #02b3db !important;
+  }
+
+  .btn-success,
+  .label-success,
+  .alert-success,
+  .badge-success {
+    color: #fff !important;
+    border: none !important;
+    background-color: #02b3db !important;
+  }
+
+  .btn-info,
+  .label-info,
+  .alert-info,
+  .badge-info {
+    color: #fff !important;
+    border: none !important;
+    background-color: #73CAEF !important;
+  }
+
+  .btn-danger,
+  .label-danger,
+  .alert-danger,
+  .badge-danger {
+    color: #fff !important;
+    border: none !important;
+    background-color: #FF6656 !important;
+  }
+
+  .btn-warning,
+  .label-warning,
+  .alert-warning,
+  .badge-warning {
+    color: #fff !important;
+    border: none !important;
+    background-color: #F0AD4E !important;
+  }
+
+  .btn-default,
+  .label-default,
+  .alert-default,
+  .badge-default {
+    color: #f7f7f7 !important;
+    border: none !important;
+    background-color: #34495e !important;
+  }
+
+  .custom-file-input {
+    display: none;
+  }
+  .custom-file-label {
+    background-color: #3498db;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }

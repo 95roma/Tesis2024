@@ -1,0 +1,65 @@
+
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Listado{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+
+{% endfor %}
+{% endif %}
+
+                    <table id="example" class="table table-striped table-bordered">
+                      <thead>
+                        <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+                          <th>#</th>
+                          <th>Dui</th>
+                          <th>Nombre</th>
+                          <th>Telefono</th>
+                          <th>Agencia</th>
+                          <th > Opciones </th>
+                          <th > Opciones </th>
+                          <th > Opciones </th>
+                          <th > Opciones </th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody style="color: #27575c;">
+                        {% for u in perfil %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{u.dui}}</td>
+                          <td>{{u.nombres}} {{ u.apellidos}}</td>
+                          <td>{{u.telefono}}</td>
+                          <td>{{u.Agencia.nombre}}</td> 
+                          <td><a href="editarPerfil/{{u.id}}" class="btn btn-info">Editar</a></td>
+                          <td><a href="eliminarPerfil/{{u.id}}" class="btn btn-danger">Eliminar</a></td>
+                          <td><a href="evaluacionf/{{u.id}}" class="btn btn-warning">Evaluación I vs E</a></td>
+                          <td><a href="evaluacionm/{{u.id}}" class="btn btn-warning">Evaluación Micro</a></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endblock %}
+                    <!-- /cerrar el bloque de contenido-->
+                    {% block js %}
+                    <script>
+                        $(document).ready(function() {
+                            $('#example').DataTable({
+                                responsive: true,
+                                language: {
+                                    url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+                                }
+                            });
+                        });
+                      </script>
+                      
+                      
+                      {% endblock %}

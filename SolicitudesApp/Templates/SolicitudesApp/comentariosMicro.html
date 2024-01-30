@@ -1,0 +1,190 @@
+<input type="hidden" id="passCM" name="passCM" value="0">
+<div style="margin-top: 10px;">
+  <!-- Comentario sobre la iniciativa -->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <label class="control-laber ">Comentario sobre la necesidad de la vivienda o mejoramiento de vivienda</label>
+    <div class="col-md-12 col-sm9">
+      <textarea class="form-text" id="comIniciativa" name="comIniciativa"  style="height: 80px;"  >{{soli.10.CSN}}</textarea>
+    </div>
+  </div>
+
+</div><!-- / fin Comentario sobre la iniciativa -->
+<div class="row" style="margin-top: 50px;"></div>
+<div style="margin-top: 10px;">
+  <!-- Comentario sobre la evaluacion y estabilidad de los ingresos -->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <label class="control-laber ">Comentario sobre la evaluacion y estabilidad de los ingresos</label>
+    <span class="step_descr">(Capacidad de pago, actividad productiva, referencias crediticias
+      y alternativas de pago por pérdida de fuente de ingreso actual)</span>
+    <div class="col-md-12 col-sm9">
+      <textarea class="form-text" id="comEvaluacion" name="comEvaluacion" style="height: 80px;" >{{soli.10.CEE}}</textarea>
+    </div>
+  </div>
+</div><!-- / fin comentario sobre la evaluacion y estabilidad de los ingresos -->
+<div class="row" style="margin-top: 50px;"></div>
+<div style="margin-top: 10px;">
+  <!-- Comentario sobre la evaluacion y estabilidad de los ingresos -->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <label class="control-laber ">Comentario sobre la garantía ofrecida</label>
+
+    <div class="col-md-12 col-sm9">
+      <textarea class=" form-text" id="comGarantia" name="comGarantia" style="height: 80px;" >{{soli.10.CGO}}</textarea>
+    </div>
+  </div>
+</div><!-- / fin comentario sobre la evaluacion y estabilidad de los ingresos -->
+<BR><BR><BR>
+<div class="x_title">
+  
+  <div class="row">
+    <h4 class="">Medio por el cual se informó del servicio crediticio de HPHES </h4>
+  </div>
+</div>
+<div>
+  <input type="hidden" id="passMI" name="passMI" value="0">
+ 
+<div class="row">
+    <div class="col-md-8 col-sm-6 col-xs-6">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <div class="checkbox">
+        {% if soli.11.redes == "Redes sociales" %}
+        <label>
+          Redes sociales <input type="checkbox" checked class="flat" name="redes" value="Redes sociales" > 
+         </label>
+        {% else %}
+        <label>
+          Redes sociales <input type="checkbox" class="flat" name="redes" value="Redes sociales"  > 
+         </label>
+        {% endif %}       
+          
+        </div>     
+  </div>  
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <div class="checkbox">
+          {% if soli.11.pvv == "PVV" %}
+        <label>
+          PVV <input type="checkbox" checked class="flat" name="pvv" value="PVV" > 
+         </label>
+        {% else %}
+        <label>
+          PVV <input type="checkbox" class="flat" name="pvv" value="PVV" > 
+         </label>
+        {% endif %}  
+          
+        </div>     
+  </div>
+</div>
+&nbsp;
+<div class="col-md-5 col-sm-6 col-xs-6">
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <div class="checkbox">
+      {% if soli.11.referenciado == "Referenciado" %}
+        <label>
+          Referenciado <input type="checkbox" checked class="flat" name="referenciado" value="Referenciado" > 
+         </label>
+        {% else %}
+        <label>
+          Referenciado <input type="checkbox" class="flat" name="referenciado"  value="Referenciado" > 
+         </label>
+        {% endif %}  
+    </div>     
+</div>
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="col-md-6 col-sm-6 col-xs-6">
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <div class="checkbox">
+      {% if soli.11.perifoneo == "Perifoneo" %}
+        <label>
+          Perifoneo <input type="checkbox" checked class="flat" name="perifoneo" value="Perifoneo" > 
+         </label>
+        {% else %}
+        <label>
+          Perifoneo <input type="checkbox" class="flat" name="perifoneo" value="Perifoneo" > 
+         </label>
+        {% endif %}  
+    </div>     
+</div>
+</div>
+
+</div>
+<div class="row">
+  <div class="col-md-4 col-sm-6 col-xs-6">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <div class="checkbox">
+      {% if soli.11.radio == "Radio" %}
+        <label>
+          Radio <input type="checkbox" checked class="flat" name="radio" value="Radio" > 
+         </label>
+        {% else %}
+        <label>
+          Radio <input type="checkbox" class="flat" name="radio" value="Radio" >
+         </label>
+        {% endif %}  
+      
+    </div>     
+    </div>
+    </div>
+  <div class="col-md-5 col-sm-6 col-xs-6">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <div class="checkbox">
+        {% if soli.11.feriav == "Feria de Vivienda" %}
+        <label>
+          Feria de Vivienda <input type="checkbox" checked class="flat" name="feriav" value="Feria de Vivienda" >  
+         </label>
+        {% else %}
+        <label>
+          Feria de Vivienda <input type="checkbox" class="flat" name="feriav" value="Feria de Vivienda" > 
+         </label>
+        {% endif %}  
+      </div>     
+</div>
+</div>
+&nbsp;&nbsp;&nbsp;
+  
+<div class="col-md-6 col-sm-6 col-xs-6">
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <div class="checkbox">
+      {% if soli.11.campanap == "Campaña de Promoción" %}
+        <label>
+          Campaña de Promoción <input type="checkbox" checked class="flat" name="campaprom" value="Campaña de Promoción" >  
+         </label>
+        {% else %}
+        <label>
+          Campaña de Promoción <input type="checkbox" class="flat" name="campaprom" value="Campaña de Promoción" > 
+         </label>
+        {% endif %}  
+    </div>     
+  </div>
+  </div>
+  <div class="col-md-3 col-sm-6 col-xs-6">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <div class="checkbox">
+        {% if soli.11.otros == "Otros" %}
+        <label>
+          Otros <input type="checkbox" checked class="flat" name="otros" value="Otros" >   
+         </label>
+        {% else %}
+        <label>
+          Otros <input type="checkbox" class="flat" name="otros" value="Otros" > 
+         </label>
+        {% endif %} 
+      </div>     
+    </div>
+    </div>
+</div>
+<div class="row">
+  
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Especifique</h4>
+      <input type="text" class="form-text"  id="espeotromed" name="espeotromed" required>
+      <span class="bar"></span>
+</div>
+</div>
+</div>
+
+</div>

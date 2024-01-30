@@ -1,0 +1,98 @@
+<div>
+    <div class="x_title">
+        
+        <div class="row">
+          <h4 class="">Otras Especificaciones </h4>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Sub Total</h4>
+                  <input type="text" class="form-text" id="subtotal" name="subtotal" disabled
+                   onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
+                   placeholder="0" required>
+                  <span class="bar"></span>
+              </div>
+          </div>
+     
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <h4>Asistencia Tecnica Constructiva</h4>
+                      <input type="text" class="form-text" id="asistenciatc" name="asistenciatc" value="{{pre.asistenciatecn}}"
+                      oninput="calculartotalp();" 
+                      onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
+                      placeholder="0" pattern="^\d*(\.\d{0,1})?$"  > 
+                      <span class="bar"></span>
+                  </div>
+              </div>
+  
+              </div>
+              <div class="row">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                          <h4>Comisión por Otorgamiento</h4>
+                          <input type="text" class="form-text" id="comisionot" name="comisionot" value="{{pre.comisionporot}}"
+                          oninput="calculartotalp();" 
+                          onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
+                          placeholder="0" pattern="^\d*(\.\d{0,1})?$" >
+                          <span class="bar"></span>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                          <h4>Consulta Buró de Creditos</h4>
+                          <input type="text" class="form-text" id="consultabc" name="consultabc" value="{{pre.consultabcredoto}}"
+                          oninput="calculartotalp();" 
+                          onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
+                          placeholder="0" pattern="^\d*(\.\d{0,1})?$" >
+                          <span class="bar"></span>
+                      </div>
+                  </div>
+      
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                            <h4>Cancelar Saldo Pendiente</h4>
+                            <input type="text" class="form-text" id="cancelarsp" name="cancelarsp" value="{{pre.cansaldopend}}"
+                            oninput="calculartotalp();" 
+                            onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
+                            placeholder="0" pattern="^\d*(\.\d{0,1})?$" >
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                            <h4>Primera Cuota</h4>
+                            <input type="text" class="form-text" id="primerac" name="primerac" value="{{pre.pcuota}}"
+                            oninput="calculartotalp();" 
+                            onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
+                            placeholder="0" pattern="^\d*(\.\d{0,1})?$" >
+                            <span class="bar"></span>
+                        </div>
+                    </div>       
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                <h4>Total</h4>
+                                <input type="text" class="form-text" id="total" name="total" value="0"
+                                 onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
+                                 placeholder="0"  required disabled>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                <h4>Notas</h4>
+                                <input type="text" class="form-text" id="notas" name="notas" value="{{pre.notas}}">
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+            
+                        </div>
+              
+     
+     </div>
+  

@@ -1,0 +1,527 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Perfil del Cliente{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% csrf_token %}
+<!-- page content -->
+<input type="hidden" id="idCliente" value="{{perfil.id}}">
+<input type="hidden" id="estado-cliente" value="{{perfil.estadosoli}}">
+<input type="hidden" id="csrftoken" value="{{csrf_token }}">
+
+<div class="x_content">
+    <div class="col-md-3 col-sm-3  profile_left">
+        <div class="profile_img">
+            <div id="crop-avatar">
+            </div>
+        </div>
+        <h3>{{perfil.nombres}}</h3>
+        <h3>{{perfil.apellidos}}</h3>
+
+        <ul class="list-unstyled user_data">
+            <li><i class="fa fa-map-marker user-profile-icon"></i> {{perfil.direccion}}
+            </li>
+
+            <li>
+                <i class="fa fa-briefcase user-profile-icon"></i> {{perfil.idocu.ocupacion}}
+            </li>
+
+            <li class="m-top-xs">
+                <i class="fa fa-phone user-profile-icon"></i> {{perfil.telefono}}
+            </li>
+        </ul>
+
+        <a href="../../listaPerfil/editarPerfil/{{perfil.id}}" class="btn btn-success"><i
+                class="fa fa-edit m-right-xs"></i> Editar Perfil</a> <br>
+        <a id="btnDicom" class="btn btn-success" style="display: none;"><i class="fa fa-pie-chart"></i> DICOM</a>
+        <a id="btnlistaChequeo" class="btn btn-success" style="display: none;"><i class="fa fa-list-ol m-right-xs"></i> Lista de chequeo</a>
+        <div id="divlistaChequeoRepo" style="display: none;" >
+            <li role="presentation" class="dropdown">
+                <a id="" href="#1" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    role="button" aria-expanded="false">
+                    Reportes
+                    <span class=""></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="row" id="divListaChequeo"style="display:contents"> &nbsp;&nbsp; <a id="btnListaChequeoRepo" class="dropdown-item">Lista de Chequeo</a></div>
+                </div>
+            </li>
+        </div>
+        
+        <br /> <br />
+        <div id="inspecciones" style="display: none;">
+        <a id="btnPrimeraInspeccion" onclick="alertA('Primero registre el formulario de inspeccion')" class="btn btn-success">Primera inspeccion</a>
+        <li role="presentation" class="dropdown">
+            <a id="btnPrimeraInspeccion" href="#1" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                role="button" aria-expanded="false">
+                Reportes
+                <span class=""></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="row" id="divEsquema1"style="display:contents"> &nbsp;&nbsp; <a id="btnesquema1Repo" class="dropdown-item">Esquema</a></div>
+                <div class="row" id="divubicacion1" style="display:contents"> &nbsp;&nbsp; <a id="btnUbicacion1Repo" class="dropdown-item">Ubicacion</a></div>
+                <div class="row" style="display:contents"> &nbsp;&nbsp; <a id="btnPFotografico1Repo" class="dropdown-item">Fotografico</a></div>
+            </div>
+        </li>
+
+        <a id="btnSegundaInspeccion" onclick="alertA('Primero registre la primera inspeccion')"            class="btn btn-success">Segunda inspeccion</a>
+        <li role="presentation" class="dropdown">
+            <a id="btnPrimeraInspeccion" href="#1" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="false"
+                role="button" aria-expanded="false">
+                Reportes
+                <span class=""></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="row" id="divEsquema2" style="display:contents"> &nbsp;&nbsp; <a id="btnesquema2Repo" class="dropdown-item">Esquema</a></div>
+                <div class="row" id="divubicacion2" style="display:contents"> &nbsp;&nbsp; <a id="btnUbicacion2Repo" class="dropdown-item">Ubicacion</a></div>
+                <div class="row" style="display:contents"> &nbsp;&nbsp; <a id="btnPFotografico2Repo" class="dropdown-item">Fotografico</a></div>
+            </div>
+        </li>       
+
+        <a id="btnTerceraInspeccion" onclick="alertA('Primero registre la segunda inspeccion')"            class="btn btn-success">Tercera inspeccion</a>
+        <li role="presentation" class="dropdown">
+            <a id="btnPrimeraInspeccion" href="#1" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                role="button" aria-expanded="false">
+                Reportes
+                <span class=""></span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="row" id="divEsquema3" style="display:contents"> &nbsp;&nbsp; <a id="btnesquema3Repo" class="dropdown-item">Esquema</a></div>
+                <div class="row" id="divubicacion3" style="display:contents"> &nbsp;&nbsp; <a id="btnUbicacion3Repo" class="dropdown-item">Ubicacion</a></div>
+                <div class="row" style="display:contents"> &nbsp;&nbsp; <a id="btnPFotografico3Repo" class="dropdown-item">Fotografico</a></div>
+            </div>
+        </li>
+    </div>
+        <!-- start skills -->
+
+        <!-- end of skills -->
+    </div>
+    <!-- inicia barra de progreso -->
+    <div class="col-md-9 col-sm-9 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2 id="titulo"><i class="fa fa-align-left"></i> Solicitud en proceso</h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content" id="progreso-soli">
+
+                <p id="despcipcion">No hay solicitud en proceso</p>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" id="progresoSoli" role="progressbar"
+                        style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- start of user-activity-graph -->
+
+        <!-- end of user-activity-graph -->
+
+        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                <li role="presentation" class=""><a href="#tab_content1" id="home-tab" role="tab"
+                        style="font-size: small;display: none;" data-toggle="tab" aria-expanded="true">Documentos
+                        Personales</a>
+                </li>
+
+                <li role="presentation" class="" id="role-formularios"><a href="#tab_content3" role="tab"
+                        id="formularios-tab2" style="font-size: 10; display: none;" data-toggle="tab"
+                        aria-expanded="false">Formularios </a>
+                </li>
+                <li role="presentation" class="" id="roler-reportes"><a href="#tab_reportes" role="tab"
+                        id="reportes-tab2" style="font-size: 10; display: none;" data-toggle="tab"
+                        aria-expanded="false">Reportes</a>
+                </li>
+                <li role="presentation" class="" id="roler-chequeo"><a href="#tab_chequeo" role="tab"
+                    id="chequeo-tab2" style="font-size: 10; display: none;" data-toggle="tab"
+                    aria-expanded="false">Lista de Chequeo</a>
+            </li>
+                <li role="presentation" class="" id="roler-historial"><a href="#tab_historial" role="tab"
+                        id="historial-tab2" style="font-size: 10; display: none;" data-toggle="tab"
+                        aria-expanded="false">Historial</a>
+                </li>
+                <li role="presentation" class="" id="nueva-soli-role"><a href="#nueva-solicitud" role="tab"
+                        id="nueva-soli" style="font-size: 10; display: none;" data-toggle="tab"
+                        aria-expanded="false">Iniciar</a>
+                </li>
+            </ul>
+
+            <div id="myTabContent" class="tab-content">
+                <div role="tabpanel" class="tab-pane fade " id="tab_content1" style="width:auto;"
+                    aria-labelledby="home-tab">
+
+                    <!-- inicia documentos personales -->
+                    {% include "ClienteApp/documentosPersonales.html" %}
+                    <!-- fin documentos personales -->
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                    <!-- inicia formularios -->
+                    {% include "ClienteApp/formulariosMicro.html" %}
+                    <!-- fin  formularios -->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="nueva-solicitud" aria-labelledby="profile-tab">
+                    <!-- inicia formulario nueva micro empresa -->
+                    {% include "ClienteApp/nuevaSolicitud.html" %}
+                    <!-- fin  formulario nueva micro empresa  -->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab_reportes" aria-labelledby="profile-tab">
+                    <!-- inicia reportes -->
+                    {% include "ClienteApp/Reportes.html" %}
+                    <!-- fin  reportes -->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab_chequeo" aria-labelledby="profile-tab">
+                    <!-- inicia reportes -->
+                    {% include "ListaChequeoApp/listaChequeoAdminCliente.html" with id="1" %}
+                    <!-- fin  reportes -->
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="tab_historial" aria-labelledby="profile-tab">
+                    <!-- inicia reportes -->
+                    {% include "ClienteApp/historialCliente.html" %}
+                    <!-- fin  reportes -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- fin barra de progreso -->
+<div class="clearfix"></div>
+<!-- inicia formularios -->
+
+
+<!-- /page content -->
+
+
+{% endblock %}
+
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+
+<script type="text/javascript">
+    // ver funciones en tesis/static/js/formulariosMicro.js
+    $(document).ready(function () {
+
+        $('input').on('keypress', function (e) {
+            if (e.keyCode == 25) {
+                // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+                var TabIndexActual = $(this).attr('tabindex');
+                var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+                // Se determina si el tabindex existe en el formulario
+                var CampoSiguiente = $('[tabindex=' + TabIndexSiguiente + ']');
+                // Si se encuentra el campo entra al if
+                if (CampoSiguiente.length > 0) {
+                    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+                    return false; // retornamos false para detener alguna otra ejecucion en el campo
+                } else {// Si no se encontro ningún elemento, se retorna false
+                    return false;
+                }
+            }
+        });
+
+
+
+        $('.mask-fecha').mask('00/00/0000');
+
+        $.validator.addMethod("validaemail", function (value, element) {
+            return /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i.test(value);
+        }, "<h2>Ingrese un correo válido  en formaro que contenga @ y .com</h2>");
+
+        $.validator.addMethod("letras", function (value, element) {
+            return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ.]*$/i.test(value);
+        }, "<h2>Ingrese sólo letras ..</h2>");
+
+        $.validator.addMethod("validardui", function (value, element) {
+            return /^(?!.*(.)\1{4})\d{8}-\d{1}$/.test(value);
+        }, "<h2>Ingrese corecctamente el DUI ..</h2>");
+
+        $.validator.addMethod("numero", function (value, element) {
+            return /^[0-9,.]*$/i.test(value);
+        }, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+        $.validator.addMethod("dire", function (value, element) {
+            return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª#@&%-.]*$/i.test(value);
+        }, "<h2>Ingrese una dirección valida ..</h2>");
+
+        $.validator.addMethod("validartelefono", function (value, element) {
+            return /^[7|6|2]\d{3}-\d{4}$/.test(value);
+        }, "Ingrese correctamente el teléfono ****-****, que comience con 7,6 ó 2");
+
+        /*  $("#fecha").datetimepicker({
+            format:'DD/MM/YY', // dar formato a fecha
+         daysOfWeekDisabled:[0,6], // desabilita los fines de semana
+            minDate: new Date(), // desabilita los dias anteriores a la fecha actual
+            maxDate: new Date(), // desabilita los dias posteriores a la fecha actual
+        
+        });*/
+
+
+        $("#perfil").validate({
+            errorElement: "em",
+            errorPlacement: function (error, element) {
+                $(element.parent("div").addClass("form-animate-error"));
+                error.appendTo(element.parent("div"));
+            },
+            success: function (label) {
+                $(label.parent("div").removeClass("form-animate-error"));
+            },
+            rules: {
+                nombres: {
+                    minlength: 3,
+                    required: true,
+                    letras: true,
+                    maxlength: 30
+                },
+                apellidos: {
+                    minlength: 3,
+                    required: true,
+                    letras: true,
+                    maxlength: 30
+                },
+                dui: {
+                    minlength: 10,
+                    required: true,
+                    validardui: true,
+                    maxlength: 10,
+
+                },
+                telefono: {
+                    minlength: 9,
+                    required: true,
+                    validartelefono: true,
+                    maxlength: 9,
+
+                },
+                fecha: {
+                    required: true,
+
+                },
+
+                salario: {
+                    required: true,
+                    minlength: 3,
+                    maxlength: 10,
+                    numero: true,
+
+                },
+                direccion: {
+                    minlength: 10,
+                    required: true,
+                    dire: true,
+                    maxlength: 100
+
+                },
+                correo: {
+                    minlength: 3,
+                    required: true,
+                    validaemail: true,
+                    maxlength: 30
+
+                },
+                contrasena: {
+                    minlength: 8,
+                    required: true,
+                    maxlength: 30
+
+                },
+                rcontrasena: {
+                    minlength: 8,
+                    required: true,
+                    maxlength: 30
+
+                },
+            },
+            messages: {
+                nombres: {
+                    required: "<h2>Debe ingresar los Nombres</h2>",
+                    minlength: "<h2>El nombre debe tener un minimo de 3 caracteres</h2>",
+                    maxlength: "<h2>El nombre debe tener un maximo de 30 caracteres</h2>"
+                },
+                apellidos: {
+                    required: "<h2>Debe ingresar los Apellidos</h2>",
+                    minlength: "<h2>El apellido debe tener un minimo de 3 caracteres</h2>",
+                    maxlength: "<h2>El apellido debe tener un maximo de 30 caracteres</h2>"
+                },
+                dui: {
+                    required: "<h2>Debe ingresar el Dui</h2>",
+                    minlength: "<h2>El dui debe tener un minimo de 10 caracteres</h2>",
+                    maxlength: "<h2>El dui debe tener un maximo de 10 caracteres</h2>"
+                },
+                telefono: {
+                    required: "<h2>Debe ingresar el Teléfono</h2>",
+                    minlength: "<h2>EL teléfono debe tener un minimo de 9 caracteres</h2>",
+                    maxlength: "<h2>EL teléfono debe tener un maximo de 9 caracteres</h2>"
+                },
+                nacionalidad: {
+                    required: "<h2>Debe seleccionar la Nacionalidad</h2>",
+                },
+                fecha: {
+                    required: "<h2>Debe ingresar la Fecha</h2>",
+                },
+                ocupacion: {
+                    required: "<h2>Debe seleccionar la Ocupación</h2>"
+                },
+                salario: {
+                    required: "<h2>Debe ingresar un Salario </h2>",
+                    minlength: "<h2>El salario debe tener un minimo de 3 digitos</h2>",
+                    maxlength: "<h2>El salario debe tener un maximo de 10 digitos</h2>"
+                },
+                departamento: {
+                    required: "<h2>Debe seleccionar el Departamento</h2>"
+                },
+                municipio: {
+                    required: "<h2>Debe seleccionar el Municipio</h2>"
+                },
+                direccion: {
+                    required: "<h2>Debe ingresar una Dirección</h2>",
+                    minlength: "<h2>La direción debe tener un minimo de 10 caracteres</h2>",
+                    maxlength: "<h2>La direción debe tener un maximo de 100 caracteres</h2>"
+                },
+                correo: {
+                    required: "<h2>Debe ingresar el Correo</h2>",
+                    minlength: "<h2>El correo debe tener un minimo de 8 caracteres</h2>",
+                    maxlength: "<h2>El correo debe tener un maximo de 11 caracteres</h2>"
+                },
+                contrasena: {
+                    required: "<h2>Debe ingresar una Contraseña</h2>",
+                    minlength: "<h2>La contraseña debe tener un minimo de 5 caracteres</h2>",
+                    maxlength: "<h2>La contraseña debe tener un numero, una mayuscula y minimo de 8 caracteres</h2>"
+                },
+                rcontrasena: {
+                    required: "<h2>Debe ingresar una Contraseña</h2>",
+                    minlength: "<h2>La contraseña debe tener un minimo de 5 caracteres</h2>",
+                    maxlength: "<h2>La contraseña debe tener un maximo de 30 caracteres</h2>"
+                },
+            }
+        });
+    });
+
+
+
+    function validarFecha(fecha) {
+        var actual = new Date();
+        var f = Date.parse(fecha.value);
+        var anio = actual.getFullYear();
+        var mes = actual.getMonth();
+        var dia = actual.getDate();
+
+        if (f.getFullYear() > anio) {
+            alertE("Ingrese una fecha valida ");
+            fecha.value = "";
+        } else {
+            if (f.getMonth() > mes && f.getFullYear() == anio) {
+                alertE("Ingrese una fecha valida ");
+                fecha.value = "";
+            } else {
+                if (f.getDate() > dia && f.getMonth() == mes) {
+                    alertE("Ingrese una fecha valida ");
+                    fecha.value = "";
+                }
+            }
+        }
+    }
+
+    function tel(id) {
+        var num = document.getElementById(id).value.length;
+        var primer = document.getElementById(id).value;
+        if (num == 4)
+            document.getElementById(id).value = document.getElementById(id).value + '-';
+
+        if (num == 1) {
+            if (primer == '2' || primer == '7' || primer == "6")
+                return
+            else {
+                document.getElementById(id).value = "";
+                document.getElementById(id).title = "El Telefono debe comenzar con 2, 6 o 7";
+
+
+            }
+        }
+
+    }
+
+
+    function du(id) {
+        var num = document.getElementById(id).value.length;
+
+        if (num == 8)
+            document.getElementById(id).value = document.getElementById(id).value + '-';
+
+
+    }
+
+    function validarSalario(salario) {
+        var val = document.getElementById(salario).value
+        var primer = document.getElementById(salario).value
+
+        if (primer != '0')
+            return
+        else {
+            alertE('Ingrese un valor valido');
+            document.getElementById(salario).value = "";
+        }
+    }
+
+
+    function cambiarMunicipio() {
+        let depa = document.perfil.departamento[document.perfil.departamento.selectedIndex].value
+        //alert(depa);
+        let url = 'municipio/?departamento=' + depa;
+        //alert(url);
+        fetch(url)
+            .then(function (result) {
+                return result.text();
+            })
+            .then(function (result) {
+                // alert(result);
+                document.getElementById('municipio').innerHTML = result;
+            });
+
+
+    }
+
+    function validarPass() {
+        var con = document.getElementById('contrasena').value
+        var myregex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+        if (myregex.test(con)) {
+            //alert(con+" es valido :-) !");
+            return true;
+        } else {
+            //alert(con+" NO es valido!");
+            document.getElementById('contrasena').value = "";
+            alertE("La contaseña no es valida, debe tener un numero, una mayuscula y al menos 8 caracteres");
+            return false;
+        }
+    }
+
+    function compararPass() {
+        var con = document.getElementById('contrasena').value
+        var rcon = document.getElementById('rcontrasena').value
+
+        if (con != rcon) {
+            alertE("Las contaseñas no son iguales");
+            document.getElementById('contrasena').value = "";
+            document.getElementById('rcontrasena').value = "";
+
+        }
+    }
+
+
+</script>
+{% endblock %}

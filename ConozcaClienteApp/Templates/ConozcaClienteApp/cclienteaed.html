@@ -1,0 +1,109 @@
+<div>
+
+  <div class="x_title">
+    <div class="row">
+      <h2 style="text-align: center;">{{sol.0.perfil.nombres}} {{sol.0.perfil.apellidos}} </h2>
+    </div><br>
+    <div class="row">
+      <h4 class="">Actividades Economica del cliente </h4>
+    </div>
+  </div>
+
+  <div class="row">
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:10px !important;">
+      <label>Tipo:</label> &nbsp;&nbsp;
+      Empleado
+      <div class="iradio_flat-green ">
+        <input type="radio" class="flat"  name="tipoa" id="tipoa" value="Empleado" required>
+        <ins class="iCheck-helper"></ins>
+      </div>&nbsp;
+      Negocio Propio
+      <div class="iradio_flat-green ">
+        <input type="radio" class="flat" name="tipoa" id="tipoa" value="Negocio Propio" checked required>
+        <ins class="iCheck-helper"></ins>
+      </div>&nbsp;
+      Dependiente
+      <div class="iradio_flat-green ">
+        <input type="radio" class="flat" name="tipoa" id="tipoa" value="Dependiente" required>
+        <ins class="iCheck-helper"></ins>
+      </div>&nbsp;
+      Otro
+      <div class="iradio_flat-green ">
+        <input type="radio" class="flat" name="tipoa" id="tipoa" value="Otro" required>
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Especifique el Lugar de Trabajo</h4>
+        <input type="text" class="form-text" id="lugart" name="lugart" value="{{sol.1.lugarTrabajo}}" disabled required>
+        <span class="bar"></span>
+      </div>
+  </div>
+</div>
+  <div class="row">    
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Cargo que Desempeña</h4>
+        <input type="text" class="form-text" id="cargode" name="cargode" value=""  required>
+        <span class="bar"></span>
+      </div>
+  </div>
+ <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Tiempo de Laborar</h4>
+    <input type="text" class="form-text" id="tiempolab" name="tiempolab" value="{{sol.1.tiempEmptiempFun}}"   required>
+    <span class="bar"></span>
+  </div>
+</div> 
+</div>
+
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+<div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Procedencia de los Fondos</h4>
+  <input type="text" class="form-text" id="procedenciafonda" name="procedenciafonda" value=""   >
+  <span class="bar"></span>
+  </div>
+</div>
+  <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:0px !important;">
+      <h4>Rango de Ingresos Mensuales si es Empleado</h4>
+      <input type="text" class="form-text" id="rangoing" name="rangoing" value=""  required>
+      <span class="bar"></span>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:0px !important;">
+      <label>Otros Ingresos:</label> &nbsp;&nbsp;
+      Si
+      <div class="iradio_flat-green ">
+        <input type="radio"  name="otingresos" id="otingresos" value="Si" onchange="habdesO(this.value)" required>
+        <ins class="iCheck-helper"></ins>
+      </div>&nbsp;&nbsp;
+      No
+      <div class="iradio_flat-green ">
+        <input type="radio" name="otingresos" id="otingresos" value="No" checked onchange="habdesO(this.value)" required>
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+<div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+<div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Procedencia</h4>
+  <input type="text" class="form-text"  id="procedencia" name="procedencia" value="" disabled >
+  <span class="bar"></span>
+</div>
+</div>
+</div>
+
+<input type="hidden" id="passAED" name="passAED" value="0">
+</div>
+
+

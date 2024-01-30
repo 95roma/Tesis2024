@@ -1,0 +1,210 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/inicio.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<div class="right_col" role="main">
+  
+    <div class="clearfix"></div>
+  <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+              <div class="x_title">
+                  <h2>Registro de Empleados</h2>
+                  <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+  <!-- /contenido cambiante en la demas paginas -->
+  <form id="registrou" name="registrou" action="insertar/" method="post" autocomplete="off">{% csrf_token %}
+    <div class="row">
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombres</h4>
+            <input type="text" class="form-text" id="nombre" name="nombre" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Apellidos</h4>
+            <input type="text" class="form-text" id="apellido" name="apellido" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre Agencia </h4>
+           
+              <select class="form-text" id="agencia" name="agencia" required >
+                  <option value="0" disabled>SELECCIONE AGENCIA</option>
+                  {% for d in Agencia %}
+                  <option value="{{d.id}}">{{d.nombre}}</option>
+                  {% endfor %} 
+              </select>
+          
+            <span class="bar"></span>
+        </div>
+    </div>
+    </div>
+  
+    <div class="row">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>CARGO</h4>
+                    <select class="form-text" id="cargo" name="cargo"  required >
+                        <option  value="0"disabled> Seleccione una opcion...</option>
+                        <option value="2" >Jefe de agencia</option>
+                        <option value="4" >Oficial de credito</option>
+                        <option value="5">Tecnico constructor</option>
+                        
+                    </select>
+              
+                <span class="bar"></span>
+            </div>
+        </div>
+ 
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <h4>Correo</h4>
+                    <input type="text" class="form-text" id="correo" name="correo" required>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Contraseña</h4>
+                <input type="password" class="form-text" id="contra" name="contra" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+       
+        </div>
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+        </div>
+    </div>
+</form>
+  
+  
+
+                  
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  </div>
+
+
+
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+
+
+    $(document).ready(function(){
+   
+    $.validator.addMethod("letras", function(value, element) {
+       return /^[ A-Za-záéíóúüñ]*$/i.test(value);
+   }, "<h2>Ingrese sólo letras </h2>");
+
+   $.validator.addMethod("validaemail", function(value, element) {
+        return/^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i.test(value);
+    }, "<h2>Ingrese un correo válido  en formaro que contenga @ y .com</h2>");
+
+   $.validator.addMethod("pass", function(value, element) {
+        return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,20}$/i.test(value);
+    }, "<h2>La contraseña debe contener al menos un número, una letra mayúscula, una letra minúscula y un caracter especial. </h2>");
+    
+   
+   $("#registrou").validate({
+     errorElement: "em",
+     errorPlacement: function(error, element) {
+       $(element.parent("div").addClass("form-animate-error"));
+       error.appendTo(element.parent("div"));
+     },
+     success: function(label) {
+       $(label.parent("div").removeClass("form-animate-error"));
+     },
+     rules: {
+        nombre:{
+          minlength:3,
+          required: true,
+          letras:true,
+          maxlength:30
+        },
+        apellido:{
+          minlength:3,
+          required: true,
+          letras:true,
+          maxlength:30
+        },
+        contra:{
+          minlength:8,
+          required: true,
+          pass: true,
+          maxlength:20  
+      },
+        correo:{
+          minlength:3,
+          required: true,
+          validaemail:true,
+          maxlength:30
+  
+      },
+     },
+     messages: {
+       nombre:{
+           required : "<h2>Debe ingresar el nombre del Departamento</h2>",
+           minlength : "<h2>El nombre debe tener un minimo de 3 caracteres</h2>",
+           maxlength : "<h2>El nombre debe tener un maximo de 30 caracteres</h2>"
+       },
+       apellido:{
+            required : "<h2>Debe ingresar los apellidos</h2>",
+            minlength : "<h2>El apellido debe tener un minimo de 3 caracteres</h2>",
+            maxlength : "<h2>El apellido debe tener un maximo de 30 caracteres</h2>"
+        },
+       contra:{
+            required : "<h2>Debe ingresar una contraseña</h2>",
+            minlength : "<h2>La contraseña debe tener un minimo de 8 caracteres</h2>",
+            maxlength : "<h2>La contraseña debe tener un maximo de 30 caracteres</h2>"
+        },
+        correo:{
+            required : "<h2>Debe ingresar el correo</h2>",
+            minlength : "<h2>El correo debe tener un minimo de 8 caracteres</h2>",
+            maxlength : "<h2>El correo debe tener un maximo de 15 caracteres</h2>"
+        },
+     },
+   });
+   
+   $("#btnguardar").click(function(){
+   if($("#registrou").valid()){
+      //alertC("Departamento registrado")
+      
+   
+       }else{
+        alertA("Debe registrar datos!!!")
+   
+       }
+   });
+   
+   });
+   
+   
+   
+   </script>
+{% endblock %}

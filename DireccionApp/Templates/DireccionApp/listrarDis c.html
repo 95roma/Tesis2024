@@ -1,0 +1,104 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Tabla{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+<form id="contact" name="contact" action="registrarDocu/" enctype="multipart/form-data" method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden" id="bandera" name="bandera">
+
+  <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Departamento</h4>
+          <select class="form-control" id="iddepto" name="iddepto" onchange="cargarMuni()"  required >
+            <option value="0">SELECCIONE DEPARTAMENTO</option>
+            {% for d in Departamento %}
+            <option value="{{d.id}}">{{d.nombre_depto}}</option>
+            {% endfor %} 
+        </select>
+          <span class="bar"></span>
+      </div>
+      
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Municipio</h4>
+    <select class="form-control" id="id" name="id" onchange="cargarLista()"  required >
+      <option value="0">SELECCIONE MUNICIPIO</option>
+      
+  </select>
+    <span class="bar"></span>
+</div>
+</div>
+</div>
+</form>
+
+<p></p>
+<table id="example" class="table table-striped table-bordered">
+  <thead>
+    <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+      <th><center>#</center></th>       
+      <th><center> Nombre de Distritos</center></th>
+      <th colspan="1"><center>OPCIONES</center>  </th>
+    
+
+    </tr>
+  </thead>
+
+  <tbody id="grupo" name="grupo" style="color: #000000;">
+   
+  </tbody>
+</table>
+                   
+                    {% endblock %}
+                    <!-- /cerrar el bloque de contenido-->
+                    {% block js %}
+                   
+                    <script>
+                      $(document).ready(function() {
+                        $('#example').DataTable({
+                            responsive: true,
+                            language: {
+                                url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+                            }
+                        });
+                    });
+                      var rangos = JSON.parse('{{ ran_json|escapejs }}');
+                      function cargarMuni() {
+                        var idDeptoSeleccionado = parseInt(document.getElementById('iddepto').value);
+                        var comboMuni = document.getElementById('id');
+                        comboMuni.value=0
+                        comboMuni.innerHTML = "Seleccione Municipio"; // Limpiamos las opciones actuales del combo de municipios
+                        //alert()
+                        for (var i = 0; i < rangos.length; i++) {
+                              var rango = rangos[i];
+                          //alert(rango.depto_id);
+                          if(rango.depto_id==idDeptoSeleccionado){
+                            //alert(rango.depto)
+                            var option = document.createElement('option');
+                            option.value = rango.idmuni;
+                            option.textContent = rango.nombre_muni;
+                            comboMuni.appendChild(option);
+                          }
+                        }
+                      }
+                      function cargarLista() {
+                        var id = document.getElementById('id').value;
+                        //alert(id);
+                        let url = 'mun/?id=' + id;
+                        fetch(url)
+                          .then(function (result) {
+                            return result.text();
+                          })
+                          .then(function (result) {
+                            document.getElementById('grupo').innerHTML = result;
+                          });
+                      }
+                    </script>
+                    
+                      
+                      {% endblock %}

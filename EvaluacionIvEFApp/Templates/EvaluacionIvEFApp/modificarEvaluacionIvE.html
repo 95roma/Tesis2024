@@ -1,0 +1,818 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Modificar Evaluación Personal{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+
+{% endfor %}
+{% endif %}
+
+<form id="mevaluacioni" name="mevaluacioni" action="../../../EvaluacionIvEFApp/modificarEvaluacion/" method="post" autocomplete="off">{% csrf_token %}
+    <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <h4>Solicitante</h4>
+                      <input type="hidden" id="idp" name="idp" value="{{perfil.id}}">
+                      <input type="text" class="form-text" id="nombresp" name="nombresp" value="{{perfil.nombres}} {{perfil.apellidos}}" disabled>
+                      <span class="bar"></span>
+                  </div>
+              </div>
+           </div>
+
+           <div>  <!-- Descripción de los bienes del hogar encontrados en la vivienda -->
+            <table class="table">
+              <caption style="text-align: center;">
+                <h2>Descrición de los bienes del hogar encontrados en la vivienda</h2>
+              </caption>
+              <thead>
+                <tr>
+                  <th width="10%" style="font-size: 16px;">No.</th>
+                  <th width="40%" style="font-size: 16px;">Descrición del bien</th>
+                  <th width="25%" style="font-size: 16px;">Precio de Compra</th>
+                  <th width="20%" style="font-size: 16px;">Cuota mensual</th>
+                </tr>
+              </thead>
+              <tbody>
+                <input  type="hidden"  value="{{bienes.0.id}}" name="idbns" id="idbns" maxlength="50"  >
+                <input  type="hidden"  value="{{bienes.1.id}}" name="idbns"  maxlength="50"  >
+                <input  type="hidden"  value="{{bienes.2.id}}" name="idbns"  maxlength="50"  >
+                <input  type="hidden"  value="{{bienes.3.id}}" name="idbns"  maxlength="50"  >
+                <input  type="hidden"  value="{{bienes.4.id}}" name="idbns"  maxlength="50"  >
+                <tr>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text" id="numerob" name="numerob" value="{{bienes.0.numero}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text" id="descripcionbien" name="descripcionbien" value="{{bienes.0.descripcionbien}}" maxlength="100" > 
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text" id="preciocop" name="preciocop" value="{{bienes.0.preciocompra}}"  maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  id="cuotam" name="cuotam" value="{{bienes.0.cuotamensual}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="numerob" id="numerob" value="{{bienes.1.numero}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="descripcionbien" id="descripcionbien" value="{{bienes.1.descripcionbien}}" maxlength="100" >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="preciocop" id="preciocop" value="{{bienes.1.preciocompra}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"   name="cuotam" id="cuotam" value="{{bienes.1.cuotamensual}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="numerob" id="numerob" value="{{bienes.2.numero}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="descripcionbien" id="descripcionbien" value="{{bienes.2.descripcionbien}}" maxlength="100" >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="preciocop" id="preciocop" value="{{bienes.2.preciocompra}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"   name="cuotam" id="cuotam" value="{{bienes.2.cuotamensual}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="numerob" id="numerob" value="{{bienes.3.numero}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="descripcionbien" id="descripcionbien" value="{{bienes.3.descripcionbien}}" maxlength="100" >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="preciocop" id="preciocop" value="{{bienes.3.preciocompra}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"   name="cuotam" id="cuotam" value="{{bienes.3.cuotamensual}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="numerob" id="numerob" value="{{bienes.4.numero}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="descripcionbien" id="descripcionbien" value="{{bienes.4.descripcionbien}}" maxlength="100" >
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"  name="preciocop" id="preciocop" value="{{bienes.4.preciocompra}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                      style="padding-bottom:0px !important;">
+                      <input type="text" class="form-text"   name="cuotam" id="cuotam" value="{{bienes.4.cuotamensual}}" maxlength="10" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                    </div>
+                  </td>
+                </tr>
+               
+              </tbody>
+            </table>
+          </div><!-- / fin descripcion de los bienes -->
+
+      <!-- / flujo de caja -->
+      <div class="row">
+        <table class="table">
+          <thead>
+          <tr>
+            <th colspan="6" style="text-align: center; background-color: #1BC4D9 ; font-size: 18px;">Flujo Caja</th>
+          </tr>
+          <tr>
+            <th colspan="3" style="text-align: center; background-color: #1BC4D9 ; font-size: 18px;">Egresos</th>
+            <th colspan="3" style="text-align: center; background-color: #1BC4D9 ; font-size: 18px;">Ingresos</th>
+          </tr>
+        </thead>
+          <tbody>
+            <tr>
+              <td colspan="2" style="font-size: 17px;">Alimentación del grupo familiar</td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="hidden" id="ide" name="ide" value="{{egresos.id}}">
+                  <input type="text" class="form-text" id="alimentaciongf" name="alimentaciongf" value="{{egresos.alimentacion}}" oninput="calcularTotalE();"  placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
+                    required>
+                </div>
+              </td>
+              <td style="font-size: 17px;"> Familiar</td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  id="familiar" name="familiar" value="{{ingresos.familiar}}"  oninput="calcularTotalI();"  placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
+                    required>
+                </div>
+              </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td  colspan="2" style="font-size: 17px;">Educación del grupo familiar</td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  id="educaciongf" name="educaciongf" value="{{egresos.educacion}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+                </div>
+              </td>
+              <td style="font-size: 17px;"> Otros ingresos</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="otrosing" name="otrosing" value="{{ingresos.otrosingres}}"  oninput="calcularTotalI();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="border: 0;"></td>
+            </tr>
+            <tr>
+              <td  colspan="2" style="font-size: 17px;">Transporte</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="transporte" name="transporte" value="{{egresos.transporte}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="font-size: 17px;"> Total(2)</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="totald" name="totald" value="{{ingresos.totali}}"   placeholder="$" disabled>
+              </div></td>
+              <td style="border: 0;"></td>
+            </tr>
+            <tr>
+              <td  colspan="2" style="font-size: 16px;">Salud / ISSS / ISBM / otros gastos de salud</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="saludiio" name="saludiio" value="{{egresos.salud}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td colspan="2" style="text-align: center; background-color: #1BC4D9;"> Analisis de capacidad de pago</td>
+              <td style="font-size: 17px;">Porcentajes</td>
+            </tr>
+            <tr>
+              <td  colspan="2" style="font-size: 17px;">AFP / IPSFA / ISR / Otros</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="afpiio" name="afpiio" value="{{egresos.AFP}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td colspan="2" style="text-align: center; font-size: 17px;"> Endeudamiento Actual:</td>
+              <td style=" background-color: antiquewhite;"><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="pendeudamientoa" name="pendeudamientoa" value="{{cpago.porcentajee}}"  placeholder="$" disabled>
+              </div></td>
+            </tr>
+            <tr>
+              <td  colspan="2" style="font-size: 17px;">Servicios</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="servicios" name="servicios" value="{{egresos.servicios}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="background-color: #1BC4D9;" style="font-size: 17px;"> Disponible = 2 - 1</td>
+              <style>
+                #dis {
+                  text-align: center;
+                  vertical-align: middle;
+                }
+              </style>
+              <td rowspan="2" style="text-align: center;" id="dis">
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  id="disponible" name="disponible" value="{{cpago.disponible}}" placeholder="$" disabled>
+                </div>
+              </td>
+              <style>
+                #pdis {
+                  text-align: center;
+                  vertical-align: middle;
+                }
+              </style>
+              <td rowspan="2" style=" background-color: antiquewhite;" id="pdis">
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="pdisponible" name="pdisponible" value="{{cpago.porcentajedis}}" placeholder="$" disabled>
+              </div></td>
+            </tr>
+            <tr>
+              <td  colspan="2" style="font-size: 17px;">Alquiler</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="alquiler" name="alquiler" value="{{egresos.alquiler}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="font-size: 17px;"> Ingresos - Egresos</td>
+            </tr>
+          
+            <tr>
+              <td rowspan="3" style="text-align: center; font-size: 17px;">Prestamos Actuales</td>
+              <td style="background-color: aquamarine; font-size: 17px;">En Planilla</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input style="background-color: antiquewhite;" type="text" class="form-text"  id="planilla" name="planilla" value="{{egresos.pplanilla}}"  placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="text-align: center; font-size: 17px;">Cuota</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input  type="text" class="form-text"  id="cuota" name="cuota" placeholder="$" value="{{cpago.cuota}}" oninput="porcuota();" required onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input style="background-color: antiquewhite;" type="text" class="form-text"  id="pcuota" name="pcuota" value="{{cpago.porcentajecuot}}" placeholder="$" disabled>
+              </div></td>
+            </tr>
+            <tr>
+              <td style="background-color: aquamarine; font-size: 17px;">En Ventanilla</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input style="background-color: antiquewhite;" type="text" class="form-text"  id="ventanilla" name="ventanilla" value="{{egresos.pventanilla}}"  placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="font-size: 17px;">Superavit</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input  type="text" class="form-text"  id="superavit" name="superavit" value="{{cpago.superavit}}" placeholder="$" disabled>
+              </div></td>
+              <td style="border: 0;"></td>
+            </tr>
+            <tr>
+              <td style="background-color: aquamarine;">HPH EL SALVADOR</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input style="background-color: antiquewhite;" type="text" class="form-text"  id="hphes" name="hphes" value="{{egresos.phplhes}}"   placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="font-size: 17px;">Deficit</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input  type="text" class="form-text"  id="deficit" name="deficit" value="{{cpago.deficit}}" placeholder="$" disabled>
+              </div></td>
+              <td style="border: 0;"></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-size: 17px;">Otros descuentos</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input type="text" class="form-text"  id="otrosdes" name="otrosdes" value="{{egresos.otrosdesc}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="border: 0;"></td>
+              <td style="border: 0;"></td>
+              <td style="border: 0;"></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-size: 17px;">Recreación</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input  type="text" class="form-text"  id="recreacion" name="recreacion" value="{{egresos.recreacion}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="border: 0;"></td>
+              <td style="border: 0;"></td>
+              <td style="border: 0;"></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-size: 17px;">Imprevistos</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input  type="text" class="form-text"  id="imprevistos" name="imprevistos" value="{{egresos.imprevistos}}" oninput="calcularTotalE();" placeholder="$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 ">
+              </div></td>
+              <td style="border: 0;"></td>
+              <td style="border: 0;"></td>
+              <td style="border: 0;"></td>
+            </tr>
+            <tr>
+              <td colspan="2" style="font-size: 17px;">Total (1)</td>
+              <td><div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                style="padding-bottom:0px !important;">
+                <input  type="text" class="form-text"  id="totalp" name="totalp" value="{{egresos.total}}"  placeholder="$" disabled>
+              </div></td>
+              <td style="border: 0;"></td>
+              <td style="border: 0;"></td>
+              <td style="border: 0;"></td>
+            </tr>
+          </tbody>
+          
+        </table>
+
+      </div>
+ 
+    <BR><BR>
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button  type="reset" class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+$.validator.addMethod("letrasn", function(value, element) {
+return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+}, "<h2>Ingrese una descripción valida ..</h2>");
+
+$.validator.addMethod("numero", function(value, element) {
+return /^[0-9,. - %]*$/i.test(value);
+}, "<h2>Ingrese sólo numero, puntos, comas  </h2>");
+
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  
+  rules: {
+    numerob:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    descripcionbien:{
+      minlength:5,
+      required: false,
+      letrasn:true,
+      maxlength:100
+    },
+    preciocop:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    cuotam:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    alimentaciongf:{
+      minlength:2,
+      required: true,
+      numero:true,
+      maxlength:10
+    },
+    educaciongf:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    transporte:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    saludiio:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    afpiio:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    servicios:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    alquiler:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    otrosdes:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    recreacion:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    imprevistos:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    planilla:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    ventanilla:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    hphes:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    familiar:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    cuota:{
+      minlength:1,
+      required: false,
+      numero:true,
+      maxlength:10
+    },
+    
+  
+  },
+  messages: {
+    numerob:{
+        required : "<h2>Debe ingresar el numero</h2>",
+        minlength : "<h2>EL numero debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL numero debe tener un maximo de 10 digitos</h2>"
+    },
+    descripcionbien:{
+        required : "<h2>Debe ingresar la descripción</h2>",
+        minlength : "<h2>La descripción debe tener un minimo de 5 digitos</h2>",
+        maxlength : "<h2>La descripción debe tener un maximo de 100 digitos</h2>"
+    },
+    preciocop:{
+        required : "<h2>Debe ingresar el percio de compra</h2>",
+        minlength : "<h2>EL percio de compra debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL percio de compra debe tener un maximo de 10 digitos</h2>"
+    },
+    cuotam:{
+        required : "<h2>Debe ingresar la cuota</h2>",
+        minlength : "<h2>La cuota debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>La cuota debe tener un maximo de 10 digitos</h2>"
+    },
+
+    alimentaciongf:{
+        required : "<h2>Debe ingresar el costo de alimentación</h2>",
+        minlength : "<h2>EL costo de alimentación debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de alimentación debe tener un maximo de 10 digitos</h2>"
+    },
+    educaciongf:{
+        required : "<h2>Debe ingresar el costo de educación</h2>",
+        minlength : "<h2>EL costo de educación debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de educación debe tener un maximo de 10 digitos</h2>"
+    },
+    transporte:{
+        required : "<h2>Debe ingresar el costo de transporte</h2>",
+        minlength : "<h2>EL costo de transporte debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de transporte debe tener un maximo de 10 digitos</h2>"
+    },
+    saludiio:{
+        required : "<h2>Debe ingresar el costo de salud</h2>",
+        minlength : "<h2>EL costo de salud debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de salud debe tener un maximo de 10 digitos</h2>"
+    },
+    afpiio:{
+        required : "<h2>Debe ingresar el descuento de AFP</h2>",
+        minlength : "<h2>EL descuento de AFP debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL descuento de AFP debe tener un maximo de 10 digitos</h2>"
+    },
+    servicios:{
+        required : "<h2>Debe ingresar el costo de servicios</h2>",
+        minlength : "<h2>EL costo de servicios debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de servicios debe tener un maximo de 10 digitos</h2>"
+    },
+    alquiler:{
+        required : "<h2>Debe ingresar el costo de alquiler</h2>",
+        minlength : "<h2>EL costo de alquiler debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de alquiler debe tener un maximo de 10 digitos</h2>"
+    },
+    otrosdes:{
+        required : "<h2>Debe ingresar el costo de otros descuentos</h2>",
+        minlength : "<h2>EL costo de otros descuentos debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de otros descuentos debe tener un maximo de 10 digitos</h2>"
+    },
+    recreacion:{
+        required : "<h2>Debe ingresar el costo de recreación</h2>",
+        minlength : "<h2>EL costo de recreación debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de recreación debe tener un maximo de 10 digitos</h2>"
+    },
+    planilla:{
+        required : "<h2>Debe ingresar el costo de planilla</h2>",
+        minlength : "<h2>EL costo de planilla debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de planilla debe tener un maximo de 10 digitos</h2>"
+    },
+    ventanilla:{
+        required : "<h2>Debe ingresar el costo de ventanilla</h2>",
+        minlength : "<h2>EL costo de ventanilla debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de ventanilla debe tener un maximo de 10 digitos</h2>"
+    },
+    hphes:{
+        required : "<h2>Debe ingresar el costo de la asociación</h2>",
+        minlength : "<h2>EL costo de la asociación debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL costo de la asociación debe tener un maximo de 10 digitos</h2>"
+    },
+    familiar:{
+        required : "<h2>Debe ingresar el valor del ingreso familiar</h2>",
+        minlength : "<h2>EL valor del ingreso familiar debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL valor del ingreso familiar debe tener un maximo de 10 digitos</h2>"
+    },
+    otrosing:{
+        required : "<h2>Debe ingresar el valor de otros ingreso </h2>",
+        minlength : "<h2>EL valor de otros ingreso  debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL valor de otros ingreso  debe tener un maximo de 10 digitos</h2>"
+    },
+    cuota:{
+        required : "<h2>Debe ingresar el valor de la cuota</h2>",
+        minlength : "<h2>EL valor de la cuota debe tener un minimo de 1 digitos</h2>",
+        maxlength : "<h2>EL valor de la cuota debe tener un maximo de 10 digitos</h2>"
+    },
+  }
+});
+
+$("#btnguardar").click(function(){
+if($("#mevaluacioni").valid()){  
+  document.getElementById("pendeudamientoa").disabled = false;
+  document.getElementById("pdisponible").disabled = false;
+  document.getElementById("pcuota").disabled = false;
+  document.getElementById("totalp").disabled = false;
+  document.getElementById("totald").disabled = false;
+  document.getElementById("disponible").disabled = false;
+  document.getElementById("superavit").disabled = false;
+  document.getElementById("deficit").disabled = false;
+
+}else{
+  alertE("Debe Registrar Datos Validos!");
+  return false;
+}
+});// fin de btnguardar
+
+});
+
+function calcularDisponible() {  //resta los egresos de los ingresos
+      e = parseFloat( document.getElementById("totalp").value);
+      i = parseFloat( document.getElementById("totald").value);
+
+      if(isNaN(e)){
+        e=0
+      }
+      if(isNaN(i)){
+        i=0
+      }
+      document.getElementById("disponible").value = i - e;
+      porcuota()
+  }  
+
+function calcularTotalE() {    
+      a = parseFloat( document.getElementById("alimentaciongf").value);
+      e = parseFloat( document.getElementById("educaciongf").value);
+      t = parseFloat( document.getElementById("transporte").value);
+      s = parseFloat( document.getElementById("saludiio").value);
+      af = parseFloat( document.getElementById("afpiio").value);
+      se = parseFloat( document.getElementById("servicios").value);
+      al = parseFloat( document.getElementById("alquiler").value);
+      o = parseFloat( document.getElementById("otrosdes").value);
+      r = parseFloat( document.getElementById("recreacion").value);
+      i = parseFloat( document.getElementById("imprevistos").value);
+
+      if(isNaN(a)){
+        a=0
+      }
+      if(isNaN(e)){
+        e=0
+      }
+      if(isNaN(t)){
+        t=0
+      }
+      if(isNaN(s)){
+        s=0
+      }
+      if(isNaN(af)){
+        af=0
+      }
+      if(isNaN(se)){
+        se=0
+      }
+      if(isNaN(al)){
+        al=0
+      }
+      if(isNaN(o)){
+        o=0
+      }
+      if(isNaN(r)){
+        r=0
+      }
+      if(isNaN(i)){
+        i=0
+      }
+
+      document.getElementById("totalp").value = a + e + t + s + af + se + al + o + r + i ;   
+      calcularDisponible() 
+  }
+
+
+function calcularTotalI() {  
+      // ingresos  
+      f = parseFloat( document.getElementById("familiar").value);
+      o = parseFloat( document.getElementById("otrosing").value);
+      // total egresos
+      i = parseFloat( document.getElementById("totalp").value);
+      // prestamos actuales
+      p = parseFloat( document.getElementById("planilla").value);
+      v = parseFloat( document.getElementById("ventanilla").value);
+      h = parseFloat( document.getElementById("hphes").value); 
+
+      if ( isNaN(f) ) {
+        f= 0;
+      }
+      if ( isNaN(o) ) {
+        o= 0;
+      }
+        t=document.getElementById("totald").value = f + o; //Calcula el total de ingresos
+
+      if(t>0 || i>=0){
+        calcularDisponible()
+        //d=document.getElementById("disponible").value = t - i; //Calcula el disponible de ingresos menos egresos
+
+        //document.getElementById("pdisponible").value=(((d*100)/t).toFixed(2))+'%';// Calcula el porcentaje del dinero disponible
+        //porcuota()
+      }  
+
+      if ( isNaN(p) ) {
+        p= 0;
+      }
+      if ( isNaN(v) ) {
+        v= 0;
+      }
+      if ( isNaN(h) ) {
+        h= 0;
+      }
+        ve= p + v + h;  
+
+      if(ve>0 ){
+        document.getElementById("pendeudamientoa").value=(((ve*100)/t).toFixed(2))+'%';
+       }else{
+        document.getElementById("pendeudamientoa").value=0.00+'%';
+      } 
+  }
+
+
+
+function porcuota(){
+  d = parseFloat( document.getElementById("disponible").value);
+  c = parseFloat( document.getElementById("cuota").value);
+  if(isNaN(d)){
+    d=0;
+  }
+  if(isNaN(c)){
+    c=0;
+  }
+  if(d>0 && c>0){
+    p=document.getElementById("pcuota").value=(((c*100)/d).toFixed(2))+'%';      
+    
+  }else{
+    document.getElementById("pcuota").value=0.00+'%';
+  }
+  por=parseInt(p);
+  if(por > 69 || por < 0){
+    
+        alertE("La cuota no debe ser menor al 0% ni mayor al 70% del disponible");
+        document.getElementById("cuota").value=" ";
+        document.getElementById("pcuota").value=" ";
+        document.getElementById("superavit").value=" ";
+        document.getElementById("deficit").value=" ";
+    }
+
+  t=d-c;
+  if(t>0 ){
+    document.getElementById("superavit").value=t;
+    document.getElementById("deficit").value='-';
+  }else{
+    document.getElementById("deficit").value=t;
+    document.getElementById("superavit").value='-';
+  }
+          
+  }
+
+ 
+
+</script>
+{% endblock %}
+
+
+
+

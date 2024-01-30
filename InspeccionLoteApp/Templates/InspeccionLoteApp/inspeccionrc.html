@@ -1,0 +1,185 @@
+
+  <div>            <!-- Datos de declaracion de salud -->
+
+    <div class="x_title">
+        <div class="row">
+          <h2 style="text-align: center;">Riesgos </h2>
+        </div>
+    </div>   
+       <div class="row">
+          
+           <table class="table" style="width: 40%; white-space: nowrap" >
+             <thead>
+               <tr>
+                <th width="20%"></th>
+                 <th width="15%">Riesgos </th>
+                 <th width="25%">Existe</th>
+               </tr>
+             </thead>
+             <tbody id="tbriesgos" style="color: #27575c;">
+              {% for se in listase %}
+               <tr>
+                 <td>
+                  <input type="hidden" id="idenf" name="idenf" value=" {{se.id}}">
+                  </td>
+                  <td>
+                    <input type="hidden" class="form-text" id="empleadoen" name="empleadoen" value="{{se.nombre}}"  >
+                    {{se.nombre}}
+                    </td>
+              
+                 <td> 
+                  Si
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat"  name="existese-{{se.id}}" id="existese" value="Si" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                  No
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="existese-{{se.id}}" id="existese" value="No" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>                
+                </td>
+                
+               </tr>
+               {% endfor %}
+             </tbody>
+         
+           </table>
+
+           <table class="table" style="width: 40%; white-space: nowrap">
+            <thead>
+              <tr>
+                <th width="15%">Distancia </th>
+                <th width="25%">Metros</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Distancia a Taludes(m)</th>
+                <td>
+                  <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                    style="padding-bottom:0px !important;">
+                    <input type="text" class="form-text" id="distanciatl" name="distanciatl" value="No" onfocus="limpiarValorN(this)" maxlength="15" minlength="1" 
+                      required>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>Distancia a Rios Cercanos(m)</th>
+                <td>
+                  <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                    style="padding-bottom:0px !important;">
+                    <input type="text" class="form-text" id="distanciarc" name="distanciarc" value="No" onfocus="limpiarValorN(this)" maxlength="15" minlength="1" 
+                      required>
+                  </div>
+                </td>
+               
+              </tr>
+              <tr>
+                <th>Distancia a Laderas Cercanas(m)</th>
+                <td>
+                  <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                    style="padding-bottom:0px !important;">
+                    <input type="text" class="form-text" id="distancialc" name="distancialc" value="No" onfocus="limpiarValorN(this)" maxlength="15" minlength="1" 
+                      required>
+                  </div>
+                </td>
+          
+              </tr>
+              <tr>
+                <th>Distancia a Torres o Antenas(m)</th>
+                <td>
+                  <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                    style="padding-bottom:0px !important;">
+                    <input type="text" class="form-text" id="distanciata" name="distanciata" value="No" onfocus="limpiarValorN(this)" maxlength="15" minlength="1" 
+                      required>
+                  </div>
+                </td>
+               
+              </tr>
+            </tbody>
+          </table>
+
+         </div>
+         <input type="hidden" id="passDS" name="passDS" value="0">
+        </div>
+ 
+      <div>    
+      <div class="x_title">
+        <div class="row">
+          <h2 class="">Comentarios / Observaciones </h2>
+        </div>
+      </div>
+      <span class="section"></span>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Comentarios</h4>
+            <input type="text" class="form-text" id="comentariosil" name="comentariosil"  >
+            <span class="bar"></span>
+          </div>
+        </div>
+       
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Observaciones</h4>
+              <input type="text" class="form-text" id="observacionesil" name="observacionesil"  >
+              <span class="bar"></span>
+            </div>
+          </div>
+
+          </div>
+
+          <input type="hidden" id="passGN" name="passGN" value="0">
+      </div>
+      
+      <div>    
+        <div class="x_title">
+          <div class="row">
+            <h2 class="">Vias de Acceso </h2>
+          </div>
+        </div>
+        <span class="section"></span>
+        <div class="row">
+          <div class="col-md-10 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:10px !important;">
+              <label>Vias de Acceso:</label> &nbsp;&nbsp;&nbsp;
+              Carretera / Calle Pavimentada
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat"  name="tipovia" id="tipovia" value="Carretera / Calle Paviment" checked required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Calle Rural
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" name="tipovia" id="tipovia" value="Calle Rural" required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Servidumbre
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" name="tipovia" id="tipovia" value="Servidumbre" required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Pasaje Peatonal
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" name="tipovia" id="tipovia" value="Pasaje Peatonal" required>
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+         
+          </div>
+  
+            <input type="hidden" id="passGN" name="passGN" value="0">
+        </div>
+        
+      
+      
+      
+
+ 
+
+
+
+

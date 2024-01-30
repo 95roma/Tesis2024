@@ -1,0 +1,62 @@
+
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Listado de Perfiles de Clientes que No Aplican {% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil de Clientes que No Aplican   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+
+{% endfor %}
+{% endif %}
+
+                    <table id="example" class="table table-striped table-bordered">
+                      <thead>
+                        <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+                          <th>#</th>
+                          <th>Dui</th>
+                          <th>Nombre</th>
+                          <th>Telefono</th>
+                          <th>Agencia</th>
+                          <th>Observación</th>
+                          <th > Opción </th>
+                          
+                        </tr>
+                      </thead>
+
+
+                      <tbody style="color: #27575c;">
+                        {% for p in perfil %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{p.dui}}</td>
+                          <td>{{p.nombres}} {{ p.apellidos}}</td>
+                          <td>{{p.telefono}}</td>
+                          <td>{{p.Agencia.nombre}}</td> 
+                          <td>{{p.observaciones}}</td>
+                          <td><a href="pelfilNA/{{p.id}}" class="btn btn-info">Reporte</a></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endblock %}
+                    <!-- /cerrar el bloque de contenido-->
+                    {% block js %}
+                    <script>
+                        $(document).ready(function() {
+                            $('#example').DataTable({
+                                responsive: true,
+                                language: {
+                                    url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+                                }
+                            });
+                        });
+                      </script>
+                      
+                      
+                      {% endblock %}

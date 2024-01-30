@@ -1,0 +1,77 @@
+<div>
+    <div class="x_title">
+        
+        <div class="row">
+          <h4 class="">Otras Especificaciones </h4>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Materiales</h4>
+                  <input type="number" class="form-text" id="tmateriales"  name="tmateriales"
+                   disabled value="{{pvt.materiales}}" value="0" oninput="calculartotalp();" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+                  <span class="bar"></span>
+              </div>
+          </div>
+     
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <h4>Mano de obra</h4>
+                      <input type="number" class="form-text" id="tmanoobra" name="tmanoobra" disabled
+                       value="{{pvt.manoobra}}" value="0" oninput="calculartotalp();" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required> 
+                      <span class="bar"></span>
+                  </div>
+              </div>
+  
+              </div>
+              <div class="row">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                          <h4>Transporte</h4>
+                          <input type="text" pattern="^\d*(\.\d{0,1})?$" class="form-text" id="ttransporte" name="ttransporte" value="{{pvt.transporte}}" oninput="calculartotalp();" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+                          <span class="bar"></span>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                          <h4>Solucion sanitaria</h4>
+                          <input type="text" class="form-text" pattern="^\d*(\.\d{0,1})?$" id="solucionsan" name="solucionsan" value="{{pvt.solucionsanit}}" oninput="calculartotalp();" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+                          <span class="bar"></span>
+                      </div>
+                  </div>
+      
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                            <h4>Kit de emergencia</h4>
+                            <input type="text" class="form-text" pattern="^\d*(\.\d{0,1})?$" id="kitemerg" name="kitemerg" value="{{pvt.kitemerg}}" oninput="calculartotalp();"  required>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                            <h4>Herramientas</h4>
+                            <input type="text" class="form-text" pattern="^\d*(\.\d{0,1})?$" id="herramientas" name="herramientas" value="{{pvt.herramientas}}"  oninput="calculartotalp();" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                <h4>Total costos directos</h4>
+                                <input type="text" class="form-text" id="totalcd" name="totalcd"
+                                 disabled value="{{pvt.totalcostosd}}"  value="0" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                       
+            
+                        </div>
+              
+     
+     </div>
+  

@@ -1,0 +1,114 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Infraestructura  Mejora{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<form id="infraestructuram" name="infraestructuram" action="/ConfiguracionApp/registrarInfraestructuram/" method="post" autocomplete="off">{% csrf_token %}
+    <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre</h4>
+            <input type="text" class="form-text" id="nombreifm" name="nombreifm" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Tipo</h4>                
+                  <select class="form-text" id="tipoifm" name="tipoifm"  required >
+                      <option  selected disabled>SELECCIONE UN TIPO</option>
+                      <option value="2" >Infraestructura del Inmueble</option>
+                      <option value="3"> Espacios Encontrados</option>
+                      <option value="5">Servicios Básicos</option>
+                      <option value="6">Infraestructura</option>
+                      <option value="7">Riesgos</option>
+                  </select>
+              
+                <span class="bar"></span>
+            </div>
+        </div>
+        </div>
+        <BR><BR>
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="reset" class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+$.validator.addMethod("letras", function(value, element) {
+return /^(?!.*(.)\1{2})[  a-zA-Záéíóúüñ, / .]*$/i.test(value);
+}, "<h2>Ingrese sólo letras sin repetir más de 2 veces o espacios..</h2>");
+
+$("#infraestructuram").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  
+  rules: {
+    nombreifm:{
+      minlength:4,
+      required: true,
+      letras:true,
+      maxlength:40
+    },
+    tipoifm:{
+      required: true,
+    },
+  
+  },
+  messages: {
+    nombreifm:{
+        required : "<h2>Debe ingresar el nombre</h2>",
+        minlength : "<h2>EL nombre debe tener un minimo de 4 digitos</h2>",
+        maxlength : "<h2>EL nombre debe tener un maximo de 40 digitos</h2>"
+    },
+    tipoifm:{
+        required : "<h2>Debe seleccionar el tipo</h2>",
+    },
+  
+  }
+});
+$("#btnguardar").click(function(){
+if($("#infraestructuram").valid()){ 
+
+}else{
+  alertE("Debe Registrar Datos Validos!");
+ 
+  return false;
+}
+});// fin de btnguardar
+
+});
+</script>
+{% endblock %}

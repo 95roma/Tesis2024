@@ -1,0 +1,825 @@
+  <!-- start accordion -->
+ 
+  <div class="accordion" id="accordion1" role="tablist" aria-multiselectable="true">
+    <div class="panel">
+      <a class="panel-heading" role="tab" id="headingOne1" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+        <h4 class="panel-title">Información del Solicitante</h4>
+      </a>
+      <div id="collapseOne1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+          <!-- dui y nit   -->
+  <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="duiDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Fotocopias del DUI</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <!--input type="file" name="duiDoc" id="duiDoc"  onchange="vistaPrevia(this)" required-->
+              <input type="file" class="custom-file-input" name="duiDoc" id="duiDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="duiDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5"  >
+      <ul class="messages">
+        <li>
+          <img src="../../../static/TesisApp/images/subir.jpg" id="nitDocVista" class="avatar" alt="Avatar">
+          
+          <div class="message_wrapper">
+            <h4 class="heading">Fotocopias del NIT</h4>
+            
+            <p class="url">
+              <!--span class="fs1" aria-hidden="true" data-icon=""></span-->
+              <input type="file" class="custom-file-input" name="nitDoc" id="nitDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+   <!--  recibo agua y luz-->
+   <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="aguaDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Recibo de agua</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="aguaDoc" id="aguaDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5"  >
+      <ul class="messages">
+        <li>
+          <img src="../../../static/TesisApp/images/subir.jpg" id="luzDocVista" class="avatar" alt="Avatar">
+          
+          <div class="message_wrapper">
+            <h4 class="heading">Recibo de luz</h4>
+            
+            <p class="url">
+              <span class="fs1" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="luzDoc" id="luzDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- telefono-->
+  <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="telDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Recibo de telefono</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="telDoc" id="telDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="referenciasCreDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Referencias crediticias</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="referenciasCreDoc" id="referenciasCreDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>          
+        </li>
+      </ul>
+    </div>
+
+  </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingTwo1" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo">
+        <h4 class="panel-title">Constancia de Ingresos para Empleados</h4>
+      </a>
+      <div id="collapseTwo1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+        <div class="panel-body">
+
+   <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="constanciaEmpDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Constancia de empleo actualizada</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="constanciaEmpDoc" id="constanciaEmpDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5"  >
+      <ul class="messages">
+        <li>
+          <img src="../../../static/TesisApp/images/subir.jpg" id="tacoIsssDocVista" class="avatar" alt="Avatar">
+          
+          <div class="message_wrapper">
+            <h4 class="heading">Taco ISSS</h4>
+            
+            <p class="url">
+              <span class="fs1" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="tacoIsssDoc" id="tacoIsssDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+         </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingThree1" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree1" aria-expanded="false" aria-controls="collapseThree">
+        <h4 class="panel-title">Constancia de Ingresos para Comerciantes o Independientes</h4>
+      </a>
+      <div id="collapseThree1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+        <div class="panel-body">
+
+   <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="analisisEcNDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Análisis económico del negocio</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="analisisEcNDoc" id="analisisEcNDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5"  >
+      <ul class="messages">
+        <li>
+          <img src="../../../static/TesisApp/images/subir.jpg" id="balanceDocVista" class="avatar" alt="Avatar">
+          
+          <div class="message_wrapper">
+            <h4 class="heading">Balance</h4>
+            
+            <p class="url">
+              <span class="fs1" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="balanceDoc" id="balanceDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+
+    <div class="col-md-5"  >
+      <ul class="messages">
+        <li>
+          <img src="../../../static/TesisApp/images/subir.jpg" id="balanceResDocVista" class="avatar" alt="Avatar">
+          
+          <div class="message_wrapper">
+            <h4 class="heading">Balance de resultados</h4>
+            
+            <p class="url">
+              <span class="fs1" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="balanceResDoc" id="balanceResDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+         </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingFour1" data-toggle="collapse" data-parent="#accordion1" href="#collapseFour1" aria-expanded="false" aria-controls="collapseFour">
+        <h4 class="panel-title">Información del Fiador</h4>
+      </a>
+      <div id="collapseFour1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+        <div class="panel-body">
+<!-- fiador-->
+   <!-- dui y nit-->
+   <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="duifDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Copia de Dui</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="duifDoc" id="duifDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5"  >
+      <ul class="messages">
+        <li>
+          <img src="../../../static/TesisApp/images/subir.jpg" id="nitfDocVista" class="avatar" alt="Avatar">
+          
+          <div class="message_wrapper">
+            <h4 class="heading">Copia de NIT</h4>
+            
+            <p class="url">
+              <span class="fs1" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="nitfDoc" id="nitfDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+           <!--  recibo agua y luz-->
+   <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="aguafDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Copia de Recibo de agua</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="aguafDoc" id="aguafDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5"  >
+      <ul class="messages">
+        <li>
+          <img src="../../../static/TesisApp/images/subir.jpg" id="luzfDocVista" class="avatar" alt="Avatar">
+          
+          <div class="message_wrapper">
+            <h4 class="heading">Copia de Recibo de luz</h4>
+            
+            <p class="url">
+              <span class="fs1" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="luzfDoc" id="luzfDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- telefono-->
+  <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="constEmpDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Constancia de empleo actualizada</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="constEmpDoc" id="constEmpDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="analisisEcNVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Análisis económico del negocio</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="analisisEcNDoc" id="analisisEcNDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+   
+  </div>
+
+  <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="referenciasCrefDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Referencias crediticias</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="referenciasCrefDoc" id="referenciasCrefDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>          
+        </li>
+      </ul>
+    </div>
+   
+  </div>
+         </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingFive1" data-toggle="collapse" data-parent="#accordion1" href="#collapseFive1" aria-expanded="false" aria-controls="collapseFive">
+        <h4 class="panel-title">Información Técnica</h4>
+      </a>
+      <div id="collapseFive1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+        <div class="panel-body">
+          <!-- telefono-->
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="inspeccionTecDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Inspección Técnica</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="inspeccionTecDoc" id="inspeccionTecDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="presupuestoConsDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Presupuesto de Construcción</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="presupuestoConsDoc" id="presupuestoConsDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>
+           
+          </div>
+           
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingSix1" data-toggle="collapse" data-parent="#accordion1" href="#collapseSix1" aria-expanded="false" aria-controls="collapseSix">
+        <h4 class="panel-title">Informacion legal</h4>
+      </a>
+      <div id="collapseSix1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+        <div class="panel-body">
+          <!-- telefono-->
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="certificacionEstracDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Certificación Estractada</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="certificacionEstracDoc" id="certificacionEstracDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="carenciaBienDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Carencia de Bienes</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="carenciaBienDoc" id="carenciaBienDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>
+           
+          </div>
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="fotocopiaEscritDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Fotocopia de Escritura</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="fotocopiaEscritDoc" id="fotocopiaEscritDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                   
+                  
+                </li>
+              </ul>
+            </div>
+           
+          </div>
+           
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingSeven1" data-toggle="collapse" data-parent="#accordion1" href="#collapseSeven1" aria-expanded="false" aria-controls="collapseSeven">
+        <h4 class="panel-title">Información de Riesgos</h4>
+      </a>
+      <div id="collapseSeven1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+        <div class="panel-body">
+          <!-- telefono-->
+  <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="declaracionSalDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Declaración de salud</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="declaracionSalDoc" id="declaracionSalDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>          
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-5" >
+      <ul class="messages">
+        <li>       
+            <img src="../../../static/TesisApp/images/subir.jpg" id="informeDICOMDocVista" class="avatar" alt="Avatar">
+          <div class="message_wrapper">
+            <h4 class="heading">Informe DICOM</h4>
+            <p class="url">
+              <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+              <input type="file" class="custom-file-input" name="informeDICOMDoc" id="informeDICOMDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+              <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+            </p>
+          </div>
+          
+        </li>
+      </ul>
+    </div>
+   
+  </div>
+
+           
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingEight1" data-toggle="collapse" data-parent="#accordion1" href="#collapseEight1" aria-expanded="false" aria-controls="collapseEight">
+        <h4 class="panel-title">Anexos</h4>
+      </a>
+      <div id="collapseEight1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+        <div class="panel-body">
+          <!-- telefono-->
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="documentosSopDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Documentos de soporte de ingresos</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="documentosSopDoc" id="documentosSopDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="documentosRemDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Documentos de remesas de los ultimos tres meses</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="documentosRemDoc" id="documentosRemDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>
+           
+          </div>
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="cancelacionPresDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Cancelaciones de préstamos </h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="cancelacionPresDoc" id="cancelacionPresDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="estadoCuenDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Estados de cuentas</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="estadoCuenDoc" id="estadoCuenDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>
+           
+          </div>
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+           
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="finiquitosDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Finiquitos</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="finiquitosDoc" id="finiquitosDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>
+           
+          </div>
+ 
+
+           
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingNine1" data-toggle="collapse" data-parent="#accordion1" href="#collapseNine1" aria-expanded="false" aria-controls="collapseNine">
+        <h4 class="panel-title">Documentos de Orden de Inicio y Desembolsos</h4>
+      </a>
+      <div id="collapseNine1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+        <div class="panel-body">
+          <!-- telefono-->
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="hojaAprobCredDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Hoja de Aprobación del Crédito</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="hojaAprobCredDoc" id="hojaAprobCredDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="cartaElabMutDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Carta para Elaboración del Mutuo</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="cartaElabMutDoc" id="cartaElabMutDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>
+           
+          </div>
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="reciboPagPrimDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Recibo de pago de prima</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="reciboPagPrimDoc" id="reciboPagPrimDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="ordenDesIrrevDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Orden de Descuento Irrevocable</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="ordenDesIrrevDoc" id="ordenDesIrrevDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>       
+          </div>
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="permisoConsDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Permiso de Construcción</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="permisoConsDoc" id="permisoConsDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>      
+          </div>
+           
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingTen1" data-toggle="collapse" data-parent="#accordion1" href="#collapseTen1" aria-expanded="false" aria-controls="collapseTen">
+        <h4 class="panel-title">Documentos de Entrega de Costos y Desembolsos</h4>
+      </a>
+      <div id="collapseTen1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
+        <div class="panel-body">
+          <!-- telefono-->
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="cartaEntrCostDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Carta de entrega de costos o desembolso</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="cartaEntrCostDoc" id="cartaEntrCostDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="fotocopiaMutHipDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Fotocopia de Mutuo Hipotecario o Simple</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="fotocopiaMutHipDoc" id="fotocopiaMutHipDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>
+                  
+                </li>
+              </ul>
+            </div>     
+          </div> 
+
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <a class="panel-heading collapsed" role="tab" id="headingEleven1" data-toggle="collapse" data-parent="#accordion1" href="#collapseEleven1" aria-expanded="false" aria-controls="collapseEleven">
+        <h4 class="panel-title">Mantener Actualizados</h4>
+      </a>
+      <div id="collapseEleven1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEleven">
+        <div class="panel-body">
+          <!-- telefono-->
+          <div class="row" style="display: flex; flex-wrap: wrap; background-color:white;">
+            <div class="col-md-5" >
+              <ul class="messages">
+                <li>       
+                    <img src="../../../static/TesisApp/images/subir.jpg" id="gestionesCobrDocVista" class="avatar" alt="Avatar">
+                  <div class="message_wrapper">
+                    <h4 class="heading">Gestiones de Cobro</h4>
+                    <p class="url">
+                      <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
+                      <input type="file" class="custom-file-input" name="gestionesCobrDoc" id="gestionesCobrDoc" style="display:none;" onchange="vistaPrevia(this)" required>
+                      <label for="nitDoc" class="custom-file-label">Seleccionar Archivo</label>
+                    </p>
+                  </div>          
+                </li>
+              </ul>
+            </div>     
+          </div> 
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- end of accordion     twelve   -->
+ 
+ 
+
+  
+  
+
+
+
+
+
+    

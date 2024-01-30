@@ -1,0 +1,624 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "Proy1App/index.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Registro de cliente</h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#"> Tabla expediente</a>
+              </li>
+              <li><a href="#"> 2</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <br />
+        <h2>Conozca a su Cliente</h2> <!-- titulo de formulario -->
+        <div id="wizard_verticle" class="form_wizard wizard_verticle">
+          <ul class="list-unstyled wizard_steps">
+            <li>
+              <a href="#step-1">
+                <span class="step_no">1</span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-2">
+                <span class="step_no">2</span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-3">
+                <span class="step_no">3</span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-4">
+                <span class="step_no">4</span>
+              </a>
+            </li>
+            <li>
+              <a href="#step-5">
+                <span class="step_no">5</span>
+              </a>
+            </li>
+          </ul>
+            <div id="step-1">
+            <span class="section">Datos  Generales</span>
+            <form class="form-horizontal form-label-left">
+
+              <div class="row"><!--primer row  del formulario -->
+                <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nombre Completo" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+                <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="C&oacute;digo  de Cliente" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  <span >Calidad en la que Actua:</span></div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                  <p>Cliente: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                </div><div class="col-md-4 col-sm-4 col-xs-3">
+                  <p>Fiador: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                </div>                
+               </div>
+              <BR>
+               <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Conocido como, seg&uacute;n DUI" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+                <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Lugar de Nacimiento" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Fecha de Nacimiento" required>
+                  <span class="bar"></span>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="N&uacute;mero de DUI" required>
+                  <span class="bar"></span>
+                </div>
+            </div>
+              <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="fecha de Vencimiento" required>
+                  <span class="bar"></span>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="N&uacute;mero de Pasaporte" required>
+                <span class="bar"></span>
+              </div>
+          </div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Fecha de Vencimiento" required>
+                <span class="bar"></span>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nacionalidad" required>
+              <span class="bar"></span>
+            </div>
+        </div>
+          <div class="col-md-1 col-sm-4 col-xs-3">
+            <span >Sexo:</span></div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <p>Cliente: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+          </div><div class="col-md-4 col-sm-4 col-xs-3">
+            <p>Fiador: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+          </div>                
+         </div>
+        
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Profesi&oacute;n seg&uacute;n DUI" required>
+                <span class="bar"></span>
+              </div>
+          </div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Ocupaci&oacute;n o Actividad Actual" required>
+                <span class="bar"></span>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Direcci&oacute;n domicilio" required>
+              <span class="bar"></span>
+            </div>
+        </div>
+          <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tiempo de Residir en esta Direcci&oacute;n" required>
+              <span class="bar"></span>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Cant&oacute;n" required>
+            <span class="bar"></span>
+          </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Municipio" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Departamento" required>
+        <span class="bar"></span>
+      </div>
+      </div>
+        <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Pais" required>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tel&eacute;fono Residencia" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Direcci&oacute;n o Correspondencia" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tel&eacute;fono Oficina" required>
+        <span class="bar"></span>
+        </div>
+      </div>
+      </div>     
+     <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Cant&oacute;n" required>
+        <span class="bar"></span>
+      </div>
+      </div>
+    <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Municipio" required>
+      <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Departamento" required>
+        <span class="bar"></span>
+      </div>
+      </div>
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Pais" required>
+        <span class="bar"></span>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-md-4 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tel&eacute;fono Celular" required>
+        <span class="bar"></span>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Correo Electr&oacute;nico " required>
+        <span class="bar"></span>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Fax" required>
+      <span class="bar"></span>
+     </div>
+    </div>
+    </div>  
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Estatus de la Propiedad" required>
+          <span class="bar"></span>
+        </div>
+    </div>
+      <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nombre del C&oacute;nyuge" required>
+          <span class="bar"></span>
+        </div>
+    </div>
+  </div>   
+             </form>
+           </div><!-- fin step-1 -->
+           <!-- ###################################################################################################################################### -->
+           <div id="step-2">
+            <span class="section">Datos  de la Empresa o Lugar en que Genera sus Ingresos</span>
+            <form class="form-horizontal form-label-left">
+
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nombre de la Empresa o Negocio" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+                <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Cargo que Desempeña" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tel&eacute;fono" required>
+                  <span class="bar"></span>
+                </div>
+            </div>
+              <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Fax" required>
+                  <span class="bar"></span>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tiempo de Laborar" required>
+                <span class="bar"></span>
+              </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Actividad del Negocio(c a)" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+            <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Principales Proveedores(c a)" required>
+                <span class="bar"></span>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Direeci&oacute;n" required>
+              <span class="bar"></span>
+            </div>
+            </div>
+          <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Cant&oacute;n" required>
+            <span class="bar"></span>
+          </div>
+          </div>
+        <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Municipio" required>
+          <span class="bar"></span>
+        </div>
+        </div>
+          <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Departamento" required>
+            <span class="bar"></span>
+          </div>
+          </div>
+        <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Pais" required>
+            <span class="bar"></span>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-7 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Rango de Ingresos Mensuales por salario o negocio" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-6">
+            <span >Otros Ingresos:</span></div>
+          <div class="col-md-1 col-sm-4 col-xs-3">
+            <p>Si:<input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+          </div><div class="col-md-1 col-sm-4 col-xs-3">
+            <p>No:<input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+          </div> 
+          <div class="col-md-3 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Procedencia" required>
+              <span class="bar"></span>
+            </div>
+            </div>
+            
+            </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-2 col-xs-6">
+                    <span >¿Recibe Remesas Familiares?</span></div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                  <p>Si: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                </div><div class="col-md-4 col-sm-4 col-xs-3">
+                  <p>No: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                </div>                
+               </div>
+              <BR>
+               <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nombre del Remitente" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Parentesco" required>
+                  <span class="bar"></span>
+                </div>
+              </div>
+                <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Pais de origen de la Remesa" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+            </div>
+             </form>
+           </div><!-- fin step-2 -->
+           <!-- ###################################################################################################################################### -->
+           <!-- ###################################################################################################################################### -->
+           <div id="step-3">
+            <span class="section">Declaraci&oacute;n del Cliente o Fiador en Operaciones Activas</span>
+            <form class="form-horizontal form-label-left">
+           <div class="row">
+            
+          <div class="col-md-6 col-sm-6 col-xs-2">
+            <span >Clasificaci&oacute;n del Cr&eacute;dito:</span></div>
+          <div class="col-md-2 col-sm-4 col-xs-3">
+            <p>Mejora: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+          </div><div class="col-md-3 col-sm-4 col-xs-3">
+            <p>Vivienda: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+          </div> 
+        </div>
+      <BR>
+          <div class="row">
+          <div class="col-md-5 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Frecuencia de Pago" required>
+              <span class="bar"></span>
+            </div>
+            </div>
+            <div class="col-md-5 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tipo de Garantia" required>
+                <span class="bar"></span>
+              </div>
+              </div>
+            </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <span >¿Tiene Proyectado Realizar Pagos Adicionales a las Cuotas Pactadas?</span></div>
+                <div class="col-md-2 col-sm-4 col-xs-3">
+                  <p>Si: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                </div><div class="col-md-2 col-sm-4 col-xs-3">
+                  <p>No: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                </div>                
+               </div>
+              <BR>
+               <div class="row">
+                <div class="col-md-11 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Procedencia de los Fondos" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+              
+                
+            </div>
+             </form>
+           </div><!-- fin step-3 -->
+           <!-- ###################################################################################################################################### -->
+           <div id="step-4">
+            <span class="section">Referencias de Colocaci&oacute;n (Bancarias, Comerciales, Personales)</span>
+            <form class="form-horizontal form-label-left">
+         
+          <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nombre" required>
+                <span class="bar"></span>
+              </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Direcci&oacute;n" required>
+                  <span class="bar"></span>
+                </div>
+                </div>
+          <div class="col-md-4 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Parentesco" required>
+              <span class="bar"></span>
+            </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tel&eacute;fono" required>
+                <span class="bar"></span>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nombre" required>
+                  <span class="bar"></span>
+                </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Direcci&oacute;n" required>
+                    <span class="bar"></span>
+                  </div>
+                  </div>
+            <div class="col-md-4 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Parentesco" required>
+                <span class="bar"></span>
+              </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tel&eacute;fono" required>
+                  <span class="bar"></span>
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nombre" required>
+                    <span class="bar"></span>
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Direcci&oacute;n" required>
+                      <span class="bar"></span>
+                    </div>
+                    </div>
+              <div class="col-md-4 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Parentesco" required>
+                  <span class="bar"></span>
+                </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Tel&eacute;fono" required>
+                    <span class="bar"></span>
+                  </div>
+                  </div>
+                </div>
+               <span class="section">Perfil de transaccones (Productos actuales con la Asociaci&oacute;n)</span>
+               <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Prestamos" required>
+                    <span class="bar"></span>
+                  </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Otros (especificar)" required>
+                      <span class="bar"></span>
+                    </div>
+                    </div>
+                </div>
+             </form>
+           </div><!-- fin step-4 -->
+           <!-- ###################################################################################################################################### -->
+            <!-- ###################################################################################################################################### -->
+            <div id="step-5">
+              <span class="section">Persona Expuesta Politicamente(PEPs)</span>
+              <form class="form-horizontal form-label-left">
+             <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+              <span >¿Es usted una persona Expuesta Politicamente?</span></div>
+                <div class="col-md-2 col-sm-4 col-xs-3">
+                 <p>Si:  <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                </div><div class="col-md-3 col-sm-4 col-xs-3">
+                 <p>No:  <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                </div> 
+                </div>
+              <BR>
+            
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                  <span >¿Tiene relaci&oacute;n con alguna persona Espuesta Politicamnete?</span></div>
+                  <div class="col-md-2 col-sm-4 col-xs-3">
+                    <p>Si: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                  </div><div class="col-md-2 col-sm-4 col-xs-3">
+                    <p>No: <input type="radio" class="flat" name="gender" id="genderM" value="M" checked="" required /></p>
+                  </div>                
+                 </div>
+                <BR>
+                 <div class="row">
+                  <div class="col-md-11 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Nombre" required>
+                      <span class="bar"></span>
+                    </div>
+                </div>
+                <div class="col-md-11 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <input type="text" class="form-text" id="nombre" name="nombre" maxlength="50"  placeholder="Puesto que desempeña" required>
+                    <span class="bar"></span>
+                  </div>
+              </div>
+                  
+              </div>
+               </form>
+             </div><!-- fin step-5 -->
+      </div><!--wizard_verticle -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}<!-- /cerrar el bloque de contenido-->

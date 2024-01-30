@@ -1,0 +1,300 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Registro Direccion{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Municipio  {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+<form id="contact" name="contact" action="registrarDire/" method="post" autocomplete="off">{% csrf_token %}
+    <input type="hidden" id="bandera" name="bandera">
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Departamento</h4>
+                <select id="departamento" class="form-text" name="departamento" onchange="actualizar()" required> 
+                    <option value="0" selected disabled>Seleccione... </option> 
+                    <option value="1">Ahuachapán            </option> 
+                    <option value="2">Cabañas       </option> 
+                    <option value="3">Chalatenango </option> 
+                    <option value="4">Cuscatlán </option> 
+                    <option value="5"> La Libertad </option> 
+                    <option value="6"> La Paz </option> 
+                    <option value="7"> La Unión </option> 
+                    <option value="8"> Morazán </option>
+                    <option value="9"> San Miguel </option>        
+                    <option value="10"> San Salvador </option>
+                    <option value="11"> San Vicente </option>
+                    <option value="12"> Santa Ana </option>
+                    <option value="13"> Sonsonate </option>
+                    <option value="14"> Usulután </option>
+                    </select>
+                
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Municipio</h4>
+                <select name="municipio" id="municipio" class="form-text" required> 
+                    <option value="-">- 
+                    </select> 
+                
+                <span class="bar"></span>
+            </div>
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <h4>Latitud</h4>
+                    <input type="text" class="form-text" id="latitud" name="latitud" required>
+                    <span class="bar"></span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <h4>Longuitud</h4>
+                    <input type="text" class="form-text" id="longitud" name="longitud" required>
+                    <span class="bar"></span>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                        <h4>Direcci&oacute;n</h4>
+                        <input type="text" class="form-text" id="nombre_dire" name="nombre_dire" required>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                  
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                            <h4>Descripci&oacute;n del lugar</h4>
+                            <textarea class="form-text" id="descripcion" name="descripcion" placeholder="ejempo: La entrada al  lugar donde recido queda enfrente de una iglesia" required></textarea>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    </div>
+            
+
+
+
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+
+ $.validator.addMethod("numero", function(value, element) {
+    return /^[0-9,.-]*$/i.test(value);
+}, "<h2>Ingrese sólo numero, puntos y guion </h2>");
+
+$.validator.addMethod("letras", function(value, element) {
+    return /^[ a-z0-9áéíóúüñ,.ª]*$/i.test(value);
+}, "<h2>Ingrese sólo letras, puntos, comas y ª </h2>");
+
+
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    latitud:{
+      minlength:3,
+      required: true,
+      numero:true,
+      maxlength:60
+    },
+    longitud:{
+      minlength:3,
+      required: true,
+      numero:true,
+      maxlength:60
+    },
+    departamento:{
+        required:true
+
+    },
+    municipio:{
+        required:true
+
+    },
+    descripcion:{
+        required:true
+
+    },
+    nombre_dire:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:200
+    }    
+  },
+  messages: {
+    latitud:{
+        required : "<h2>Debe ingresar la latitud</h2>",
+        minlength : "<h2>Debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>Debe tener un maximo de 60 caracteres</h2>"
+    },
+    longitud:{
+        required : "<h2>Debe ingresar la longitud</h2>",
+        minlength : "<h2>Debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>Debe tener un maximo de 60 caracteres</h2>"
+    },
+    departamento:{
+        required:"<h2>Debe seleccionar el departamento</h2>",
+        maxlength:60
+
+    },
+    municipio:{
+        required:"<h2>Debe seleccionar el municipio</h2>"
+
+    },
+    descripcion:{
+        required:"<h2>Debe ingresar la descripcion</h2>",
+        maxlength : "<h2>Debe tener un maximo de 200 caracteres</h2>"
+
+    },
+    nombre_dire:{
+        required : "<h2>Debe ingresar una dirección</h2>",
+        minlength : "<h2>Debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>Debe tener un maximo de 200 caracteres</h2>"
+    } 
+  },
+});
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+    
+}
+});
+});
+var departamentos = new Array("Ahuachapán","Cabañas","Chalatenango","Cuscatlán","La Libertad","La Paz","La Unión","Morazán","San Miguel","San Salvador","San Vicente","Santa Ana","Sonsonate","Usulután")
+    var municipios_1=new Array("Ahuachapán" ,"Apaneca","Atiquizaya","Concepción de Ataco","El Refugio","Guaymango,Jujutla","San Francisco Menéndez","San Lorenzo","San Pedro Puxtla","Tacuba","Turín") 
+    var municipios_2=new Array("Sensuntepeque","Cinquera","Dolores","Guacotecti","Ilobasco","Jutiapa","San Isidro","Tejutepeque","Victoria") 
+    var municipios_3=new Array("Chalatenango","Agua Caliente","Arcatao","Azacualpa","Cancasque","Citalá","Comalapa","Concepción Quezaltepeque","Dulce Nombre de María","El Carrizal","El Paraíso","La Laguna","La Palma","La Reina","Las Flores","Las Vueltas","Nombre de Jesús","Nueva Concepción ","Nueva Trinidad","Ojos de Agua","Potonico","San Antonio de la Cruz","San Antonio Los Ranchos","San Fernando","San Francisco Lempa","San Francisco Morazán","San Ignacio","San Isidro Labrador","San Luis del Carmen","San Miguel de Mercedes","San Rafael","Santa Rita","Tejutla") 
+    var municipios_4=new Array("Cojutepeque","Candelaria","El Carmen","El Rosario","Monte San Juan","Oratorio de Concepción","San Bartolomé Perulapía","San Cristóbal","San José Guayabal","San Pedro Perulapán","San Rafael Cedros","San Ramón","Santa Cruz Analquito","Santa Cruz Michapa","Suchitoto","Tenancingo")
+    var municipios_5=new Array("Antiguo Cuscatlán" ,"Chiltiupán", "Ciudad Arce", "Colón", "Comasagua" ,"Huizúcar" ,"Jayaque" ,"Jicalapa", "La Libertad", "Santa Tecla" ,"Nuevo Cuscatlán", "San Juan Opico" ,"Quezaltepeque", "Sacacoyo" ,"San José Villanueva" ,"San Matías" ,"San Pablo" ,"Tacachico" ,"Talnique", "Tamanique" ,"Teotepeque" ,"Tepecoyo", "Zaragoza")
+    var municipios_6=new Array("Zacatecoluca","Cuyultitán","El Rosario","Jerusalén","Mercedes La Ceiba","Olocuilta","Paraíso de Osorio","San Antonio Masahuat","San Emigdio","San Francisco Chinameca","San Pedro Masahuat","San Juan Nonualco","San Juan Talpa","San Juan Tepezontes","San Luis La Herradura","San Luis Talpa","San Miguel Tepezontes","San Pedro Nonualco","San Rafael Obrajuelo","Santa María Ostuma","Santiago Nonualco","Tapalhuaca")
+    var municipios_7=new Array("La Unión","Anamorós","Bolívar","Concepción de Oriente","Conchagua","El Carmen",'El Sauce',"Intipucá","Lislique","Meanguera del Golfo","Nueva Esparta","Pasaquina","Polorós","San Alejo","San José","Santa Rosa de Lima","Yayantique","Yucuaiquín")
+    var municipios_8=new Array("San Francisco Gotera","Arambala","Cacaopera","Chilanga","Corinto","Delicias de Concepción","El Divisadero","El Rosario","Gualococti","Guatajiagua","Joateca","Jocoaitique","Jocoro","Lolotiquillo","Meanguera","Osicala","Perquín","San Carlos","San Fernando","San Isidro","San Simón","Sensembra","Sociedad","Torola","Yamabal","Yoloaiquín")
+    var municipios_9=new Array("San Miguel" ,"Carolina","Chapeltique","Chinameca","Chirilagua","Ciudad Barrios","Comacarán","El Tránsito","Lolotique","Moncagua","Nueva Guadalupe","Nuevo Edén de San Juan","Quelepa","San Antonio","San Gerardo","San Jorge","San Luis de la Reina","San Rafael Oriente","Sesori","Uluazapa")
+    var municipios_10=new Array("San Salvador","Aguilares","Apopa","Ayutuxtepeque","Ciudad Delgado","Cuscatancingo","El Paisnal","Guazapa","Ilopango","Mejicanos","Nejapa","Panchimalco","Rosario de Mora","San Marcos","San Martín","Santiago Texacuangos","Santo Tomás","Soyapango","Tonacatepeque")
+    var municipios_11=new Array("San Vicente","Apastepeque",'Guadalupe',"San Cayetano Istepeque","San Esteban Catarina",'San Ildefonso','San Lorenzo',"San Sebastián","Santa Clara","Santo Domingo","Tecoluca","Tepetitán","Verapaz")
+    var municipios_12=new Array("Santa Ana" ,"Candelaria de la Frontera","Chalchuapa","Coatepeque","El Congo","El Porvenir","Masahuat","Metapán","San Antonio Pajonal","San Sebastián Salitrillo","Santa Rosa Guachipilín","Santiago de la Frontera","Texistepeque")
+    var municipios_13=new Array("Sonsonate" ,"Acajutla","Armenia","Caluco","Cuisnahuat","Izalco","Juayúa","Nahuizalco","Nahulingo","Salcoatitán","San Antonio del Monte","San Julián","Santa Catarina Masahuat","Santa Isabel Ishuatán","Santo Domingo de Guzmán","Sonzacate")
+    var municipios_14=new Array("Usulután" ,"Alegría","Berlín","California","Concepción Batres","El Triunfo","Ereguayquín","Estanzuelas","Jiquilisco","Jucuapa","Jucuarán","Mercedes Umaña","Nueva Granada","Ozatlán","Puerto El Triunfo","San Agustín","San Buenaventura","San Dionisio","San Francisco Javier","Santa Elena","Santa María","Santiago de María","Tecapán")
+    var municipios = [
+    [],
+    municipios_1,
+    municipios_2,
+    municipios_3,
+    municipios_4,  
+    municipios_5,
+    municipios_6,
+    municipios_7,
+    municipios_8,
+    municipios_9,
+    municipios_10,
+    municipios_11,
+    municipios_12,
+    municipios_13,
+    municipios_14,
+    ];
+
+    function tel(id){
+      var num=  document.getElementById(id).value.length;
+      var primer = document.getElementById(id).value;
+      if(num==4)
+      document.getElementById(id).value=document.getElementById(id).value+'-';
+
+      if(num==1 ){
+        if( primer=='2' || primer=='7' || primer=="6")
+           return
+           else {
+            document.getElementById(id).value="";
+            document.getElementById(id).title = "El Telefono debe comenzar con 2, 6 o 7";
+                      
+            
+            } 
+      }
+      
+     
+    }
+
+    function actualizar(){
+        	//tomo el valor del select del pais elegido 
+        var depa 
+        
+        depa = document.contact.departamento[document.contact.departamento.selectedIndex].value 
+        
+        //miro a ver si el pais está definido 
+        if (depa  != 0) { 
+            //si estaba definido, entonces coloco las opciones de la provincia correspondiente. 
+            //selecciono el array de provincia adecuado 
+            mis_provincias=municipios[depa ] 
+            //calculo el numero de provincias 
+            num_provincias = mis_provincias.length 
+            //marco el número de provincias en el select 
+            document.contact.municipio.length = num_provincias 
+            //para cada provincia del array, la introduzco en el select 
+           
+            for(i=0;i<num_provincias;i++){ 
+                document.contact.municipio.options[i].value=mis_provincias[i] 
+                document.contact.municipio[i].text=mis_provincias[i] 
+            }	
+            document.contact.departamento.options[depa].value=departamentos[depa-1]
+        }else{ 
+            //si no había provincia seleccionada, elimino las provincias del select 
+            document.contact.municipio.length = 1 
+            
+            //coloco un guión en la única opción que he dejado 
+            document.contact.municipio.options[0].value = "-" 
+            document.contact.municipio.options[0].text = "-" 
+        } 
+        //marco como seleccionada la opción primera de provincia 
+        document.contact.municipio.options[0].selected = true 
+    }
+
+</script>
+{% endblock %}

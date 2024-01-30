@@ -1,0 +1,215 @@
+
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Lista de Chequeo{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="done" isdone="1" rel="2">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Constancia de Ingresos </small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="3">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Información Técnica</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="4">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Documentos</small> </span>
+      </a>
+    </li>
+  </ul>
+<div class="stepContainer" style="overflow: hidden !important;">
+<form style="overflow: hidden !important;"  id="listaCh" name="listaCh" action="../../../ListaChequeoApp/registrarLC/" method="post" autocomplete="off">{% csrf_token %}
+  <div id="step-1" class="content" style="display: block;">
+  <div class="row">
+    <div class="col-md-9 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="hidden" id="ids" name="ids" value="{{soli.id}}">
+        <h4>Nombre del Cliente</h4>
+        <input type="text" class="form-text" id="nombrec" name="nombrec" value="{{soli.perfil.nombres}} {{soli.perfil.apellidos}}" disabled required>
+        <span class="bar"></span>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Fecha</h4>
+        <input type="date" class="form-text" id="fecha" name="fecha" onchange="validarFecha(this)" required>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-5 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Agencia</h4>
+        <input type="text" class="form-text" id="agencia" name="agencia" value="{{soli.perfil.Agencia.nombre}}" disabled>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="x_title">
+    <div class="row">
+      <h2 class="">Información del Solicitante y Fiador: </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>1. Solicitud de Cliente</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="checkbox"  name="solicitudc" id="solicitudc" value="Si" onchange="Cheque(this)">
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+   
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>2. Fotocopias del DUI y NIT del Cliente</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="checkbox"  name="fotocDN" id="fotocDN" value="Si" onchange="Cheque(this)" >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>3. Recibos del último mes, cancelados de agua, luz y teléfono</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="checkbox"  name="recibosum" id="recibosum" value="Si" onchange="Cheque(this)" >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div> 
+  </div>
+</div>
+<div id="step-2" class="content" style="display: none; height: 700px !important;">
+  {% include "ListaChequeoApp/listaChequeope.html" %}
+</div>
+<div id="step-3" class="content" style="display: none; height: 900px !important;">
+  {% include "ListaChequeoApp/listaChequeoit.html" %}
+</div>
+<div id="step-4" class="content" style="display: none; height: 700px !important;">
+  {% include "ListaChequeoApp/listaChequeodoi.html" %}
+</div>
+</form>
+</div>
+</div>
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+     $(document).ready(function(){
+
+
+  $("#fin").click(function () {
+      
+   if($("#listaCh").valid()){ 
+
+      document.listaCh.submit()
+
+  }else{
+
+      alertE("DEBE REGISTRAR DATOS!")
+      
+      return false; // Evita el envío del formulario si la validación falla
+  }
+
+
+
+  });
+
+
+  
+$("#listaCh").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    fecha:{
+      required: true,
+    },
+  },
+
+  messages: {
+    fecha:{
+        required : "<h2>Debe ingresar la fecha</h2>",
+    },
+    
+  }
+});
+
+
+
+});
+
+function validarFecha(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  function Cheque(valor) {
+    if (valor.checked){
+        alertA("El documeto solo esta en fisico")
+    }
+       
+  }
+
+</script>
+{% endblock %}

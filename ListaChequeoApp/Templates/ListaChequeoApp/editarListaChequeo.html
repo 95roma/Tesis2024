@@ -1,0 +1,335 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Editar Lista de Chequeo{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}{% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}
+ <!-- Agrega el estilo CSS aquí -->
+ <style>
+  /* Estilo del checkbox */
+  .verificarCheck {
+      /* Establece el tamaño del checkbox */
+      width: 20px;
+      height: 20px;
+      /* Cambia el color de fondo cuando el checkbox está marcado (seleccionado) */
+      background-color: #007bff !important; /* Cambia esto al color que desees */
+      /* Elimina el borde por defecto del checkbox */
+      border: none;
+      /* Añade un margen para separar el checkbox de la etiqueta */
+      margin-right: 10px; /* Cambia esto según tus preferencias */
+      /* Establece el cursor en puntero para indicar que se puede hacer clic */
+      cursor: pointer;
+      /* Oculta el checkbox por defecto */
+      opacity: 1;
+  }
+
+
+  /* Cambia el color del checkbox marcado (seleccionado) */
+  .verificarCheck:checked {
+      background-color: #007bff !important; /* Cambia esto al color que desees */
+  }
+</style>
+<!-- /abrir el bloque de contenido-->
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="done" isdone="1" rel="2">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Constancia de Ingresos </small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="3">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Información Técnica</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="4">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Documentos</small> </span>
+      </a>
+    </li>
+  </ul>
+<div class="stepContainer" style="overflow: hidden !important;">
+<form style="overflow: hidden !important;"  id="mlistaCh" name="mlistaCh" action="../../../ListaChequeoApp/modificarCheq/" method="post" autocomplete="off">{% csrf_token %}
+  <div id="step-1" class="content" style="display: block; height: 575px !important;">
+  <div class="row">
+    <div class="col-md-9 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="hidden" id="idlc" name="idlc" value="{{lc.id}}">
+        <h4>Nombre del Cliente</h4>
+        <input type="text" class="form-text" id="nombrec" name="nombrec" value="{{lc.ids.perfil.nombres}} {{lc.ids.perfil.apellidos}}"  disabled>
+        <span class="bar"></span>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Fecha</h4>
+        <input type="date" class="form-text" id="fecha" name="fecha" onchange="validarFecha(this)" value="{{lc.fecha|date:'Y-m-d'}}" required>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-5 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Agencia</h4>
+        <input type="text" class="form-text" id="agencia" name="agencia" value="{{lc.ids.perfil.Agencia.nombre}}" disabled>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="x_title">
+    <div class="row">
+      <h2 class="">Información del Solicitante y Fiador: </h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>1. Solicitud de Cliente</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="checkbox" class="verificarCheck"  name="solicitudc" id="solicitudc" value="Si" >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">     
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>2.1 Fotocopias del DUI del Cliente</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;" style="background-color: #007bff;">
+        <input type="hidden" data-idcliente="{{lc.ids.perfil.id}}" data-nombred="duiDoc" data-ids= "{{lc.ids.id}}">
+        <input type="checkbox" class="verificarCheck" name="fotocDN" id="fotocDN" value="Si"  >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">     
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>2.2 Fotocopias del NIT del Cliente</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="hidden" data-idcliente="{{lc.ids.perfil.id}}" data-nombred="nitDoc" data-ids= "{{lc.ids.id}}">
+        <input type="checkbox" class="verificarCheck"   name="fotocDN" id="fotocDN" value="Si"  >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>3.1 Recibos del último mes, cancelados de agua</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="hidden" data-idcliente="{{lc.ids.perfil.id}}"  data-nombred="aguaDoc" data-ids= "{{lc.ids.id}}">
+        <input type="checkbox" class="verificarCheck"   name="recibosuma" id="recibosuma" value="Si" >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>3.2 Recibos del último mes, cancelados de luz </label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="hidden" data-idcliente="{{lc.ids.perfil.id}}"  data-nombred="luzDoc" data-ids= "{{lc.ids.id}}">
+        <input type="checkbox" class="verificarCheck"   name="recibosuml" id="recibosuml" value="Si" >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>3.3 Recibos del último mes, cancelados de teléfono</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="hidden" data-idcliente="{{lc.ids.perfil.id}}"  data-nombred="telDoc" data-ids= "{{lc.ids.id}}">
+        <input type="checkbox" class="verificarCheck"   name="recibosumt" id="recibosumt" value="Si" >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <label>6.1 Referencias Crediticias del solicitante  </label>
+        &nbsp;&nbsp;
+      </div>
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <input type="hidden" data-idcliente="{{lc.ids.perfil.id}}"  data-nombred="referenciasCreDoc" data-ids= "{{lc.ids.id}}">
+        <input type="checkbox" class="verificarCheck"   name="referenciacs" id="referenciacs" value="Si" >
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="step-2" class="content" style="display: none; height: 820px !important;">
+  {% include "ListaChequeoApp/editarListaChequeope.html" %}
+</div>
+<div id="step-3" class="content" style="display: none; height: 900px !important;">
+  {% include "ListaChequeoApp/editarListaChequeoit.html" %}
+</div>
+<div id="step-4" class="content" style="display: none; height: 700px !important;">
+  {% include "ListaChequeoApp/editarListaChequeodoi.html" %}
+</div>
+</form>
+</div>
+</div>
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+     $(document).ready(function(){
+
+   //establecer valor de los checkbox 
+  $("input[type='checkbox'][name='solicitudc'][value='{{lc.solicitudc}}']").prop('checked',true);
+  $("input[type='checkbox'][name='fotocDN'][value='{{lc.fotocdui}}']").prop('checked',true);
+  $("input[type='checkbox'][name='recibosuma'][value='{{lc.recibosagua}}']").prop('checked',true);
+  $("input[type='checkbox'][name='recibosuml'][value='{{lc.recibosluz}}']").prop('checked',true);
+  $("input[type='checkbox'][name='recibosumt'][value='{{lc.recibostelef}}']").prop('checked',true);
+  $("input[type='checkbox'][name='referenciacs'][value='{{lc.refercs}}']").prop('checked',true);
+  $("input[type='checkbox'][name='constanciaemp'][value='{{lc.constemp}}']").prop('checked',true);
+  $("input[type='checkbox'][name='tacoisss'][value='{{lc.tacoisss}}']").prop('checked',true);
+  $("input[type='checkbox'][name='analisisen'][value='{{lc.analisisec}}']").prop('checked',true);
+  $("input[type='checkbox'][name='balance'][value='{{lc.balance}}']").prop('checked',true);
+  $("input[type='checkbox'][name='balancerst'][value='{{lc.balanceres}}']").prop('checked',true);
+  $("input[type='checkbox'][name='copiaDNF'][value='{{lc.copiaduifia}}']").prop('checked',true);
+  $("input[type='checkbox'][name='copiaraF'][value='{{lc.recibosfiaagua}}']").prop('checked',true);
+  $("input[type='checkbox'][name='copiarlF'][value='{{lc.recibosfialuz}}']").prop('checked',true);
+  $("input[type='checkbox'][name='constanciaempF'][value='{{lc.constempfia}}']").prop('checked',true);
+  $("input[type='checkbox'][name='referenciacsf'][value='{{lc.refercsfia}}']").prop('checked',true);
+  $("input[type='checkbox'][name='inspecciont'][value='{{lc.inspecciontec}}']").prop('checked',true);
+  $("input[type='checkbox'][name='presupuestoc'][value='{{lc.presupuestocons}}']").prop('checked',true);
+  $("input[type='checkbox'][name='certificacionext'][value='{{lc.certifext}}']").prop('checked',true);
+  $("input[type='checkbox'][name='carenciab'][value='{{lc.carenciabien}}']").prop('checked',true);
+  $("input[type='checkbox'][name='fotocescr'][value='{{lc.fotocescrit}}']").prop('checked',true);
+  $("input[type='checkbox'][name='declaracions'][value='{{lc.declaracions}}']").prop('checked',true);
+  $("input[type='checkbox'][name='informeD'][value='{{lc.infdicom}}']").prop('checked',true);
+  $("input[type='checkbox'][name='docsi'][value='{{lc.docsing}}']").prop('checked',true);
+  $("input[type='checkbox'][name='docrem'][value='{{lc.docrem}}']").prop('checked',true);
+  $("input[type='checkbox'][name='cancelpec'][value='{{lc.cancelpec}}']").prop('checked',true);
+  $("input[type='checkbox'][name='finiquitos'][value='{{lc.finiquitos}}']").prop('checked',true);
+  $("input[type='checkbox'][name='hojaac'][value='{{lc.hojaaprovc}}']").prop('checked',true);
+  $("input[type='checkbox'][name='cartaem'][value='{{lc.cartaelbmutuo}}']").prop('checked',true);
+  $("input[type='checkbox'][name='recibopp'][value='{{lc.recibpagp}}']").prop('checked',true);
+  $("input[type='checkbox'][name='ordendi'][value='{{lc.ordendesi}}']").prop('checked',true);
+  $("input[type='checkbox'][name='permisoc'][value='{{lc.permisocons}}']").prop('checked',true);
+  $("input[type='checkbox'][name='cartaecd'][value='{{lc.cartaentcd}}']").prop('checked',true);
+  $("input[type='checkbox'][name='fotocmhs'][value='{{lc.fotocmutuo}}']").prop('checked',true);
+  $("input[type='checkbox'][name='gestionesc'][value='{{lc.gestioncobro}}']").prop('checked',true);
+
+
+  $("#fin").hide(); // oculta el boton
+  
+
+ 
+   
+
+});
+
+// Agrega un evento 'change' a todos los elementos con la clase "verificarCheck"
+$(".verificarCheck").change(function () {
+    // Verifica si el checkbox está marcado
+    if ($(this).is(":checked")) {
+      var archivodt = new FormData();
+      let fecha = new Date();
+      let f = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+
+      let idpd = $(this).closest(".row").find("input[type=hidden][data-idcliente]").data("idcliente");
+      let nomd = $(this).closest(".row").find("input[type=hidden][data-nombred]").data("nombred");
+      let idsd = $(this).closest(".row").find("input[type=hidden][data-ids]").data("ids");
+      //alert(idpd+ " y " + nomd + " y " + idsd + " fecha " + f);
+
+      $.ajax({
+        url: "/ClienteApp/registrarDocumento/?idCliente="+idpd+"&fecha="+f+"&nombreD="+nomd +"&ids="+idsd ,
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+        dataType: "json",
+        data: archivodt,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+          alertA("El documeto solo esta en fisico")
+        },
+        error: function(jqXHR,textStatus,error){
+              console.log(error)
+              alertE("Error al guardar")
+            },
+    });
+        
+    }
+});
+
+function validarFecha(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  
+
+  function Cheque(valor) {
+    if (valor.checked){
+        alertA("El documeto solo esta en fisico")
+    }
+       
+  }
+
+</script>
+{% endblock %}

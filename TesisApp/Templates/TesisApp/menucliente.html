@@ -1,0 +1,52 @@
+<ul class="nav side-menu">
+                 
+  
+  <li><a><i class="fa fa-users"></i> Cliente <span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu">
+      <li><a href="{% url 'perfil'%}">Perfil de Cliente</a></li>
+      <li><a href="{% url 'listaPerfil'%}">Lista de Cliente</a></li>
+    </ul>
+  </li>
+  
+  <li><a><i class="fa fa-users"></i> Flujo de caja <span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu">
+      <li><a href="{% url ''%}">Perfil de Cliente</a></li>
+      <li><a href="{% url ''%}">Lista de Cliente</a></li>
+    </ul>
+  </li>
+  
+  <li><a><i class="fa fa-edit"></i> Solicitud <span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu">
+      <li><a><i class="fa fa-renren"></i> Solicitud Personal <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li><a href="{% url 'listarSN'%} " >Listado Solicitudes Completas</a></li>
+          <li><a href="{% url 'listarSNC'%} " >Listado Solicitudes Incompletas</a></li>
+          <li><a href="{% url ''%} " >Listado Solicitudes por Agencia</a></li>          
+        </ul>
+      </li>
+      <li><a><i class="fa fa-renren"></i> Solicitud Microempresa <span class="fa fa-chevron-down"></span></a>
+        <ul class="nav child_menu">
+          <li><a href="{% url 'listaSolicitud'%} " >Listado Solicitudes Completas</a></li>
+          <li><a href="{% url 'listarSC'%} " >Listado Solicitudes Incompletas</a></li>
+          <li><a href="{% url 'listaSCA'%} id=request.user.agencia.id%}" >Listado Solicitudes por Agencia</a></li>        
+        </ul>
+      </li>
+    </ul>
+  </li>
+  
+  
+
+                
+  <li><a><i class="fa fa-plus-square-o"></i> Revicion de documentos <span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu">
+      <li><a href="{% url 'revi'%}">Documentos</a></li>
+      <li><a href="{% url 'listarDocu'%}">Documentos</a></li>
+    </ul>
+  </li>
+
+  
+
+ </ul>
+
+
+

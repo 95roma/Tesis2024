@@ -1,0 +1,66 @@
+
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Listado{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Conozca a su Cliente   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+                    <table id="example" class="table table-striped table-bordered">
+                      <thead>
+                        <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+                          <th>#</th>
+                          <th>Codigo</th>
+                          <th>Dui</th>
+                          <th>Nombre</th>
+                          <th>Calidad</th>
+                          <th>Telefono</th>
+                          <th colspan="2"> Opciones </th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody style="color: #27575c;">
+                        {% for c in listc %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{c.codigo}}</td>
+                          <td>{{c.ids.perfil.dui}}</td>
+                          <td>{{c.nombrecc}} </td>
+                          <td>{{c.calidadactua}}</td>
+                          <td>{{c.telfijo}}</td>
+
+                          <td><a href="editarCliente/{{c.iddg}}" class="btn btn-info">Editar</a></td>
+                          <td><a href="conozcaC/{{c.iddg}}" class="btn btn-info">Reporte</a></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endblock %}
+                    <!-- /cerrar el bloque de contenido-->
+                    {% block js %}
+                    <script>
+                        $(document).ready(function() {
+                            $('#example').DataTable({
+                                responsive: true,
+                                language: {
+                                    url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+                                }
+                            });
+                        });
+                      </script>
+                      
+                      
+                      {% endblock %}

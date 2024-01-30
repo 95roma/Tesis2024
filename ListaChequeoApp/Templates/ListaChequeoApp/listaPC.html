@@ -1,0 +1,62 @@
+
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Listado{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+                    <table id="example" class="table table-striped table-bordered">
+                      <thead>
+                        <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+                          <th>#</th>
+                          <th>Dui</th>
+                          <th>Nombre</th>
+                          <th>Agencia</th>
+                          <th > Opción </th>
+                        </tr>
+                      </thead>
+
+
+                      <tbody style="color: #27575c;">
+                        {% for s in sol %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{s.perfil.dui}}</td>
+                          <td>{{s.perfil.nombres}} {{ s.perfil.apellidos}}</td>
+                          <td>{{s.perfil.Agencia.nombre}}</td> 
+
+                          <td><a href="listaChequeov/{{s.id}}" class="btn btn-warning">Lista de Chequeo</a></td>
+
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endblock %}
+                    <!-- /cerrar el bloque de contenido-->
+                    {% block js %}
+                    <script>
+                        $(document).ready(function() {
+                            $('#example').DataTable({
+                                responsive: true,
+                                language: {
+                                    url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+                                }
+                            });
+                        });
+                      </script>
+                      
+                      
+                      {% endblock %}

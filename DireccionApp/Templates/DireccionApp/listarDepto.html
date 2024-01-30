@@ -1,0 +1,44 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Tabla{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+<p></p>
+                    <table id="example" class="table table-striped table-bordered">
+                      <thead>
+                        <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+                          <th><center>Id</center></th>       
+                          <th><center>Nombre</center></th>
+                          <th ><center>Opciones</center>  </th>
+    
+                        </tr>
+                      </thead>
+
+
+                      <tbody style="color: #000000;">
+                        {% for d in departamento %}
+                        <tr>
+                          <td align="center" style="cursor:pointer">{{forloop.counter}}</td>
+                          <td align="center" style="cursor:pointer">{{d.nombre_depto}}</td>
+                         
+                          <td  align="center" style="cursor:pointer"><a href="/DireccionApp/modiDepto/{{d.id}}" class="btn btn-info"><img src="{% static 'TesisApp/images/edit.png' %}"style="width:25px">Editar</a></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                   
+                    {% endblock %}
+                    <!-- /cerrar el bloque de contenido-->
+                    {% block js %}
+                   
+                    <script>
+                    
+                        
+                      </script>
+                    
+                      
+                      {% endblock %}

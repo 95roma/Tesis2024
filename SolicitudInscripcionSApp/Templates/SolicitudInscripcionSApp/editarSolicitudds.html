@@ -1,0 +1,139 @@
+<div> <!-- Datos de declaracion de salud -->
+
+    <div class="x_title">
+      <div class="row">
+        <h2 style="text-align: center;">DECLARACION DE SALUD </h2>
+      </div><br>
+      <div class="row">
+  
+      </div>
+    </div>
+  
+    <div>
+  
+      <table class="table">
+        <caption style="text-align: center;">
+          <h2>Detalle de los Padecimientos </h2>
+        </caption>
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th width="26%">Padecimiento </th>
+            <th width="9%">Opción</th>
+            <th width="15%">Fecha</th>
+            <th width="35%">Tratamiento</th>
+            <th width="29%">Situación actual</th>
+          </tr>
+        </thead>
+        <tbody id="lenfermedadm" style="color: #27575c;">
+          {% for e in enfermedades %}
+          <tr>
+            <td>
+              <input type="hidden" id="idenf" name="idenf" value=" {{e.id}}">
+              <input type="hidden" id="idpad" name="idpad" >
+            </td>
+            <td>
+              <input type="hidden" id="idc" name="idc" value="{{s.perfil.id}}">
+            </td>
+            <td >
+  
+              <input type="hidden" class="form-text" id="padec" name="padec" maxlength="50" minlength="4"
+                value="{{e.nombreenf}}" required>
+  
+              <div style="display: table-cell; vertical-align: middle; height: 50px;width: 250px; ">
+                <p style="vertical-align:middle; font-size: smaller;">{{e.nombreenf}}</p>
+              </div>
+            </td>
+            <td>
+              <div style="display: block;align-content: center;line-height: 5px;">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" id="tindice" class="flat">
+                  </label>
+                </div>
+              </div>
+            </td>
+            <td>
+  
+              <div style="display: table-cell; vertical-align: middle; height: 50px;width: 200px; ">
+                <div class="form-animate-text form-group ">
+                  <input type="date" class="form-text" id="fechapad" name="fechapad" onchange="validarF(this)" required>
+                  <span class="bar"></span>
+                </div>
+              </div>
+  
+  
+  
+            </td>
+            <td>
+              <div style="display: table-cell; vertical-align: middle;height: 50px;width: 275px; ">
+                <div class="form-group form-animate-text " style="align-content: center;line-height: 4em !important"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text" id="tratamientor" name="tratamientor" required>
+                  <span class="bar"></span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div style="display: table-cell; vertical-align: middle;height: 50px;width: 250px; font-size: xx-small; ">
+                <div class="form-group form-animate-text " >
+                  <input type="text" class="form-text" list="situacionActual" id="situaciona" name="situaciona" required>
+                  <span class="bar"></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+  
+      </table>
+    </div>
+      <div class="x_title">
+        <div class="row">
+          <h5 style="text-align: center;"> </h5>
+        </div>
+        
+      </div>
+      <input type="hidden" id="personal" name="personal"  value="Si" required>
+      <input type="hidden" id="idpot" name="idpot" value="{{s.perfil.id}}">
+      <input type="hidden" id="idpotp" name="idpotp" value="{{reSi.id}}">
+
+      <div class="row">   
+        <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+           <div class="form-group form-animate-text " style="margin-top:5px !important;">
+               <h4>Otro padecimiento</h4>
+             <input type="text" class="form-text" id="padecimientoOt" name="padecimientoOt" value="{{reSi.idsisenf.nombreenf}}"  >
+             <span class="bar"></span>
+           </div>
+       </div>
+       <div class="col-md-3 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+         <div class="form-group form-animate-text " style="margin-top:5px !important;">
+           <h4>Fecha</h4>
+           <input type="date" class="form-text" id="fechaOt" name="fechaOt" onchange="validarF(this)" value="{{reSi.fechap|date:'Y-m-d'}}"  >
+           <span class="bar"></span>
+         </div>
+     </div>
+      <div class="col-md-5 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Tratamiento</h4>
+          <input type="text" class="form-text" id="tratamientoOt" name="tratamientoOt" value="{{reSi.tratamientor}}"  >
+          <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Situación actual</h4>
+        <input type="text" class="form-text" list="situacionActual" id="situacionOt" name="situacionOt" value="{{reSi.situaciona}}"  >
+        <span class="bar"></span>
+      </div>
+    </div>
+   </div>
+  
+  <datalist id="situacionActual" >
+    <option value="Curado"></option>
+    <option value="En tratamiento"></option>
+  </datalist>
+  
+    <input type="hidden" id="passDS" name="passDS" value="0">
+  </div>

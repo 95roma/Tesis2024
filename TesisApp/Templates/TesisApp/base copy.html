@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+  <!-- pagina padre del sistema hereda -->
+  <head>
+    {% load static %}
+    <link href="{% static 'TesisApp/css/esti.css' %}" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link
+      href="{% static 'TesisApp/vendors/bootstrap/dist/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      href="{% static 'TesisApp/vendors/font-awesome/css/font-awesome.min.css' %}"
+      rel="stylesheet"
+    />
+    <!-- NProgress -->
+    <link
+      href="{% static 'TesisApp/vendors/nprogress/nprogress.css' %}"
+      rel="stylesheet"
+    />
+    <!-- iCheck -->
+    <link
+      href="{% static 'TesisApp/vendors/iCheck/skins/flat/green.css' %}"
+      rel="stylesheet"
+    />
+    <!-- bootstrap-progressbar -->
+    <link
+      href="{% static 'TesisApp/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}"
+      rel="stylesheet"
+    />
+    <!-- JQVMap -->
+    <link
+      href="{% static 'TesisApp/vendors/jqvmap/dist/jqvmap.min.css' %}"
+      rel="stylesheet"
+    />
+    <!-- bootstrap-daterangepicker -->
+    <link
+      href="{% static 'TesisApp/vendors/bootstrap-daterangepicker/daterangepicker.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- este sirve para cambiar idioma al calendario locale -->
+    <script src="{% static 'TesisApp/vendors/moment/locale/es.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery Smart Wizard -->
+    <!-- jQuery Smart Wizard -->
+    <script src="{% static 'TesisApp/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
+    <!-- Datatables -->
+    <!-- Datatables -->
+    <link
+      href="{% static 'TesisApp/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'TesisApp/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'TesisApp/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'TesisApp/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'TesisApp/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Custom Theme Style -->
+    <link
+      href="{% static 'TesisApp/build/css/custom.min.css' %}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0">
+              <a href="" class="site_title"> <span>SIGPESH</span></a
+              ><!-- LA ABREVIATURA TIENE QUE SALIR DE LA BASE DE DATOS RECORDAR -->
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img
+                  src="{% static 'TesisApp/images/HH.png' %}"
+                  alt="..."
+                  class="img-circle profile_img"
+                />
+              </div>
+              <div class="profile_info">
+                <span>BIENVENIDO,</span>
+                {% if request.user.username is not None %}
+
+                <h2>{{request.user.nombre}} {{request.user.apellido}}</h2>
+
+                {% else %}
+
+                <h2>AL SISTEMA</h2>
+                <!-- DE LA BASE SACAR EL NOMBRE DEL QUE INGRESO RECORDAR -->
+                {% endif %}
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+            <br />
+            <!-- sidebar menu -->
+            <div
+              id="sidebar-menu"
+              class="main_menu_side hidden-print main_menu"
+            >
+              <div class="menu_section">
+                <h3>MENÚ GENERAL</h3>
+                
+                
+                  {% if request.user.cargo == 1 %}<!-- Menu para Administrador -->
+                  {% include 'TesisApp/menuAdmin.html' with menuAdmin=object %}
+                  {% elif request.user.cargo == 2 %}<!-- Menu para jefe agencia -->
+                  {% include 'TesisApp/menuJefeA.html' with menuJefeA=object %}
+                  <!-- Menu para clientes -->
+                  {% elif request.user.cargo == 3 %}
+                    {% include 'TesisApp/menucliente.html' with menucliente=object %}
+                  {% elif request.user.cargo == 4 %}<!-- Menu para oficiales de credito -->
+                  {% elif request.user.cargo == 5 %}<!-- Menu para Tecnicos -->
+                  {% else %}
+                    {% include 'TesisApp/menu.html' with menuprincipal=object %}
+                {% endif %}
+               <!-- Menu para usuarios -->
+                 <!--{{
+                  menuprincipal }}--> 
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+          </div>
+        </div>
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <!--img src="{% static 'TesisApp/images/HH.png' %}" height="50" width="50"-->
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <style>
+                    #out {
+                      color: blue;
+                      background-color: initial;
+                    }
+                  </style>
+                  <a href="{% url 'logout' %}" id="out"><h2> <img src="{% static 'TesisApp/images/salir.png' %}" height="20" width="20"></h2></a>
+                </li>
+                <li class="">
+                  {% block static %} {% if request.user is not None %}
+                  <style>
+                    #ag:hover {
+                      background-color: initial;
+                      border-color:initial;
+                    }
+                  </style>
+                  
+                  <a href="#" class="disabled" id="ag"><h2>{{request.user.agencia.nombre}}</h2></a>
+                  <!--h3>{{request.user.agencia.nombre}}</h3-->
+                  {% else %}
+                  <h4 id="user"></h4>
+                  <!--<h4>AL SISTEMA</h4> DE LA BASE SACAR EL NOMBRE DEL QUE INGRESO RECORDAR -->
+                  {% endif %} {% endblock static %}
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+        <!-- page content  el cuerpo de la pagina-->
+        <div class="right_col" role="main">
+          <div class="clearfix"></div>
+          <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                  <h2>{% block titulo %} {% endblock titulo %}</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                      <a class="collapse-link"
+                        ><i class="fa fa-chevron-up"></i
+                      ></a>
+                    </li>
+                    <li class="dropdown">
+                      <a
+                        href="#"
+                        class="dropdown-toggle"
+                        data-toggle="dropdown"
+                        role="button"
+                        aria-expanded="false"
+                        ><i class="fa fa-wrench"></i
+                      ></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="#">{% block uno %} {% endblock uno %}</a>
+                        </li>
+                        <li>
+                          <a href="#">{% block dos %} {% endblock dos %}</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  {% block content %}
+                  <!-- /contenido cambiante en la demas paginas -->
+
+                  {% endblock %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content pie de pagina -->
+        <footer>
+          <div class="pull-right">pie <a href="">Pie</a></div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+    <!-- Menu Toggle Script -->
+
+    <!-- jQuery -->
+    <script src="{% static 'TesisApp/vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'TesisApp/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+    <!-- FastClick -->
+    <script src="{% static 'TesisApp/vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'TesisApp/vendors/nprogress/nprogress.js' %}"></script>
+    <!-- Chart.js -->
+    <script src="{% static 'TesisApp/vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'TesisApp/vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'TesisApp/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'TesisApp/vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'TesisApp/vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'TesisApp/vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'TesisApp/vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'TesisApp/vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'TesisApp/vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'TesisApp/vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+    <!-- jQuery Smart Wizard -->
+    <script src="{% static 'TesisApp/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js' %}"></script>
+    <!-- Datatables -->
+    <script src="{% static 'TesisApp/vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/jszip/dist/jszip.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'TesisApp/build/js/custom.min.js' %}"></script>
+    <script src="{% static 'TesisApp/js/materialize.js' %}"></script>
+    <script src="{% static 'TesisApp/js/jquery.mask.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/switchery/dist/switchery.min.js' %}"></script>
+    <script src="{% static 'TesisApp/vendors/iCheck/icheck.min.js' %}"></script>
+
+    <!-- validator -->
+    <script src="{% static 'TesisApp/vendors/validator/validator.js' %}"></script>
+
+    <script src="{% static 'TesisApp/js/jquery.js' %}"></script>
+    <script src="{% static 'TesisApp/js/jquery.validate.js' %}"></script>
+    <script src="{% static 'TesisApp/js/jquery.validate.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="{% static 'TesisApp/js/alertas.js' %}"></script>
+    <script src="{% static 'TesisApp/js/sweetalert2.all.min.js' %}"></script>
+
+    {% if messages %} {% for m in messages %}
+   
+    <script>
+      
+      
+    var tags="{{ m.tags }}";
+      if(tags== "warning") {
+        alertA("{{m}}")
+        
+    }else if(tags== "info") {
+      confirmar("{{m}}")
+      
+    }else if(tags== "success") {
+      alertC("{{m}}")
+      
+    }else{
+      alertE("{{m}}")
+    }
+  </script>
+
+    <!--{% if m.1 is "0" %}
+    <script>
+        Swal.fire({
+        icon: "success",
+        title: "Exito...",
+        text: "Datos Registrados",
+        imageUrl: "{% static 'TesisApp/images/iconHabiC.png' %}",
+        imageWidth: 200,
+        imageHeight: 100,
+      });
+    </script>
+    {% elif m.1 is "1" %}
+    <script>
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "{{m.0}}",
+        imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+        imageWidth: 200,
+        imageHeight: 100,
+      });
+    </script>
+    {% else %}
+      <script>
+        Swal.fire({
+          icon: "success",
+          title: "Exito...",
+          text: "{{ m.0 }}",
+          imageUrl: "{% static 'TesisApp/images/iconHabiS.png' %}",
+          imageWidth: 200,
+          imageHeight: 100,
+        });
+      </script>
+    {% endif %} -->{% endfor %} {% endif %} 
+    {% block js %}
+    <script type="text/javascript">
+
+      function session(){
+        var user= {{usuario.nombre|safe}};
+
+        var logo="{{ usuario|safe }}";
+        localStorage.setItem('usuario',user);
+      //window.localStorage.setItem('theme','dark');
+      // alert('ok');
+      //console.log(logo);
+      // console.log("Hola mundo"+user.nombre);
+      }
+      console.log("Hola mundo");
+      var my_data = {{ usuario|safe }};
+        console.log(my_data);
+    </script>
+    {% endblock %}
+  </body>
+</html>

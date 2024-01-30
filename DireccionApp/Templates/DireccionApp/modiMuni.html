@@ -1,0 +1,129 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+
+
+{% block titulo %}Modificar Municipio{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}  <li><a href="{% url 'listarMuni'%}"> Listar Municipio   </a></li>  {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}  <li><a href="#">prueba</a></li>  {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<form id="contact" name="contact" action="../editMuni/" method="post" autocomplete="off">{% csrf_token %}
+    <input type="hidden" id="id" name="id" value="{{Muni.idmuni}}">
+
+
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Departamento</h4>
+            <div class="col-md-9 col-sm-9 ">
+                <select class="form-text" id="id_depto" name="id_depto" value="{{Muni.depto.id}}" required >
+                    
+                    {% for d in Departamento %}
+                    <option value="{{d.id}}" {% if d.id == Muni.depto.id %}selected{% endif %}>{{d.nombre_depto}}</option>
+                    {% endfor %} 
+                </select>
+            </div>
+            <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre</h4>
+            <input type="text" class="form-text"  id="nombre_muni" name="nombre_muni" value="{{Muni.nombre_muni}}" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  //this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ a-záéíóúüñ]*$/i.test(value);
+}, "<h2>Ingrese sólo letras </h2>");
+
+
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    nombre_muni:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:60
+    },
+    id_depto:{
+        required:true
+
+    } 
+  },
+  messages: {
+    nombre_muni:{
+        required : "<h2>Debe ingresar el nombre del municipio</h2>",
+        minlength : "<h2>El nombre debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>El nombre debe tener un maximo de 60 caracteres</h2>"
+    },
+    id_depto:{
+        required: "<h2>Seleccione Departamento</h2>"
+    }
+  },
+});
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+    
+}
+});
+
+});
+</script>
+{% endblock %}

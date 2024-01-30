@@ -1,0 +1,239 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Registro Datos de la Obra a Realizar{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Municipio  {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form id="contact" name="contact" action="../registrarDatosCome/" method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden"  id="id" name="id"  value="{{DetalleApp.id}}" >
+                      
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Comentario sobre la necesidad de la vivienda o mejoramiento de vivienda</h4>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <textarea id="CSN" name="CSN" class="resizable_textarea form-text"></textarea>
+      <span class="bar"></span>
+  </div>
+</div> 
+<br>
+<br>
+<div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Comentario sobre la evaluacion y estabilidad de los ingresos</h4>
+    <span class="step_descr">(Capacidad de pago, actividad productiva, referencias crediticias
+        y alternativas de pago por pérdida de fuente de ingreso actual)</span>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <textarea id="CEE" name="CEE" class="resizable_textarea form-text"></textarea>
+      <span class="bar"></span>
+  </div>
+</div>
+
+<br>
+<br>
+<div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Comentario sobre la garantía ofrecida</h4>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <textarea id="CGO" name="CGO" class="resizable_textarea form-text"></textarea>
+      <span class="bar"></span>
+  </div>
+</div>
+
+
+ 
+  
+    
+   
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Medios por el cual se informo del servicio crediticio de HPHES</h4>
+          <div class="col-md-10 col-sm-10 ">
+              <select class="form-text" id="medio" name="medio"  required >
+                  <option  selected></option>
+                  <option value="Redes sociales" >Redes sociales</option>
+                  <option value="Feria de vivienda">Feria de vivienda</option>
+                  
+              </select>
+          </div>
+          <span class="bar"></span>
+      </div>
+  </div>
+  </div><br><br><br>
+
+
+  <div class="form-group">
+    <div class="col-md-12 col-md-offset-2">
+        <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+            style="width:200px; height:40px;">Finalizar</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+    </div>
+</div>
+
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+
+{% block js %}<!-- bloque para validaciones de input-->
+<!-- bootstrap-datetimepicker -->    
+
+
+
+
+  
+
+
+</script>
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  //this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+
+
+// para poner validaciones 
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ ]*$/i.test(value);
+}, "<h2>Ingrese solo letras </h2>");
+$.validator.addMethod("zona", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+}, "<h2>Ingrese una dirección valida ..</h2>");
+//fin de validaciones con ajax
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    duenoPropiedad:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:30
+    },
+    direExacta:{
+      minlength:3,
+      required: true,
+      zona:true,
+      maxlength:30
+    },
+    presupuesto:{
+      minlength:3,
+      required: true,
+      maxlength:10,
+      
+    },
+    destino:{
+      minlength:4,
+      required: true,
+      letras:true,
+      maxlength:100
+
+    },
+    parentesco:{
+      minlength:4,
+      required: true,
+      letras:true,
+      maxlength:100
+
+    },
+    detalleObra:{
+      minlength:6,
+      required: true,
+      letras:true,
+      maxlength:100
+
+    }
+  },
+  messages: {
+    duenoPropiedad:{
+        required : "<h2>Debe ingresar el nombre </h2>",
+        minlength : "<h2>EL nombre debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL nombre debe tener un maximo de 30 caracteres</h2>"
+    },
+    direExacta:{
+        required : "<h2>Debe ingresar la direccion</h2>",
+        minlength : "<h2>EL apellido debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL apellido debe tener un maximo de 30 caracteres</h2>"
+    },
+    presupuesto:{
+        required : "<h2>Debe ingresar el presupuesto</h2>",
+        minlength : "<h2>Debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>Debe tener un maximo de 10 caracteres</h2>"
+    },
+    destino:{
+      minlength:"<h2>Debe tener un minimo de 4 caracteres</h2>",
+      required: "<h2>Debe ingresar el destino del credito</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+    parentesco:{
+      minlength:"<h2>Debe tener un minimo de 4 caracteres</h2>",
+      required: "<h2>Debe ingresar el parentesco con el solicitante</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+    detalleObra:{
+      minlength:"<h2>Debe tener un minimo de 6 caracteres</h2>",
+      required: "<h2>Debe ingresar el dato</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    }
+  },
+});// fin del form contact 
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+   
+   
+
+    }else{
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'DEBE REGISTRAR DATOS!',
+  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+  imageWidth: 200,
+  imageHeight: 100
+}) 
+    }
+});// fin de btnguardar
+
+
+ 
+  
+
+ 
+
+  
+
+});// fin de la document
+
+
+</script>
+{% endblock %}

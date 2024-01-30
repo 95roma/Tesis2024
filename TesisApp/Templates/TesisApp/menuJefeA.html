@@ -1,0 +1,102 @@
+<ul class="nav side-menu">
+                 
+    
+    <li><a><i class="fa fa-gear"></i> Configuraciones Generales <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        
+        <li><a><i class="fa fa-renren"></i> Zona <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'zonaAgencia'%}">Registro de Zona</a></li>
+            <li><a href="{% url 'asignarZona'%}">Asignar Zona</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Ocupacion <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'ocupacion'%} " >Registro de Ocupacion</a></li>
+            <li><a href="{% url 'listaOcupacion'%} " >Lista de Ocupacion</a></li>
+          </ul>
+        </li>
+        
+        <li><a><i class="fa fa-renren"></i> Materiales <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'materiales'%} " >Registro de Materiales</a></li>
+            <li><a href="{% url 'listaMater'%} " >Lista de Materiales</a></li>
+          </ul>
+        </li>
+        
+        
+        
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-users"></i> Cliente <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'perfil'%}">Perfil de Cliente</a></li>
+        <li><a href="{% url 'listaPerfil'%}">Lista de Cliente</a></li>
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-users"></i> Flujo de caja <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url ''%}">Perfil de Cliente</a></li>
+        <li><a href="{% url ''%}">Lista de Cliente</a></li>
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-edit"></i> Solicitud <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a><i class="fa fa-renren"></i> Solicitud Personal <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listarSN'%} " >Listado Solicitudes Completas</a></li>
+            <li><a href="{% url 'listarSNC'%} " >Listado Solicitudes Incompletas</a></li>
+            <li><a href="{% url ''%} " >Listado Solicitudes por Agencia</a></li>          
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Solicitud Microempresa <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaSolicitud'%} " >Listado Solicitudes Completas</a></li>
+            <li><a href="{% url 'listarSC'%} " >Listado Solicitudes Incompletas</a></li>
+            <li><a href="{% url 'listaSCA'%} id=request.user.agencia.id%}" >Listado Solicitudes por Agencia</a></li>        
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a><i class="fa fa-clone"></i> Historial Crediticio <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url ''%}">Registro</a></li>
+        <li><a href="{% url ''%}">Lista</a></li>
+        
+      </ul>
+    </li>
+    <li><a><i class="fa fa-clone"></i> Reportes <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaCC'%}">Conozca a su Cliente</a></li>
+        <li><a href="{% url ''%}">Declaracion Jurada</a></li>
+        <li><a href="{% url ''%}">Inscripcion Seguro</a></li>
+        <li><a href="{% url ''%}">Inspeccion</a></li>
+        <li><a href="{% url ''%}">Presupuesto</a></li>
+      </ul>
+    </li>
+ 
+                  
+    <li><a><i class="fa fa-plus-square-o"></i> Revicion de documentos <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'revi'%}">Documentos</a></li>
+        <li><a href="{% url 'listarDocu'%}">Documentos</a></li>
+      </ul>
+    </li>
+
+    <li><a><i class="fa fa-gear"></i>Graficas<span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'Grafica'%}">Grafica 1</a></li>
+        <li><a href="{% url 'Gporyear'%}">Grafica 2</a></li>
+        <li><a href="{% url 'graf1'%}">Grafica Persona Natural</a></li>
+        <li><a href="{% url 'graf2'%}">Grafica Microempresa</a></li>
+        
+      </ul>
+    </li>
+
+   </ul>
+
+ 
+

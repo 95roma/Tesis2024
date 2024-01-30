@@ -1,0 +1,485 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/inicio.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Perfil del Cliente{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+
+{% endfor %}
+{% endif %}
+
+<div class="right_col" role="main">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                  <h2>Perfil del Cliente</h2>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <form id="perfils" name="perfils" action="registrarPerfil/" method="post" autocomplete="off">{% csrf_token %}
+                        <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                <h4>Nombres</h4>
+                                <input type="text" class="form-text" id="nombres" name="nombres" required>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                <h4>Apellidos</h4>
+                                <input type="text" class="form-text" id="apellidos" name="apellidos" required>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                <h4>Dui</h4>
+                                <input type="text" class="form-text" id="dui" name="dui" onkeypress=" du('dui');return event.charCode>=48 && event.charCode<=57 " maxlength="10" minlength="10"  required >
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                <h4>Teléfono</h4>
+                                <input type="text" class="form-text" id="telefono" name="telefono" onkeypress=" tel('telefono');return event.charCode>=48 && event.charCode<=57 " maxlength="9" minlength="9"  required>
+                                <span  class="bar"></span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                    <h4>Nacionalidad</h4>
+                                    <div class="col-md-10 col-sm-10 ">
+                                        <select class="form-text" id="nacionalidad" name="nacionalidad"  required >
+                                            <option  selected></option>
+                                            <option value="salvadoreño" >Salvadoreño/a</option>
+                                            <option value="otro">otro</option>
+                                            
+                                        </select>
+                                    </div>
+                                    <span class="bar"></span>
+                                </div>  
+                            </div>
+                    
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                    <h4>fecha de nacimiento</h4>
+                                    <input type="date" class="form-text" id="fecha" name="fecha" onchange="validarFecha('fecha')"   required >
+                                    <span class="bar"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                    <h4>Ocupación</h4>
+                                    <div class="col-md-10 col-sm-10 ">
+                                        <select class="form-text id="ocupacion" name="ocupacion"  required >
+                                            <option selected ></option>
+                                            {% for o in ocupaciones %}
+                                            <option value="{{o.id}}" >{{o.ocupacion}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <span class="bar"></span>
+                                </div>
+                            </div>
+                    
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                    <h4>Salario</h4>
+                                    <input type="number" class="form-text" id="salario" name="salario"  onkeypress="validarSalario('salario');return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  maxlength="10"  required>
+                                    <span class="bar"></span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                        <h4>Departamento</h4>
+                                        <select id="departamento" class="form-text" name="departamento" onchange="cambiarMunicipio()" required> 
+                                            <option value="0" selected disabled>SELECCIONE DEPARTAMENTO... </option> 
+                                            <option selected ></option>
+                                            {% for d in Departamento %}
+                                            <option value="{{d.id}}" >{{d.nombre_depto}}</option>
+                                            {% endfor %}
+                                        </select>
+                                        
+                                        <span class="bar"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                        <h4>Municipio</h4>
+                                        <select name="municipio" id="municipio" class="form-text" required> 
+                                            <option value="-">- 
+                                            </select> 
+                                        
+                                        <span class="bar"></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                            <h4>Direccion</h4>
+                                            <input type="text" class="form-text" id="direccion" name="direccion" required>
+                                            <span class="bar"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12 col-xs-12">
+                                        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                            <h4>Correo</h4>
+                                            <input type="text" class="form-text" id="correo" name="correo" required>
+                                            <span class="bar"></span>
+                                        </div>
+                                    </div>
+                                    </div>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                        <h4>Contraseña</h4>
+                                        <input type="password" class="form-text" id="contrasena" name="contrasena" onchange="validarPass();"   required>
+                                        <span class="bar"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                                        <h4>Repita su Contraseña</h4>
+                                        <input type="password" class="form-text" id="rcontrasena" name="rcontrasena" onchange="compararPass();"  required>
+                                        <span class="bar"></span>
+                                    </div>
+                                </div>
+                                </div>
+                                <BR><BR>
+                            <div class="form-group">
+                                <div class="col-md-12 col-md-offset-2">
+                                    <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                                        style="width:200px; height:40px;">Guardar</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button type="reset" class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+     $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+});
+
+$(function () {// agregar la fecha actual a la solicitud
+    $(window).load(function () {
+      var fecha = new Date();
+     // var f = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+      f = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+
+      //se agrega la fecha maxima para la fecha de nacimiento
+        document.getElementsByName('fecha').setAttribute("max", f);
+
+    });
+
+  });
+
+
+ $.validator.addMethod("validaemail", function(value, element) {
+    return/^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i.test(value);
+}, "<h2>Ingrese un correo válido  en formaro que contenga @ y .com</h2>");
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ.]*$/i.test(value);
+}, "<h2>Ingrese sólo letras ..</h2>");
+
+$.validator.addMethod("validardui", function(value, element) {
+    return /^(?!.*(.)\1{4})\d{8}-\d{1}$/.test(value);
+}, "<h2>Ingrese corecctamente el DUI ..</h2>");
+
+$.validator.addMethod("numero", function(value, element) {
+    return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+$.validator.addMethod("dire", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+}, "<h2>Ingrese una dirección valida ..</h2>");
+
+
+
+$("#perfils").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    nombres:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:30
+    },
+    apellidos:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:30
+    },
+    dui:{
+      minlength:10,
+      required: true,
+      validardui:true,
+      maxlength:10,
+      
+    },
+    fecha:{
+      required:true,
+
+    },
+    
+    salario:{
+      required:true,
+      minlength:3,
+      maxlength:10,
+      numero:true,
+      
+    },
+    direccion:{
+      minlength:10,
+      required: true,
+      dire:true,
+      maxlength:100
+
+    },
+    correo:{
+      minlength:3,
+      required: true,
+      validaemail:true,
+      maxlength:30
+
+    },
+    contrasena:{
+      minlength:5,
+      required: true,
+      maxlength:30
+
+    },
+    rcontrasena:{
+      minlength:5,
+      required: true,
+      maxlength:30
+
+    },
+  },
+  messages: {
+    nombres:{
+        required : "<h2>Debe ingresar los nombres</h2>",
+        minlength : "<h2>EL nombre debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL nombre debe tener un maximo de 30 caracteres</h2>"
+    },
+    apellidos:{
+        required : "<h2>Debe ingresar los apellidos</h2>",
+        minlength : "<h2>EL apellido debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL apellido debe tener un maximo de 30 caracteres</h2>"
+    },
+    dui:{
+        required : "<h2>Debe ingresar el dui</h2>",
+        minlength : "<h2>EL dui debe tener un minimo de 10 caracteres</h2>",
+        maxlength : "<h2>EL dui debe tener un maximo de 10 caracteres</h2>"
+    },
+    telefono:{
+        required : "<h2>Debe ingresar el teléfono</h2>",
+    },
+    nacionalidad:{
+        required : "<h2>Debe seleccionar la nacionalidad</h2>",
+    },
+    fecha:{
+        required : "<h2>Debe ingresar la fecha</h2>",
+    },
+    ocupacion:{
+        required : "<h2>Debe seleccionar la ocupación</h2>"
+    },
+    salario:{
+        required : "<h2>Debe ingresar un salario </h2>",
+        minlength : "<h2>EL salario debe tener un minimo de 3 digitos</h2>",
+        maxlength : "<h2>EL salario debe tener un maximo de 10 digitos</h2>"
+    },
+    departamento:{
+        required : "<h2>Debe seleccionar el departamento</h2>"
+    },
+    direccion:{
+        required : "<h2>Debe ingresar una dirección</h2>",
+        minlength : "<h2>La direción debe tener un minimo de 10 caracteres</h2>",
+        maxlength : "<h2>La direción debe tener un maximo de 100 caracteres</h2>"
+    },
+    correo:{
+        required : "<h2>Debe ingresar el correo</h2>",
+        minlength : "<h2>EL correo debe tener un minimo de 8 caracteres</h2>",
+        maxlength : "<h2>EL correo debe tener un maximo de 11 caracteres</h2>"
+    },
+    contrasena:{
+        required : "<h2>Debe ingresar una contraseña</h2>",
+        minlength : "<h2>La contraseña debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>La contraseña debe tener un maximo de 30 caracteres</h2>"
+    },
+    rcontrasena:{
+        required : "<h2>Debe ingresar una contraseña</h2>",
+        minlength : "<h2>La contraseña debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>La contraseña debe tener un maximo de 30 caracteres</h2>"
+    },
+  }
+});
+});
+
+
+
+    function tel(id){
+      var num=  document.getElementById(id).value.length;
+      var primer = document.getElementById(id).value;
+      if(num==4)
+      document.getElementById(id).value=document.getElementById(id).value+'-';
+
+      if(num==1 ){
+        if( primer=='2' || primer=='7' || primer=="6")
+           return
+           else {
+            document.getElementById(id).value="";
+            document.getElementById(id).title = "El Telefono debe comenzar con 2, 6 o 7";
+                      
+            
+            } 
+      }
+      
+     
+    }
+
+    function validarFecha(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes) {
+        alertE("Ingrese una fecha valida");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia) {
+          alertE("Ingrese una fecha valida");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+    function du(id){
+      var num=  document.getElementById(id).value.length;
+      
+      if(num==8)
+      document.getElementById(id).value=document.getElementById(id).value+'-';
+      
+     
+    }
+
+    function validarSalario(salario) {
+       var val = document.getElementById(salario).value 
+       var primer = document.getElementById(salario).value 
+      
+    if (primer != '0' ) 
+       return 
+        else{
+        alertE('Ingrese un valor valido');
+        document.getElementById(salario).value="";
+    }
+  }
+
+
+    function cambiarMunicipio(){
+        let depa=document.perfils.departamento[document.perfils.departamento.selectedIndex].value
+        //alert(depa);
+        let url='municipio/?departamento='+depa;
+        fetch(url)
+        .then(function(result){
+            return result.text();
+        })
+        .then(function(result){
+            document.getElementById('municipio').innerHTML=result;
+        });
+
+        
+    }
+
+    
+function validarPass(){
+    var con = document.getElementById('contrasena').value
+    var myregex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/; 
+        if(myregex.test(con)){
+            //alert(con+" es valido :-) !");
+            return true;        
+        }else{
+            //alert(con+" NO es valido!");
+            document.getElementById('contrasena').value = "";
+            alertE("La contaseña no es valida, debe tener un numero, una mayuscula y al menos 8 caracteres");
+            return false;        
+        }   
+ }
+
+ function compararPass(){
+    var con = document.getElementById('contrasena').value
+    var rcon = document.getElementById('rcontrasena').value
+
+        if(con != rcon){
+            alertE("Las contaseñas no son iguales"); 
+            document.getElementById('contrasena').value = "";
+            document.getElementById('rcontrasena').value = "";
+      
+        }   
+ }
+
+
+    
+</script>
+{% endblock %}

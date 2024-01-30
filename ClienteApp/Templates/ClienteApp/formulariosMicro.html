@@ -1,0 +1,96 @@
+<table class="data table table-striped no-margin">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>formulario</th>
+        <th>Progreso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><a href="../../listaPerfil/evaluacionm/{{perfil.id}}" id="btnEvaliacionMicro"
+          class="btn btn-info">Evaluación microempresa</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="rogresoEvaluacionMicro" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <!---   -->
+        <td><a id="btnSolicitudCredito" href="../../../EvaluacionMicroApp/listaEvaluacionm/solicitudMicro/{{perfil.id}}"
+           class="btn btn-info">Solicitud de crédito</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoSoliMicro" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><a id="btnConozCliente" onclick="alertA('Primero registre una solicitud')"  class="btn btn-info">Conozca a su cliente</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoConozcaCliente" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><a onclick="alertA('Primero registre una solicitud')" id="btnDeclaracionJurada"  class="btn btn-info">Declaración jurada</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoDeclaracion" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><a id="btnInscripcionSeguro" onclick="alertA('Primero registre una solicitud')" class="btn btn-info">Inscripción de seguro</a> </td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoSeguro" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><a id="btnInspeccionLote" Natural class="btn btn-info"  onclick="alertA('Primero registre una solicitud')">Inspección lote</a> </td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoInspeccion" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      
+      
+      <tr>
+        <td>7</td>
+        <td> <a id="btnPresupuestoVivienda"   class="btn btn-info"  onclick="alertA('Primero registre una solicitud')">Presupuesto </a></td>
+       
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoPresupuesto" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr class="trObras" id="trObras" style="display: none;">
+      <td>8</td>
+        <td> <a id="btnObrasAdicionales"   class="btn btn-info"  onclick="alertA('Primero registre el presupuesto de la obra')">Obras adicionales</a></td>
+       
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoObrasAdd" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>

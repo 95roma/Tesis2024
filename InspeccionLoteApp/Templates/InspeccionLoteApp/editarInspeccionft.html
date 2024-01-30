@@ -1,0 +1,96 @@
+<div>    
+    <div class="x_title">
+      <div class="row">
+        <h2 class="">Factibilidad Técnica del Proyecto </h2>
+      </div>
+    </div>
+    <span class="section"></span>
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:10px !important;">
+          <label>Factibilidad Técnica del Proyecto:</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Procede
+          <div class="iradio_flat-green ">
+            <input type="radio" class="flat"  name="factp" id="factp" value="Procede" checked required>
+            <ins class="iCheck-helper"></ins>
+          </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          No Procede
+          <div class="iradio_flat-green ">
+            <input type="radio" class="flat" name="factp" id="factp" value="No Procede" required>
+            <ins class="iCheck-helper"></ins>
+          </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Para Caso Especial
+          <div class="iradio_flat-green ">
+            <input type="radio" class="flat" name="factp" id="factp" value="Para Caso Especial" required>
+            <ins class="iCheck-helper"></ins>
+          </div>
+        </div>
+      </div>
+     
+      </div>
+  
+        <input type="hidden" id="passGN" name="passGN" value="0">
+    </div>
+    <div>            <!-- Datos de declaracion de salud -->   
+        <div class="x_title">
+          <div class="row">
+            <h2 class="">Descripción del Proyecto </h2>
+          </div>
+        </div>
+        <span class="section"></span>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Modelo de la vivienda a construir</h4>
+              <input type="text" class="form-text" id="modelov" name="modelov" value="{{dp.modeloviviedac}}"  >
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Solución sanitaria propuesta</h4>
+              <input type="text" class="form-text" id="solucions" name="solucions" value="{{dp.solucionsanitariap}}"  >
+              <span class="bar"></span>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Obras adicionales a construir</h4>
+                <input type="text" class="form-text" id="obrasa" name="obrasa" value="{{dp.obrasadicionalesconst}}" >
+                <span class="bar"></span>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Observaciones técnicas generales y/o condicionamientos </h4>
+                <input type="text" class="form-text" id="obst" name="obst" value="{{dp.observtecnicas}}" >
+                <span class="bar"></span>
+              </div>
+            </div>
+            </div>
+  
+     <input type="hidden" id="passDS" name="passDS" value="0">
+  </div>
+  <div>    
+    <div class="x_title">
+      <div class="row">
+        <h2 class="">Descripción de actividades bajo la responsabilidad del futuro propietario antes de iniciar la construcción </h2>
+      </div>
+    </div>
+      <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Descripción de actividades bajo la responsabilidad del futuro propietario antes de iniciar la construcción</h4>
+        <textarea  class="form-text" id="descripciona" name="descripciona" style="height: 50px;"  >{{dp.actividadbrfp}}</textarea>
+        <span class="bar"></span>
+      </div>
+    </div>
+      <br>  <br>
+        <input type="hidden" id="passGN" name="passGN" value="0">
+    </div>
+  
+  
+  
+  
+  

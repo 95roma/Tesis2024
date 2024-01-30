@@ -1,0 +1,215 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Editar {{pim.ninspeccion}} inspeccione para Mejoramientos de Viviendas{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+
+   
+<div class="stepContainer" style="overflow: hidden !important;">
+<form id="minspeccionm" name="minspeccionm" action="../../../InspeccionMejViviendaApp/modificarPIM/" enctype="multipart/form-data"  method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden" id="idim" name="idim" value="{{pim.id}}">
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Número de Inspección</h4>
+                <input type="text" class="form-text" id="ninspeccionm" name="ninspeccionm" value="{{pim.ninspeccion}}"
+                required disabled>
+                <span class="bar"></span>
+            </div>  
+        </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Solicitante</h4>
+                  <input type="text" class="form-text" id="nombresm" name="nombresm" value="{{ipm.ids.perfil.nombres}} {{ipm.ids.perfil.apellidos}} " disabled required>
+                <span class="bar"></span>
+                 
+              </div>
+          </div>
+           
+          </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Municipio</h4>
+                <input type="text" class="form-text" id="municipiom" name="municipiom" value="{{ipm.ids.perfil.municipio}}  " disabled required>
+                <span class="bar"></span>
+            </div>
+        </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Agencia</h4>
+                  <input type="text" class="form-text" id="agenciam" name="agenciam" value="{{ipm.ids.perfil.Agencia.nombre}} {{pim.ninspeccion}}"  disabled  required>
+                <span class="bar"></span>
+                 
+              </div>
+          </div>        
+         
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Fecha</h4>
+              <input type="date" class="form-text" id="fecham" name="fecham"  value="{{pim.fecha|date:'Y-m-d'}}" onchange="validarFecha(this)"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <h4>Dirección del proyecto</h4>
+                    <input type="text" class="form-text" id="direccionm" name="direccionm" value="{{do.direExacta}}" disabled required>
+                    <span class="bar"></span>
+                </div>
+            </div>
+            
+         </div>
+         <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Dias estimados para la construcción de la obra</h4>
+                  <input type="text" class="form-text" id="diasestm" name="diasestm" value="{{dpi.diasestimados}}" disabled required>
+                  <span class="bar"></span>
+              </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Mejora a realizar</h4>
+                  <input type="text" class="form-text" id="mejoraarm" name="mejoraarm" value="{{dpi.descripcion}}" disabled required>
+                  <span class="bar"></span>
+              </div>
+          </div>
+         
+           
+       </div>
+       <div class="row">   
+          <div class="col-md-6 col-sm-12 col-xs-12" id="esquemaDiv">
+            <input type="hidden" id="desquema" name="desquema"  value="{{pim.esquema}}">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Cambiar Archivo de esquema de ubicación </h4><h6>{{pim.esquema}}</h6>
+                <input type="file" name="esquemam" id="esquemam" accept="image/*"  >
+                <span class="bar"></span>
+            </div>
+        </div>   
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          {% for imagen in imgpil %}  
+          <input type="hidden" id="idimg" name="idimg" value="{{imagen.id}}">
+          {% endfor %} 
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Cambiar Imagenes </h4>
+            {% for imagen in imgpil %}  
+            <h6>{{imagen.imagen}}</h6>
+            {% endfor %} 
+              <input type="file" name="imagen" id="imagen" accept="image/*" multiple >
+              <span class="bar"></span>
+          </div>
+      </div>
+      
+     </div>
+    
+   <div class="form-group">
+    <div class="col-md-12 col-md-offset-2">
+        <button id="btnguardar" name="btnguardar"  class="btn btn-success" 
+            style="width:200px; height:40px;"  >Guardar</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+    </div>
+ </div>
+
+     </form>
+   </div>
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+     $(window).load(//funcion para selecionar los valores de los selects por defecto al cargar la pagina
+    function () {
+      let n = "{{pim.ninspeccion}}"
+      if(n.trim()!="PRIMERA" ){
+        document.getElementById("esquemaDiv").style.display = "none";
+      }
+       
+      }
+  )
+
+  $(document).ready(function(){
+
+$("#minspeccionm").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  
+  rules: {
+    fecham: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        }
+  },
+  messages: {
+    fecham: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        }, 
+  }
+});
+
+$("#btnguardar").click(function(){
+if($("#minspeccionm").valid()){
+  document.getElementById("ninspeccionm").disabled = false;
+  document.minspeccionm.submit()
+}else{
+  alertE("Debe Registrar Datos Validos!"); 
+  return false;
+}
+});// fin de btnguardar
+
+});
+
+
+function validarFecha(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,339 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}
+<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %} Grupo Familiar{% endblock titulo %}
+<!-- /el titulo del formulario-->
+{% block uno %} {% endblock uno %}
+<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}
+<!-- /Para el menu de formulario em la llave-->
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+      <div class="x_content">
+        <br />
+
+        
+        <table id="example" class="display" cellspacing="0" width="100%">
+            <caption style="text-align: center;">
+                <h2>Grupo Familiar</h2>
+              </caption>
+
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Edad</th>
+              <th>Salario</th>
+              <th>Lugar de Trabajo</th>
+              <th>Parentesco</th>
+              <th>&nbsp;</th>
+            </tr>
+
+          </thead>
+          <tbody id="grupo" name="grupo">
+            <form id="contact" name="contact" action="/NaturalApp/registrarFamilia/" method="post" autocomplete="off">{% csrf_token %}
+                <input type="hidden" id="id" name="id" value="{{Perfil.id}}">
+                <input type="hidden"  id="ids" name="ids"  value="{{ids.id}}" >
+           <tr>
+            <td>
+                
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="nombref1" name="nombref1"  >
+                      <span class="bar"></span>
+                    </div>
+                  
+            </td>
+            <td> 
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="edadf1" name="edadf1"  >
+                  <span class="bar"></span>
+                </div>
+              </td>
+            <td>
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="salariof1" name="salariof1"  >
+                  <span class="bar"></span>
+                </div>
+               </td>
+            <td> 
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="lugarTf1" name="lugarTf1"  >
+                  <span class="bar"></span>
+                </div>
+              </td>
+            <td>
+               
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="parentescof1" name="parentescof1" value="{{grupoFamiliar.parentescof}}" >
+                      <span class="bar"></span>
+                    </div>
+                  
+            </td> 
+           </tr>
+
+           <tr>
+            <td>
+                
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="nombref1" name="nombref1" >
+                      <span class="bar"></span>
+                    </div>
+                  
+            </td>
+            <td> 
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="edadf1" name="edadf1" >
+                  <span class="bar"></span>
+                </div>
+              </td>
+            <td>
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="salariof1" name="salariof1" >
+                  <span class="bar"></span>
+                </div>
+               </td>
+            <td> 
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="lugarTf1" name="lugarTf1" >
+                  <span class="bar"></span>
+                </div>
+              </td>
+            <td>
+               
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="parentescof1" name="parentescof1" >
+                      <span class="bar"></span>
+                    </div>
+                  
+            </td> 
+           </tr>
+
+           <tr>
+            <td>
+                
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="nombref1" name="nombref1">
+                      <span class="bar"></span>
+                    </div>
+                  
+            </td>
+            <td> 
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="edadf1" name="edadf1" >
+                  <span class="bar"></span>
+                </div>
+              </td>
+            <td>
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="salariof1" name="salariof1" >
+                  <span class="bar"></span>
+                </div>
+               </td>
+            <td> 
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <input type="text" class="form-text" id="lugarTf1" name="lugarTf1" >
+                  <span class="bar"></span>
+                </div>
+              </td>
+            <td>
+               
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <input type="text" class="form-text" id="parentescof1" name="parentescof1" >
+                      <span class="bar"></span>
+                    </div>
+                  
+            </td> 
+           </tr>
+          </tbody>
+        </table>
+             
+
+        <div class="form-group">
+            <div class="col-md-12 col-md-offset-2">
+                <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+                    style="width:200px; height:40px;">Siguente</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+            </div>
+        </div>
+        </form>
+        <br>
+        
+        <br>
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" date-dismiss="alert">&times;</button>
+  <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}
+<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+
+    $(document).ready(function(){
+   
+   $('input').on('keypress', function(e){
+     //this.value = this.value.toLocaleUpperCase();
+     if (e.keyCode == 25) {
+       // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+       var TabIndexActual = $(this).attr('tabindex');
+       var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+       // Se determina si el tabindex existe en el formulario
+       var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+       // Si se encuentra el campo entra al if
+       if(CampoSiguiente.length > 0)
+       {
+       CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+       return false; // retornamos false para detener alguna otra ejecucion en el campo
+       }else{// Si no se encontro ningún elemento, se retorna false
+       return false;
+       }
+     }
+    
+   });
+   
+  
+   // para poner validaciones 
+   $('.mask-dui').mask('00000000-0');
+    $.validator.addMethod("letras", function(value, element) {
+       return /^[ A-Za-záéíóúüñ ]*$/i.test(value);
+   }, "<h2>Ingrese numeros y letras </h2>");
+   $.validator.addMethod("validardui", function(value, element) {
+       return /^(?!.*(.)\1{4})\d{8}-\d{1}$/.test(value);
+   }, "<h2>Ingrese corecctamente el DUI ..</h2>");
+   $.validator.addMethod("zona", function(value, element) {
+       return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ 0-9]*$/i.test(value);
+   }, "<h2>Ingrese una dirección valida ..</h2>");
+   $.validator.addMethod("numeros", function(value, element) {
+    return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numeropunto y coma  </h2>");
+$.validator.addMethod("edades", function(value, element) {
+    return /^[0-9]*$/i.test(value);
+}, "<h2>Ingrese sólo numero </h2>");
+
+
+   //fin de validaciones con ajax
+   $("#contact").validate({
+     errorElement: "em",
+     errorPlacement: function(error, element) {
+       $(element.parent("div").addClass("form-animate-error"));
+       error.appendTo(element.parent("div"));
+     },
+     success: function(label) {
+       $(label.parent("div").removeClass("form-animate-error"));
+     },
+     rules: {
+       nombref1:{
+         minlength:3,
+         letras:true,
+         maxlength:30
+       },
+       edadf1:{
+         minlength:2,
+        
+         edades:true,
+         maxlength:3
+       },
+       salariof1:{
+         minlength:3,
+         
+         numeros:true,
+         maxlength:8,
+         
+       },
+       lugarTfi:{
+         minlength:6,
+        
+         zona:true,
+         maxlength:100
+   
+       },
+      
+       parentescof1:{
+         minlength:6,
+        
+         letras:true,
+         maxlength:100
+   
+       }
+     },
+     messages: {
+       nombref1:{
+         
+           minlength : "<h2>EL nombre debe tener un minimo de 3 caracteres</h2>",
+           maxlength : "<h2>EL nombre debe tener un maximo de 30 caracteres</h2>"
+       },
+       edadf1:{
+          
+           minlength : "<h2>EL edad debe tener un minimo de 2 caracteres</h2>",
+           maxlength : "<h2>EL edad debe tener un maximo de 3 caracteres</h2>"
+       },
+       salariof1:{
+           
+           minlength : "<h2>EL dui debe tener un minimo de 3 caracteres</h2>",
+           maxlength : "<h2>EL dui debe tener un maximo de 8 caracteres</h2>"
+       },
+       lugarTf1:{
+         minlength:"<h2>Debe tener un minimo de 6 caracteres</h2>",
+        
+         maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+   
+       }, 
+       parentescof1:{
+         minlength:"<h2>Debe tener un minimo de 6 caracteres</h2>",
+         
+         maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+   
+       }
+     },
+   });// fin del form contact 
+   
+   $("#btnguardar").click(function(){
+   if($("#contact").valid()){
+      
+      
+   
+       }else{
+   Swal.fire({
+     icon: 'error',
+     title: 'Oops...',
+     text: 'DEBE REGISTRAR DATOS!',
+     imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+     imageWidth: 200,
+     imageHeight: 100
+   }) 
+       }
+   });// fin de btnguardar
+     
+   
+   });// fin de la document
+   
+   
+   </script>
+
+{% endblock %}

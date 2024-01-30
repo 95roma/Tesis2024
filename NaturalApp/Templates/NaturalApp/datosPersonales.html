@@ -1,0 +1,563 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Registro Datos Personales Cliente{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Municipio  {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form id="contact" name="contact" action="../registrarDatos/" method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden"  id="id" name="id"  value="{{Perfil.id}}" >
+  <input type="hidden"  id="ids" name="ids"  value="{{idsol.id}}" >
+                      
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+<h2>DATOS DE SOLICITANTE</h2> <h3><span ></span></h3>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Conyuge:
+          <input type="radio" class="flat" name="tipo" id="genderM" value="conyuge" checked="" required /> 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Codeudor:
+          <input type="radio" class="flat" name="tipo" id="genderF" value="codeudor" />
+          <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre del solicitante</h4>
+            <input type="text" class="form-text"  value="{{Perfil.nombres}} " disabled id="nombres" name="nombres" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Nombre del Fiador</h4>
+          <input type="text" class="form-text"    id="nombrefia" name="nombrefia" required>
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Apellido del solicitante</h4>
+            <input type="text" class="form-text"  value="{{Perfil.apellidos}}" disabled  id="apellidos" name="apellidos" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Apellido del Fiador</h4>
+          <input type="text" class="form-text"    id="apellidofia" name="apellidofia" required>
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>DUI del solicitante</h4>
+            <input type="text" class="form-text "  value="{{Perfil.dui}}" disabled  id="dui" name="dui" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>DUI del Fiador</h4>
+          <input type="text" class="form-text mask-dui"    id="duifia" name="duifia" required>
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Lugar y fecha de expedición DUI del solicitante</h4>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-text " id="lugarduiC" name="lugarduiC" required>
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <input  type="date" class="form-text has-feedback-left"   id="fechaduiC" name="fechaduiC" onchange="validarFechaExp(this)" required>
+          
+          <span class="bar"></span>
+      </div>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Lugar y fecha de expedición DUI del Fiador</h4>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-text"    id="lugarduifia" name="lugarduifia" required>
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <input  type="date" class="form-text has-feedback-left"   id="fechaduifia" name="fechaduifia" onchange="validarFechaExp(this)" required>
+         
+          <span class="bar"></span>
+      </div>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Lugar y fecha de nacimiento del solicitante</h4>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-text"    id="lugarnaciC" name="lugarnaciC" required>
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <input type="text" class="form-text" value="{{Perfil.fechan|date:'d/m/Y'}}"  disabled  id="fechanaciC" name="fechanaciC" onchange="validarFechaNac(this)"  required>
+          <span class="bar"></span>
+      </div>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Lugar y fecha de nacimiento del Fiador</h4>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-text"    id="lugarnacifia" name="lugarnacifia" required>
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <input  type="date" class="form-text has-feedback-left"   id="fechanacifia" name="fechanacifia"  onchange="validarFechaNac(this)"  required>
+ 
+          <span class="bar"></span>
+      </div>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Edad del solicitante</h4>
+            <input type="text" class="form-text"  value="{{Perfil.edad}}"  disabled id="edad" name="edad" onkeypress="return event.charCode>=48 && event.charCode<=57 " required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Edad del Fiador</h4>
+          <input type="text" class="form-text"    id="edadfia" name="edadfia" onkeypress="return event.charCode>=48 && event.charCode<=57 "  >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Estado Civil del solicitante</h4>
+          <div class="col-md-10 col-sm-10 ">
+              <select class="form-text" id="estadocivilC" name="estadocivilC"  required >
+                  <option  selected></option>
+                  <option value="casado/a">Casado/a</option>
+                  <option value="concubinato/a">Concubinato/a</option>
+                  <option value="divorciado/a">Divorciado/a</option>
+                  <option value="soltero/a">Soltero/a</option>
+                  <option value="separación en proceso judicial">Separación en proceso judicial</option>
+                  <option value="viudo/a">Viudo/a</option>
+                  
+              </select>
+          </div>
+          <span class="bar"></span>
+      </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Estado Civil del Fiador</h4>
+        <div class="col-md-10 col-sm-10 ">
+            <select class="form-text" id="estadocivilfia" name="estadocivilfia"  required >
+                <option  selected></option>
+                <option value="casado/a">Casado/a</option>
+                <option value="concubinato/a">Concubinato/a</option>
+                <option value="divorciado/a">Divorciado/a</option>
+                <option value="soltero/a">Soltero/a</option>
+                <option value="separación en proceso judicial">Separación en proceso judicial</option>
+                <option value="viudo/a">Viudo/a</option>
+                
+            </select>
+        </div>
+        <span class="bar"></span>
+    </div>
+</div>
+     
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Genero del solicitante</h4>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Femenino:
+              <input type="radio" class="flat" name="generoC" id="genderM" value="Femenino" checked="" required /> 
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              Masculino:
+              <input type="radio" class="flat" name="generoC" id="genderF" value="Masculino" />
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Genero del Fiador</h4>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Femenino:
+          <input type="radio" class="flat" name="generofia" id="genderM" value="Femenino" checked="" required /> 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Masculino:
+          <input type="radio" class="flat" name="generofia" id="genderF" value="Masculino" />
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Profesion u oficio del solicitante</h4>
+            <input type="text" class="form-text"  value="{{Perfil.idocu.ocupacion}}"   id="profesionc" name="profesionc" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Profesion u oficio del Fiador</h4>
+          <div class="col-md-9 col-sm-9 ">
+            <select class="form-text" id="profefia" name="profefia" required >
+                <option disabled value="0">Seleccione </option>
+                {% for d in Ocupacion %}
+                <option value="{{d.id}}" >{{d.ocupacion}}</option>
+                {% endfor %}
+            </select>
+        </div>
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12 col-md-offset-2">
+        <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+            style="width:200px; height:40px;">Siguente</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="reset"  class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+    </div>
+</div>
+
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+
+{% block js %}<!-- bloque para validaciones de input-->
+<!-- bootstrap-datetimepicker -->    
+<script src="{% static 'TesisApp/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+<script>
+
+
+
+  
+
+
+</script>
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  //this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+
+
+// para poner validaciones 
+$('.mask-dui').mask('00000000-0');
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ 0-9]*$/i.test(value);
+}, "<h2>Ingrese numeros y letras </h2>");
+$.validator.addMethod("validardui", function(value, element) {
+    return /^(?!.*(.)\1{4})\d{8}-\d{1}$/.test(value);
+}, "<h2>Ingrese corecctamente el DUI ..</h2>");
+$.validator.addMethod("zona", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+}, "<h2>Ingrese una dirección valida ..</h2>");
+//fin de validaciones con ajax
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    nombrefia:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:30
+    },
+    apellidofia:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:30
+    },
+    duifia:{
+      minlength:6,
+      required: true,
+      validardui:true,
+      maxlength:10,
+      
+    },
+    lugarduiC:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+
+    },
+    fechaduiC:"required",
+    lugarduifia:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+
+    },
+    fechaduifia:"required",
+    lugarnaciC:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+
+    },
+    lugarnacifia:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+
+    },
+    fechanacifia:"required",
+    estadocivilC:"required",
+    estadocivilfia:"required",
+    generoC:"required",
+    generofia:"required",
+    profefia:{
+   
+      required: true,
+     
+    }
+  },
+  messages: {
+    nombrefia:{
+        required : "<h2>Debe ingresar el nombre </h2>",
+        minlength : "<h2>El nombre debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>El nombre debe tener un maximo de 30 caracteres</h2>"
+    },
+    apellidofia:{
+        required : "<h2>Debe ingresar los apellidos</h2>",
+        minlength : "<h2>El apellido debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>El apellido debe tener un maximo de 30 caracteres</h2>"
+    },
+    duifia:{
+        required : "<h2>Debe ingresar el dui</h2>",
+        minlength : "<h2>El dui debe tener un minimo de 10 caracteres</h2>",
+        maxlength : "<h2>El dui debe tener un maximo de 10 caracteres</h2>"
+    },
+    lugarduiC:{
+      minlength:"<h2>Debe tener un minimo de 6 caracteres</h2>",
+      required: "<h2>Debe ingresar el lugar</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+    fechaduiC:{
+        required : "<h2>Debe ingresar una fecha</h2>"
+    }, 
+    lugarduifia:{
+      minlength:"<h2>Debe tener un minimo de 6 caracteres</h2>",
+      required: "<h2>Debe ingresar el lugar</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+    fechaduifia:{
+        required : "<h2>Debe ingresar una fecha</h2>"
+    }, 
+    lugarnaciC:{
+      minlength:"<h2>Debe tener un minimo de 6 caracteres</h2>",
+      required: "<h2>Debe ingresar el datos</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+    lugarnacifia:{
+      minlength:"<h2>Debe tener un minimo de 6 caracteres</h2>",
+      required: "<h2>Debe ingresar el datos</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+    fechanacifia:{
+        required : "<h2>Debe ingresar una fecha</h2>"
+    },
+    estadocivilC:{
+        required : "<h2>Debe seleccionar </h2>"
+    },
+    estadocivilfia:{
+        required : "<h2>Debe seleccionar </h2>"
+    },
+    generoC:{
+        required : "<h2>Debe seleccionar </h2>"
+    },
+    generofia:{
+        required : "<h2>Debe seleccionar </h2>"
+    },
+    profefia:{
+     
+      required: "<h2>Debe seleccionar</h2>",
+    
+    }
+  },
+});// fin del form contact 
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+  document.getElementById("profesionc").disabled = false;
+   
+   
+
+    }else{
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'DEBE REGISTRAR DATOS!',
+  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+  imageWidth: 200,
+  imageHeight: 100
+}) 
+    }
+});// fin de btnguardar
+
+
+});// fin de la document
+
+
+$(function () {// agregar la fecha actual a la solicitud
+    $(window).load(function () {
+      var fecha = new Date();
+      var f = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+      
+
+      document.getElementById("fechaduiC").setAttribute("max", f);
+      document.getElementById("fechaduifia").setAttribute("max", f);
+
+      //para definir la fecha maxima y garantizar solo mayores de edad
+      var max = (fecha.getFullYear() - 18) + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+
+      //se agrega la fecha maxima a los input de fecha de nacimiento
+      document.getElementById("fechanaciC").setAttribute("max", max);
+      document.getElementById("fechanacifia").setAttribute("max", max);
+    });
+
+  });
+
+  function validarFechaExp(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes) {
+        alertE("Ingrese una fecha valida");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia) {
+          alertE("Ingrese una fecha valida");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  function validarFechaNac(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if ((anio - f.getFullYear()) < 18) {
+      alertE("Ingrese una fecha de nacimiento valida ");
+      fecha.value = "";
+    } else {
+      if ((anio - f.getFullYear() == 18)) {
+        if (f.getMonth() > mes) {
+          alertE("Ingrese una fecha de nacimiento valida");
+          fecha.value = "";
+        } else {
+          if (f.getDate() > dia) {
+            alertE("Ingrese una fecha de nacimiento valida");
+            fecha.value = "";
+          } else {
+            if (fecha.id == "fechNaS") {
+              document.getElementById("edad").value = calcularEdad(dia, mes, anio, f)
+            } else {
+              document.getElementById("edadfia").value = calcularEdad(dia, mes, anio, f)
+            }
+          }
+        }
+      } else {
+        if (fecha.id == "fechNaS") {
+          document.getElementById("edad").value = calcularEdad(dia, mes, anio, f)
+        } else {
+          document.getElementById("edadfia").value = calcularEdad(dia, mes, anio, f)
+        }
+      }
+    }
+  }
+
+  function calcularEdad(dia, mes, anio, f) {
+    if (f.getMonth() == mes) {
+      if (f.getDate() > dia) {
+        return (anio - f.getFullYear()) - 1
+      } else {
+        return (anio - f.getFullYear())
+      }
+    } else {
+      if (f.getMonth() > mes) {
+        return (anio - f.getFullYear()) - 1
+      } else {
+        return (anio - f.getFullYear())
+      }
+    }
+  }
+
+
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,131 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block head %} 
+{% endblock head %}
+{% block titulo %}Asignar Agencia a Zona{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}<li><a href="#">Listar Zonas</a></li> {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}<li><a href="{% url 'asignarZona'%}">Asignar municipios a Zona</a></li>  {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+<form id="contact" name="contact" action="registrarZona/" method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden" id="bandera" name="bandera">
+
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Nombre Agencia </h4>
+        <div class="col-md-9 col-sm-9 ">
+          <select class="form-text" id="agencia" name="agencia" required >
+              <option value="0" disabled>SELECCIONE AGENCIA</option>
+              {% for d in Agencia %}
+              <option value="{{d.id}}">{{d.nombre}}</option>
+              {% endfor %} 
+          </select>
+      </div>
+        <span class="bar"></span>
+    </div>
+</div>
+
+
+
+  <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Nombre Zona </h4>
+          <input type="text" class="form-text"  id="nombrezona" name="nombrezona" required>
+          <span class="bar"></span>
+      </div>
+  </div>
+
+  <div class="form-group">
+      <div class="col-md-12 col-md-offset-2">
+          <button id="btnguardar" name="btnguardar" data-toggle="sweet-alert" data-sweet-alert="confirm" type="submit" class="btn btn-success" 
+              style="width:200px; height:40px;">Guardar</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+      </div>
+  </div>
+</form>
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  //this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+/*
+Swal.fire({
+    titleText:"hola",
+    text:"Mensaje de puta",
+    icon:"success",
+    confirmButtonText: "ok"
+  });*/
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ a-z0-9áéíóúüñ]*$/i.test(value);
+}, "<h2>Ingrese sólo letras </h2>");
+
+
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    nombrezona:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:60
+    },
+    agencia:{
+      required:true
+    }
+  },
+  messages: {
+    nombrezona:{
+        required : "<h2>Debe ingresar la nombre</h2>",
+        minlength : "<h2>El nombre debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>El nombre debe tener un maximo de 60 caracteres</h2>"
+    },
+    agencia:{
+      required:"<h2>No hay agencias para asignar zona</h2>"
+    }
+  },
+});
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+    
+}
+});
+
+});
+
+</script>
+{% endblock %}

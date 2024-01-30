@@ -1,0 +1,158 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Rango de historial{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+
+{% endfor %}
+{% endif %}
+
+<form id="contact" name="contact" action="../registroHist/" method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden" id="id" name="id" value="{{rango.id}}">
+  <input type="hidden" id="idh" name="idh" value=0>
+    <div class="row">
+
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4> Estado</h4>
+            <input type="text" class="form-text" id="est" name="est"  value="{{rango.tipo}}"   maxlength="10" required>
+            <span class="bar"></span>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4> Porcentaje de financiamiento</h4>
+            <input type="number" class="form-text" id="porc" name="porc"  value="{{rango.porcentaje}}" placeholder="Digite numeros de 0 a 100"  maxlength="10" required>
+            <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4> Valor Minimo</h4>
+            <input type="number" class="form-text" id="histmin" name="histmin"  onkeypress="vSalariom('salariominimo');return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  value="{{rango.minimo}}" maxlength="10" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4> Valor Maximo</h4>
+          <input type="number" class="form-text" id="histmax" name="histmax"  onchange="vSalariomax()" maxlength="10"  value="{{rango.maximo}}" required>
+          <span class="bar"></span>
+      </div>
+  </div>
+    </div>
+    <BR><BR>
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+$.validator.addMethod("letras", function(value, element) {
+return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ.]*$/i.test(value);
+}, "<h2>Ingrese sólo letras ..</h2>");
+
+$.validator.addMethod("numero", function(value, element) {
+return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  
+  rules: {
+    est:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:20
+    },
+    histmax:{
+      minlength:3,
+      required: true,
+      numero:true,
+      maxlength:10
+    },
+    histmin:{
+      minlength:3,
+      required: true,
+      numero:true,
+      maxlength:10
+    },
+  
+  },
+  messages: {
+    est:{
+      required : "<h2>Debe ingresar el estado</h2>",
+      minlength : "<h2>El estado debe tener un minimo de 3 digitos</h2>",
+      maxlength : "<h2>El estado debe tener un maximo de 20 digitos</h2>"
+  },
+    histmax:{
+        required : "<h2>Debe ingresar el valor maximo</h2>",
+        minlength : "<h2>El salario debe tener un minimo de 3 digitos</h2>",
+        maxlength : "<h2>El salario debe tener un maximo de 10 digitos</h2>"
+    },
+    histmin:{
+        required : "<h2>Debe ingresar el valor minimo</h2>",
+        minlength : "<h2>El salario debe tener un minimo de 3 digitos</h2>",
+        maxlength : "<h2>El salario debe tener un maximo de 10 digitos</h2>"
+    },
+  
+  }
+});
+
+});
+
+function vSalariom(salario) {
+       var val = document.getElementById(salario).value 
+       var primer = document.getElementById(salario).value 
+      
+    if (primer != '0' ) 
+       return 
+        else{
+        alertE('Ingrese un valor valido');
+        document.getElementById(salario).value="";
+    }
+  }
+
+  function vSalariomax() {
+    var smin=parseFloat( document.getElementById("histmin").value) ;
+    var smax=parseFloat( document.getElementById("histmax").value );
+      
+    if (smin > smax ) {
+        alertE('El valor Minimo debe ser menor que el Maximo');
+        document.getElementById("histmin").value="";
+        document.getElementById("histmax").value="";
+    }
+  }
+
+
+</script>
+{% endblock %}

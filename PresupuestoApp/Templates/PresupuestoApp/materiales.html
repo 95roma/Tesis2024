@@ -1,0 +1,5 @@
+<datalist id="materiales-list">
+    {% for m in materiales %}
+    <option  data-id="{{m.id}}" >{{m.nombre}}</option>
+    {% endfor %}
+</datalist>

@@ -1,0 +1,159 @@
+
+<div>
+  <div class="x_title">
+    <div class="row">
+      <h2 style="text-align: center;">{{sol.0.perfil.nombres}} {{sol.0.perfil.apellidos}} </h2>
+    </div><br>
+    <div class="row">
+      <h4 class="">Persona Expuesta Politicamente(PEPs) </h4>
+    </div>
+  </div>
+<div class="row">
+<div class="col-md-7 col-sm-12 col-xs-12">
+<h4 >¿Es usted una persona Expuesta Politicamente?</h4></div>
+  <div class="col-md-2 col-sm-4 col-xs-3">
+   <p>Si:  <input type="radio" class="flat" name="ustpeps" id="ustpeps" value="Si"   required /></p>
+  </div><div class="col-md-2 col-sm-4 col-xs-3">
+   <p>No:  <input type="radio" class="flat" name="ustpeps" id="ustpeps" value="No" checked="" required /></p>
+  </div> 
+  </div>
+  <BR>
+  <div class="row">
+    <div class="col-md-7 col-sm-12 col-xs-12">
+    <h4 >¿Tiene relación con alguna persona Espuesta Politicamnete?</h4></div>
+    <div class="col-md-2 col-sm-3 col-xs-3">
+      <p>Si: <input type="radio" name="relpeps" id="relpeps" value="Si"  onchange="habdesP(this.value);" required /></p>
+    </div><div class="col-md-2 col-sm-3 col-xs-3">
+      <p>No: <input type="radio"  name="relpeps" id="relpeps" value="No" onchange="habdesP(this.value);" checked="" required /></p>
+    </div>                
+   </div>
+  <BR>
+   <div class="row">
+    <div class="col-md-11 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4 >Nombre</h4>
+        <input type="text" class="form-text" id="nombrep" name="nombrep"  value=""  disabled>
+        <span class="bar"></span>
+      </div>
+  </div>
+  <div class="col-md-11 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Puesto que desempeña</h4>
+      <input type="text" class="form-text" id="puestodes" name="puestodes"  value="" disabled >
+      <span class="bar"></span>
+    </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-11 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4 >Periodo de gestión Desde</h4>
+      <input type="text" class="form-text" id="periodogd" name="periodogd"  value=""  disabled>
+      <span class="bar"></span>
+    </div>
+</div>
+<div class="col-md-11 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Hasta</h4>
+    <input type="text" class="form-text" id="periodogh" name="periodogh"  value="" disabled >
+    <span class="bar"></span>
+  </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-4 col-sm-12 col-xs-12">
+  <h4 >Grado</h4>
+           
+     1er:  <input type="radio"  name="grado" id="grado" value="Primero" onchange="habdesG(this.value);" disabled  />
+</div>
+ <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Parentesco</h4>
+                <div class="col-md-10 col-sm-10 ">
+                    <select class="form-text" id="pparentesco" name="pparentesco" disabled  >
+                        <option  selected disabled hidden></option>
+                        <option value="Padre" >Padre</option>
+                        <option value="Madre">Madre</option>
+                        <option value="Suegro">Suegro/a</option>
+                        <option value="Hijo">Hijo/a</option>
+                        <option value="Yerno">Yerno</option>
+                        <option value="Nuera">Nuera</option>
+                    </select>
+                </div>
+                <span class="bar"></span>
+            </div>
+        </div>
+
+  </div> 
+ <div class="row">
+  <div class="col-md-4 col-sm-12 col-xs-12">
+  <h4 >Grado</h4>
+ 
+     2do:  <input type="radio" name="grado" id="grado" value="Segundo" onchange="habdesG(this.value);" disabled  />
+</div>
+ <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Parentesco</h4>
+                <div class="col-md-10 col-sm-10 ">
+                    <select class="form-text" id="sparentesco" name="sparentesco" disabled >
+                        <option  selected disabled hidden></option>
+                        <option value="Abuelo" >Abuelo/a</option>
+                        <option value="Hermano">Hermano/a</option>
+                        <option value="Cuñado">Cuñado/a</option>
+                        <option value="Nieto">Nieto/a</option>
+                        <option value="Cuñado">Concuñado</option>
+                        <option value="abuelosC">Abuelos del Cónyuge</option>
+                    </select>
+                </div>
+                <span class="bar"></span>
+            </div>
+        </div>
+  </div> 
+  <input type="hidden" id="passPEP" name="passPEP" value="0">  
+</div> 
+<div> 
+  <br> 
+<div class="x_title">
+  <div class="row">
+    <h4 class="">Confirmación de Datos </h4>
+  </div>
+</div>
+<div class="row">
+<div class="col-md-7 col-sm-12 col-xs-12">
+<h4 >¿Validé firmas, nombres y fotografía, según documentos legales?</h4></div>
+  <div class="col-md-2 col-sm-4 col-xs-3">
+   <p>Si:  <input type="radio" class="flat" name="validefnf" id="validefnf" value="Si"  required /></p>
+  </div><div class="col-md-2 col-sm-4 col-xs-3">
+   <p>No:  <input type="radio" class="flat" name="validefnf" id="validefnf" value="No" checked=""  required /></p>
+  </div> 
+  </div>
+  <BR>
+  <div class="row">
+    <div class="col-md-7 col-sm-12 col-xs-12">
+    <h4 >¿Verifiqué la dirección presentada con el documento de identidad personal, coincide con la señalada por el cliente?</h4></div>
+    <div class="col-md-2 col-sm-3 col-xs-3">
+      <p>Si: <input type="radio" class="flat" name="verdirec" id="verdirec" value="Si"  required /></p>
+    </div><div class="col-md-2 col-sm-3 col-xs-3">
+      <p>No: <input type="radio" class="flat" name="verdirec" id="verdirec" value="No" checked="" required /></p>
+    </div>                
+   </div>
+   <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4 >Verificado por</h4>
+        
+        <input type="text" class="form-text" id="nombrever" name="nombrever" value="{{request.user.nombre}} {{request.user.apellido}}"   required>
+        <span class="bar"></span>
+      </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4 >Código de Empleado/a</h4>
+      <input type="text" class="form-text" id="codigoemp" name="codigoemp" value=""   required>
+      <span class="bar"></span>
+    </div>
+</div>
+</div>
+<input type="hidden" id="passCD" name="passCD" value="0">
+</div>
+

@@ -1,0 +1,145 @@
+<div>            <!-- Experiencia crediticia -->
+  <input type="hidden" id="passEC" name="passEC" value="0">
+  <input type="hidden" id="idExC" name="idExC" value="{{soli.8.0.id}}">
+  <input type="hidden"  name="idExC" value="{{soli.8.1.id}}">
+  <input type="hidden"  name="idExC" value="{{soli.8.2.id}}">
+    <table class="table">
+       
+      <div class="checkbox" onchange="">
+        <label >
+          <input type="checkbox" class="" id="sinEC"  name="sinEC"  onchange="sinEC2(this)"> 
+          Sin experiencia crediticia
+        </label>
+      </div>
+      
+      <caption style="text-align: center;">
+       
+        <h2>Experiencia crediticia</h2>
+      </caption>
+
+      
+
+      <thead>
+        <tr>
+          <th width="25%">Lugar</th>
+          <th width="20%">Monto</th>
+          <th width="10%">Fecha de otorgamiento</th>
+          <th width="20%">Estado</th>
+          <th width="25%">Cuota que pagaba</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text" id="lugarEC" name="lugarEC" maxlength="50" placeholder=""
+              value="{{soli.8.0.lugar}}" >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text" id="montoEC" name="montoEC" maxlength="50" placeholder="" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
+              value="{{soli.8.0.monto}}" >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="date" class="form-text" id="fechaEC" name="fechaEC" maxlength="50" placeholder=""
+              value="{{soli.8.0.fechaOtorgamiento|date:'Y-m-d'}}" onchange="validarFechaExp(this)"  >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <select class="form-text" id="estadoEC0" name="estadoEC">
+                <option value="Finalizado">Finalizado</option>
+                <option value="Activo">Activo</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"id="cuotaEC" name="cuotaEC" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " maxlength="50" placeholder=""
+              value="{{soli.8.0.cuota}}" >
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="lugarEC" maxlength="50" placeholder="" value="{{soli.8.1.lugar}}" >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="montoEC" maxlength="50" placeholder="" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " value="{{soli.8.1.monto}}"  >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="date" class="form-text"  name="fechaEC" maxlength="50" placeholder="" onchange="validarFechaExp(this)" value="{{soli.8.1.fechaOtorgamiento|date:'Y-m-d'}}"  >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <select class="form-text" id="estadoEC1" name="estadoEC">
+                <option value="Finalizado">Finalizado</option>
+                <option value="Activo">Activo</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text" name="cuotaEC" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " maxlength="50" placeholder="" value="{{soli.8.1.cuota}}">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="lugarEC" maxlength="50" placeholder="" value="{{soli.8.2.lugar}}" >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="montoEC" maxlength="50" placeholder="" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " value="{{soli.8.2.monto}}"  >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="date" class="form-text"  name="fechaEC" maxlength="50" placeholder="" onchange="validarFechaExp(this)" value="{{soli.8.2.fechaOtorgamiento|date:'Y-m-d'}}"  >
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <select class="form-text" id="estadoEC" name="estadoEC">
+                <option value="Finalizado">Finalizado</option>
+                <option value="Activo">Activo</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text" name="cuotaEC" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " maxlength="50" placeholder="" value="{{soli.8.2.cuota}}">
+            </div>
+          </td>
+        </tr>
+
+      
+      </tbody>
+    </table>
+  </div><!-- / fin Experiencia crediticia -->

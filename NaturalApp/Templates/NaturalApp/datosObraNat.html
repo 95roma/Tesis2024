@@ -1,0 +1,72 @@
+<div> <!-- Datos de la obra a realizar -->
+    <input type="hidden" id="passDORN" name="passDORN" value="0">
+                          
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Destino del crédito o producto</h4>
+        
+                <select class="form-text" id="destinoNE" name="destinoNE" onchange="obtenerRangoNatural(this.value)" >
+                  {% include "NaturalApp/alternativasN.html" %}
+                </select>
+                <span class="bar"></span>
+        </div>
+        </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Nombre del dueño de la propiedad</h4>
+              <input type="text" class="form-text" id="duenoNE" name="duenoNE" maxlength="50" minlength="4"
+                value="{{soli.6.dueno}}" required>
+              <span class="bar"></span>
+      </div>   
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Parentesco con el solicitante</h4>
+                <input type="text" class="form-text" list="parentesco-list" id="parentescoNE" name="parentescoNE"
+                maxlength="50" minlength="4" value="{{soli.6.parentesco}}" required>
+                <span class="bar"></span>
+        </div>
+        </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Dirección exacta de dónde se construirá</h4>
+              <input type="text" class="form-text" id="direccionE" name="direccionE" maxlength="50" minlength="4"
+                value="{{soli.6.direExacta}}" required>
+              <span class="bar"></span>
+      </div>   
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Detalle de la obra a realizar</h4>
+                <select class="form-text" id="detalleObra" name="detalleObra" >
+                  {% include "NaturalApp/modelosN.html" %}
+                </select>
+                <span class="bar"></span>
+        </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Detalle adicional</h4>
+            <input type="text" class="form-text" id="detalleAD"
+              name="detalleAD" maxlength="40" minlength="3" value="{{soli.6.detalleadic}}" required>
+            <span class="bar"></span>
+    </div>   
+      </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Presupuesto de la obra</h4>
+              <input type="text" class="form-text"
+                onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " id="PresupuestoNE"
+                name="PresupuestoNE" maxlength="7" minlength="3" value="{{soli.6.presupuesto}}" required>
+              <span class="bar"></span>
+      </div>   
+        </div>
+      </div>
+   
+  
+  </div><!-- /fin Datos de la obra a realizar -->

@@ -1,0 +1,258 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Editar {{pil.ninspeccion}} inspección para Lote{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" date-dismiss="alert">&times;</button>
+  <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+
+
+<div class="stepContainer" style="overflow: hidden !important;">
+  <form id="pinspeccionlEdit" name="pinspeccionlEdit" action="../../../InspeccionLoteApp/modificarPIL/"
+    enctype="multipart/form-data" method="post" autocomplete="off">{% csrf_token %}
+    <input type="hidden" id="idpi" name="idpi" value="{{pil.id}}">
+
+
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Número de Inspección</h4>
+          <input type="text" class="form-text" id="ninspeccion" name="ninspeccion" value="{{pil.ninspeccion}}"
+            required disabled>
+
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Agencia</h4>
+          <input type="text" class="form-text" id="agenciam" name="agenciam" value="{{ipl.ids.perfil.Agencia.nombre}}" disabled
+            required>
+          <span class="bar"></span>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Fecha</h4>
+          <input type="date" class="form-text" id="pfecha" name="pfecha" onchange="validarFecha(this)"
+            value="{{pil.fecha|date:'Y-m-d'}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Cliente</h4>
+          <input type="text" class="form-text" id="nombresm" name="nombresm"
+            value="{{ipl.ids.perfil.nombres}} {{ipl.ids.perfil.apellidos}} " disabled required>
+          <span class="bar"></span>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Tiempo de Construcción</h4>
+          <input type="text" class="form-text" id="diasestimados" name="diasestimados" disabled
+            value="{{pdg.tiempoconstruccion }} " required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Modelo de Vivienda</h4>
+          <input type="text" class="form-text" id="modelov" name="modelov" value="{{dpi.modeloviviedac}}" disabled required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Municipio</h4>
+          <input type="text" class="form-text" id="municipiom" name="municipiom" value="{{ipl.ids.perfil.municipio}} " disabled
+            required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Dirección del proyecto</h4>
+          <input type="text" class="form-text" id="direccionm" name="direccionm" value="{{do.direExacta}}" disabled required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Teléfono</h4>
+          <input type="text" class="form-text" id="dtelefono" name="dtelefono" value="{{ipl.ids.perfil.telefono}}" disabled
+            required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Latitud</h4>
+          <input type="text" class="form-text" id="latitud" name="latitud" value="{{ipl.latitud}}" disabled required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Longitud</h4>
+          <input type="text" class="form-text" id="longitud" name="longitud" value="{{ipl.longitud}}" disabled required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        {% for imagen in imgpil %}
+        <input type="hidden" id="idimg" name="idimg" value="{{imagen.id}}">
+        {% endfor %}
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Cambiar reporte fotografico del inmueble </h4>
+          {% for imagen in imgpil %}
+          <h6>{{imagen.reportef}}</h6>
+          {% endfor %}
+          <input type="file" name="archivorepf" id="archivorepf" accept="image/*" multiple>
+          <span class="bar"></span>
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12" id="esquemaDivEdit">
+        <input type="hidden" id="desquema" name="desquema" value="{{pil.esquema}}">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Cambiar esquema de ubicación del inmueble </h4>
+          <h6>{{pil.esquema}}</h6>
+          <input type="file" name="archivoesq" id="archivoesq" accept="image/*">
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12" id="ubicacionDivEdit">
+        <input type="hidden" id="dubicacion" name="dubicacion" value="{{pil.ubicacion}}">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Cambiar ubicación de vivienda en el terreno </h4>
+          <h6>{{pil.ubicacion}}</h6>
+          <input type="file" name="archivoubic" id="archivoubic" accept="image/*">
+          <span class="bar"></span>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="form-group">
+      <div class="col-md-12 col-md-offset-2">
+        <button id="btnguardar" name="btnguardar" type="button"  class="btn btn-success"
+          style="width:200px; height:40px;">Guardar</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+      </div>
+    </div>
+
+
+  </form>
+</div>
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+  $(window).load(//funcion para selecionar los valores de los selects por defecto al cargar la pagina
+    function () {
+      let n = "{{pil.ninspeccion}}"
+      if(n.trim()!="PRIMERA" ){
+        document.getElementById("esquemaDivEdit").style.display = "none";
+        document.getElementById("ubicacionDivEdit").style.display = "none";
+      }
+       
+      }
+  )
+
+  $(document).ready(function(){
+
+$("#pinspeccionlEdit").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  
+  rules: {
+    pfecha: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        }
+  },
+  messages: {
+    pfecha: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        }, 
+  }
+});
+$("#btnguardar").click(function(){
+if($("#pinspeccionlEdit").valid()){
+  document.getElementById("ninspeccion").disabled = false;
+  document.pinspeccionlEdit.submit()
+}else{
+  alertE("Debe Registrar Datos Validos!"); 
+  return false;
+}
+});// fin de btnguardar
+
+});
+
+
+  function validarFecha(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+
+
+
+
+</script>
+{% endblock %}

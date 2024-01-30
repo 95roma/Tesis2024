@@ -1,0 +1,892 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% block titulo %}Conozca a su Cliente{% endblock titulo %}<!-- /el titulo del formulario-->
+{% load static %}
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="done" isdone="1" rel="2">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Actividades Economica del cliente </small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="3">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Datos del Negocio</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="4">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Recibe Remesas Familiares</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-5" class="done" isdone="1" rel="4">
+        <span class="step_no">5</span>
+        <span class="step_descr"><small>Declaraci&oacute;n del Cliente o Fiador en Operaciones Activas</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-6" class="done" isdone="1" rel="4">
+        <span class="step_no">6</span>
+        <span class="step_descr"><small>Personas expuestas politicamente</small> </span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="stepContainer" style="overflow: hidden !important;">
+    <form style="overflow: hidden !important;" id="ccliente" name="ccliente"
+      action="../../../ConozcaClienteApp/registrarD/" method="post" autocomplete="off">{% csrf_token %}
+      <input type="hidden" id="estadoM" name="estadoM" value="Incompleto">
+
+      <input type="hidden" id="ids" name="ids" value="{{dp.idSolicitud.id}}">
+      <div id="step-1" class="content" style="display: block;">
+        <div class="x_title">
+          <div class="row">
+            <h4 class="">Datos Generales </h4>
+          </div>
+        </div>
+       
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Calidad en la que actúa:</label> &nbsp;&nbsp;
+             
+              Fiador:
+              <div class="iradio_flat-green ">
+                <input type="radio" name="calidad" id="calidad" value="Fiador"  checked  required>
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Código de Cliente</h4>
+              <input type="text" class="form-text" id="codigo" name="codigo" value="" maxlength="10" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row"><!--primer row  del formulario -->
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Nombre Completo</h4>
+              <input type="text" class="form-text" id="nombre" name="nombre"
+                value="{{dp.nombrefia}} {{dp.apellidofia}}" disabled required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Conocido por:(Solo si lo dice el DUI)</h4>
+              <input type="text" class="form-text" id="conocidoc" name="conocidoc" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Profesión según DUI</h4>
+              <input type="text" class="form-text" id="profesionsd" name="profesionsd" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Nacionalidad</h4>
+                <div class="col-md-10 col-sm-10 ">
+                  <select class="form-text" id="nacionalidad" name="nacionalidad"  required >
+                      <option  selected></option>
+                      <option value="salvadoreño" >Salvadoreño/a</option>
+                      <option value="otro">otro</option>
+                      
+                  </select>
+              </div>
+              <span class="bar"></span>
+            </div>
+          </div>
+        
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Lugar de Nacimiento</h4>
+              <input type="text" class="form-text " id="lugarn" name="lugarn" value="{{dp.lugarnacifia}}" disabled required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Fecha de Nacimiento</h4>
+              <input type="date" class="form-text" id="fechan" name="fechan" value="{{dp.fechanacifia|date:'Y-m-d'}}" disabled
+                required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Documento de Identidad</h4>
+
+              <label>DUI: <input type="radio" class="" name="documento" id="documento" value="DUI" checked onchange="MostrarDuif(this.value);" required /></label>
+
+              <label> PAS: <input type="radio" class="" name="documento" id="documento" value="PAS" onchange="MostrarDuif(this.value);"/></label>
+
+              <label> CR: <input type="radio" class="" name="documento" id="documento" value="CR" onchange="MostrarDuif(this.value);" /></label>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>N° de Documento</h4>
+              <input type="text" class="form-text " id="ndoc" name="ndoc" value="{{dp.duifia}}"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+         
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Fecha de Vencimiento</h4>
+              <input type="date" class="form-text " id="fechavd" name="fechavd" onchange="validarF(this)"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Ocupación o actividad actual</h4>
+              <input type="text" class="form-text" id="ocupacion" name="ocupacion" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Dirección domicilio</h4>
+              <input type="text" class="form-text" id="direcciond" name="direcciond" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Tiempo de residir en esta dirección</h4>
+              <input type="text" class="form-text" id="tiempores" name="tiempores" value="{{d.resideDesde}}" disabled
+                required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Correo electrónico</h4>
+              <input type="text" class="form-text" id="correo" name="correo"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Teléfono de Celular</h4>
+              <input type="text" class="form-text" id="telefonoc" name="telefonoc" 
+                onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 " maxlength="9"
+                minlength="9" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Teléfono Fijo</h4>
+              <input type="text" class="form-text " id="telefonof" name="telefonof"
+                onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 " maxlength="9"
+                minlength="9" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Estado Civil</h4>
+              <input type="text" class="form-text" id="estadocv" name="estadocv" value="{{dp.estadocivilfia}}" disabled required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">  
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Estatus de la propiedad</h4>
+              <input type="text" class="form-text" id="estatusp" name="estatusp" maxlength="60" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Nombre del cónyuge</h4>
+              <input type="text" class="form-text" id="nombrecony" name="nombrecony" maxlength="60"
+                 >
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+        {% include "ConozcaClienteApp/cclienteaedf.html" %}
+      </div>
+      <div id="step-3" class="content" style="display: none;">
+        {% include "ConozcaClienteApp/cclientednf.html" %}
+      </div>
+      <div id="step-4" class="content" style="display: none;">
+        {% include "ConozcaClienteApp/cclienterrff.html" %}
+      </div>
+      <div id="step-5" class="content" style="display: none;">
+        {% include "ConozcaClienteApp/cclientedcrcf.html" %}
+      </div>
+      <div id="step-6" class="content" style="display: none;">
+        {% include "ConozcaClienteApp/cclientepepsf.html" %}
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block js %}
+<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+
+  $(document).ready(function () {//funcion para guardar
+
+    $("#fin").click(function () {
+      document.getElementById("nombre").disabled = false;
+      document.getElementById("telefonoc").disabled = false;
+      document.getElementById("correo").disabled = false;
+      document.getElementById("lugart").disabled = false;
+
+      // estas son banderas para no guardar los formularios que estan en blanco
+      // los metodos validar devulven 0 si no estan completos los formularios
+      // y 1 si los formularios estan completos
+      var passAED = document.getElementById("passAED").value = validarDatos();
+      var passDN = document.getElementById("passDN").value = validarDN();
+      var passRRF = document.getElementById("passRRF").value = validarRRF();
+      var passDCF = document.getElementById("passDCF").value = validarDCF();
+      var passBPEP = document.getElementById("passBPEP").value = validarBPEP();
+      var passPT = document.getElementById("passPT").value = validarPerfilT();
+      var passPEP = document.getElementById("passPEP").value = validarPEPS();
+      var passCD = document.getElementById("passCD").value = validarConfirmarD();
+
+      //comparo que todas las banderas esten en 1 para cambiar el estado de la solicitud a aprobado
+      if (passAED == '1' && passDN == '1' && passRRF == '1' && passDCF == '1' && passBPEP == '1' && passPT == '1' && passPEP == '1' && passCD == '1' ) {
+        document.getElementById('estadoM').value = 'Completado';
+        document.ccliente.submit();
+      } else {// encaso que una bandera este en 0 muestra el mensaje para comfirmar si desea guardar la solicitud
+        //enfio el mensaje y el formulario para poder enviarlo desde la fucnion
+        // la funcion confirmar esta en TesisApp\static\TesisApp\js\alertas.js
+        confirmar('Formulario incompleto, desea guardarlo para completarlo despues?', document.ccliente);
+      }
+      //validarDatos();
+      //validarDN();
+      //validarRRF()
+      //alert(pas)
+      //validarDCF();
+      //validarBPEP()
+      //document.ccliente.submit();
+    });
+  });
+
+
+  $('.mask-dui').mask('00000000-0');
+  $('.mask-fax').mask('0000-0000');
+  $('.mask-telefono').mask('0000-0000');
+  $('.mask-fecha').mask('00/00/0000');
+
+
+  $.validator.addMethod("validaemail", function (value, element) {
+    return /^(?:[^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*|"[^\n"]+")@(?:[^<>()[\].,;:\s@"]+\.)+[^<>()[\]\.,;:\s@"]{2,63}$/i.test(value);
+  }, "<h2>Ingrese un correo válido  en formaro que contenga @ y .com</h2>");
+
+  $.validator.addMethod("letras", function (value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ.]*$/i.test(value);
+  }, "<h2>Ingrese sólo letras ..</h2>");
+
+  $.validator.addMethod("validardui", function (value, element) {
+    return /^(?!.*(.)\1{4})\d{8}-\d{1}$/.test(value);
+  }, "<h2>Ingrese corecctamente el DUI ..</h2>");
+
+  $.validator.addMethod("numero", function (value, element) {
+    return /^[0-9,.]*$/i.test(value);
+  }, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+  $.validator.addMethod("dire", function (value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+  }, "<h2>Ingrese una dirección valida ..</h2>");
+
+  $.validator.addMethod("numletras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ 0-9]*$/i.test(value);
+  }, "<h2>Ingrese numeros y letras </h2>");
+
+
+    
+    $("#ccliente").validate({
+      errorElement: "em",
+      errorPlacement: function(error, element) {
+        $(element.parent("div").addClass("form-animate-error"));
+        error.appendTo(element.parent("div"));
+      },
+      success: function(label) {
+        $(label.parent("div").removeClass("form-animate-error"));
+      },
+      rules: {
+        conocidoc:{
+          minlength:3,
+          required: false,
+          letras:true,
+          maxlength:60
+        },
+        profesion:{
+          minlength:8,
+          required: true,
+          letras:true,
+          maxlength:15
+        },
+        
+        direcciond:{
+          minlength:10,
+          required: true,
+          dire:true,
+          maxlength:100
+    
+        },
+        direccioncor:{
+          minlength:10,
+          required: true,
+          dire:true,
+          maxlength:100
+    
+        },
+        estatusp:{
+          minlength:6,
+          required: true,
+          letras:true,
+          maxlength:60
+        },
+        nombrecony:{
+          minlength:10,
+          required: true,
+          letras:true,
+          maxlength:60
+        },
+        cargode:{
+          minlength:8,
+          required: true,
+          letras:true,
+          maxlength:50
+    
+        },
+        tiempolab:{
+          minlength:1,
+          required: true,
+          maxlength:20,
+          numletras:true
+    
+        },
+        direccionde:{
+          minlength:10,
+          required: true,
+          dire:true,
+          maxlength:100
+    
+        },
+        rangoing:{
+          minlength:3,
+          required: true,
+          maxlength:20
+    
+        },
+        frecuenciap:{
+          minlength:5,
+          required: true,
+          letras:true,
+          maxlength:30
+    
+        },
+        tipog:{
+          minlength:5,
+          required: true,
+          letras:true,
+          maxlength:50
+    
+        },
+        nombrever:{
+          minlength:5,
+          required: true,
+          letras:true,
+          maxlength:60
+        }
+    
+       
+      },
+      messages: {
+        conocidoc:{
+            required : "<h2>Debe ingresar los nombres</h2>",
+            minlength : "<h2>EL nombre debe tener un minimo de 3 caracteres</h2>",
+            maxlength : "<h2>EL nombre debe tener un maximo de 60 caracteres</h2>"
+        },
+        profesion:{
+            required : "<h2>Debe ingresar la profesión</h2>",
+            minlength : "<h2>La profesión debe tener un minimo de 8 caracteres</h2>",
+            maxlength : "<h2>La profesión debe tener un maximo de 15 caracteres</h2>"
+        },
+        direcciond:{
+            required : "<h2>Debe ingresar la dirección</h2>",
+            minlength : "<h2>La dirección debe tener un minimo de 10 caracteres</h2>",
+            maxlength : "<h2>La dirección debe tener un maximo de 100 caracteres</h2>"
+        },
+        direccioncor:{
+            required : "<h2>Debe ingresar la dirección</h2>",
+            minlength : "<h2>La dirección debe tener un minimo de 10 caracteres</h2>",
+            maxlength : "<h2>La dirección debe tener un maximo de 100 caracteres</h2>"
+        },
+        telefono:{
+            required : "<h2>Debe ingresar el teléfono</h2>",
+        },
+        fechavd:{
+            required : "<h2>Debe ingresar la fecha</h2>",
+        },
+        departamentoof:{
+            required : "<h2>Debe seleccionar el departamento</h2>"
+        },
+        estatusp:{
+            required : "<h2>Debe ingresar el estatus de la propiedad </h2>",
+            minlength : "<h2>EL estatus debe tener un minimo de 6 digitos</h2>",
+            maxlength : "<h2>EL estatus debe tener un maximo de 60 digitos</h2>"
+        },
+        
+        nombrecony:{
+            required : "<h2>Debe ingresar el nombre del conyuge</h2>",
+            minlength : "<h2>EL nombre del conyuge debe tener un minimo de 10 caracteres</h2>",
+            maxlength : "<h2>EL nombre del conyuge debe tener un maximo de 60 caracteres</h2>"
+        },
+        
+        cargode:{
+            required : "<h2>Debe ingresar el cargo que desempeña</h2>",
+            minlength : "<h2>EL cargo debe tener un minimo de 8 caracteres</h2>",
+            maxlength : "<h2>EL cargo debe tener un maximo de 50 caracteres</h2>"
+        },
+        
+        tiempolab:{
+            required : "<h2>Debe ingresar el tiempo de laborar</h2>",
+            minlength : "<h2>EL tiempo de laborar debe tener un minimo de 1 caracteres</h2>",
+            maxlength : "<h2>EL tiempo de laborar debe tener un maximo de 20 caracteres</h2>"
+        },
+        
+        direccionde:{
+            required : "<h2>Debe ingresar la dirección</h2>",
+            minlength : "<h2>La dirección debe tener un minimo de 10 caracteres</h2>",
+            maxlength : "<h2>La dirección debe tener un maximo de 100 caracteres</h2>"
+        },
+        
+        rangoing:{
+            required : "<h2>Debe ingresar el rango de ingresos</h2>",
+            minlength : "<h2>EL rango de ingresos debe tener un minimo de 3 caracteres</h2>",
+            maxlength : "<h2>EL rango de ingresos debe tener un maximo de 20 caracteres</h2>"
+        },
+        
+        frecuenciap:{
+            required : "<h2>Debe ingresar la frencuencia de pago</h2>",
+            minlength : "<h2>La frecuencia de pago debe tener un minimo de 5 caracteres</h2>",
+            maxlength : "<h2>La frecuencia de pago debe tener un maximo de 30 caracteres</h2>"
+        },
+        
+        tipog:{
+            required : "<h2>Debe ingresar el tipo de garantia</h2>",
+            minlength : "<h2>El tipo de garantia debe tener un minimo de 5 caracteres</h2>",
+            maxlength : "<h2>El tipo de garantia debe tener un maximo de 50 caracteres</h2>"
+        },
+        
+        nombrever:{
+            required : "<h2>Debe ingresar el nombre </h2>",
+            minlength : "<h2>El nombre debe tener un minimo de 5 caracteres</h2>",
+            maxlength : "<h2>El nombre debe tener un maximo de 60 caracteres</h2>"
+        }
+
+
+      }
+    
+    });
+    
+
+  function validarDatos() {
+    if (document.getElementById("tipoa").value != "" &&
+      document.getElementById("cargode").value != "" &&
+      document.getElementById("tiempolab").value != "" &&
+      document.getElementById("procedenciafonda").value != "" &&
+      document.getElementById("rangoing").value != "" &&
+      document.getElementById("otingresos").value != ""
+    ) {
+   
+      document.getElementById("passAED").value = "1"
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+  function validarDN() {
+    if (document.getElementById("nombreng").value != "" &&
+      document.getElementById("descps").value != "" &&
+      document.getElementById("direccionneg").value != "" &&
+      document.getElementById("fechaia").value != "" &&
+      document.getElementById("rangoimn").value != "" &&
+      document.getElementById("otrosidn").value != "" ||
+      document.getElementById("nombreng").value == "" ||
+      document.getElementById("descps").value == "" ||
+      document.getElementById("direccionneg").value == "" ||
+      document.getElementById("fechaia").value == "" ||
+      document.getElementById("rangoimn").value == "" ||
+      document.getElementById("otrosidn").value == "" 
+    ) {
+      document.getElementById("passDN").value = "1"
+      return 1;
+    } else {
+      return 0;
+    
+    }
+
+  }
+
+  function validarRRF() {
+    const radios = document.getElementsByName('reciberf');
+      pass = 0;
+    for (var i = 0; i <  radios.length; i++) {
+      if (radios[i].checked && radios[i].value=="Si") {
+        
+        for (i = 0; i < document.getElementsByName('nombrer').length; i++) {
+          if (
+            document.getElementsByName('nombrer')[i].value != "" &&
+            document.getElementsByName('parentescor')[i].value != "" &&
+            document.getElementsByName('paisorg')[i].value != "" &&
+            document.getElementsByName('montor')[i].value != "" 
+          ) {
+            document.getElementById("passRRF").value = "1"
+            pass = 1;
+          } 
+        } 
+
+        //break;
+      }else if(radios[i].checked && radios[i].value=="No") {
+       
+        for (i = 0; i < document.getElementsByName('nombrer').length; i++) {
+          if (
+            document.getElementsByName('nombrer')[i].value == "" &&
+            document.getElementsByName('parentescor')[i].value == "" &&
+            document.getElementsByName('paisorg')[i].value == "" &&
+            document.getElementsByName('montor')[i].value == "" 
+          ) {
+           //alert("No");
+           document.getElementById("passRRF").value = "1"
+            pass = 1;
+          } 
+        } 
+      }
+  }
+  return pass;
+
+}
+
+  function validarDCF() {
+    if (document.getElementById("clasificacionc").value != "" &&
+        document.getElementById("rpagosadic").value != "" ||
+        document.getElementById("clasificacionc").value == " " 
+      //document.getElementById("cuotadc").value != "" &&
+      
+    ) {
+      document.getElementById("passDCF").value = "1"
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+  function validarBPEP() {
+    if (document.getElementById("noaplica").value != "" &&
+       document.getElementById("beneficiariopeps").value != "" ||
+       document.getElementById("noaplica").value == " " 
+      //document.getElementById("direcpermanente").value != "" &&
+      //document.getElementById("tdocumento").value != "" &&
+      //document.getElementById("ndocumento").value != ""  &&
+      
+    ) {
+      document.getElementById("passBPEP").value = "1"
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+  
+
+  function validarPerfilT() {
+    if (document.getElementById("prestamos").value != "" &&
+      document.getElementById("otrosesp").value != "" ||
+      document.getElementById("prestamos").value == "" ||
+      document.getElementById("otrosesp").value == "") {
+      document.getElementById("passPT").value = "1"
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+  function validarPEPS() {
+    if (document.getElementById("ustpeps").value != "" &&
+      document.getElementById("relpeps").value != "" 
+    ) {
+      document.getElementById("passPEP").value = "1"
+      return 1;
+    } else {
+      //alertA('Datos personales  de conyuge o codeudor no completados');
+      return 0;
+    }
+
+  }
+
+  function validarConfirmarD() {
+    if (document.getElementById("validefnf").value != "" &&
+      document.getElementById("verdirec").value != "" &&
+      document.getElementById("nombrever").value != "") {
+      document.getElementById("passCD").value = "1"
+      return 1;
+    } else {
+      //alertA('Datos personales  de conyuge o codeudor no completados');
+      return 0;
+    }
+
+  }
+ 
+function MostrarDuif(value) { 
+
+if (value == "DUI") {
+  var du = "{{dp.duifia}}";
+  document.getElementById("ndoc").value = du;
+
+} else if (value == "PAS" ||  value == "CR") {
+  document.getElementById("ndoc").value = "";
+
+}
+}
+
+  function habdesO(value) {
+    if (value == "Si") {
+      document.getElementById("procedencia").disabled = false;
+      document.getElementById("procedencia").focus();
+    } else if (value == "No") {
+      document.getElementById("procedencia").value = "";
+      document.getElementById("procedencia").blur();
+      document.getElementById("procedencia").disabled = true;
+    }
+  }
+
+  function habdesOn(value) {
+    if (value == "Si") {
+      document.getElementById("procedenciadn").disabled = false;
+      document.getElementById("procedenciadn").focus();
+    } else if (value == "No") {
+      document.getElementById("procedenciadn").value = "";
+      document.getElementById("procedenciadn").blur();
+      document.getElementById("procedenciadn").disabled = true;
+    }
+  }
+
+
+  function habdesRR(value) {
+    if (value == "Si") {
+      alert("si")
+      for (i = 0; i < document.getElementsByName('nombrer').length; i++) {
+      document.getElementsByName("nombrer")[i].disabled=false;
+      document.getElementsByName("parentescor")[i].disabled=false;
+      document.getElementsByName("paisorg")[i].disabled=false;
+      document.getElementsByName("montor")[i].disabled=false;
+      }
+
+    } else if (value == "No") {
+      for (i = 0; i < document.getElementsByName('nombrer').length; i++) { 
+      document.getElementsByName("nombrer")[i].disabled=true;
+      document.getElementsByName("parentescor")[i].disabled=true;
+      document.getElementsByName("paisorg")[i].disabled=true;
+      document.getElementsByName("montor")[i].disabled=true;
+      document.getElementsByName("nombrer")[i].value=" ";
+      document.getElementsByName("parentescor")[i].value=" ";
+      document.getElementsByName("paisorg")[i].value=" ";
+      document.getElementsByName("montor")[i].value=" ";
+      }
+     
+    }
+  }
+
+
+  function habdesPr(value) {
+    if (value == "Si") {
+      document.getElementById("procfondos").disabled = false;
+      document.getElementById("procfondos").focus();
+    } else if (value == "No") {
+      document.getElementById("procfondos").value = "";
+      document.getElementById("procfondos").blur();
+      document.getElementById("procfondos").disabled = true;
+    }
+  }
+
+  function habdesG(value) {
+    if (value == "Primero") {
+      document.getElementById("pparentesco").disabled = false;
+      document.getElementById("sparentesco").disabled = true;
+      document.getElementById("sparentesco").selectedIndex = 0;
+    } else if (value == "Segundo") {
+      document.getElementById("pparentesco").disabled = true;
+      document.getElementById("sparentesco").disabled = false;
+      document.getElementById("pparentesco").selectedIndex = 0;
+    }
+  }
+
+
+  function habdesP(value) {
+    if (value == "Si") {
+      document.getElementById("nombrep").disabled = false;
+      document.getElementById("puestodes").disabled = false;
+      document.getElementById("periodogd").disabled = false;
+      document.getElementById("periodogh").disabled = false;
+      var r = document.getElementsByName("grado");
+      for (var i = 0; i < r.length; i++) {
+        r[i].disabled = false;
+      }
+      document.getElementById("pparentesco").disabled = false;
+      document.getElementById("sparentesco").disabled = false;
+    } else if (value == "No") {
+      document.getElementById("nombrep").value = "";
+      document.getElementById("puestodes").value = "";
+      document.getElementById("periodogd").value = "";
+      document.getElementById("periodogh").value = "";
+      document.getElementById("grado").value = "";
+      document.getElementById("pparentesco").value = "";
+      document.getElementById("sparentesco").value = "";
+      document.getElementById("nombrep").disabled = true;
+      document.getElementById("puestodes").disabled = true;
+      document.getElementById("periodogd").disabled = true;
+      document.getElementById("periodogh").disabled = true;
+      var r = document.getElementsByName("grado");
+      for (var i = 0; i < r.length; i++) {
+        r[i].disabled = true;
+        r[i].checked = false;
+      }
+      document.getElementById("pparentesco").disabled = true;
+      document.getElementById("sparentesco").disabled = true;
+    }
+  }
+
+ 
+
+
+  function validarF(fechacc) { // para fecha de vencimiento, no tiene q ser menor a la actual
+
+    var actual = new Date();
+    var f = Date.parse(fechacc.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+    var date1 = new Date('1960-01-01');
+
+    if (f>=date1 && f<actual) {
+      alertE("Ingrese una fecha valida ");
+      fechacc.value = "";
+    } 
+    if (f.getFullYear()>=2100) {
+      alertE("Ingrese una fecha valida ");
+      fechacc.value = "";
+    }  
+
+  }
+
+  function validarFechan(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  function validarTel(tel) {
+    var num = tel.value.length;
+    var primer = tel.value;
+    if (num == 4)
+      tel.value = tel.value + '-';
+
+    if (num == 1) {
+      if (primer == '2' || primer == '7' || primer == "6")
+        return
+      else {
+        tel.value = "";
+        tel.title = "El Telefono debe comenzar con 2, 6 o 7";
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'El Telefono debe comenzar con 2, 6 o 7',
+          showConfirmButton: false,
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          timer: 1500
+        })
+      }
+    }
+
+  }
+
+  
+
+</script>
+{% endblock %}

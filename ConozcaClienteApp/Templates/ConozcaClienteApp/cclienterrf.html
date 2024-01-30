@@ -1,0 +1,134 @@
+
+<div>            <!-- Recibe remesas familiares -->
+    <input type="hidden" id="passRRF" name="passRRF" value="0">
+    <div class="x_title">
+      <div class="row">
+        <h2 style="text-align: center;">{{sol.0.perfil.nombres}} {{sol.0.perfil.apellidos}} </h2>
+      </div><br>
+      <div class="row">
+        <h4 class="">Recibe Remesas Familiares </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:10px !important;">
+          <label>Recibe Remesas Familiares:</label> &nbsp;&nbsp;
+          Si
+          <div class="iradio_flat-green ">
+            <input type="radio"  id="reciberf" name="reciberf" value="Si" onchange="habdesRR(this.value);"  required>
+            <ins class="iCheck-helper"></ins>
+          </div>&nbsp;
+          No
+          <div class="iradio_flat-green ">
+            <input type="radio" id="reciberf" name="reciberf" value="No" onchange="habdesRR(this.value);"  checked required>
+            <ins class="iCheck-helper"></ins>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    <table class="table" >
+     
+      <thead>
+        <tr>
+          <th width="25%">Nombre del Remitente</th>
+          <th width="20%">Parentesco</th>
+          <th width="35%">Pais de origen de la remesa</th>
+          <th width="20%">Monto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text" id="nombrer" name="nombrer" maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text" id="parentescor" name="parentescor" maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text" id="paisorg" name="paisorg" maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  id="montor" name="montor"  disabled
+                required>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="nombrer" id="nombrer" maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="parentescor" id="parentescor" maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="paisorg" id="paisorg" maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"   name="montor" id="montor"  maxlength="9" disabled
+                required>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="nombrer" id="nombrer"  maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="parentescor" id="parentescor" maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"  name="paisorg" id="paisorg" maxlength="50" disabled
+                required>
+            </div>
+          </td>
+          <td>
+            <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+              style="padding-bottom:0px !important;">
+              <input type="text" class="form-text"   name="montor" id="montor"   maxlength="9" disabled
+                required>
+            </div>
+          </td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </div><!-- / fin Recibe remesas familiares -->

@@ -1,0 +1,76 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+
+{% block titulo %}Listado de Documentos Presentados por Cliente{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}<li><a href="{% url ''%}">Modi</a></li>   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}<li><a href="{% url 'listarDocu'%}">listar Documento</a></li>    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+
+<form id="contact" name="contact" action="registrarDocu/" enctype="multipart/form-data" method="post" autocomplete="off">{% csrf_token %}
+    <input type="hidden" id="bandera" name="bandera">
+
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Cliente</h4>
+            <select class="form-text" id="id" name="id" onchange="cargarLista()"  required >
+              <option value="0">SELECCIONE CLIENTE</option>
+              {% for d in Perfil %}
+              <option value="{{d.id}}">{{d.nombres}}&nbsp;&nbsp;&nbsp;&nbsp;   {{d.apellidos}}</option>
+              {% endfor %} 
+          </select>
+            <span class="bar"></span>
+        </div>
+    </div>
+</div>
+  </div>
+</form>
+
+<table id="example" class="table table-striped table-bordered">
+  <thead>
+    <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+      <th><center>#</center></th> 
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Documento</th>
+        <th>Archivo</th>
+        <th>Actualizar</th>
+        
+      </tr>
+
+    </thead>
+    <tbody id="grupo" name="grupo">
+     
+    </tbody>
+  </table>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    function cargarLista() {
+      var id = document.getElementById('id').value;
+      //alert(id);
+      let url = 'docu/?id=' + id;
+      fetch(url)
+        .then(function (result) {
+          return result.text();
+        })
+        .then(function (result) {
+          document.getElementById('grupo').innerHTML = result;
+        });
+    }
+</script>
+<script>
+  $(document).ready(function() {
+      $('#example').DataTable({
+          responsive: true,
+          language: {
+              url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+          }
+      });
+  });
+  
+</script>
+{% endblock %}

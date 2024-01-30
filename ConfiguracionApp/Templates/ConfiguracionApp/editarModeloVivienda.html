@@ -1,0 +1,166 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Editar Modelos de Viviendas{% endblock titulo %}<!-- /el titulo del formulario-->
+
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<form id="vivienda" name="vivienda" action="/ConfiguracionApp/modificarMV/" enctype="multipart/form-data" method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden" id="idmv" name="idmv" value="{{mmv.id}}">
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Tipo de Vivienda</h4>
+            <input type="text" class="form-text" id="tipovivienda" name="tipovivienda"  maxlength="30" value="{{mmv.topovivienda}}" disabled required>
+            <span class="bar"></span>
+        </div>
+    </div>
+
+    </div> 
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <input type="hidden" id="dmodelov" name="dmodelov" value="{{mmv.modelo}}">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Subir modelo de la vivienda </h4>
+            <h6>{{mmv.modelo}}</h6>
+            <input type="file" name="modelov" id="modelov" accept="image/*"  >
+            <span class="bar"></span>
+        </div>
+    </div> 
+
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Monto</h4>
+              <input type="number" class="form-text" id="montov" name="montov" onchange="vSalariom()" maxlength="10" value="{{mmv.montoc}}" required>
+              <span class="bar"></span>
+          </div>
+      </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Descripción</h4>
+                  <input type="text" class="form-text" id="descripcion" name="descripcion" maxlength="300" value="{{mmv.descripcion}}" required>
+                  <span class="bar"></span>
+              </div>
+          </div>
+      
+          </div> 
+    <BR><BR>
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="reset" class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+$.validator.addMethod("numero", function(value, element) {
+return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+$.validator.addMethod("letras", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ-9]*$/i.test(value);
+}, "<h2>Ingrese sólo letras ..</h2>");
+
+$("#vivienda").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  
+  rules: {
+    tipovivienda:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:30
+    },
+    modelov:{
+      required: true,
+    },
+    montov:{
+      minlength:2,
+      required: true,
+      numero:true,
+      maxlength:10
+    },
+  
+  },
+  messages: {
+    tipovivienda:{
+        required : "<h2>Debe ingresar el tipo de vivienda</h2>",
+        minlength : "<h2>EL tipo de vivienda debe tener un minimo de 3 digitos</h2>",
+        maxlength : "<h2>EL tipo de vivienda debe tener un maximo de 30 digitos</h2>"
+    },
+    montov:{
+        required : "<h2>Debe ingresar el monto de la vivienda</h2>",
+        minlength : "<h2>EL monto debe tener un minimo de 2 digitos</h2>",
+        maxlength : "<h2>EL monto debe tener un maximo de 10 digitos</h2>"
+    },
+  
+  }
+});
+
+//$("#contact").submit(function(e) {
+//    if (!$(this).valid()) {
+//      e.preventDefault(); // Detiene el envío del formulario
+//      alert("Por favor, complete los campos requeridos correctamente.");
+//    }
+//  });
+
+$("#btnguardar").click(function(){
+if($("#vivienda").valid()){
+
+}else{
+  alertE("Debe Registrar Datos Validos!"); 
+  return false;
+}
+});// fin de btnguardar
+
+
+});
+
+function vSalariom(salario) {
+       //var val = document.getElementById(salario).value 
+       var primer = document.getElementById(salario).value 
+      
+    if (primer != '0' ) 
+       return 
+        else{
+        alertE('Ingrese un valor valido');
+        document.getElementById(salario).value="";
+    }
+  }
+
+  
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,308 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}
+{% block titulo %}SOLICITUD DE CREDITO PARA PERSONAS NATURALES{% endblock titulo %}
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="done" isdone="1" rel="2">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Datos personales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="3">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Grupo familiar</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="4">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Domicilio y lugar de Trabajo</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-5" class="done" isdone="1" rel="5">
+        <span class="step_no">5</span>
+        <span class="step_descr"><small>Datos de la obra a realizar</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-6" class="done" isdone="1" rel="6">
+        <span class="step_no">6</span>
+        <span class="step_descr"><small>Detalle de la solicitud</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-7" class="done" isdone="1" rel="7">
+        <span class="step_no">7</span>
+        <span class="step_descr"><small>Experiencia crediticia</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-8" class="done" isdone="1" rel="8">
+        <span class="step_no">8</span>
+        <span class="step_descr"><small>Referencia personales y familiares</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-9" class="done" isdone="1" rel="9">
+        <span class="step_no">9</span>
+        <span class="step_descr"><small>Comentarios</small> </span>
+      </a>
+    </li>
+  </ul>
+  <div class="stepContainer" style="overflow: hidden !important;">
+    <form style="overflow: hidden !important;" id="solicitudNatural" name="solicitudNatural"
+      action="../../../NaturalApp/registrarDatosN/" method="post" autocomplete="off">{% csrf_token %}
+      <input type="hidden" id="estadoN" name="estadoN" value="Incompleto">
+      <div id="step-1" class="content" style="display: block;">
+
+        <div class="x_title">
+          <div class="row">
+            <h2 style="text-align: center;">SOLICITUD DE CREDITO </h2>
+          </div><br>
+          <div class="row">
+            <h2 style="text-align: center;">{{soli.0.perfil.nombres}}  {{soli.0.perfil.apellidos}}  </h2>
+          </div>
+          <div class="row">
+            <h4 class="">Para familias con ingresos provenientes de empleos y/o remesa familiares </h4>
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:0px !important;">
+            <label>Tipo de obra a realizar:</label> &nbsp;&nbsp;
+            Vivienda
+            <div class="iradio_flat-green ">
+              <input type="radio" class="flat" checked name="tipoobra" value="vivienda" required>
+              <ins class="iCheck-helper"></ins>
+            </div>&nbsp;&nbsp;
+            Mejora
+            <div class="iradio_flat-green ">
+              <input type="radio" class="flat" name="tipoobra" value="mejora" required>
+              <ins class="iCheck-helper"></ins>
+            </div>
+          </div>
+        </div>
+      </div> 
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" disabled id="fechaSN1" name="fechaSN1" maxlength="50"
+                placeholder="Fecha" value="" required>
+              <input type="hidden" id="fechaSN" name="fechaSN">
+              <span class="bar"></span>
+            </div>
+
+          </div><!-- /fin columna  derecha-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" disabled id="" name="" maxlength="50" value="{{cliente.Agencia.nombre}}" 
+                required>
+              <input type="hidden" id="agenciaN" name="agenciaN" value="1">
+              <span class="bar"></span>
+            </div>
+          </div><!-- /fin columna  izquierda-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text"  id="n" name="n" maxlength="50" placeholder="16607"
+                 required>
+              <span class="bar"></span>
+            </div>
+          </div><!-- /fin columna  izquierda-->
+        </div>
+        <div class="row">
+          <!-- datos de ubicacion  comunidad, municipio -->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" id="comunidadN" name="comunidadN" maxlength="50"
+                placeholder="Comunidad" required>
+              <span class="bar"></span>
+            </div>
+
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" id="municipioN" name="municipioN" maxlength="50"
+                value="{{cliente.municipio}}" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+      
+        </div> <!-- / fin datos de ubicacion-->
+        <div class="row">
+          <!-- datos de  area y tipo de ingreso-->
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Área:</label> &nbsp;&nbsp;
+              Urbana
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" checked name="areaN" value="Urbana" required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;
+              Rural
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" name="areaN" value="Rural" required>
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Tipo de ingreso:</label> &nbsp;&nbsp;
+              Empleo:
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" checked name="tipoingreso" id="tipoingreso" value="Empleo" required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;
+              Remesa:
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" name="tipoingreso" id="tipoingreso" value="Remesa" required>
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+        </div> <!-- / fin datos de ubicacion-->
+
+      </div>
+      <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+        {% include "NaturalApp/datosPerNat.html" %}
+      </div>
+      <div id="step-3" class="content" style="display: none;">
+        {% include "NaturalApp/grupoFNat.html" %}
+      </div>
+      <div id="step-4" class="content" style="display: none;">
+        {% include "NaturalApp/domicilioNat.html" %}
+      </div>
+      <div id="step-5" class="content" style="display: none;">
+        {% include "NaturalApp/datosObraNat.html" %}
+      </div>
+      <div id="step-6" class="content" style="display: none;">
+        {% include "NaturalApp/detalleNat.html" %}
+      </div>
+      <div id="step-7" class="content" style="display: none;">
+        {% include "NaturalApp/experienciaNat.html" %}
+      </div>
+      <div id="step-8" class="content" style="display: none;">
+        {% include "NaturalApp/referenciasNat.html" %}
+      </div>
+      <div id="step-9" class="content" style="display: none;">
+        {% include "NaturalApp/comentariosNat.html" %}
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="clearfix"></div>
+{% endblock %}
+
+
+{% block js %}
+<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+  let montoMin=0
+  let montoMax=0
+
+  $(document).ready(function () {//funcion para guardar
+    $("#fin").click(function () {
+      //activo los input parq que puedan guardarse
+      document.getElementById("fechaSN").disabled = false;
+      document.getElementById("edadS").disabled = false;
+      document.getElementById("edadC").disabled = false;
+      document.getElementById("fechNaS").disabled = false;
+      document.getElementById("apellidoS").disabled = false;
+      document.getElementById("duiS").disabled = false;
+      document.getElementById("nombreS").disabled = false;
+      document.getElementById("direActS").disabled = false;
+      document.getElementById("telefonoS").disabled = false;
+      document.getElementById("salarioS").disabled = false;
+      document.getElementById("profecionS").disabled = false;
+      document.getElementById("cuotaNE").disabled = false;
+
+      // estas son banderas para no guardar los formularios que estan en blanco
+      // los metodos validar devulven 0 si no estan completos los form
+      // y 1 si los formularios estan completos
+      var passDPN = document.getElementById("passDPN").value = validarDatosN(); 
+      var passDPNC = document.getElementById("passDPNC").value = validarDatosNC();
+      var passGPN = document.getElementById("passGPN").value = validarGrupoFN();
+      var passDLN = document.getElementById("passDLN").value = validarDomicilioNatural();
+      var passDLNC = document.getElementById("passDLNC").value = validarDomicilioCNatural();
+      var passDORN = document.getElementById("passDORN").value = validarDatosObraN();
+      var passDSN = document.getElementById("passDSN").value = validarDetalleN();
+      var passECN = document.getElementById("passECN").value = validarExpeCrediN();
+      var passRPFN = document.getElementById("passRPFN").value = validarReferenciasPFN();
+      var passCMN = document.getElementById("passCMN").value = validarComentariosN();
+      
+
+      document.getElementById('direccionNS').value=(document.getElementById('lugrNatuS').value);
+      //document.getElementById("passEC").value = '1';
+      // var passRPF =  document.getElementById("passRPF").value = validarExpeCredi();
+      // fin banderas
+    
+      //comparo que todas las banderas esten en 1 para cambiar el estado de la solicitud a aprobado
+      if (passDPN == '1' &&  passDPNC == '1' && passGPN == '1' && passDLN == '1' && passDLNC == '1' && passDORN == '1' && passDSN == '1' && passECN == '1' && passRPFN =='1' && passCMN =='1') {
+        document.getElementById('estadoN').value = 'Completado';
+        document.solicitudNatural.submit();
+      } else {// encaso que una bandera este en 0 muestra el mensaje para comfirmar si desea guardar la solicitud
+        //enfio el mensaje y el formulario para poder enviarlo desde la fucnion
+        // la funcion confirmar esta en TesisApp\static\TesisApp\js\alertas.js
+        confirmar('Formulario incompleto, desea guardarlo para completarlo despues?', document.solicitudNatural);
+      }
+
+
+
+    });
+  });
+
+  $(function () {// agregar la fecha actual a la solicitud
+    $(window).load(function () {
+      var fecha = new Date();
+      var f = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+      document.getElementById("fechaSN1").value = f;
+
+      f = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+      document.getElementById("fechaSN").value = f;
+
+      //se agrega la fecha maxima para la fecha de otorgamiento en experiencia crediticia
+      for (i = 0; i < document.getElementsByName('fechaEC').length; i++) {
+        document.getElementsByName('fechaEC')[i].setAttribute("max", f);
+
+      }
+
+      document.getElementById("fechExS").setAttribute("max", f);
+      document.getElementById("fechExC").setAttribute("max", f);
+
+      //para definir la fecha maxima y garantizar solo mayores de edad
+      var max = (fecha.getFullYear() - 18) + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+
+      //se agrega la fecha maxima a los input de fecha de nacimiento
+      document.getElementById("fechNaS").setAttribute("max", max);
+      document.getElementById("fechNaC").setAttribute("max", max);
+      obtenerRangoNatural("-0")
+
+    });
+
+  });
+
+  
+</script>
+{% endblock %}

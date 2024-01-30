@@ -1,0 +1,261 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Registro Linea de Financiamiento de Crèdito{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}<li><a href="{% url 'listarAl'%}">Listar Linea de Financiamiento</a></li>   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form id="contact" name="contact" action="/ConfiguracionApp/registraral/ " method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden"  id="id" name="id"  value="{{DetalleApp.id}}" >
+                      
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4> Nombre de la Linea de Financiamiento</h4>
+            <input type="text" class="form-text"   id="alternativa" name="alternativa" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Monto Minimo</h4>
+          <input type="text" class="form-text"    id="montominimo" name="montominimo" 
+           onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
+           pattern="^\d*(\.\d{0,2})?$" title="Maximo 2 decimales"  required >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Monto Maximo</h4>
+            <input type="text" class="form-text"   id="montomaximo" name="montomaximo"
+            onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "
+            pattern="^\d*(\.\d{0,2})?$" title="Maximo 2 decimales" required>
+            <span class="bar"></span>
+
+    </div>
+    </div>
+     
+
+  
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Plazo en Años</h4>  
+            <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-text "    id="plazo" name="plazo" onblur="compruebaValidoEntero()" required>
+            <span class="bar"></span>
+          </div> 
+          <div class="col-md-2 col-sm-12 col-xs-12">
+            <input type="text" class="form-text"id="meses" name="meses" onkeypress="return event.charCode>=48 && event.charCode<=57 " disabled  >
+            <span class="bar"></span>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <h4>meses</h4>
+      </div>
+
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Tasa de Interes</h4>
+          <div class="col-md-12 col-sm-9 ">
+              <select class="form-text" id="interes" name="interes" required >
+                  <option value="0">SELECCIONE LA TASA DE INTERES</option>
+                  {% for d in TasaInteres %}
+                  <option value="{{d.id}}">{{d.numerocredito}}-- {{d.interes}}% anual/saldo</option>
+                  {% endfor %} 
+              </select>
+          </div>
+          <span class="bar"></span>
+      </div>
+  </div>
+  </div>
+ <div>
+  <br>
+ </div>
+
+  <div class="form-group">
+    <div class="col-md-12 col-md-offset-2">
+        <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+            style="width:200px; height:40px;">Guradar</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+    </div>
+</div>
+
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+
+{% block js %}<!-- bloque para validaciones de input-->
+<!-- bootstrap-datetimepicker -->    
+<script src="{% static 'TesisApp/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+<script>
+
+
+
+  
+
+
+</script>
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  //this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+
+
+// para poner validaciones 
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ ]*$/i.test(value);
+}, "<h2>Ingrese solo letras </h2>");
+$.validator.addMethod("numeros", function(value, element) {
+    return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numero, punto y coma  </h2>");
+$.validator.addMethod("numero", function(value, element) {
+    return /^[0-9]*$/i.test(value);
+}, "<h2>Ingrese  solo numeros positivos, desde 1 en adelante</h2>");
+//fin de validaciones con ajax
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+     montominimo:{
+      minlength:3,
+      required: true,
+      numeros:true
+    },
+    alternativa:{
+      minlength:4,
+      required: true,
+      letras:true,
+      maxlength:100
+
+    },
+     montomaximo:{
+      minlength:3,
+      required: true,
+      numeros:true
+
+    },
+    plazo:{
+      required: true,
+      numero:true
+
+    }
+  },
+  messages: {
+     montominimo:{
+        required : "<h2>Debe ingresar el monto minimo de credito </h2>",
+        minlength : "<h2>EL nombre debe tener un minimo de 3 numeros</h2>"
+    },
+    alternativa:{
+      minlength:"<h2>Debe tener un minimo de 4 caracteres</h2>",
+      required: "<h2>Debe ingresar el dato</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+     montomaximo:{
+      minlength:"<h2>Debe tener un minimo de 3 caracteres</h2>",
+      required: "<h2>Debe ingresar el monto maximo</h2>"
+
+    },
+    plazo:{
+      required: "<h2>Debe ingresar el dato</h2>",
+
+    }
+  },
+});// fin del form contact 
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+   
+   
+
+    }else{
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'DEBE REGISTRAR DATOS!',
+  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+  imageWidth: 200,
+  imageHeight: 100
+}) 
+    }
+});// fin de btnguardar
+
+
+ 
+
+  
+
+});// fin de la document
+
+function validarEntero(valor){ 
+    //intento convertir a entero. 
+    //si era un entero no le afecta, si no lo era lo intenta convertir 
+    valor = parseInt(valor)
+
+    //Compruebo si es un valor numérico 
+    if (isNaN(valor)) { 
+       //entonces (no es numero) devuelvo el valor cadena vacia 
+       return "" 
+    }else{ 
+       //En caso contrario (Si era un número) devuelvo el valor 
+       return valor 
+    } 
+}
+
+function compruebaValidoEntero(){ 
+   	enteroValidado = validarEntero(document.contact.plazo.value) 
+    //alert(enteroValidado);
+   	if (enteroValidado == ""){ 
+      	//si era la cadena vacía es que no era válido. Lo aviso 
+      	//alert ("Debe escribir numero un entero!") 
+      	//selecciono el texto 
+      	document.contact.plazo.select() 
+      	//coloco otra vez el foco 
+      	document.contact.plazo.focus() 
+   	}else {
+       mul=enteroValidado*12; // se multiplica el año por los meses
+      document.contact.meses.value = mul// se le asigana a meses el valor de mul
+
+    }
+
+      	
+} 
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+
+{% block titulo %}Grafica de Solicitudes por Estado de Solicitud{% endblock titulo %}<!-- /el titulo del formulario-->
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form method="post" action="../../../GraficasApp/graficaASolic">
+    {% csrf_token %}
+     
+    <div class="row">
+        <div class="col-md-5 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Selecciona una agencia:</h4>
+            <select class="form-text"  id="agencia" name="agencia">
+            <option selected disabled >Seleccione</option>
+            {% for agencia in agencias %}
+                <option value="{{ agencia.id }}">{{ agencia.nombre }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    </div>
+    <div class="col-md-5 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text" style="margin-top:5px !important;">
+            <h4>Selecciona un tipo de solicitud:</h4>
+            <select class="form-text" id="tipo_sol" name="tipo_sol">
+                <option selected disabled>Seleccione</option>
+                    <option value="4">Aprobadas</option>
+                    <option value="5">Observadas</option>
+                    <option value="6">Denegadas</option>
+                    <option value="7">Vencidas</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:20px !important;">
+        <button type="submit" class="btn btn-success" style="width:200px; height:40px;">Generar Gráfico</button>
+    </div> 
+    </div>    
+    </div> 
+</form>
+
+<div id="grafico-container">
+    <canvas id="grafAgenciaSolic" width="100" height="50"></canvas>
+</div>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+    var densityCanvas = document.getElementById("grafAgenciaSolic");
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 20;
+
+// Datos que vienen desde la vista de Django
+var solicitudes_por_mes = JSON.parse('{{ solicitudes_por_mes|safe }}');
+
+console.log(solicitudes_por_mes);
+
+var densityData = {
+    labels: [], // Etiquetas para el eje X (por ejemplo, meses)
+    datasets: [
+        {
+            label: 'Número de Solicitudes Por Mes',
+            data: [], // Datos para el eje Y (por ejemplo, cantidad de solicitudes)
+            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+            borderColor: 'rgba(255, 99, 132, 0.6)',
+            borderWidth: 1
+        }
+    ]
+};
+
+// Arreglo de nombres de todos los meses
+var nombresDeMeses = [
+    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+];
+
+// Arreglo de datos de cantidad para todos los meses
+var datosPorMes = nombresDeMeses.map(function(nombreDeMes) {
+    var solicitudPorMes = solicitudes_por_mes.find(function(item) {
+        return nombreDeMes === nombresDeMeses[item.mes - 1];
+        
+    });
+    
+    return solicitudPorMes ? solicitudPorMes.cantidad : 0;
+});
+
+
+console.log(densityData.labels)
+
+// Llena las etiquetas y datos en base a los datos obtenidos
+densityData.labels = nombresDeMeses;
+densityData.datasets[0].data = datosPorMes;
+
+var barChart = new Chart(densityCanvas, {
+    type: 'bar',
+    data: densityData,
+    options: {
+        scales: {
+            yAxes: [{
+                 ticks: {
+                    beginAtZero: true,                     
+                    stepSize: 1,
+                    maxTicksLimit: 5,
+                  }
+            }],
+        }
+    }
+});
+
+});
+
+</script>
+{% endblock %}

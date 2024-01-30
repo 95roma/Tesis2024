@@ -1,0 +1,64 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Listado de Salarios{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Lista de salarios {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+
+<table id="example" class="table table-striped table-bordered">
+  <thead>
+    <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+      <th>#</th>
+      <th>Tipo</th>
+      <th>Salario Maximo</th>
+      <th>Salario Minimo</th>
+      <th>Estado</th>
+      <th> Opción </th>
+      <th> Opción </th>
+    </tr>
+  </thead>
+
+
+  <tbody style="color: #27575c;">
+    {% for s in salarios %}
+    <tr>
+      <td>{{s.id}} </td>
+      <td>{{s.tiposalario}}</td>
+      <td>{{s.salariomaximo}}</td>
+      <td>{{s.salariominimo}}</td>
+      <td>{{s.estado}}</td>
+
+      {% if s.estado == "activo" %}
+      <td><a href="editarSalario/{{s.id}}" class="btn btn-info">Editar</a></td>
+      <td><a href="darBaja/{{s.id}}" class="btn btn-danger">Dar de Baja</a></td>
+      {% elif s.estado == "inactivo" %}
+      <td><a style="display: none;" class="btn btn-danger"></a></td>
+      <td><a style="display: none;" class="btn btn-danger"></a></td>
+      {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+{% block js %}
+<script>
+  $(document).ready(function () {
+    $('#example').DataTable({
+      responsive: true,
+      language: {
+        url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+      }
+    });
+  });
+
+
+</script>
+
+{% endblock %}
+

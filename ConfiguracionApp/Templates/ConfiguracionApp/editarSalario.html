@@ -1,0 +1,173 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Editar Salario{% endblock titulo %}<!-- /el titulo del formulario-->
+
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<form id="msalario" name="msalario" action="/ConfiguracionApp/modificarSalario/" method="post" autocomplete="off">{% csrf_token %}
+  <div class="row">
+    <input type="hidden" id="ids" name="ids" value="{{s.id}}">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Tipo de Salario</h4>
+            <input type="text" class="form-text" id="tiposalario" name="tiposalario" value="{{s.tiposalario}}"    maxlength="100" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+
+    </div> 
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Salario Minimo</h4>
+            <input type="number" class="form-text" id="salariominimo" name="salariominimo" value="{{s.salariominimo}}"   onkeypress="vSalariom('salariominimo');return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  maxlength="10" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+
+    </div>
+    <div class="row">
+  
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Salario Maximo</h4>
+            <input type="number" class="form-text" id="salariomaximo" name="salariomaximo" value="{{s.salariomaximo}}"   onchange="vSalariomax()" maxlength="10" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+      </div>
+    <BR><BR>
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success"
+                style="width:200px; height:40px;">Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="reset" class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    $(document).ready(function(){
+
+$.validator.addMethod("numero", function(value, element) {
+return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+$.validator.addMethod("letrasn", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+}, "<h2>Ingrese un dato valido ..</h2>");
+
+$("#salario").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  
+  rules: {
+    tiposalario:{
+      minlength:3,
+      required: true,
+      letrasn:true,
+      maxlength:100
+    },
+    salariomaximo:{
+      minlength:3,
+      required: true,
+      numero:true,
+      maxlength:10
+    },
+    salariominimo:{
+      minlength:2,
+      required: true,
+      numero:true,
+      maxlength:10
+    },
+  
+  },
+  messages: {
+    tiposalario:{
+        required : "<h2>Debe ingresar el tipo de salario</h2>",
+        minlength : "<h2>EL tipo de salario debe tener un minimo de 3 digitos</h2>",
+        maxlength : "<h2>EL tipo de salario debe tener un maximo de 100 digitos</h2>"
+    },
+    salariomaximo:{
+        required : "<h2>Debe ingresar el salario maximo</h2>",
+        minlength : "<h2>EL salario debe tener un minimo de 3 digitos</h2>",
+        maxlength : "<h2>EL salario debe tener un maximo de 10 digitos</h2>"
+    },
+    salariominimo:{
+        required : "<h2>Debe ingresar el salario minimo</h2>",
+        minlength : "<h2>EL salario debe tener un minimo de 2 digitos</h2>",
+        maxlength : "<h2>EL salario debe tener un maximo de 10 digitos</h2>"
+    },
+  
+  }
+});
+
+//$("#contact").submit(function(e) {
+//    if (!$(this).valid()) {
+//      e.preventDefault(); // Detiene el envío del formulario
+//      alert("Por favor, complete los campos requeridos correctamente.");
+//    }
+//  });
+
+$("#btnguardar").click(function(){
+if($("#salario").valid()){
+
+}else{
+  alertE("Debe Registrar Datos Validos!"); 
+  return false;
+}
+});// fin de btnguardar
+
+
+});
+
+
+
+function vSalariom(salario) {
+       //var val = document.getElementById(salario).value 
+       var primer = document.getElementById(salario).value 
+      
+    if (primer != '0' ) 
+       return 
+        else{
+        alertE('Ingrese un valor valido');
+        document.getElementById(salario).value="";
+    }
+  }
+
+  function vSalariomax() {
+    var smin=parseFloat( document.getElementById("salariominimo").value) ;
+    var smax=parseFloat( document.getElementById("salariomaximo").value );
+      
+    if (smin > smax ) {
+        alertE('El salario Minimo debe ser menor que el Maximo');
+        document.getElementById("salariominimo").value="";
+        document.getElementById("salariomaximo").value="";
+    }
+  }
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,293 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Registro Detalle de la Solicitud{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Municipio  {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form id="contact" name="contact" action="../registrarDatosS/" method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden"  id="id" name="id"  value="{{DetalleApp.id}}" >
+  <input type="hidden"  id="ids" name="ids"  value="{{ids.id}}" >
+  <input type="hidden"  id="montomaximo" name="montomaximo"  value="{{Alternativa.montomaximo}}" >
+  <input type="hidden"  id="montominimo" name="montominimo"  value="{{Alternativa.montominimo}}" >
+  <input type="hidden"  id="plazomese" name="plazomese"  value="{{Alternativa.plazomese}}">
+                      
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Monto a Solicitar</h4>
+            <input type="text" class="form-text"   id="monto" name="monto" onblur="comprueba('monto');return event.charCode>=48 && event.charCode<=57 " required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Plazo Solicitado</h4>
+          <div class="col-md-6 col-sm-12 ">
+            <select class="form-text" id="meses" name="meses"  required >
+              <option value="0">0 meses </option>
+              <option value="1">1 mes</option>
+              <option value="2">2 meses</option>
+              <option value="3">3 meses</option>
+              <option value="4">4 meses</option>
+              <option value="5">5 meses</option>
+              <option value="6">6 mese</option>
+              <option value="7">7 mes</option>
+              <option value="8">8 meses</option>
+              <option value="9">9 meses</option>
+              <option value="10">10 meses</option>
+              <option value="11">11 meses</option>
+            </select>
+        </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <input type="text" class="form-text"     id="plazo" name="plazo" onblur="sumar('plazo');return event.charCode>=48 && event.charCode<=57 " placeholder="escribe años" required>
+            <span class="bar"></span>
+        </div>
+         
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Cuota Proyectada</h4>
+            <input type="text" class="form-text" value="{{Capacidadpagof.cuota}}"  id="cuota" name="cuota" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Forma de Pago</h4>
+          <select class="form-text" id="formaPago" name="formaPago" required>
+            <option value="Ventanilla">Ventanilla</option>
+            <option value="OPI">OPI</option>
+          </select>
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Fecha que solicita pagar</h4>
+            
+            <input type="text" class="form-text "    id="fechaPago" name="fechaPago" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+     
+  </div>
+ 
+
+  <div class="form-group">
+    <div class="col-md-12 col-md-offset-2">
+        <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+            style="width:200px; height:40px;">Siguente</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+    </div>
+</div>
+
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+
+{% block js %}<!-- bloque para validaciones de input-->
+<!-- bootstrap-datetimepicker -->    
+<script src="{% static 'TesisApp/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+<script>
+
+
+
+  
+
+
+</script>
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  //this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+
+
+// para poner validaciones 
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ ]*$/i.test(value);
+}, "<h2>Ingrese solo letras </h2>");
+$.validator.addMethod("letrasN", function(value, element) {
+    return /^[ A-Za-záéíóúüñ 0-9 ]*$/i.test(value);
+}, "<h2>Ingrese solo letras y numeros </h2>");
+$.validator.addMethod("Numeros", function(value, element) {
+    return /^[  0-9 ]*$/i.test(value);
+}, "<h2>Ingrese solo numeros </h2>");
+//fin de validaciones con ajax
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    plazo:{
+      
+      required: true,
+      Numeros:true,
+     
+    },
+    formaPago:{
+     
+      required: true
+      
+    },
+   monto:{
+      minlength:2,
+      required: true,
+      Numeros:true,
+      maxlength:100
+
+    },
+    cuota:{
+      minlength:2,
+      required: true,
+      Numeros:true,
+      maxlength:100
+
+    },
+    fechaPago:{
+      minlength:2,
+      required: true,
+      letrasN:true,
+      maxlength:100
+
+    }
+  },
+  messages: {
+    plazo:{
+        required : "<h2>Debe ingresar el plazo </h2>"
+    
+    },
+    formaPago:{
+        required : "<h2>Debe ingresar la Forma de pago</h2>"
+    },
+
+   monto:{
+      minlength:"<h2>Debe tener un minimo de 2 caracteres</h2>",
+      required: "<h2>Debe ingresar el monto </h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+    cuota:{
+      minlength:"<h2>Debe tener un minimo de 2 caracteres</h2>",
+      required: "<h2>Debe ingresar el cuota con el solicitante</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+    fechaPago:{
+      minlength:"<h2>Debe tener un minimo de 2 caracteres</h2>",
+      required: "<h2>Debe ingresar el dato</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    }
+  },
+});// fin del form contact 
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+   
+   
+
+    }else{
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'DEBE REGISTRAR DATOS!',
+  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+  imageWidth: 200,
+  imageHeight: 100
+}) 
+    }
+});// fin de btnguardar
+
+
+ 
+  
+
+ 
+
+  
+
+});// fin de la document
+
+
+
+
+function comprueba(monto){ 
+  var monto = document.getElementById(monto).value 
+  //alertE(monto);
+  var monmax =document.contact.montomaximo.value //document.getElementById(montomaximo).value
+  //alertE(monmax);
+  var monmi = document.contact.montominimo.value //document.getElementById(montominimo).value
+  var nox=monmax//monto maximo
+  var min=monmi//monto minimo
+  var mon=monto//monto 
+ // alertE(nox);
+  if( mon<min && mon>nox ){
+         alertE('Ingrese un valor valido');
+         document.getElementById(monto).value="";
+        //document.contact.monto.value 
+  }
+        
+         //document.getElementById(monto).value="";    	
+} 
+
+
+function sumar(plazo){ 
+  var plazo = document.getElementById(plazo).value 
+  //
+  var pla=plazo
+  //alertE(pla);
+  var meses =document.contact.meses[document.contact.meses.selectedIndex].value
+ // document.contact.meses.value //document.getElementById(montomaximo).value
+  me=meses
+ // alertE(me);
+  m=parseInt(me)
+  var plazomese=document.contact.plazomese.value
+  var plame=plazomese
+  re=pla*12;
+  suma= re+m;
+  alertE(suma)
+  if(plame<suma){
+    ///alertE('Ingrese un valor valido   '+plame+'   meses');
+         document.getElementById(plazo).value="";
+  }
+
+ 
+          	
+} 
+
+</script>
+{% endblock %}

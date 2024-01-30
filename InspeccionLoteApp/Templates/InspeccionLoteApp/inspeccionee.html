@@ -1,0 +1,106 @@
+
+  <div>            <!-- Datos de declaracion de salud -->
+
+    <div class="x_title">
+        <div class="row">
+          <h2 style="text-align: center;">Riesgos </h2>
+        </div>
+    </div>   
+        <div>
+          
+           <table class="table" style="width: 40%; white-space: nowrap" >
+             <thead>
+               <tr>
+                <th width="20%"></th>
+                 <th width="15%">Espacios </th>
+                 <th width="25%">Existe</th>
+               </tr>
+             </thead>
+             <tbody id="lenfermedad" style="color: #27575c;">
+              {% for se in listase %}
+               <tr>
+                 <td>
+                  <input type="hidden" id="idenf" name="idenf" value=" {{se.id}}">
+                  </td>
+                  <td>
+                    <input type="hidden" class="form-text" id="empleadoen" name="empleadoen" value="{{se.nombre}}"  >
+                    {{se.nombre}}
+                    </td>
+              
+                 <td> 
+                  Si
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat"  name="existeee" value="Si" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                  No
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="existeee" value="No" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>                
+                </td>
+           
+
+                
+                
+               </tr>
+               {% endfor %}
+             </tbody>
+         
+           </table>
+         </div>
+         <input type="hidden" id="passDS" name="passDS" value="0">
+        </div>
+ 
+      <div>    
+      <div class="x_title">
+        <div class="row">
+          <h6 class="">ACTIVIDAD ECONÓMICA(PARA PERSONA NATURAL) </h6>
+        </div>
+      </div>
+      <span class="section"></span>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Distancia a Taludes(m)</h4>
+            <input type="text" class="form-text" id="empleadoen" name="empleadoen"  >
+            <span class="bar"></span>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Distancia a Rios Cercanos(m)</h4>
+            <input type="text" class="form-text" id="profecionind" name="profecionind"  >
+            <span class="bar"></span>
+          </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Distancia a Laderas Cercanas(m)</h4>
+              <input type="text" class="form-text" id="conocimientoen" name="conocimientoen"  >
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Distancia a Torres o Antenas(m) </h4>
+              <input type="text" class="form-text" id="empresarioen" name="empresarioen"  >
+              <span class="bar"></span>
+            </div>
+          </div>
+          </div>
+
+          <input type="hidden" id="passGN" name="passGN" value="0">
+      </div>
+      
+      
+      
+      
+
+ 
+
+
+
+

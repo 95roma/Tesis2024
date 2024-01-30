@@ -1,0 +1,84 @@
+
+<div>
+ 
+    <input type="hidden" id="iddg" name="iddg" value="{{s.id}}">
+    <div class="x_title">
+      <div class="row">
+        <h2 style="text-align: center;">{{sol.0.perfil.nombres}} {{sol.0.perfil.apellidos}} </h2>
+      </div><br>
+      <div class="row">
+        <h4 class="">Datos del Negocio </h4>
+      </div>
+    </div>
+  
+    <div class="row">    
+      <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Nombre del Negocio</h4>
+          <input type="text" class="form-text" id="nombreng" name="nombreng"   >
+          <span class="bar"></span>
+        </div>
+    </div>
+   <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Describa los productos y/o servicios que comercializa</h4>
+      <input type="text" class="form-text" id="descps" name="descps" >  
+      <span class="bar"></span>
+    </div>
+  </div> 
+  </div>
+  
+  <div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Dirección del Negocio</h4>
+    <input type="text" class="form-text" id="direccionneg" name="direccionneg"  >
+    <span class="bar"></span>
+    </div>
+  </div>
+    <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:0px !important;">
+        <h4>Fecha de inicio de actividades</h4>
+        <input type="date" class="form-text" id="fechaia" name="fechaia" onchange="validarFechan(this)"    >
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div> 
+  <div class="row">  
+    <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Rango de ingresos mensuales del negocio</h4>
+          <input type="text" class="form-text"  id="rangoimn" name="rangoimn" >
+          <span class="bar"></span>
+        </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:0px !important;">
+            <label>Otros Ingresos:</label> &nbsp;&nbsp;
+            Si
+            <div class="iradio_flat-green ">
+              <input type="radio" name="otrosidn" id="otrosidn" value="Si" onchange="habdesOn(this.value)" required>
+              <ins class="iCheck-helper"></ins>
+            </div>&nbsp;&nbsp;
+            No
+            <div class="iradio_flat-green ">
+              <input type="radio" name="otrosidn" id="otrosidn" value="No" checked onchange="habdesOn(this.value)" required>
+              <ins class="iCheck-helper"></ins>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class="row">  
+  <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Procedencia</h4>
+    <input type="text" class="form-text"  id="procedenciadn" name="procedenciadn" value="" disabled >
+    <span class="bar"></span>
+  </div>
+  </div>
+  </div>
+  <input type="hidden" id="passDN" name="passDN" value="0">
+  </div>
+  
+  
+  

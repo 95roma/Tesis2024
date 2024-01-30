@@ -1,0 +1,104 @@
+<div>            <!-- Datos de declaracion de salud -->
+
+  <div class="x_title">
+      <div class="row">
+        <h2 style="text-align: center;">Riesgos </h2>
+      </div>
+  </div>   
+     <div class="row">
+        
+         <table class="table" style="width: 40%; white-space: nowrap" >
+           <thead>
+             <tr>
+              <th width="20%"></th>
+               <th width="15%">Riesgos </th>
+               <th width="25%">Existe</th>
+             </tr>
+           </thead>
+           <tbody id="tbriesgosm" style="color: #27575c;">
+            {% for r in listar %}
+             <tr>
+               <td>
+                <input type="hidden" id="idenf" name="idenf" value=" {{r.id}}">
+                </td>
+                <td>
+                  <input type="hidden" class="form-text" id="riesgm" name="riesgm" value="{{r.nombre}}"  >
+                  {{r.nombre}}
+                  </td>
+            
+               <td> 
+                Si
+                <div class="iradio_flat-green ">
+                  <input type="radio" class="flat"  name="existerm-{{r.id}}" id="existerm" value="Si" required>
+                  <ins class="iCheck-helper"></ins>
+                </div>&nbsp;
+                No
+                <div class="iradio_flat-green ">
+                  <input type="radio" class="flat" name="existerm-{{r.id}}" id="existerm" value="No" checked required>
+                  <ins class="iCheck-helper"></ins>
+                </div>                
+              </td>
+              
+             </tr>
+             {% endfor %}
+           </tbody>
+       
+         </table>
+
+         <table class="table" style="width: 40%; white-space: nowrap">
+          <thead>
+            <tr>
+              <th width="15%">Distancia </th>
+              <th width="25%">Metros</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Distancia a Taludes(m)</th>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text" id="distanciatlm" name="distanciatlm" value="No" onfocus="limpiarValorN(this)" maxlength="15" minlength="1" 
+                    required>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>Distancia a Rios Cercanos(m)</th>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text" id="distanciarcm" name="distanciarcm" value="No" onfocus="limpiarValorN(this)" maxlength="15" minlength="1" 
+                    required>
+                </div>
+              </td>
+             
+            </tr>
+            <tr>
+              <th>Distancia a Laderas Cercanas(m)</th>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text" id="distancialcm" name="distancialcm" value="No" onfocus="limpiarValorN(this)" maxlength="15" minlength="1" 
+                    required>
+                </div>
+              </td>
+        
+            </tr>
+            <tr>
+              <th>Distancia a Torres o Antenas(m)</th>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text" id="distanciatam" name="distanciatam" value="No" onfocus="limpiarValorN(this)" maxlength="15" minlength="1" 
+                    required>
+                </div>
+              </td>
+             
+            </tr>
+          </tbody>
+        </table>
+
+       </div>
+       <input type="hidden" id="passDS" name="passDS" value="0">
+      </div>

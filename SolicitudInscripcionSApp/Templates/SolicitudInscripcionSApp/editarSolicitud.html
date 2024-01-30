@@ -1,0 +1,526 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Editar Solicitud de inscripcion para seguro {% endblock titulo %}<!-- /el titulo del formulario-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<!-- /abrir el bloque de contenido-->
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="done" isdone="1" rel="2">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Declaración de salud</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="3">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Declaración de deformidades o defectos</small> </span>
+      </a>
+    </li>
+
+     
+  </ul>
+  <div class="stepContainer" style="overflow: hidden !important;">
+    <form style="overflow: hidden !important;" id="msolicitudIs" name="msolicitudIs"
+    action="../../../SolicitudInscripcionSApp/modificarSIS/" method="post" autocomplete="off">{% csrf_token %}
+    <input type="hidden" id="estadoM" name="estadoM" value="Incompleto">
+    <div id="step-1" class="content" style="display: block;">
+      <input type="hidden" id="idsi" name="idsi" value="{{si.id}}">
+      <div class="x_title">
+        <div class="row">
+          <h2 style="text-align: center;">SOLICITUD DE INSCRIPCIÓN PARA SEGURO COLECTIVO DE VIDA TEMPORAL DECRECIENTE  </h2>
+        </div>
+       
+      </div>
+    <div class="row"><!--primer row  del formulario -->
+      <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre del asegurado</h4>
+          <input type="text" class="form-text" id="nombreaseg" name="nombreaseg" value="{{s.perfil.nombres}} {{s.perfil.apellidos}} " disabled required>
+          <span class="bar"></span>
+        </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Montos asegurados anteriores</h4>
+          <input type="text" class="form-text" id="montoaa" name="montoaa" value="{{si.montoaa}}" oninput="calculartotal()"  onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+          <span class="bar"></span>
+        </div>
+    </div>
+  </div>
+    <div class="row">   
+     <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nuevo monto a asegurar</h4>
+          <input type="text" class="form-text" id="nuevom" name="nuevom" value="{{si.nuevoma}}"   oninput="calculartotal()"  required>
+          <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Monto total asegurado</h4>
+        <input type="text" class="form-text" id="montot" name="montot" value="{{si.montot}}" disabled required>
+        <span class="bar"></span>
+      </div>
+  </div>
+</div>
+<div class="row">   
+    <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+       <div class="form-group form-animate-text " style="margin-top:5px !important;">
+           <h4>Plazo años</h4>
+         <input type="text" class="form-text" id="plazo" name="plazo" value="{{si.plazo}}" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+         
+         <span class="bar"></span>
+       </div>
+   </div>
+   <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+     <div class="form-group form-animate-text " style="margin-top:5px !important;">
+       <h4>Garantia</h4>
+       <input type="text" class="form-text" id="garantia" name="garantia" value="{{si.garantia}}"  required>
+       <span class="bar"></span>
+     </div>
+ </div>
+</div>
+<div class="x_title">
+ 
+  <div class="row">
+    <h5 class="">En relación con la presente solicitud, manifiesto mi conformidad para ser inscrito como asegurado y para ese fin proporciono los siguientes datos </h5>
+  </div>
+</div>
+
+     <div class="row">      
+      <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre completo</h4>
+          <input type="text" class="form-text" id="nombrecomp" name="nombrecomp" value="{{s.perfil.nombres}} {{s.perfil.apellidos}}" disabled  required>
+          <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Fecha de nacimiento</h4>
+        <input type="text" class="form-text" id="fechana" name="fechana" value="{{s.perfil.fechan|date:'d-m-Y'}}" disabled  required>
+        <span class="bar"></span>
+      </div>
+  </div>
+  </div>
+  <div class="row">      
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Estado civil</h4>
+        <input type="text" class="form-text" id="estadociv" name="estadociv" value="{{dp.estadocivilC}} " disabled  required>
+        <span class="bar"></span>
+      </div>
+  </div>
+<div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+  <h4>Sexo</h4> 
+  
+  <label> M: <input type="radio" name="sexo" id="idm" value="Masculino" required /></label> 
+ 
+  <label> F: <input type="radio" name="sexo" id="idf" value="Femenino" required/></label>
+  
+  <span class="bar"></span>
+</div>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Estatura Mts</h4>
+      <input type="text" class="form-text" id="estatura" name="estatura" value="{{si.estatura}}" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+      <span class="bar"></span>
+    </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Peso libras</h4>
+      <input type="text" class="form-text" id="peso" name="peso" value="{{si.peso}}" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+      <span class="bar"></span>
+    </div>
+  </div>
+</div>
+<div class="row">
+<div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Ocupación actual</h4>
+    <input type="text" class="form-text" id="ocupaciona" name="ocupaciona" value="{{s.perfil.idocu.ocupacion}}" disabled  required>
+    <span class="bar"></span>
+  </div>
+</div>
+<div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>No. DUI</h4>
+    <input type="text" class="form-text" id="ndui" name="ndui"  value="{{s.perfil.dui}}" onkeypress=" vadui('ndui');return event.charCode>=48 && event.charCode<=57 " maxlength="10" minlength="10"  disabled  required>
+    <span class="bar"></span>
+  </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Lugar de trabajo</h4>
+        <input type="text" class="form-text" id="ltrabajo" name="ltrabajo"  value="{{d.lugarTrabajo}}" disabled  required>
+        <span class="bar"></span>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      {% if si.dbeneficiario == "ASOCIACION HPH EL SALVADOR" %} 
+      <label> <input type="radio" class="flat" name="beneficiario" id="beneficiario" value="ASOCIACION HPH EL SALVADOR" checked required /> Designo como beneficiario irrevocable a ASOCIACION HPH EL SALVADOR hasta por el importe de la deuda contraída con dicha institución </label> 
+      {% else %}
+      <label> <input type="radio" class="flat" name="beneficiario" id="beneficiario" value="ASOCIACION HPH EL SALVADOR"  required /> Designo como beneficiario irrevocable a ASOCIACION HPH EL SALVADOR hasta por el importe de la deuda contraída con dicha institución </label> 
+      {% endif %}
+      <span class="bar"></span>
+    </div>
+    </div>
+</div>
+</div>
+<div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+  {% include "SolicitudInscripcionSApp/editarSolicitudds.html" %}
+</div>
+<div id="step-3" class="content" >
+  {% include "SolicitudInscripcionSApp/editarSolicituddad.html" %}
+</div>
+
+</form>
+</div>
+</div>
+<div class="clearfix"></div>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+     $(document).ready(function(){
+     
+     var auxgenero= "{{dp.generoC|safe}}";
+     //establecer valor del radio sexo
+     if(auxgenero=="Femenino"){
+     document.getElementById("idf").checked = true;
+     }
+     else if(auxgenero=="Masculino"){
+     document.getElementById("idm").checked = true;
+    }
+
+    //recuperar lista  para establecer el check
+    var listEnfermedades = JSON.parse('{{ lista_padecimientos_json|safe }}');
+
+// Itera sobre los elementos de la tabla
+$('#lenfermedadm tr').each(function() {
+  var $row = $(this);
+  var idenfInput = $row.find('input[name="idenf"]');
+  
+  // Compara el valor de idenfInput con los valores de la consulta
+  var idenf = idenfInput.val();
+  var encontrado = listEnfermedades.find(function(item) {
+    return item.idenf == idenf;
+  });
+  
+  // Si se encontró un elemento en la consulta, marca la casilla de verificación
+  if (encontrado) {
+    $row.find('input[type="checkbox"]').prop('checked', true);
+     // Llena los campos de idpadecimiento, fecha, tratamiento y situaciona
+    $row.find('input[id="idpad"]').val(encontrado.id); 
+    $row.find('input[id="fechapad"]').val(encontrado.fecha);
+    $row.find('input[id="tratamientor"]').val(encontrado.tratamiento);
+    $row.find('input[id="situaciona"]').val(encontrado.situacion);
+  }
+});
+
+    
+
+    $("#fin").click(function () {
+      
+      document.getElementById("montot").disabled = false;
+      document.getElementById("passDS").value = '1'
+      document.getElementById("passDO").value = '1'
+            validarDatos()
+        //if (validarDeclaracionD()) {
+          document.msolicitudIs.submit()
+          
+        //}
+      
+      
+    });
+
+
+$('input').on('keypress', function(e){
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+});
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ.]*$/i.test(value);
+}, "<h2>Ingrese sólo letras ..</h2>");
+
+
+$.validator.addMethod("numero", function(value, element) {
+  return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numeros, comas y puntos  </h2>");
+
+function validarDatos() {
+  var table = document.getElementById('lenfermedadm');
+  var inputCheck = table.querySelectorAll('input[type="checkbox"]');
+    
+  for (var i = 0; i < inputCheck.length; i++)
+         {
+            //Usar variable con [i]
+            if (inputCheck[i].checked &&
+        document.getElementsByName('padec')[i].value != "" &&
+        document.getElementsByName('fechapad')[i].value != "" &&
+        document.getElementsByName('tratamientor')[i].value != "" &&
+        document.getElementsByName('situaciona')[i].value != "" 
+            ) 
+            {
+            // alert(document.getElementsByName('padec')[i].value) 
+              return 1;
+              
+
+  }else{
+    return 0;
+  }
+
+  }
+}
+
+  function validarDeclaracionD() {
+    if (document.getElementById("tiened").value != "" &&
+      document.getElementById("fumacp").value != "" &&   
+      document.getElementById("ibebidas").value != "" &&
+      document.getElementById("tratamientomd").value != "" && 
+      document.getElementById("practicaadp").value != ""&&
+      document.getElementById("segurod").value != "" 
+    ) {
+      //document.getElementById("passDO").value = "1"
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+ 
+
+$("#msolicitudIs").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    montoaa :{
+      required: true,
+      numero:true,
+      minlength:1,
+      maxlength:10
+    },
+    nuevom:{  
+      required: true,
+      numero:true,
+      minlength:3,
+      maxlength:10
+    },
+    plazo:{  
+      required: true,
+      numero:true,
+      minlength:1,
+      maxlength:10
+    },
+   
+    garantia:{    
+      required: true,
+      letras:true,
+      minlength:4,
+      maxlength:30
+    },
+
+    estatura:{    
+      required: true,
+      numero:true,
+      minlength:2,
+      maxlength:10
+    },
+    peso:{
+      required:true,
+      numero:true,
+      minlength:2,
+      maxlength:10,
+    },
+  },
+  messages: {
+    montoaa:{
+        required : "<h2>Debe ingresar los montos acegurados anteriormente</h2>",
+        minlength : "<h2>EL montos debe tener un minimo de 1 caracteres</h2>",
+        maxlength : "<h2>EL montos debe tener un maximo de 10 caracteres</h2>"
+    },
+    nuevom:{
+        required : "<h2>Debe ingresar el nuevo monto a asegurar</h2>",
+        minlength : "<h2>EL nuevo monto debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL nuevo monto debe tener un maximo de 10 caracteres</h2>"
+    },
+    plazo:{
+        required : "<h2>Debe ingresar el plazo</h2>",
+        minlength : "<h2>EL plazo debe tener un minimo de 1 caracteres</h2>",
+        maxlength : "<h2>EL plazo debe tener un maximo de 10 caracteres</h2>"
+    },
+    garantia:{
+        required : "<h2>Debe ingresar la garantia</h2>",
+        minlength : "<h2>La garantia debe tener un minimo de 4 caracteres</h2>",
+        maxlength : "<h2>La garantia debe tener un maximo de 30 caracteres</h2>"
+    },
+   
+    estatura:{
+        required : "<h2>Debe ingresar la estatura</h2>",
+        minlength : "<h2>La estatura debe tener un minimo de 2 caracteres</h2>",
+        maxlength : "<h2>La estatura debe tener un maximo de 10 caracteres</h2>"
+    },
+    peso:{
+        required : "<h2>Debe ingresar el peso</h2>",
+        minlength : "<h2>EL peso debe tener un minimo de 2 caracteres</h2>",
+        maxlength : "<h2>EL peso debe tener un maximo de 10 caracteres</h2>"
+    },
+
+
+  }
+});
+});
+
+function calculartotal() {
+    var v1=parseFloat( document.getElementById("montoaa").value) ;
+    var v2=parseFloat( document.getElementById("nuevom").value );
+    var total = 0;
+   
+      total=(v1 + v2);
+      document.getElementById("montot").value = total;
+
+   
+  }
+
+  function validarF(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  function HDdef(value) {
+    if (value == "Si") {
+      document.getElementById("detalled").disabled = false;
+      document.getElementById("detalled").focus();
+    } else if (value == "No") {
+      document.getElementById("detalled").value = "";
+      document.getElementById("detalled").blur();
+      document.getElementById("detalled").disabled = true;
+    }
+  }
+
+  function HDcig(value) {
+    if (value == "Si") {
+      document.getElementById("cuantosd").disabled = false;
+      document.getElementById("cuantosd").focus();
+    } else if (value == "No") {
+      document.getElementById("cuantosd").value = "";
+      document.getElementById("cuantosd").blur();
+      document.getElementById("cuantosd").disabled = true;
+    }
+  }
+  
+  function HDbeb(value) {
+    if (value == "Si") {
+      document.getElementById("frecuanciab").disabled = false;
+      document.getElementById("frecuanciab").focus();
+    } else if (value == "No") {
+      document.getElementById("frecuanciab").value = "";
+      document.getElementById("frecuanciab").blur();
+      document.getElementById("frecuanciab").disabled = true;
+    }
+  }
+  function HDtat(value) {
+    if (value == "Si") {
+      document.getElementById("detalletm").disabled = false;
+      document.getElementById("detalletm").focus();
+    } else if (value == "No") {
+      document.getElementById("detalletm").value = "";
+      document.getElementById("detalletm").blur();
+      document.getElementById("detalletm").disabled = true;
+    }
+  }
+  function HDact(value) {
+    if (value == "Si") {
+      document.getElementById("clase").disabled = false;
+      document.getElementById("clase").focus();
+      document.getElementById("frecuencia").disabled = false;
+    } else if (value == "No") {
+      document.getElementById("clase").value = "";
+      document.getElementById("clase").blur();
+      document.getElementById("clase").disabled = true;
+      document.getElementById("frecuencia").disabled = true;
+    }
+  }
+
+  function vadui(id){
+      var num=  document.getElementById(id).value.length;
+      
+      if(num==8)
+      document.getElementById(id).value=document.getElementById(id).value+'-';
+      
+     
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,997 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Inspección para Lote{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" date-dismiss="alert">&times;</button>
+  <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Información General</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="selected" isdone="1" rel="1">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Construcciones,Infraestructura...</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="2">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Riesgos, Comentarios...</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="2">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Factibilidad Técnica, Descripción del Proyecto</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-5" class="done" isdone="1" rel="2">
+        <span class="step_no">5</span>
+        <span class="step_descr"><small>Descripción de Actividades</small> </span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="stepContainer" style="overflow: hidden !important;">
+    <form id="inspeccionlt" name="inspeccionlt" action="" method="post"
+      autocomplete="off">{% csrf_token %}
+
+      <input type="hidden" id="ids" name="ids" value="{{s.id}}">
+      <input type="hidden" id="idp" name="idp" value="{{s.perfil.id}}">
+      <div id="step-1" class="content" style="display: block;">
+        <div class="x_title">
+          <div class="row">
+            <h2 class="">Información General </h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Agencia</h4>
+              <input type="text" class="form-text" id="agencial" name="agencial" value="{{s.perfil.Agencia.nombre}}" disabled  required>
+              <span class="bar"></span>
+
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Fecha</h4>
+              <input type="date" class="form-text" id="fechal" name="fechal" onchange="validarFecha(this)"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;"> <!--^(1[0-2]|0?[1-9]):[0-5]?[0-9]{0,2} [APap][Mm]$-->
+              <h4>Hora</h4>
+              <input type="text" class="form-text" id="horal" name="horal"  onblur="validarHora()" placeholder="hh:mm am/pm" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Solicitante</h4>
+              <input type="text" class="form-text" id="nombresol" name="nombresol" value="{{s.perfil.nombres}} {{s.perfil.apellidos}} " disabled  required>
+              <span class="bar"></span>
+
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Teléfono</h4>
+              <input type="text" class="form-text " id="telp" name="telp" value="{{s.perfil.telefono}} " disabled  onkeypress=" tel('telp');return event.charCode>=48 && event.charCode<=57 " maxlength="9" minlength="9"  required>
+                <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Teléfono</h4>
+              <input type="text" class="form-text " id="tels" name="tels" onkeypress=" tel('tels');return event.charCode>=48 && event.charCode<=57 " maxlength="9" minlength="9"  >
+                <span class="bar"></span>
+            </div>
+          </div>
+
+        
+        </div>
+        <div class="x_title">
+          <div class="row">
+            <h2 class="">Grupo Familiar </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Tercera edad</h4>
+              <input type="text" class="form-text" id="terceraed" name="terceraed" value="0" pattern="^\d+$"  onkeypress="return event.charCode>=48 && event.charCode<=57  " onfocus="limpiarValor(this)" minlength="1" maxlength="5"    required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Adultos</h4>
+              <input type="text" class="form-text" id="adultos" name="adultos" value="0"  pattern="^\d+$"  onkeypress="return event.charCode>=48 && event.charCode<=57  " onfocus="limpiarValor(this)" minlength="1" maxlength="5"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Niños</h4>
+              <input type="text" class="form-text" id="ninos" name="ninos" value="0"  pattern="^\d+$"  onkeypress="return event.charCode>=48 && event.charCode<=57  " onfocus="limpiarValor(this)" minlength="1" maxlength="5"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Personas con discapacidad</h4>
+              <input type="text" class="form-text" id="personadis" name="personadis" value="0"  pattern="^\d+$"  onkeypress="return event.charCode>=48 && event.charCode<=57  " onfocus="limpiarValor(this)" minlength="1" maxlength="5"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Dirección</h4>
+              <input type="text" class="form-text" id="direccion" name="direccion" value="{{do.direExacta}}"  disabled  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Municipio</h4>
+              <input type="text" class="form-text" id="municipio" name="municipio" value="{{s.perfil.municipio}}" disabled  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Propietario del Inmueble</h4>
+              <input type="text" class="form-text" id="propietarioinm" name="propietarioinm" value="{{do.dueno}}" disabled  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Latitud</h4>
+              <input type="text" class="form-text" id="latitud" name="latitud" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Longitud</h4>
+              <input type="text" class="form-text" id="longitud" name="longitud" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Inmueble</label> &nbsp;&nbsp;
+
+              Rural
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" id="inmueble" name="inmueble" value="Rural" required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;
+              Urbano
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" id="inmueble" name="inmueble" value="Urbano" checked required>
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Existen otras viviendas </label> &nbsp;&nbsp;
+
+              Si
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" id="exotrav" name="exotrav" value="Si" required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;
+              No
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" id="exotrav" name="exotrav" value="No" checked required>
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Terreno agricola</label> &nbsp;&nbsp;
+
+              Si
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" id="terrenoagric" name="terrenoagric" value="Si" required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;
+              No
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" id="terrenoagric" name="terrenoagric" value="No" checked required>
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+        </div>
+        <BR>
+        <div class="x_title">
+          <div class="row">
+            <h2 class="">Dimensiones disponibles para construir vivienda </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Anchó (M)</h4>
+              <input type="text" class="form-text" id="anchocv" name="anchocv" oninput="calcularAreaCV();" pattern="^\d*(\.\d{0,1})?$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Largo (M)</h4>
+              <input type="text" class="form-text" id="largocv" name="largocv" oninput="calcularAreaCV();" pattern="^\d*(\.\d{0,1})?$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Área (M cuadrados)</h4>
+              <input type="text" class="form-text" id="areacv" name="areacv" disabled required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="x_title">
+          <div class="row">
+            <h2 class="">Dimensiones disponibles para amplificaciones futuras </h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Anchó (M)</h4>
+              <input type="text" class="form-text" oninput="calcularAreaAF()" id="anchoaf" name="anchoaf" pattern="^\d*(\.\d{0,1})?$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Largo (M)</h4>
+              <input type="text" class="form-text" oninput="calcularAreaAF()" id="largoaf" name="largoaf" pattern="^\d*(\.\d{0,1})?$" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Área (M cuadrados)</h4>
+              <input type="text" class="form-text" id="areaaf" name="areaaf" disabled required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+        {% include "InspeccionLoteApp/inspeccioncis.html" %}
+      </div>
+      <div id="step-3" class="content" style="display: none; overflow: hidden !important;">
+        {% include "InspeccionLoteApp/inspeccionrc.html" %}
+      </div>
+      <div id="step-4" class="content" style="display: none; overflow: hidden !important;">
+        {% include "InspeccionLoteApp/inspeccionft.html" %}
+      </div>
+      <div id="step-5" class="content" style="display: none; overflow: hidden !important;">
+        {% include "InspeccionLoteApp/inspecciondar.html" %}
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+ 
+ $(document).ready(function () {
+   //agregar fecha de hoy al campo fecha
+    let fecha = new Date();
+    let ff = ""
+    if ((fecha.getMonth()) >= 9) {
+      ff = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+    } else {
+      ff = fecha.getFullYear() + "-0" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+    }
+    document.getElementById("fechal").value = ff;
+
+    
+
+
+$("#fin").click(function () {
+
+  var arrayLif=[];
+  let ids = document.getElementById("ids").value || "";
+  let fechal = document.getElementById("fechal").value || "";
+  let horal = document.getElementById("horal").value || "";
+  let telp = document.getElementById("telp").value || "";
+  let tels = document.getElementById("tels").value || "";
+  let terceraed = document.getElementById("terceraed").value || "";
+  let adultos = document.getElementById("adultos").value || "";
+  let ninos = document.getElementById("ninos").value || "";
+  let personadis = document.getElementById("personadis").value || "";
+  let propietarioinm = document.getElementById("propietarioinm").value || "";
+  let latitud = document.getElementById("latitud").value || "";
+  let longitud = document.getElementById("longitud").value || "";
+  let inmueble = $('input[name="inmueble"]:checked').val() || "";
+  let exotrav = $('input[name="exotrav"]:checked').val() || "";
+  let terrenoagric = $('input[name="terrenoagric"]:checked').val() || "";
+  let anchocv = document.getElementById("anchocv").value || "";
+  let largocv = document.getElementById("largocv").value || "";
+  let areacv = document.getElementById("areacv").value || "";
+  let anchoaf = document.getElementById("anchoaf").value || "";
+  let largoaf = document.getElementById("largoaf").value || "";
+  let areaaf = document.getElementById("areaaf").value || "";
+
+   
+    var infg= {'ids':ids,'fechal':fechal,'horal':horal,'telp':telp,'tels':tels,'terceraed':terceraed,'adultos':adultos,'ninos':ninos,'personadis':personadis,'propietarioinm':propietarioinm,'latitud':latitud,'longitud':longitud,'inmueble':inmueble,'exotrav':exotrav,'terrenoagric':terrenoagric,'anchocv':anchocv,'largocv':largocv,'areacv':areacv,'anchoaf':anchoaf,'largoaf':largoaf,'areaaf':areaaf} 
+    arrayLif.push(infg);
+    var jsonArrayif = JSON.stringify(arrayLif)
+    
+    // para tabla  construcciones
+
+    var arrayList=[];
+    var table = document.getElementById('tbconstruccion');
+    var lrexisteld = table.querySelectorAll('#existeld');
+    
+
+    for (var i = 0; i < lrexisteld.length; i++) {
+      //Usar variable con [i]  && lrexisteld[i].value=="Si"
+      
+      if (lrexisteld[i].checked ) {
+        let datos;
+        datos = lrexisteld[i].name;
+        idc=datos.replace("existeld-","")
+        //svalor=lrexisteld[i].value;
+        console.log("id: " + idc+" valor: " +lrexisteld[i].value );
+        var vdatos = {"id":idc,"valor": lrexisteld[i].value }
+   
+        arrayList.push(vdatos);
+      } 
+    }
+    var jsonArray = JSON.stringify(arrayList)   
+    console.log("jsonArray 3",arrayList )
+  
+  // para tabla infraestructura
+    var arrayListbif=[];
+    var tableif = document.getElementById('tbinfraestructura');
+    var lrexistelt = tableif.querySelectorAll('#existelt');
+    
+
+    for (var i = 0; i < lrexistelt.length; i++) {
+      //Usar variable con [i]  && lrexisteld[i].value=="Si"
+      
+      if (lrexistelt[i].checked ) {
+        let datosi;
+        datosi = lrexistelt[i].name;
+        idc=datosi.replace("existelt-","")
+
+        console.log("id: " + idc+" valor: " +lrexistelt[i].value );
+        var vdatosif = {"idi":idc,"valori": lrexistelt[i].value }
+   
+        arrayListbif.push(vdatosif);
+      } 
+    }
+    var jsonArraytbif = JSON.stringify(arrayListbif)
+    console.log("jsonArray 4",jsonArraytbif )
+
+    // para tabla saneamiento
+
+    var arrayListbs=[];
+    var tablesa = document.getElementById('tbsaneamiento');
+    var lrexistelc = tablesa.querySelectorAll('#existelc');
+    
+
+    for (var i = 0; i < lrexistelc.length; i++) {
+      //Usar variable con [i]  && lrexisteld[i].value=="Si"
+      
+      if (lrexistelc[i].checked ) {
+        let datossn;
+        datossn = lrexistelc[i].name;
+        idc=datossn.replace("existelc-","")
+
+        console.log("id: " + idc+" valor: " +lrexistelc[i].value );
+        var vdatossn = {"idi":idc,"valori": lrexistelc[i].value }
+   
+        arrayListbs.push(vdatossn);
+      } 
+    }
+    var jsonArraytbsn = JSON.stringify(arrayListbs)
+    console.log("jsonArray 5",jsonArraytbsn )
+
+    
+     // para tabla servicios basicos
+
+    var arrayListbsb=[];
+    var tablesb = document.getElementById('tbserviciosbas');
+    var lrexistesb = tablesb.querySelectorAll('#existecn');
+    
+
+    for (var i = 0; i < lrexistesb.length; i++) {
+      //Usar variable con [i]  && lrexisteld[i].value=="Si"
+      
+      if (lrexistesb[i].checked ) {
+        let datossb;
+        datossb = lrexistesb[i].name;
+        idc=datossb.replace("existecn-","")
+        var vdatossb = {"idb":idc,"valorb": lrexistesb[i].value }
+   
+        arrayListbsb.push(vdatossb);
+      } 
+    }
+    var jsonArraytbsb = JSON.stringify(arrayListbsb)
+    console.log("jsonArray 6",jsonArraytbsb )
+
+    
+    // para tabla riesgos
+    var arrayListbr=[];
+    var tabler = document.getElementById('tbriesgos');
+    var lrexister = tabler.querySelectorAll('#existese');   
+
+    for (var i = 0; i < lrexister.length; i++) {
+      
+      if (lrexister[i].checked ) {
+        let datosr;
+        datosr = lrexister[i].name;
+        idc=datosr.replace("existese-","")
+        var vdatosr = {"idr":idc,"valorr": lrexister[i].value }
+   
+        arrayListbr.push(vdatosr);
+      } 
+    }
+    var jsonArraytbr = JSON.stringify(arrayListbr)
+    console.log("jsonArray 7",jsonArraytbr )
+
+    // para distancias de riesgos
+    var arrayLdr=[];
+    let distanciatl=document.getElementById("distanciatl").value 
+    let distanciarc=document.getElementById("distanciarc").value
+    let distancialc=document.getElementById("distancialc").value
+    let distanciata=document.getElementById("distanciata").value 
+
+    var infdr= {'distanciatl':distanciatl,'distanciarc':distanciarc,'distancialc':distancialc,'distanciata':distanciata} 
+    arrayLdr.push(infdr);
+    var jsonArraydr = JSON.stringify(arrayLdr)
+    console.log("jsonArray 8",jsonArraydr )
+
+    // para comentarios y observaciones
+    var arrayLco=[];
+    let comentariosil=document.getElementById("comentariosil").value 
+    let observacionesil=document.getElementById("observacionesil").value
+
+    var infco= {'comentariosil':comentariosil,'observacionesil':observacionesil} 
+    arrayLco.push(infco);
+    var jsonArrayco = JSON.stringify(arrayLco)
+    console.log("jsonArray 9",jsonArrayco )
+
+    // para vias de acceso
+    
+    var arrayLvia=[];
+    let tipovia=$('input[name="tipovia"]:checked').val(); 
+
+    var infv= {'tipovia':tipovia} 
+    arrayLvia.push(infv);
+    var jsonArrayv = JSON.stringify(arrayLvia)
+    console.log("jsonArray 9",jsonArrayv )
+
+     // para factibilidad tecnica
+    
+    var arrayLft=[];
+    let factp=$('input[name="factp"]:checked').val(); 
+
+    var infft= {'factp':factp} 
+    arrayLft.push(infft);
+    var jsonArrayft = JSON.stringify(arrayLft)
+    console.log("jsonArray 9",jsonArrayft )
+
+    // para descripcion del proyecto y actividades bajo la responsabilidad del futuro propietario
+    var arrayLdp=[];
+    let modelov=document.getElementById("modelov").value 
+    let solucions=document.getElementById("solucions").value
+    let obrasa=document.getElementById("obrasa").value 
+    let obst=document.getElementById("obst").value
+    let descripciona=document.getElementById("descripciona").value 
+    
+
+    var infdp= {'modelov':modelov,'solucions':solucions,'obrasa':obrasa,'obst':obst,'descripciona':descripciona} 
+    arrayLdp.push(infdp);
+    var jsonArraydp = JSON.stringify(arrayLdp)
+    console.log("jsonArray 9",jsonArraydp )
+
+    // para responsabilidades del solicitante
+    
+    var arrayLrs=[];
+    let mojonesl=$('input[name="mojonesl"]:checked').val(); 
+    let linderosl=$('input[name="linderosl"]:checked').val(); 
+    let resguardom=$('input[name="resguardom"]:checked').val(); 
+    let auxiliarc=$('input[name="auxiliarc"]:checked').val(); 
+    let aguap=$('input[name="aguap"]:checked').val(); 
+    let energiae=$('input[name="energiae"]:checked').val(); 
+
+    var infrs= {'mojonesl':mojonesl,'linderosl':linderosl,'resguardom':resguardom,'auxiliarc':auxiliarc,'aguap':aguap,'energiae':energiae} 
+    arrayLrs.push(infrs);
+    var jsonArrayrs = JSON.stringify(arrayLrs)
+    console.log("jsonArray 9",jsonArrayrs )
+
+    let idperf= document.getElementById("idp").value 
+    var passD = validarD();
+
+  if($("#inspeccionlt").valid() && passD === 1){ 
+
+
+    $.ajax({
+            headers:{'X-CSRFToken': "{{csrf_token}}"},
+            url: "/InspeccionLoteApp/registrarDIL/", 
+            data:{'valoresif':jsonArrayif,'valores': jsonArray,'valorestbif': jsonArraytbif,'valorestbsa': jsonArraytbsn,'valorestbsb': jsonArraytbsb,'valorestbr': jsonArraytbr,'valorestbdr': jsonArraydr ,'valoresco': jsonArrayco,'valoresv': jsonArrayv,'valoresft': jsonArrayft,'valoresdp':  jsonArraydp,'valoresrs':  jsonArrayrs}  , 
+            type:"POST",
+            success:function(r){
+              console.log("success",r)   
+              document.inspeccionlt.submit()
+              window.location.href='../../../ClienteApp/listaClientes/administrarPerfil/'+idperf;
+
+            },
+            error: function(jqXHR,textStatus,error){
+              console.log(error)
+            },
+            complete: function(xhr,status){
+              //window.location.href='/InspeccionLoteApp/listaI/';
+            }
+          })
+
+  }else{
+        alertE("Debe Registrar Datos Validos!");  
+        return false; // Evita el envío del formulario si la validación falla
+      }
+
+
+    });
+
+  });
+
+function validarD() {
+    if (document.getElementById("fechal").value != "" &&
+      document.getElementById("horal").value != "" &&
+      document.getElementById("terceraed").value != "" &&
+      document.getElementById("adultos").value != "" &&
+      document.getElementById("ninos").value != "" &&
+      document.getElementById("personadis").value != "" &&
+      document.getElementById("latitud").value != "" &&
+      document.getElementById("longitud").value != "" &&
+      document.getElementById("anchocv").value != "" &&
+      document.getElementById("largocv").value != "" &&
+      document.getElementById("areacv").value != "" &&
+      document.getElementById("anchoaf").value != "" &&
+      document.getElementById("largoaf").value != "" &&
+      document.getElementById("areaaf").value != "" &&
+      document.getElementById("distanciatl").value != "" &&
+      document.getElementById("distanciarc").value != "" &&
+      document.getElementById("distancialc").value != "" &&
+      document.getElementById("distanciata").value != "" &&
+      document.getElementById("modelov").value != "" 
+      
+    ) {
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+    $.validator.addMethod("numero", function (value, element) {
+      return /^[0-9,.]*$/i.test(value);
+    }, "<h2>Ingrese sólo numero y puntos  </h2>");
+    $.validator.addMethod("numerosp", function (value, element) {
+      return /^[0-9]*$/i.test(value);
+    }, "<h2>Ingrese sólo numero  </h2>");
+
+    $.validator.addMethod("letrasn", function(value, element) {
+      return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+    }, "<h2>Ingrese un valor valido ..</h2>");
+
+    $("#inspeccionlt").validate({
+      errorElement: "em",
+      errorPlacement: function (error, element) {
+        $(element.parent("div").addClass("form-animate-error"));
+        error.appendTo(element.parent("div"));
+      },
+      success: function (label) {
+        $(label.parent("div").removeClass("form-animate-error"));
+      },
+
+      rules: {
+        fechal: {
+          required: true      
+        },
+        horal: {
+          required: true,
+        },
+
+        tels: {
+          minlength: 9,
+          required: false,
+          maxlength: 9
+        },
+        
+        terceraed: {
+          minlength: 1,
+          required: true,
+          numerosp: true,
+          maxlength: 5
+        },
+        adultos: {
+          minlength: 1,
+          required: true,
+          numerosp: true,
+          maxlength: 5
+        },
+        ninos: {
+          minlength: 1,
+          required: true,
+          numerosp: true,
+          maxlength: 5
+        },
+        personadis: {
+          minlength: 1,
+          required: true,
+          numerosp: true,
+          maxlength: 5
+        },
+        latitud: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 100
+        },
+        longitud: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 100
+        },
+        anchocv: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 15
+        },
+        largocv: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 15
+        },
+        
+        anchoaf: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 15
+        },
+        largoaf: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 15
+        },
+        comentariosil: {
+          minlength: 3,
+          required: false,
+          letrasn: true,
+          maxlength: 400
+        },
+        observacionesil: {
+          minlength: 3,
+          required: false,
+          letrasn: true,
+          maxlength: 400
+        },
+        distanciatl: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 15
+        },
+        distanciarc: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 15
+        },
+        distancialc: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 15
+        },
+        distanciata: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 15
+        },
+
+        modelov: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 30
+        },
+        solucions: {
+          minlength: 1,
+          required: false,
+          letrasn: true,
+          maxlength: 300
+        },
+        obrasa: {
+          minlength: 1,
+          required: false,
+          letrasn: true,
+          maxlength: 300
+        },
+        obst: {
+          minlength: 1,
+          required: false,
+          letrasn: true,
+          maxlength: 400
+        },
+        descripciona: {
+          minlength: 1,
+          required: false,
+          letrasn: true,
+          maxlength: 500
+        },
+
+
+      },
+      messages: {
+        fechal: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        },
+        horal: {
+          required: "<h2>Debe ingresar la hora</h2>",
+        },
+        tels: {
+          required: "<h2>Debe ingresar el numero de teléfono</h2>",
+          minlength: "<h2>El numero de teléfono debe tener un minimo de 9 digitos</h2>",
+          maxlength: "<h2>El numero de teléfono debe tener un maximo de 9 digitos</h2>"
+        },
+        terceraed: {
+          required: "<h2>Debe ingresar el numero de personas</h2>",
+          minlength: "<h2>EL numero de personas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL numero de personas debe tener un maximo de 5 digitos</h2>"
+        },
+        adultos: {
+          required: "<h2>Debe ingresar el numero de personas</h2>",
+          minlength: "<h2>El numero de personas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El numero de personas debe tener un maximo de 5 digitos</h2>"
+        },
+        ninos: {
+          required: "<h2>Debe ingresar el numero de personas</h2>",
+          minlength: "<h2>EL numero de personas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL numero de personas debe tener un maximo de 5 digitos</h2>"
+        },
+        personadis: {
+          required: "<h2>Debe ingresar el numero de personas</h2>",
+          minlength: "<h2>El numero de personas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El numero de personas debe tener un maximo de 5 digitos</h2>"
+        },
+        latitud: {
+          required: "<h2>Debe ingresar La latitud</h2>",
+          minlength: "<h2>La latitud debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La latitud debe tener un maximo de 100 digitos</h2>"
+        },
+        longitud: {
+          required: "<h2>Debe ingresar la longitud</h2>",
+          minlength: "<h2>La longitud debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La longitud debe tener un maximo de 100 digitos</h2>"
+        },
+        anchocv: {
+          required: "<h2>Debe ingresar el ancho tecnica</h2>",
+          minlength: "<h2>El ancho tecnica debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El ancho tecnica debe tener un maximo de 15 digitos</h2>"
+        },
+        largocv: {
+          required: "<h2>Debe ingresar el largo</h2>",
+          minlength: "<h2>El largo debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El largo debe tener un maximo de 15 digitos</h2>"
+        },
+        anchoaf: {
+          required: "<h2>Debe ingresar el ancho</h2>",
+          minlength: "<h2>El ancho debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El ancho debe tener un maximo de 15 digitos</h2>"
+        },
+        largoaf: {
+          required: "<h2>Debe ingresar el largo </h2>",
+          minlength: "<h2>El largo debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El largo debe tener un maximo de 15 digitos</h2>"
+        },
+
+        comentariosil: {
+          required: "<h2>Debe ingresar el comentario </h2>",
+          minlength: "<h2>El comentario debe tener un minimo de 3 digitos</h2>",
+          maxlength: "<h2>El comentario debe tener un maximo de 400 digitos</h2>"
+        },
+        observacionesil: {
+          required: "<h2>Debe ingresar las observaciones</h2>",
+          minlength: "<h2>Las observaciones debe tener un minimo de 3 digitos</h2>",
+          maxlength: "<h2>Las observaciones debe tener un maximo de 400 digitos</h2>"
+        },
+        distanciatl: {
+          required: "<h2>Debe ingresar la distancia</h2>",
+          minlength: "<h2>La distancia debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La distancia debe tener un maximo de 15 digitos</h2>"
+        },
+        distanciarc: {
+          required: "<h2>Debe ingresar la distancia</h2>",
+          minlength: "<h2>La distancia debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La distancia debe tener un maximo de 15 digitos</h2>"
+        },
+        distancialc: {
+          required: "<h2>Debe ingresar la distancia</h2>",
+          minlength: "<h2>La distancia debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La distancia debe tener un maximo de 15 digitos</h2>"
+        },
+        distanciata: {
+          required: "<h2>Debe ingresar la distancia</h2>",
+          minlength: "<h2>La distancia debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La distancia debe tener un maximo de 15 digitos</h2>"
+        },
+        modelov: {
+          required: "<h2>Debe ingresar el modelo de la vivienda</h2>",
+          minlength: "<h2>El modelo de la vivienda debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El modelo de la vivienda debe tener un maximo de 30 digitos</h2>"
+        },
+        solucions: {
+          required: "<h2>Debe ingresar la solución sanitaria</h2>",
+          minlength: "<h2>La solución sanitaria debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La solución sanitaria debe tener un maximo de 300 digitos</h2>"
+        },
+        obrasa: {
+          required: "<h2>Debe ingresar las obras adicionales</h2>",
+          minlength: "<h2>Las obras adicionales debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>Las obras adicionales debe tener un maximo de 300 digitos</h2>"
+        },
+        obst: {
+          required: "<h2>Debe ingresar las observaciones</h2>",
+          minlength: "<h2>Las observaciones debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>Las observaciones debe tener un maximo de 400 digitos</h2>"
+        },
+        descripciona: {
+          required: "<h2>Debe ingresar las actividades</h2>",
+          minlength: "<h2>Las actividades debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>Las actividades debe tener un maximo de 500 digitos</h2>"
+        },  
+
+      }
+    });
+
+    function validarHora() {
+        var horaIngresada = document.getElementById("horal").value;
+        var patron = /^(1[012]|[1-9]):[0-5][0-9]\s*(am|pm)$/i;
+
+        if (!patron.test(horaIngresada)) {
+            alertE("Formato de Hora inválida. ");
+            return false;
+        }
+
+        return true;
+    }
+
+
+function validarFecha(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  function tel(id){
+      var num=  document.getElementById(id).value.length;
+      var primer = document.getElementById(id).value;
+      if(num==4)
+      document.getElementById(id).value=document.getElementById(id).value+'-';
+
+      if(num==1 ){
+        if( primer=='2' || primer=='7' || primer=="6")
+           return
+           else {
+            document.getElementById(id).value="";
+            document.getElementById(id).title = "El Telefono debe comenzar con 2, 6 o 7";
+                      
+            
+            } 
+      }   
+     
+    }
+
+  function limpiarValor(campo) {
+          if (campo.value === "0") {
+              campo.value = "";
+          }
+      }  
+  
+  function limpiarValorN(campo) {
+      if (campo.value === "No") {
+          campo.value = "";
+      }
+  }  
+
+  function calcularAreaCV() {    
+      a = document.getElementById("anchocv").value;
+      b = document.getElementById("largocv").value;
+      c=(a * b)
+      document.getElementById("areacv").value = c.toFixed(2) ;
+  }
+
+  function calcularAreaAF(){
+    a = document.getElementById("anchoaf").value;
+    b = document.getElementById("largoaf").value;
+    c=(a * b)
+    document.getElementById("areaaf").value = c.toFixed(2);
+  }
+
+</script>
+{% endblock %}

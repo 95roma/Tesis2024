@@ -1,0 +1,152 @@
+<div>            <!-- Datos de deformidad, amputacion o defecto fisico -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Tiene alguna deformidad, amputación o defecto fisico, defecto de la vista o del oido</h4>
+          </div>
+        </div>
+          <div  class="col-md-6 col-sm-12 col-xs-12  " >  
+          {% if sid.tienedadf == "Si" %}   
+          <label>Si <input type="radio"  name="tiened" id="tiened" value="Si" onchange="HDdef(this.value);" checked  required />   </label>                      
+          <span class="bar"></span>   
+          <label>No <input type="radio"  name="tiened" id="tiened" value="No" onchange="HDdef(this.value);"  required />   </label>                      
+          {% else %}
+          <label>Si <input type="radio"  name="tiened" id="tiened" value="Si" onchange="HDdef(this.value);"  required />   </label>                      
+          <span class="bar"></span>   
+          <label>No <input type="radio"  name="tiened" id="tiened" value="No" onchange="HDdef(this.value);" checked  required />   </label>                      
+          {% endif %}
+          <span class="bar"></span>
+        </div> 
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Detalles</h4>
+          <input type="text" class="form-text" id="detalled" name="detalled" value="{{sid.detallesdadf}}" maxlength="50"  >
+          <span class="bar"></span>
+        </div>
+      </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Fuma cigarrillos o pipa?</h4>
+        </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          {% if sid.fumacp == "Si" %}  
+          <label> Si <input type="radio"  name="fumacp" id="fumacp" value="Si" onchange="HDcig(this.value);" checked   required /> </label> 
+          <label> No <input type="radio"  name="fumacp" id="fumacp" value="No" onchange="HDcig(this.value);"  required /> </label>                   
+          {% else %}
+          <label> Si <input type="radio"  name="fumacp" id="fumacp" value="Si" onchange="HDcig(this.value);"   required /> </label> 
+          <label> No <input type="radio"  name="fumacp" id="fumacp" value="No" onchange="HDcig(this.value);"  checked required /> </label>                   
+          {% endif %}         
+          <span class="bar"></span>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Cuántos al dia?</h4>
+            <input type="text" class="form-text" id="cuantosd" name="cuantosd" value="{{sid.cuantosd}}" maxlength="15"   >
+            <span class="bar"></span>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Ingiere bebidads alcoholicas</h4>
+        </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          {% if sid.bebidadalc == "Si" %}  
+          <label> Si <input type="radio"  name="ibebidas" id="ibebidas" value="Si" onchange="HDbeb(this.value);" checked   required /> </label> 
+          <label> No <input type="radio"  name="ibebidas" id="ibebidas" value="No" onchange="HDbeb(this.value);" required /> </label>                   
+          {% else %}
+          <label> Si <input type="radio"  name="ibebidas" id="ibebidas" value="Si" onchange="HDbeb(this.value);"  required /> </label> 
+          <label> No <input type="radio"  name="ibebidas" id="ibebidas" value="No" onchange="HDbeb(this.value);" checked required /> </label>                   
+          {% endif %}
+          <span class="bar"></span>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Con qué frecuencia?</h4>
+            <input type="text" class="form-text" id="frecuanciab" name="frecuanciab" value="{{sid.frecuenciaalc}}"   maxlength="25"  >
+            <span class="bar"></span>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Ha estado en tratamiento con algun medico?</h4>
+        </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          {% if sid.tratamientomd == "Si" %}  
+          <label> Si <input type="radio"  name="tratamientomd" id="tratamientomd" value="Si" onchange="HDtat(this.value);" checked   required /> </label> 
+          <label> No <input type="radio"  name="tratamientomd" id="tratamientomd" value="No" onchange="HDtat(this.value);"  required /> </label>                   
+          {% else %}
+          <label> Si <input type="radio"  name="tratamientomd" id="tratamientomd" value="Si" onchange="HDtat(this.value);"  required /> </label> 
+          <label> No <input type="radio"  name="tratamientomd" id="tratamientomd" value="No" onchange="HDtat(this.value);" checked  required /> </label>                   
+          {% endif %}
+          <span class="bar"></span>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Detalles</h4>
+            <input type="text" class="form-text" id="detalletm" name="detalletm" value="{{sid.detalletmd}}"  maxlength="50"  >
+            <span class="bar"></span>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Practica alguna actividad o deporte peligroso o extremo?</h4>
+        </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          {% if sid.practicaad == "Si" %}  
+          <label> Si <input type="radio"  name="practicaadp" id="practicaadp" value="Si" onchange="HDact(this.value);" checked required /> </label> 
+          <label> No <input type="radio"  name="practicaadp" id="practicaadp" value="No" onchange="HDact(this.value);"  required /> </label>                   
+          {% else %}
+          <label> Si <input type="radio"  name="practicaadp" id="practicaadp" value="Si" onchange="HDact(this.value);" required /> </label> 
+          <label> No <input type="radio"  name="practicaadp" id="practicaadp" value="No" onchange="HDact(this.value);" checked required /> </label>                   
+          {% endif %}
+          <span class="bar"></span>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Clase </h4>
+            <input type="text" class="form-text" id="clase" name="clase" value="{{sid.clasead}}"  maxlength="25"  >
+            <span class="bar"></span>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Frecuencia</h4>
+        <input type="text" class="form-text" id="frecuencia" name="frecuencia" value="{{sid.frecuenciaad}}"   maxlength="25"  >
+        <span class="bar"></span>
+      </div>
+    </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Seguro de Desempleo</h4>
+        </div>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          {% if sid.segurodd == "Si" %}  
+          <label> Si <input type="radio"  name="segurod" id="segurod" value="Si" checked required /> </label> 
+          <label> No <input type="radio"  name="segurod" id="segurod" value="No"  required /> </label>                   
+          {% else %}
+          <label> Si <input type="radio"  name="segurod" id="segurod" value="Si"  required /> </label> 
+          <label> No <input type="radio"  name="segurod" id="segurod" value="No" checked required /> </label>
+          {% endif %}
+          <span class="bar"></span>
+        </div>
+      </div>
+      <input type="hidden" id="passDO" name="passDO" value="0">
+    </div>

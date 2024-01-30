@@ -1,0 +1,372 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}
+{% block titulo %}MODIFICAR SOLICITUD DE CREDITO PARA PERSONAS NATURALES{% endblock titulo %}
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="done" isdone="1" rel="2">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Datos personales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="3">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Grupo familiar</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="4">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Domicilio y lugar de Trabajo</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-5" class="done" isdone="1" rel="5">
+        <span class="step_no">5</span>
+        <span class="step_descr"><small>Datos de la obra a realizar</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-6" class="done" isdone="1" rel="6">
+        <span class="step_no">6</span>
+        <span class="step_descr"><small>Detalle de la solicitud</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-7" class="done" isdone="1" rel="7">
+        <span class="step_no">7</span>
+        <span class="step_descr"><small>Experiencia crediticia</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-8" class="done" isdone="1" rel="8">
+        <span class="step_no">8</span>
+        <span class="step_descr"><small>Referencia personales y familiares</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-9" class="done" isdone="1" rel="9">
+        <span class="step_no">9</span>
+        <span class="step_descr"><small>Comentarios</small> </span>
+      </a>
+    </li>
+  </ul>
+  <div class="stepContainer" style="overflow: hidden !important;">
+    <form style="overflow: hidden !important;" id="modSolicitudNatural" name="modSolicitudNatural"
+      action="../../../NaturalApp/modDatosNatural/" method="post" autocomplete="off">{% csrf_token %}
+      <input type="hidden" id="estadoMod" name="estadoMod" value="Incompleto">
+      <input type="hidden" id="idSoliN" name="idSoliN" value="{{soli.0.id}}">
+      <div id="step-1" class="content" style="display: block;">
+
+        <div class="x_title">
+          <div class="row">
+            <h2 style="text-align: center;">SOLICITUD DE CREDITO </h2>
+          </div><br>
+          <div class="row">
+            <h2 style="text-align: center;">{{soli.0.perfil.nombres}}  {{soli.0.perfil.apellidos}}  </h2>
+          </div>
+          <div class="row">
+            <h4 class="">Para familias con ingresos provenientes de empleos y/o remesa familiares </h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Tipo de obra a realizar:</label> &nbsp;&nbsp;
+              Vivienda
+              <div class="iradio_flat-green ">
+                {% if soli.0.tipoobra == "vivienda" %}
+                <input type="radio" class="flat" checked name="tipoobraModN" value="vivienda" >
+                {% else %}
+                <input type="radio" class="flat" name="tipoobraModN" value="vivienda" >
+                {% endif %}
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;&nbsp;
+              Mejora
+              <div class="iradio_flat-green ">
+                {% if soli.0.tipoobra == "mejora" %}
+                <input type="radio" class="flat" name="tipoobraModN" value="mejora" checked >
+                {% else %}
+                <input type="radio" class="flat" name="tipoobraModN" value="mejora" >
+                {% endif %}
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+        </div>  
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" disabled id="fechaSM1M" name="fechaSM1M" maxlength="50"
+                placeholder="Fecha" value="{{soli.0.fecha|date:'d-m-Y'}}" required>
+              <input type="hidden" id="fechaSMM" name="fechaSMM" value="{{soli.0.fecha}}"> 
+              <span class="bar"></span>
+            </div>
+
+          </div><!-- /fin columna  derecha-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" disabled id="" name="" maxlength="50" value="{{soli.0.perfil.Agencia.nombre}}" 
+                required>
+              <input type="hidden" id="agenciaMod" name="agenciaMod" value="1">
+              <span class="bar"></span>
+            </div>
+          </div><!-- /fin columna  izquierda-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" disabled id="nModN" name="nModN" maxlength="50" placeholder=""
+                value="{{soli.0.numero}}" required>
+              <span class="bar"></span>
+            </div>
+          </div><!-- /fin columna  izquierda-->
+        </div>
+        <div class="row">
+          <!-- datos de ubicacion  comunidad, municipio -->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" id="comunidadModN" name="comunidadModN" maxlength="50"
+                placeholder="Comunidad" value="{{soli.0.comunidad}}" required>
+              <span class="bar"></span>
+            </div>
+
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" id="municipioMod" name="municipioMod" maxlength="50"
+                value="{{soli.0.perfil.municipio}}" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+      
+        </div> <!-- / fin datos de ubicacion-->
+        <div class="row">
+          <!-- datos de  area y tipo de ingreso-->
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Area:</label> &nbsp;&nbsp;
+              Urbana
+              <div class="iradio_flat-green ">
+                {% if soli.0.area == "Urbana" %}
+                <input type="radio" class="flat" checked name="areaMN" value="Urbana" required>
+                {% else %}
+                <input type="radio" class="flat" name="areaMN" value="Urbana" required>
+                {% endif %}
+                <ins class="iCheck-helper"></ins>
+
+              </div>&nbsp;&nbsp;&nbsp;
+              Rural
+              <div class="iradio_flat-green ">
+                {% if soli.0.area == "Rural" %}
+                <input type="radio" class="flat" checked name="areaMN" value="Rural" required>
+                {% else %}
+                <input type="radio" class="flat" name="areaMN" value="Rural" required>
+                {% endif %}
+                <ins class="iCheck-helper"></ins>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Tipo de ingreso:</label> &nbsp;&nbsp;
+              Empleo:
+              <div class="iradio_flat-green ">
+                {% if soli.0.tipoingreso == "Empleo" %}
+                <input type="radio" class="flat" checked name="tipoingresoModN" id="tipoingresoModN" value="Empleo" required>
+                {% else %}
+                <input type="radio" class="flat"  name="tipoingresoModN" id="tipoingresoModN" value="Empleo" required>
+                {% endif %}
+
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;
+              Remesa:
+              <div class="iradio_flat-green ">
+                {% if soli.0.tipoingreso == "Remesa" %}
+                <input type="radio" class="flat" checked name="tipoingresoModN" id="tipoingresoModN" value="Remesa" required>
+                {% else %}
+                <input type="radio" class="flat" name="tipoingresoModN" id="tipoingresoModN" value="Remesa" required>
+                {% endif %}
+
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+        </div> <!-- / fin datos de ubicacion-->
+
+      </div>
+      <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+        {% include "NaturalApp/datosPerNat.html" %}
+      </div>
+      <div id="step-3" class="content" style="display: none;">
+        {% include "NaturalApp/grupoFNat.html" %}
+      </div>
+      <div id="step-4" class="content" style="display: none;">
+        {% include "NaturalApp/domicilioNat.html" %}
+      </div>
+      <div id="step-5" class="content" style="display: none;">
+        {% include "NaturalApp/datosObraNat.html" %}
+      </div>
+      <div id="step-6" class="content" style="display: none;">
+        {% include "NaturalApp/detalleNat.html" %}
+      </div>
+      <div id="step-7" class="content" style="display: none;">
+        {% include "NaturalApp/experienciaNat.html" %}
+      </div>
+      <div id="step-8" class="content" style="display: none;">
+        {% include "NaturalApp/referenciasNat.html" %}
+      </div>
+      <div id="step-9" class="content" style="display: none;">
+        {% include "NaturalApp/comentariosNat.html" %}
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="clearfix"></div>
+{% endblock %}
+
+
+{% block js %}
+<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+  let montoMinNat=0
+  let montoMaxNat=0
+
+  $(document).ready(function () {
+    // establecer valores de genero en los radios
+    $("input[type='radio'][name='generoS'][value='{{soli.1.generoC}}']").prop('checked',true);
+    $("input[type='radio'][name='generoC'][value='{{soli.2.generofia}}']").prop('checked',true);
+
+    //funcion para guardar
+    $("#fin").click(function () {
+      //activo los input parq que puedan guardarse
+      
+      document.getElementById("fechaSM1M").disabled = false;
+      var V2 =document.getElementById("nModN").disabled = false;
+      var V3 =document.getElementById("edadS").disabled = false;
+      var V4 =document.getElementById("edadC").disabled = false;
+      var V5 =document.getElementById("fechNaS").disabled = false;
+      var V6 =document.getElementById("apellidoS").disabled = false;
+      var V7 =document.getElementById("duiS").disabled = false;
+      var V8 =document.getElementById("nombreS").disabled = false;
+      var V9 =document.getElementById("direActS").disabled = false;
+      var V10 =document.getElementById("telefonoS").disabled = false;
+      var V11 =document.getElementById("salarioS").disabled = false;
+      var V12 =document.getElementById("profecionS").disabled = false;
+      var V13 =document.getElementById("cuotaNE").disabled = false;
+
+
+      // estas son banderas para no guardar los formularios que estan en blanco
+      // los metodos validar devulven 0 si no estan completos los form
+      // y 1 si los formularios estan completos
+      var passDPN = document.getElementById("passDPN").value = validarDatosN(); 
+      var passDPNC = document.getElementById("passDPNC").value = validarDatosNC();
+      var passGPN = document.getElementById("passGPN").value = validarGrupoFN();
+      var passDLN = document.getElementById("passDLN").value = validarDomicilioNatural();
+      var passDLNC = document.getElementById("passDLNC").value = validarDomicilioCNatural();
+      var passDORN = document.getElementById("passDORN").value = validarDatosObraN();
+      var passDSN = document.getElementById("passDSN").value = validarDetalleN();
+      var passECN = document.getElementById("passECN").value = validarExpeCrediN();
+      var passRPFN = document.getElementById("passRPFN").value = validarReferenciasPFN();
+      var passCMN = document.getElementById("passCMN").value = validarComentariosN();
+      
+
+      
+      //document.getElementById("passEC").value = '1';
+      // var passRPF =  document.getElementById("passRPF").value = validarExpeCredi();
+      // fin banderas
+
+      //comparo que todas las banderas esten en 1 para cambiar el estado de la solicitud a aprobado
+      if (passDPN == '1' &&   passGPN == '1' && passDLN == '1'  && passDORN == '1' && passDSN == '1'  ) {
+        document.getElementById('estadoMod').value = 'Completado';
+        document.modSolicitudNatural.submit();
+      } else {// encaso que una bandera este en 0 muestra el mensaje para comfirmar si desea guardar la solicitud
+        //enfio el mensaje y el formulario para poder enviarlo desde la fucnion
+        // la funcion confirmar esta en TesisApp\static\TesisApp\js\alertas.js
+        confirmar('Formulario incompleto, desea guardarlo para completarlo despues?', document.modSolicitudNatural);
+      }
+
+
+
+    });
+  });
+
+  $(window).load(//funcin para selecionar los valores de los selects por defecto al cargar la pagina
+    function () {
+      // establecer valores de genero en los radios
+    $("input[type='radio'][name='generoS'][value='{{soli.1.generoC}}']").prop('checked',true);
+    $("input[type='radio'][name='generoC'][value='{{soli.2.generofia}}']").prop('checked',true);
+
+    },  
+    function () {
+      let fecha1 = new Date();
+      let f1 = fecha1.getFullYear() + "-" + (fecha1.getMonth() + 1) + "-" + fecha1.getDate();
+      let direccionMS1="{{soli.4.direccionTrabMicro}}";
+      document.getElementById("fechExS").setAttribute("max", f1);
+      document.getElementById("fechExC").setAttribute("max", f1);
+
+      //se agrega la fecha maxima para la fecha de otorgamiento en experiencia crediticia
+      for (i = 0; i < document.getElementsByName('fechaEC').length; i++) {      
+        document.getElementsByName('fechaEC')[i].setAttribute("max", f1);
+      }
+
+      //para definir la fecha maxima y garantizar solo mayores de edad
+      var max1 = (fecha1.getFullYear()-18)+"-"+(fecha1.getMonth() + 1) + "-" + fecha1.getDate(); 
+      //se agrega la fecha maxima a los input de fecha de nacimiento
+      document.getElementById("fechNaS").setAttribute("max", max1);
+      document.getElementById("fechNaC").setAttribute("max", max1);
+
+      // inicia la seleccion de los selects
+      // primero se cargan los valores en las variables
+      var estadoSiv = "{{soli.1.estadocivilC}}";
+      var estadoCivilC = "{{soli.2.estadocivilfia}}";
+      var fpago = "{{soli.7.formaPago}}";
+      var estadoExp = ['{{soli.8.0.estado}}','{{soli.8.1.estado}}','{{soli.8.2.estado}}']
+      var destino = "{{soli.6.destino_id}}"
+      var alternativa="{{soli.6.detalle_id}}"
+      var alternativa="{{soli.6.detalle.id}}"
+      //luego se asignan los optios segun los valores cargados
+      $('#estadoCivilS option[value="' + estadoSiv + '"]').prop('selected', true);
+      $('#estadoCivilC option[value="' + estadoCivilC + '"]').prop('selected', true);
+      $('#destinoME option[value="' + alternativa + '"]').prop('selected', true);
+      $('#detalleObra option[value="' + destino + '"]').prop('selected', true);
+      $('#formaPagoNE option[value="' + fpago + '"]').prop('selected', true);
+      $('#estadoEC0 option[value="' + estadoExp[0] + '"]').prop('selected', true);
+      $('#estadoEC1 option[value="' + estadoExp[1] + '"]').prop('selected', true);
+      
+      obtenerRangoNatural("-0")
+
+      //variable de evento para realizar todos los cambios en los select
+      var evt = document.createEvent("HTMLEvents");
+      evt.initEvent("change", false, true);
+      //document.getElementById('options').dispatchEvent(evt);
+
+    }
+  );
+
+ 
+
+
+
+  
+</script>
+{% endblock %}

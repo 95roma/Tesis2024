@@ -1,0 +1,970 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Modificar Presupuesto de Vivienda{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+  <button type="button" class="close" date-dismiss="alert">&times;</button>
+  <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos Generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="selected" isdone="1" rel="1">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Registro de Materiales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="2">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Registro de Mano de Obra</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="2">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Especificaciones</small> </span>
+      </a>
+    </li>
+   
+  </ul>
+
+  <div class="stepContainer" style="overflow: hidden !important;">
+    <form id="modPresupuesto" name="modPresupuesto" action="" method="post"
+      autocomplete="off">{% csrf_token %}
+      <input type="hidden" id="ids" name="ids" value="{{s.id}}">
+      <input type="hidden" id="idp" name="idp" value="{{s.perfil.id}}">
+      <input type="hidden" id="idPresupuesto" name="idPresupuesto" value="{{pvdg.id}}">
+
+      <input type="hidden" id="mt1" name="mt1" value="1">
+      <input type="hidden" id="mt2" name="mt2" value="0">
+      <input type="hidden" id="mt3" name="mt3" value="0">
+      <input type="hidden" id="mt4" name="mt4" value="0">
+      <input type="hidden" id="mt5" name="mt5" value="0">
+      
+
+      <div id="step-1" class="content" style="display: block;">
+        <div class="x_title">
+          <div class="row">
+            <h4 class="">Datos Generales </h4>
+          </div>
+        </div>
+
+        <div class="row">         
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Agencia</h4>
+              <input type="text" class="form-text" id="agencia" name="agencia" value="{{s.perfil.Agencia.nombre}}" disabled required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Fecha</h4>
+              <input type="date" class="form-text" id="fechap" name="fechap" value="{{pvdg.fecha|date:'Y-m-d'}}"  onchange="validarFecha(this)" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Tiempo de construcción</h4>
+              <input type="text" class="form-text" id="tiempocons" name="tiempocons" value="{{pvdg.tiempoconstruccion}}" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Nombre del Cliente</h4>
+              <input type="text" class="form-text" id="nombrec" name="nombrec" value="{{s.perfil.nombres}} {{s.perfil.apellidos}}" disabled required>
+              <span class="bar"></span>
+
+            </div>
+          </div>
+        </div>      
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Modelo </h4>
+              <input type="text" class="form-text" id="modelo" name="modelo" value="{{pvdg.modelo}}" disabled  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Dimension de vivienda</h4>
+              <input type="text" class="form-text" id="dimensionv" name="dimensionv" value="{{pvdg.dimensionviv}}"  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+        
+        </div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Dirección del Proyecto</h4>
+              <input type="text" class="form-text" id="direccionp" name="direccionp" value="{{do.direExacta}}" disabled required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Costo total</h4>
+              <input type="text" class="form-text" id="costotp" name="costotp" value="{{d.monto}}" disabled  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Cantidad vivienda</h4>
+              <input type="text" class="form-text" id="cantidadv" name="cantidadv" value="{{pvdg.cantidadvivienda}}"  oninput="calculartotal();" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Costo total</h4>
+              <input type="text" class="form-text" id="costots" name="costots" value="{{pvdg.costototalv}}"  onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+        {% include "PresupuestoVApp/editarPresupuestomt.html" %}
+      </div>
+      <div id="step-3" class="content" style="display: none; overflow: hidden !important;">
+        {% include "PresupuestoVApp/editarPresupuestomo.html" %}
+      </div>
+      <div id="step-4" class="content" style="display: none; overflow: hidden !important;">
+      {% include "PresupuestoVApp/editarPresupuestoesp.html" %}
+      </div>
+      
+    </form>
+  </div>
+</div>
+{% include "PresupuestoApp/materiales.html" %}
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+<!--   {% include "PresupuestoVApp/presupuestoot.html" %}  -->
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+  var subtotal = 0;
+  var indiceMo = 1; //indice mano de obra
+  let button = document.getElementById('btnagregar');
+  let buttonMO = document.getElementById('btnagregar-mo');
+  $('#btnCancelar-mo').fadeOut();
+  $(document).ready(function () {
+
+    $("#fin").click(function () {
+      event.preventDefault(); 
+      
+
+      //document.getElementById("passAE").value = '1'
+      //document.getElementById("passGN").value = '1'
+      let vmt1=document.getElementById("mt1").value
+      let vmt2=document.getElementById("mt2").value
+      let vmt3=document.getElementById("mt3").value 
+      let vmt4=document.getElementById("mt4").value 
+      let vmt5=document.getElementById("mt5").value 
+
+      var jsonArraydts = enviarDatos();
+      console.log("jsonArray datos",jsonArraydts )
+
+      //if(Number(vmt2)===1){
+      var jsonArraytbmt= enviarTablaMt();
+        console.log("jsonArray tb1",jsonArraytbmt )
+      //}
+
+      var jsonArraytmo = enviarTablaMo();
+      console.log("jsonArray tb2",jsonArraytmo )
+      
+
+      var jsonArrayepf = enviarEspecif();
+      console.log("jsonArray tb4",jsonArrayepf )
+
+      let idperf= document.getElementById("idp").value     
+    if($("#modPresupuesto").valid()){ 
+      $.ajax({
+            headers:{'X-CSRFToken': "{{csrf_token}}"},
+            url: "/PresupuestoVApp/actualizarPresupuestoV/",
+            data: {'valoresig':jsonArraydts,'valorestmt': jsonArraytbmt ,'valorestmo': jsonArraytmo ,'valoresesp': jsonArrayepf }  ,   
+            type:"POST",
+            success:function(r){
+              //console.log("success",r)
+              document.modPresupuesto.submit()
+              window.location.href='../../../ClienteApp/listaClientes/administrarPerfil/'+idperf;
+            },
+            error: function(jqXHR,textStatus,error){
+              console.log(error)
+            },
+            complete: function(xhr,status){              
+              //window.location.href='/PresupuestoVApp/listaPV/';
+            }
+          })
+    }else{
+          alertE("Debe Registrar Datos Validos!");  
+          return false; // Evita el envío del formulario si la validación falla
+      }
+
+
+    });
+
+
+    $.validator.addMethod("numero", function (value, element) {
+      return /^[0-9,.]*$/i.test(value);
+    }, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+    $.validator.addMethod("letrasn", function(value, element) {
+      return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+    }, "<h2>Ingrese un valor valido ..</h2>");
+
+    $("#modPresupuesto").validate({
+      errorElement: "em",
+      errorPlacement: function (error, element) {
+        $(element.parent("div").addClass("form-animate-error"));
+        error.appendTo(element.parent("div"));
+      },
+      success: function (label) {
+        $(label.parent("div").removeClass("form-animate-error"));
+      },
+
+      rules: {
+        fechap: {
+          required: true     
+        },
+        tiempocons: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 10
+        },
+        dimensionv: {
+          minlength: 2,
+          required: true,
+          letrasn: true,
+          maxlength: 10
+        },
+        cantidadv: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 10
+        },
+        costots:{
+          required: true     
+        },
+        preciom: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        cantidadm: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        preciomo: {
+          minlength: 1,
+          required: false,
+          numero: false,
+          maxlength: 10
+        },
+        cantidadmo: {
+          minlength: 1,
+          required: false,
+          numero: false,
+          maxlength: 10
+        },
+    
+        ttransporte: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        solucionsan: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        kitemerg: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+        herramientas: {
+          minlength: 1,
+          required: false,
+          numero: true,
+          maxlength: 10
+        },
+
+      },
+      messages: {
+        fechap: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        },
+        tiempocons: {
+          required: "<h2>Debe ingresar el tiempo de construcción</h2>",
+          minlength: "<h2>EL tiempo de construcción debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL tiempo de construcción debe tener un maximo de 10 digitos</h2>"
+        },
+        dimensionv: {
+          required: "<h2>Debe ingresar la la dimención de la vivienda</h2>",
+          minlength: "<h2>La la dimención de la vivienda debe tener un minimo de 2 digitos</h2>",
+          maxlength: "<h2>La la dimención de la vivienda debe tener un maximo de 10 digitos</h2>"
+        },
+        cantidadv: {
+          required: "<h2>Debe ingresar la cantidad de viviendas</h2>",
+          minlength: "<h2>La cantidad de viviendas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La cantidad de viviendas debe tener un maximo de 10 digitos</h2>"
+        },
+        costots: {
+          required: "<h2>Debe ingresar el costo total</h2>",
+        },
+
+        preciom: {
+          required: "<h2>Debe ingresar el precio</h2>",
+          minlength: "<h2>EL precio debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL precio debe tener un maximo de 10 digitos</h2>"
+        },
+        cantidadm: {
+          required: "<h2>Debe ingresar la cantidad</h2>",
+          minlength: "<h2>La cantidad debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La cantidad debe tener un maximo de 10 digitos</h2>"
+        },
+        preciomo: {
+          required: "<h2>Debe ingresar el precio</h2>",
+          minlength: "<h2>EL precio debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL precio debe tener un maximo de 10 digitos</h2>"
+        },
+        cantidadmo: {
+          required: "<h2>Debe ingresar la cantidad</h2>",
+          minlength: "<h2>La cantidad debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La cantidad debe tener un maximo de 10 digitos</h2>"
+        },
+        precioo: {
+          required: "<h2>Debe ingresar el precio</h2>",
+          minlength: "<h2>EL precio debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL precio debe tener un maximo de 10 digitos</h2>"
+        },
+        cantidado: {
+          required: "<h2>Debe ingresar la cantidad</h2>",
+          minlength: "<h2>La cantidad debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La cantidad debe tener un maximo de 10 digitos</h2>"
+        },
+        ttransporte: {
+          required: "<h2>Debe ingresar el transporte</h2>",
+          minlength: "<h2>EL transporte debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL transporte debe tener un maximo de 10 digitos</h2>"
+        },
+        solucionsan: {
+          required: "<h2>Debe ingresar la solución sanitaria</h2>",
+          minlength: "<h2>La solución sanitaria debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La solución sanitaria debe tener un maximo de 10 digitos</h2>"
+        },
+        kitemerg: {
+          required: "<h2>Debe ingresar el kit de emergencias</h2>",
+          minlength: "<h2>EL kit de emergencias debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL kit de emergencias debe tener un maximo de 10 digitos</h2>"
+        },
+        herramientas: {
+          required: "<h2>Debe ingresar la cantidad por herramientas</h2>",
+          minlength: "<h2>La cantidad por herramientas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La cantidad por herramientas debe tener un maximo de 10 digitos</h2>"
+        },
+
+
+      }
+    });
+
+     //Inicia llenar tabla materiales
+     var listMateriales = JSON.parse('{{listMateriales|safe }}');
+    for (i = 0; i < listMateriales.length; i++) {
+      var idmt = listMateriales[i].idm //id material
+      var nmat = listMateriales[i].nombre //nombre material
+      var dmat = listMateriales[i].descripcion  //descripcion material
+      var umat = listMateriales[i].unidad //unidad material
+      var pmat = listMateriales[i].precio //precio unitario materia
+      var cmat = listMateriales[i].cantida  //cantidad material
+
+      let subTotal = parseFloat(pmat).toFixed(2) * parseFloat(cmat).toFixed(2);
+      let bandera = false;
+
+      document.getElementById("mt1").value = 0
+      document.getElementById("mt2").value = 1
+      
+      if (bandera === false) {
+        var fila = '<tr id="' + idmt + '"><td>' + idmt + '</td><td>' + nmat + '</td><td>' + dmat + '</td><td>' +
+          umat + '</td><td>' + pmat + '</td><td>' + cmat + '</td><td>' + subTotal +
+          '</td><td><button type="button" class="btn btn-danger" onclick="remove(this)">Quitar</button>' +
+          '<button type="button" class="btn btn-info" onclick="editarMaterial(' + idmt + ',' + pmat + ',' + cmat + ')">Editar</button></td></tr>';
+
+        //var fila = '<tr id="row"><td>' + idmt + '</td><td>' + nmat + '</td><td>' + dmat + '</td><td>' + umat + '</td><td>' + pmat + '</td><td>' + cmat + '</td><td>' + subTotal + '</td><td><button type="button" class="btn btn-danger"  onclick="remove(this)" >Quitar</button></td></tr>'; //esto seria lo que contendria la fila 
+        // $('#pmateriales tbody:first').after(fila);  $('#Table1 > tbody')').children('tbody') ="pmateriales"
+        $('#pmaterialesMod tbody').append(fila);
+
+        var nFilas = $("#pmaterialesMod tbody").length;
+      }
+      //$("#pmateriales").append(nFilas - 1);
+      //le resto 1 para no contar la fila del header
+
+      
+      subtotal += subTotal; // Sumar el subTotal al subtotal total
+      actualizaTotalMaterial(); // Actualizar el valor del input
+
+    }
+    //Fin tabla materiales
+  
+
+    //Inicia llenar tabla mano de obra
+    var listManoObra = JSON.parse('{{lista_mano_obra_json|safe}}')
+    for (x = 0; x < listManoObra.length; x++) {
+      var id = listManoObra[x].id
+      var dmo = listManoObra[x].descripcion //descripcio
+      var umo = listManoObra[x].unidad //unidad medida
+      var pmo = listManoObra[x].preciouni //precio
+      var cmo = listManoObra[x].cantidad //cantidad
+      const subTotal = parseFloat(pmo).toFixed(2) * parseInt(cmo);
+      //var i = 1; contador para asignar id al boton que borrara la fila
+      var filamo = '<tr id="' + indiceMo + '"><td>' + id + '</td><td>' + dmo + '</td><td>' +
+        umo + '</td><td>' + pmo+ '</td><td>' + cmo + '</td><td>' + subTotal.toFixed(2) +
+        '</td><td ><button type="button" onclick="remove(this)" class="btn btn-danger btn_remove">Quitar</button>' +
+        '<button type="button" class="btn btn-info bnt_edit" onclick="editarManoO(' + "'" + indiceMo + "','" + dmo + "'," + "'" + umo + "'," + "'" + pmo + "'," + "'" + cmo + "'" + ')">Editar</button></td></tr>'; //esto seria lo que contendria la fila
+
+      $('#pmanoMod tbody').append(filamo);
+      //agrega al buscador
+      $('#manObra-list').prepend("<option data-id='" + indiceMo + "' >" + dmo + "</option>");
+      indiceMo++;
+
+    }
+    document.getElementById("idManoObraMod").value = "*" + indiceMo;
+    actualizaTotalMD();
+    //fin mano de obra
+
+
+  });
+
+   // funciones material
+   function AgregarTablaMod() {
+    var precio = document.getElementById("preciom").value
+    var cantidad = document.getElementById("cantidadm").value
+    var descripcion = document.getElementById("descripcionm").value
+    var unidad = document.getElementById("unidadm").value
+    if (precio != "" && cantidad != "") {
+      if (descripcion != "" && unidad != "") {
+        AgregarTablaMod2()
+      } else {
+        alertE("Seleccione un material!!")
+      }
+    } else {
+      alertE("Ingrese precio unitario y cantidad!!")
+    }
+
+  }
+
+  function cargarMaterialMod() {
+    let mat = document.modPresupuesto.nombrem.value
+    let opciones = document.querySelectorAll('#materiales-list option');
+    
+    for (let i = 0; i < opciones.length; i++) {
+      // Si el nombre tecleado es igual al de la opción
+      if (mat == opciones[i].innerText.trim()) {
+        // Asignar ID y salir del ciclo
+        mat = opciones[i].dataset.id;
+        break;
+      }
+    }
+
+    if (comprobarexistencia(mat) == false) {
+      $.ajax({
+        url: "/PresupuestoVApp/presupuestos/?idmaterial=" + mat,
+        type: "get",
+        headers: { "X-CSRFToken": '{{ csrf_token }}' },
+        dataType: "json",
+        success: function (response) {
+          document.getElementById("idmat").value = mat
+          document.getElementById("nombm").value = response[0].fields.nombre
+          document.getElementById("descripcionm").value = response[0].fields.descripcion
+          document.getElementById("unidadm").value = response[0].fields.unidad
+          document.getElementById("preciom").value = ""
+          document.getElementById("cantidadm").value = ""
+
+        },
+        error: function (error) {
+          console.log("cargarMaterial", error);
+        }
+      });
+    }
+
+  }
+
+  function comprobarexistencia(id) {
+    bandera = false
+    $("#pmaterialesMod tr").each(function (index) {
+      var self = $(this)
+      var idpk = self.find("td:eq(0)").text().trim()
+
+      if (id == idpk) {
+        bandera = true
+        var preciounidad = self.find("td:eq(4)").text().trim()
+        var cantidad = self.find("td:eq(5)").text().trim()
+        editarMaterial(id, preciounidad, cantidad)
+      }
+    });
+    button.innerText = button.textContent = 'Agregar';
+    return bandera
+  }
+
+  function editarMaterial(mat, precio, cantidad) {
+    $.ajax({
+      url: "/PresupuestoVApp/presupuestos/?idmaterial=" + mat,
+      type: "get",
+      headers: { "X-CSRFToken": '{{ csrf_token }}' },
+      dataType: "json",
+      success: function (response) {
+        console.log("cargarMaterialMod", response);
+        console.log(response[0].fields)
+        document.getElementById("idmat").value = mat
+        document.getElementById("nombm").value = response[0].fields.nombre
+        document.getElementById("descripcionm").value = response[0].fields.descripcion
+        document.getElementById("unidadm").value = response[0].fields.unidad
+        document.getElementById("preciom").value = precio
+        document.getElementById("cantidadm").value = cantidad
+        document.getElementById("nombrem").value = response[0].fields.nombre
+        button.innerText = button.textContent = 'Actualizar';
+
+      },
+      error: function (error) {
+        console.log("cargarMaterial", error);
+      }
+    });
+  }
+
+  function AgregarTablaMod2() {
+    var idmt = document.getElementById("idmat").value
+    var nmat = document.getElementById("nombm").value
+    var dmat = document.getElementById("descripcionm").value
+    var umat = document.getElementById("unidadm").value
+    var totalMaterial = document.getElementById("total-material").value;
+    var pmat = parseFloat(document.getElementById("preciom").value).toFixed(2);
+    var cmat = document.getElementById("cantidadm").value
+    let subTotal = parseFloat(pmat).toFixed(2) * parseFloat(cmat).toFixed(2);
+    let bandera = false;
+    document.getElementById("mt1").value = 0
+    document.getElementById("mt2").value = 1
+
+    $("#pmaterialesMod tr").each(function (index) {
+      var self = $(this)
+      var idpk = self.find("td:eq(0)").text().trim()
+      if (Number(idmt) === Number(idpk)) {
+        let preciouni = parseFloat(pmat)
+        let cant = parseInt(cmat)
+        let subtotals = (parseFloat(subTotal).toFixed(2))
+        bandera = true;
+        self.find("td:eq(4)").text(preciouni)
+        self.find("td:eq(5)").text(cant)
+        self.find("td:eq(6)").text(subtotals)
+
+      }
+    });
+    if (bandera === false) {
+      var fila = '<tr id="' + idmt + '"><td>' + idmt + '</td><td>' + nmat + '</td><td>' + dmat + '</td><td>' +
+        umat + '</td><td>' + pmat + '</td><td>' + cmat + '</td><td>' + subTotal +
+        '</td><td><button type="button" class="btn btn-danger" onclick="remove(this)">Quitar</button>' +
+        '<button type="button" class="btn btn-info" onclick="editarMaterial(' + idmt + ',' + pmat + ',' + cmat + ')">Editar</button></td></tr>';
+
+      //var fila = '<tr id="row"><td>' + idmt + '</td><td>' + nmat + '</td><td>' + dmat + '</td><td>' + umat + '</td><td>' + pmat + '</td><td>' + cmat + '</td><td>' + subTotal + '</td><td><button type="button" class="btn btn-danger"  onclick="remove(this)" >Quitar</button></td></tr>'; //esto seria lo que contendria la fila 
+      // $('#pmateriales tbody:first').after(fila);  $('#Table1 > tbody')').children('tbody') ="pmateriales"
+      $('#pmaterialesMod tbody').append(fila);
+      var nFilas = $("#pmaterialesMod tbody").length;
+    }
+
+    document.getElementById("descripcionm").value = "";
+    document.getElementById("unidadm").value = "";
+    document.getElementById("preciom").value = "";
+    document.getElementById("cantidadm").value = "";
+    document.getElementById("nombrem").value = "";
+    button.innerText = button.textContent = 'Agregar';
+
+
+    actualizaTotalMaterial()
+
+  }
+
+  function actualizaTotalMaterial() {
+    var total = 0
+    $("#pmaterialesMod tr").each(function (index) {
+
+      var sub = $(this).find("td:eq(6)").text().trim();
+      if (parseFloat(sub))
+        total = total + parseFloat(sub);
+    });
+    document.getElementById("total-material").value = total.toFixed(2); tmateriales
+    document.getElementById("tmateriales").value = total.toFixed(2);
+    actualizarSubtotalMod()
+  }
+
+  
+
+//Funciones para mano de obra
+function editarManoO(id, desc, unidad, precio, cantidad) {
+    document.getElementById("descripcionmo").value = desc
+    document.getElementById("unidadmo").value = unidad
+    document.getElementById("preciomo").value = precio
+    document.getElementById("cantidadmo").value = cantidad
+    document.getElementById("idManoObraMod").value = id  
+    document.getElementById("bscrMO").value = desc
+    buttonMO.innerText = button.textContent = 'Actualizar';
+    $('#btnCancelar-mo').fadeIn();//document.getElementById("btnCancelar-mo").style.display = 'true';
+
+  }
+
+  function actualizaTotalMD() {// actualiza el total de mano de obra
+    var total = 0
+    $("#pmanoMod tr").each(function (index) {
+
+      var sub = $(this).find("td:eq(5)").text().trim();
+      if (parseFloat(sub))
+        total = total + parseFloat(sub);
+    });
+    document.getElementById("totalMD").value = total.toFixed(2);
+    document.getElementById("tmanoobra").value = total.toFixed(2);
+    actualizarSubtotalMod()
+  }
+
+  function AgregarTablaMO() { //agrega a la tabla mano de obra
+    var nFilas = $("#pmanoMod tr").length;
+    var dmo = document.getElementById("descripcionmo").value
+    var umo = document.getElementById("unidadmo").value
+    var pmo = document.getElementById("preciomo").value
+    var cmo = document.getElementById("cantidadmo").value
+    var id = document.getElementById("idManoObraMod").value
+    const subTotal = parseFloat(pmo) * parseFloat(cmo);
+
+    if (id == "" || dmo == "" || umo == "" || pmo == "" || cmo == "") {
+      alertA("Complete los campos")
+    } else {
+      if (pmo <= 0) {
+        alertA("El precio tiene que ser mayor que 0")
+        document.getElementById("preciomo").focus();
+      } else {
+        if (cmo <= 0) {
+          alertA("La cantidad tiene que ser mayor que 0")
+          document.getElementById("cantidadmo").focus();
+        } else {
+          var bandera = false;
+
+          $("#pmanoMod tr").each(function (index) {
+            var self = $(this)
+            var idfila = self.attr('id')
+
+            if ((Number(id) === Number(idfila))) {
+              var decripcion = self.find("td:eq(1)").text().trim()
+              var unidad = self.find("td:eq(2)").text().trim()
+              var pu = self.find("td:eq(3)").text().trim()
+              var cantidad = self.find("td:eq(4)").text().trim()
+              self.find("td:eq(1)").text(dmo)
+              self.find("td:eq(2)").text(umo)
+              self.find("td:eq(3)").text(pmo)
+              self.find("td:eq(4)").text(cmo)
+              self.find("td:eq(5)").text(pmo * cmo)
+              $('#manObra-list option[data-id="'+id+'"]' ).text(dmo)
+              bandera = true;
+            }
+          });
+
+          if (bandera == false) {
+            var filamo = '<tr id="' + indiceMo + '"><td>' + id + '</td><td>' + dmo + '</td><td>' +
+              umo + '</td><td>' + pmo + '</td><td>' + cmo + '</td><td>' + subTotal +
+              '</td><td><button type="button" onclick="remove(this)" class="btn btn-danger btn_remove">Quitar</button>' +
+              '<button type="button" class="btn btn-info bnt_edit" onclick="editarManoO(' + "'" + indiceMo + "','" + dmo + "'," + "'" + umo + "'," + "'" + pmo + "'," + "'" + cmo + "'" + ')">Editar</button></td></tr>'; //esto seria lo que contendria la fila
+            $('#pmanoMod tbody').append(filamo);
+            //agrega al buscador
+            $('#manObra-list').prepend("<option data-id='" + indiceMo + "' >" + dmo + "</option>");
+            indiceMo++;
+
+          }
+          document.getElementById("idManoObraMod").value = "*" + indiceMo;
+          document.getElementById("descripcionmo").value = "";
+          document.getElementById("unidadmo").value = "";
+          document.getElementById("preciomo").value = "";
+          document.getElementById("cantidadmo").value = "";
+          document.getElementById("bscrMO").value = ""
+          document.getElementById("descripcionmo").focus();
+          buttonMO.innerText = button.textContent = 'Agregar';
+
+          subtotal += subTotal; // Sumar el subTotal al subtotal total
+          actualizaTotalMD(); // Actualizar el valor del input
+          document.getElementById("btnCancelar-mo").style.display = 'none';
+        }
+      }
+    }
+
+  }
+
+  function cargarMO() {//busca segun descripcion
+    
+    let desc = document.modPresupuesto.bscrMO.value
+    let opciones = document.querySelectorAll('#manObra-list option');
+    
+    for (let i = 0; i < opciones.length; i++) {//esto poque no muestra el id en el buscador
+      
+      if (desc.trim() == opciones[i].innerText.trim()) {// Si el nombre tecleado es igual al de la opción
+
+        desc = opciones[i].dataset.id; // Asignar ID y salir del ciclo
+        break;
+      }
+    }
+    
+    ObtenerManObra(desc)
+  }
+
+  function ObtenerManObra(id) {
+    $("#pmanoMod tr").each(function (index) {
+      var self = $(this)
+      var idfila = self.attr('id')
+
+      if ((Number(id) === Number(idfila))) {
+        let decripcion = self.find("td:eq(1)").text().trim()
+        let unidad = self.find("td:eq(2)").text().trim()
+        let pu = self.find("td:eq(3)").text().trim()
+        let cantidad = self.find("td:eq(4)").text().trim()
+
+        document.getElementById("idManoObraMod").value = id
+        document.getElementById("descripcionmo").value = decripcion
+        document.getElementById("unidadmo").value = unidad
+        document.getElementById("preciomo").value = pu
+        document.getElementById("cantidadmo").value = cantidad
+        document.getElementById("descripcionmo").focus();
+        buttonMO.innerText = button.textContent = 'Actualizar';
+        $('#btnCancelar-mo').fadeIn();
+
+      }
+    });
+  }
+
+  function cancelar() {
+    document.getElementById("descripcionmo").value = ""
+    document.getElementById("unidadmo").value = ""
+    document.getElementById("preciomo").value = ""
+    document.getElementById("cantidadmo").value = ""
+    document.getElementById("bscrMO").value = ""
+    buttonMO.innerText = button.textContent = 'Agregar';
+    document.getElementById("btnCancelar-mo").style.display = 'none';
+
+  }
+
+
+// captura y crea un arreglo con los datos generales   
+function enviarDatos() {
+  var arrayLisd=[];
+  let ids = document.getElementById("ids").value || "";
+  let fecha = document.getElementById("fechap").value ;
+  let tiempoc = document.getElementById("tiempocons").value || "";
+  let modelo = document.getElementById("modelo").value || "";
+  let dimension = document.getElementById("dimensionv").value || "";
+  let cantv = document.getElementById("cantidadv").value || "";
+  let costotv = document.getElementById("costots").value || "";
+  let idPresupuesto= document.getElementById("idPresupuesto").value || "";
+  
+
+  var infd= { 'idPresupuesto':idPresupuesto, 'ids':ids,'fecha':fecha,'tiempoc':tiempoc,'modelo':modelo,'dimension':dimension,'cantv':cantv,'costotv':costotv} 
+    arrayLisd.push(infd);
+    var jsonArraydt = JSON.stringify(arrayLisd) // convierte el arreglo a JSON
+    return jsonArraydt;
+
+
+//console.log("jsonArray 3",arrayList )
+//console.log("stringify",JSON.parse(jsonArray))
+
+
+}
+
+  function enviarTablaMt() {
+
+    var arrayList=[];
+    //var idsol=document.getElementById("ids").value;
+    console.log("jsonArray", arrayList)
+    $("#pmaterialesMod tbody >tr").each(function () {
+      var self = $(this)
+      var idtabla = self.find("td:eq(0)").text().trim()
+      var mat = self.find("td:eq(1)").text().trim()
+      var desc = self.find("td:eq(2)").text().trim()
+      var unidad = self.find("td:eq(3)").text().trim()
+      var preciounidad= self.find("td:eq(4)").text().trim()
+      var cantidad = self.find("td:eq(5)").text().trim()
+      var subtotal = self.find("td:eq(6)").text().trim();
+      var result = mat + " " + desc
+      
+      var datos = {"idm": parseInt(idtabla),"preciouni": parseFloat(preciounidad), "cantidad":parseInt(cantidad), "subtotal": parseFloat(subtotal) }
+      arrayList.push(datos);
+      
+    });
+    var jsonArray = JSON.stringify(arrayList)
+    return jsonArray;    
+  }
+
+function enviarTablaMo() {
+
+var arrayListmo=[];
+
+$("#pmanoMod tbody >tr").each(function () {
+  var self = $(this)
+  var id = self.find("td:eq(0)").text().trim()
+  var desc = self.find("td:eq(1)").text().trim()
+  var unidad = self.find("td:eq(2)").text().trim()
+  var preciou = self.find("td:eq(3)").text().trim()
+  var cantidad= self.find("td:eq(4)").text().trim()
+  var subtotal = self.find("td:eq(5)").text().trim()
+  
+  var datosmo = { "id": id, "descripc": desc ,"unidad": unidad ,"preciouni": parseFloat(preciou), "cantidad":parseInt(cantidad), "subtotal": parseFloat(subtotal) }
+  arrayListmo.push(datosmo);
+  
+});
+var jsonArraymo = JSON.stringify(arrayListmo)
+console.log(jsonArraymo)
+return jsonArraymo;
+
+
+}
+
+
+function enviarEspecif() {
+  var arrayLisesp=[];
+  let material = document.getElementById("tmateriales").value || "";
+  let manoob = document.getElementById("tmanoobra").value || "";
+  let transporte = document.getElementById("ttransporte").value || "";
+  let solucions = document.getElementById("solucionsan").value || "";
+  let kitemg = document.getElementById("kitemerg").value || "";
+  let herramienta = document.getElementById("herramientas").value || "";
+  let totalcd = document.getElementById("totalcd").value || "";
+
+
+  var infdesp= {'material':material,'manoob':manoob,'transporte':transporte,'solucions':solucions,'kitemg':kitemg,'herramienta':herramienta,'totalcd':totalcd} 
+    arrayLisesp.push(infdesp);
+    var jsonArrayesp = JSON.stringify(arrayLisesp)
+    return jsonArrayesp;
+
+
+//console.log("jsonArray 3",arrayList )
+//console.log("stringify",JSON.parse(jsonArray))
+
+
+}
+
+function validarFecha(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  function calculartotal() {
+    var v1= parseFloat(document.getElementById("costotp").value ) ;
+    var v2= parseFloat(document.getElementById("cantidadv").value) ;
+    
+    t=(v1 + v2)
+    document.getElementById("costots").value = t.toFixed(2);
+
+   
+  }
+
+  function calculartotalp() {
+    var v1= parseFloat(document.getElementById("tmateriales").value ) ;
+    var v2= parseFloat(document.getElementById("tmanoobra").value) ;
+    var v3= parseFloat(document.getElementById("ttransporte").value ) ;
+    var v4= parseFloat(document.getElementById("solucionsan").value) ;
+    var v5= parseFloat(document.getElementById("kitemerg").value ) ;
+    var v6= parseFloat(document.getElementById("herramientas").value) ;
+
+    if(isNaN(v1)){
+        v1=0
+    }
+    if(isNaN(v2)){
+        v2=0
+    }
+    if(isNaN(v3)){
+        v3=0
+    }
+    if(isNaN(v4)){
+        v4=0
+    }
+    if(isNaN(v5)){
+        v5=0
+    }
+    if(isNaN(v6)){
+        v6=0
+    }
+      document.getElementById("totalcd").value = v1 + v2 + v3 + v4 + v5 + v6;
+
+   
+  }
+  
+  function actualizarSubtotalMod() {
+    let materiales = parseFloat(document.getElementById("tmateriales").value)
+    let manoObra = parseFloat(document.getElementById("tmanoobra").value)
+
+    let total = materiales + manoObra 
+    $("#totalcd").val(total.toFixed(2)); // Actualizar el valor del input con el subtotal total
+    
+  }
+  function remove(button) {
+    // Obtener el elemento tr padre del botón presionado
+    var fila = $(button).closest('tr');
+
+    // Eliminar la fila de la tabla
+    fila.remove();
+    actualizaTotalMaterial();
+    actualizaTotalMD();
+  }
+
+
+</script>
+{% endblock %}

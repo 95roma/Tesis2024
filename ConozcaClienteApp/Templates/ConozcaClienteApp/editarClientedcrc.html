@@ -1,0 +1,191 @@
+
+<div>
+    <div class="x_title">
+      <div class="row">
+        <h2 style="text-align: center;">{{cdg.ids.perfil.get.nombres}} {{cdg.ids.perfil.get.apellidos}} </h2>
+      </div><br>
+      <div class="row">
+        <h4 class="">Declaraci&oacute;n del Cliente o Fiador en Operaciones Activas </h4>
+      </div>
+    </div>
+  
+  <div class="row">
+  
+  <div class="col-md-6 col-sm-6 col-xs-2">
+    <h4>Clasificación del Crédito:</h4>
+  </div>
+  {% if cdc.clasifcredito == "Mejora" %} 
+  <div class="col-md-2 col-sm-4 col-xs-3">
+  <p>Mejora: <input type="radio" class="flat" name="clasificacionc" id="clasificacionc" value="Mejora" checked  /></p>
+  </div><div class="col-md-3 col-sm-4 col-xs-3">
+  <p>Vivienda: <input type="radio" class="flat" name="clasificacionc" id="clasificacionc" value="Vivienda"   /></p>
+  </div>
+  {% elif cdc.clasifcredito == "Vivienda" %} 
+  <div class="col-md-2 col-sm-4 col-xs-3">
+  <p>Mejora: <input type="radio" class="flat" name="clasificacionc" id="clasificacionc" value="Mejora"  /></p>
+  </div><div class="col-md-3 col-sm-4 col-xs-3">
+  <p>Vivienda: <input type="radio" class="flat" name="clasificacionc" id="clasificacionc" value="Vivienda" checked  /></p>
+  </div>
+  {% else %}
+  <div class="col-md-2 col-sm-4 col-xs-3">
+    <p>Mejora: <input type="radio" class="flat" name="clasificacionc" id="clasificacionc" value="Mejora"   /></p>
+    </div><div class="col-md-3 col-sm-4 col-xs-3">
+    <p>Vivienda: <input type="radio" class="flat" name="clasificacionc" id="clasificacionc" value="Vivienda"  /></p>
+    </div>
+  {% endif %}
+
+  </div>
+  <BR>
+    <div class="row">
+      <div class="col-md-5 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Monto</h4>
+        <input type="text" class="form-text" id="montodc" name="montodc" value="{{cdc.montodc}}" required>
+        <span class="bar"></span>
+      </div>
+      </div>
+      <div class="col-md-5 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Cuota</h4>
+          <input type="text" class="form-text" id="cuotadc" name="cuotadc" value="{{cdc.cuotadc}}"  required>
+          <span class="bar"></span>
+        </div>
+        </div>
+      </div>
+    <div class="row">
+      <div class="col-md-8 col-sm-12 col-xs-12">
+        <h4>¿Tiene Proyectado Realizar Pagos Adicionales a las Cuotas Pactadas?</h4>
+      </div>
+      {% if cdc.rpagosadic == "Si" %} 
+      <div class="col-md-1 col-sm-3 col-xs-2">
+        <p>Si: <input type="radio"  name="rpagosadic" id="rpagosadic" value="Si"  onchange="habdesPrm(this.value);" checked /></p>
+      </div><div class="col-md-1 col-sm-3 col-xs-2">
+        <p>No: <input type="radio"  name="rpagosadic" id="rpagosadic" value="No" onchange="habdesPrm(this.value);"  /></p>
+      </div>  
+      {% else %}
+      <div class="col-md-1 col-sm-3 col-xs-2">
+        <p>Si: <input type="radio"  name="rpagosadic" id="rpagosadic" value="Si"  onchange="habdesPrm(this.value);" /></p>
+      </div><div class="col-md-1 col-sm-3 col-xs-2">
+        <p>No: <input type="radio"  name="rpagosadic" id="rpagosadic" value="No" onchange="habdesPrm(this.value);" checked /></p>
+      </div>
+      {% endif %}
+     </div>
+    <BR>
+     <div class="row">
+      <div class="col-md-11 col-sm-6 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Procedencia de los Fondos</h4>
+          <input type="text" class="form-text" id="procfondos" name="procfondos" value="{{cdc.procpagosadic}}"  >
+          <span class="bar"></span>
+        </div>
+    </div>  
+  </div>
+  <input type="hidden" id="passDCF" name="passDCF" value="0">
+  </div>
+  <div>
+    <div class="x_title">
+       <div class="row">
+         <h4 class="">Persona beneficiaria de la operaci&oacute;n </h4>
+       </div>
+     </div>
+   <div>
+     <div class="row">
+     <div class="col-md-6 col-sm-6 col-xs-12">
+       <div class="form-group form-animate-text " style="margin-top:0px !important;">
+         <label>No Aplica:</label> &nbsp;&nbsp;
+         No
+        
+           <input type="checkbox" name="noaplica" id="noaplica" value="No" onchange="HDCheck(this);"   required>
+           <ins class="iCheck-helper"></ins>
+        
+       </div>
+     </div>
+
+     <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+       <div class="form-group form-animate-text " style="margin-top:5px !important;">
+         <h4>Nombre completo del beneficiario</h4>
+         <input type="text" class="form-text" id="nombrecb" name="nombrecb" value="{{cdpbo.nombrecomp}}"   >
+         <span class="bar"></span>
+       </div>
+       </div>
+   
+    
+   </div>
+   <div class="row">
+    
+       <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+         <div class="form-group form-animate-text " style="margin-top:5px !important;">
+           <h4>Dirección  permanente</h4>
+           <input type="text" class="form-text" id="direcpermanente" name="direcpermanente" value="{{cdpbo.direccionp}}"  >
+           <span class="bar"></span>
+         </div>
+         </div>
+         <div class="col-md-6 col-sm-12 col-xs-12">
+           <div class="form-group form-animate-text " style="margin-top:5px !important;">
+             <h4>Tipo de Documento de Identificación </h4>
+   
+             <label>DUI: <input type="radio" name="tdocumento" id="tdocumento" value="DUI" /></label>
+   
+             <label> PAS: <input type="radio" name="tdocumento" id="tdocumento" value="PAS" /></label>
+   
+             <label> CR: <input type="radio" name="tdocumento" id="tdocumento" value="CR" /></label>
+             <span class="bar"></span>
+           </div>
+         </div>
+   
+     </div>
+     <div class="row">
+       <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+         <div class="form-group form-animate-text " style="margin-top:5px !important;">
+           <h4>Numero de Documento </h4>
+           <input type="text" class="form-text" id="ndocumento" name="ndocumento" value="{{cdpbo.ndocumento}}"  >
+           <span class="bar"></span>
+         </div>
+         </div>
+   
+         <div class="col-md-6 col-sm-6 col-xs-12">
+           <div class="form-group form-animate-text " style="margin-top:0px !important;">
+             <label>El Beneficiario es Persona Expuesta Politicamente:</label> &nbsp;&nbsp;
+             Si
+             <div class="iradio_flat-green ">
+               <input type="radio"   name="beneficiariopeps" id="beneficiariopeps" value="Si" >
+               <ins class="iCheck-helper"></ins>
+             </div>&nbsp;&nbsp;
+             No
+             <div class="iradio_flat-green ">
+               <input type="radio" name="beneficiariopeps" id="beneficiariopeps" value="No" >
+               <ins class="iCheck-helper"></ins>
+             </div>
+           </div>
+         </div>
+   
+     </div>
+   </div>
+   <input type="hidden" id="passBPEP" name="passBPEP" value="0">
+   </div>
+  <div>
+   <div class="x_title">
+    <div class="row">
+      <h4 class="">Perfil de transaccones (Productos actuales con la Asociaci&oacute;n) </h4>
+    </div>
+  </div>
+     <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Prestamos</h4>
+          <input type="text" class="form-text" id="prestamos" name="prestamos" value="{{cpt.prestamos}}" value="" >
+          <span class="bar"></span>
+        </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+          <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Otros (especificar)</h4>
+            <input type="text" class="form-text" id="otrosesp" name="otrosesp" value="{{cpt.espotros}}" value="" >
+            <span class="bar"></span>
+          </div>
+          </div>
+      </div>
+      <input type="hidden" id="passPT" name="passPT" value="0">
+    </div>
+  
+  

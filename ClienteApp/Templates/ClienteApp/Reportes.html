@@ -1,0 +1,114 @@
+<table class="data table table-striped no-margin">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Progreso</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><a href="../../../HistorialApp/listaHis/historial/{{perfil.id}}" id="btnHistorial"
+          class="btn btn-info">Historial Crediticio</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-success" id="rogresoEvaluacionMicro" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <!---   -->
+        <td><a id="btnAutorizacion" href="../../../HistorialApp/listaHis/autorizacion/{{perfil.id}}"
+           class="btn btn-info">Autorizacion para consultar información</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-success" id="progresoSoliMicro" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><a  id="btnEvaliacionRepo" class="btn btn-info">Evaluación </a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="rogresoEvaluacionRepo" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><a id="btnSolicitudCreditoRepo" onclick="alertA('Primero Complete el formulario')"    class="btn btn-info">Solicitud</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoSoliRepo"  data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><a id="btnConozClienteRepo" onclick="alertA('Primero Complete el formulario')"    class="btn btn-info">Conozca a su cliente</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoConozcaClienteRepo"  data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><a onclick="alertA('Primero Complete el formulario')" id="btnDeclaracionJuradaRepo"  class="btn btn-info">Declaración jurada</a></td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoDeclaracionRepo" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td><a id="btnInscripcionSeguroRepo" onclick="alertA('Primero Complete el formulario')" class="btn btn-info">Inscripción de seguro</a> </td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoSeguroRepo" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td><a id="btnInspeccionLoteRepo" onclick="alertA('Primero Complete el formulario')" class="btn btn-info">Inspección</a> </td>
+        
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoInspeccionRepo" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td> <a id="btnPresupuestoViviendaRepo" onclick="alertA('Primero Complete el formulario')" class="btn btn-info">Presupuesto</a></td>
+       
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoPresupuestoRepo" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+      <tr style="display:  none;" id="trObrasRepo" class="trObrasRepo">
+        <td>10</td>
+        <td> <a id="btnObrasAdicionalesRepo"  onclick="alertA('Primero Complete el formulario')"  class="btn btn-info">Obras Adicionales</a></td>
+       
+        <td class="vertical-align-mid">
+          <div class="progress">
+            <div class="progress-bar progress-bar-danger" id="progresoObrasAdicionalesRepo" data-transitiongoal="100"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,195 @@
+
+  <div>            <!-- Datos de declaracion de salud -->
+
+    <div class="x_title">
+        <div class="row">
+          <h2 style="text-align: center;">Espacios encontrados, Servicios Básicos, Infraestructura, Riesgos </h2>
+        </div>
+    </div>   
+    <div class="row">
+          
+      <table class="table"   style="width: 40%; white-space: nowrap">
+       <caption style="text-align: center;">
+  
+         <h2>Espacios Encontrados</h2>
+       </caption>
+ 
+       <thead>
+         <tr>
+          <th width="2%"></th>
+           <th width="30%">Espacios </th>
+           <th width="15%">Existe</th>
+         </tr>
+       </thead>
+        <tbody id="tbespaciose"  style="color: #27575c;" style="width: auto; ">
+         {% for ee in listaee %}
+          <tr>
+            <!--<td>
+             <input type="hidden" id="idinf" name="idinf" value="{{ld.id}}">
+             </td>-->
+             <td>
+               <input type="hidden" class="form-text" id="espaciose" name="espaciose" value="{{ee.nombre}}"  >
+               {{ee.nombre}}
+               </td>
+            <td> 
+             Si
+             <div class="iradio_flat-green ">
+               <input type="radio" class="flat" name="existele-{{ee.id}}" id="existele" value="Si" required>
+             &nbsp;
+             No
+               <input type="radio" class="flat" name="existele-{{ee.id}}" id="existele" value="No" checked required>
+              
+             </div>
+            
+           </td>
+          </tr>
+          
+          {% endfor %}
+        </tbody>
+    
+      </table>
+
+          
+    <table class="table"   style="width: 40%; white-space: nowrap">
+      <caption style="text-align: center;">
+ 
+        <h2>Servicios Básicos</h2>
+      </caption>
+      <thead>
+        <tr>
+         <th width="2%"></th>
+          <th width="25%">Servicios</th>
+          <th width="15%">Existe</th>
+        </tr>
+      </thead>
+      <tbody id="tbserviciosb"  style="color: #27575c;" style="width: auto; ">
+       {% for sb in listasb %}
+        <tr>
+          <td>
+           <input type="hidden" id="idenf" name="idenf" value=" {{sb.id}}">
+           </td>
+           <td>
+             <input type="hidden" class="form-text" id="serviciosb" name="serviciosb" value="{{sb.nombre}}"  >
+             {{sb.nombre}}
+             </td>
+       
+          <td> 
+           Si
+           <div class="iradio_flat-green ">
+             <input type="radio" class="flat"  name="existesb-{{sb.id}}" id="existesb" value="Si" required>
+             <ins class="iCheck-helper"></ins>
+           </div>&nbsp;
+           No
+           <div class="iradio_flat-green ">
+             <input type="radio" class="flat" name="existesb-{{sb.id}}" id="existesb" value="No" checked required>
+             <ins class="iCheck-helper"></ins>
+           </div>           
+         </td>              
+         
+        </tr>
+        {% endfor %}
+      </tbody>
+  
+    </table>
+
+
+
+     
+     <input type="hidden" id="passtbI" name="passtbI" value="0">
+   </div>
+ <BR>
+
+  <div class="row">
+
+ 
+          
+    <table class="table"   style="width: 40%; white-space: nowrap">
+     <caption style="text-align: center;">
+
+       <h2>Infraestructura</h2>
+     </caption>
+
+     <thead>
+       <tr>
+        <th width="2%"></th>
+         <th width="25%">Infraestructura </th>
+         <th width="15%">Existe</th>
+       </tr>
+     </thead>
+      <tbody id="tbinfraestructuram"  style="color: #27575c;" style="width: auto; ">
+       {% for inf in listaif %}
+        <tr>
+          <!--<td>
+           <input type="hidden" id="idinf" name="idinf" value="{{ld.id}}">
+           </td>-->
+           <td>
+             <input type="hidden" class="form-text" id="infraestructuram" name="infraestructuram" value="{{inf.nombre}}"  >
+             {{inf.nombre}}
+             </td>
+          <td> 
+           Si
+           <div class="iradio_flat-green ">
+             <input type="radio" class="flat" name="existelim-{{inf.id}}" id="existelim" value="Si" required>
+           &nbsp;
+           No
+             <input type="radio" class="flat" name="existelim-{{inf.id}}" id="existelim" value="No" checked required>
+            
+           </div>
+          
+         </td>
+        </tr>
+        
+        {% endfor %}
+      </tbody>
+  
+    </table>
+
+  
+ </div>
+ <div class="x_title">
+  <div class="row">
+    <h2 class="">Vias de Acceso </h2>
+  </div>
+</div>
+<span class="section"></span>
+<div class="row">
+  <div class="col-md-10 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:10px !important;">
+      <label>Vias de Acceso:</label> &nbsp;&nbsp;&nbsp;
+      Carretera / Calle Pavimentada
+      <div class="iradio_flat-green ">
+        <input type="radio" class="flat"  name="tipovia" id="tipovia" value="Carretera / Calle Paviment" checked required>
+        <ins class="iCheck-helper"></ins>
+      </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Calle Rural
+      <div class="iradio_flat-green ">
+        <input type="radio" class="flat" name="tipovia" id="tipovia" value="Calle Rural" required>
+        <ins class="iCheck-helper"></ins>
+      </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Servidumbre
+      <div class="iradio_flat-green ">
+        <input type="radio" class="flat" name="tipovia" id="tipovia" value="Servidumbre" required>
+        <ins class="iCheck-helper"></ins>
+      </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      Pasaje Peatonal
+      <div class="iradio_flat-green ">
+        <input type="radio" class="flat" name="tipovia" id="tipovia" value="Pasaje Peatonal" required>
+        <ins class="iCheck-helper"></ins>
+      </div>
+    </div>
+  </div>
+ 
+  </div>
+      
+</div>
+
+
+
+
+
+
+
+
+
+
+

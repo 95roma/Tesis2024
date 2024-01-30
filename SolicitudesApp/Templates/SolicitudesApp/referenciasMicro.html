@@ -1,0 +1,113 @@
+
+      <div>            <!-- Referencias personales y familiares -->
+        <input type="hidden" id="passRPF" name="passRPF" value="0">
+        <input  type="hidden"  value="{{soli.9.0.id}}" name="idRF" maxlength="50"  >
+        <input  type="hidden"  value="{{soli.9.1.id}}" name="idRF" maxlength="50"  >
+        <input  type="hidden"  value="{{soli.9.2.id}}" name="idRF" maxlength="50"  >
+        <table class="table">
+          <caption style="text-align: center;">
+            <h2>Referencias personales y familiares</h2>
+          </caption>
+          <thead>
+            <tr>
+              <th width="25%">Nombre Completo</th>
+              <th width="20%">Parentesco</th>
+              <th width="35%">Domicilio Completo</th>
+              <th width="20%">Telefono</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text" id="nombreRPF" name="nombreRPF" maxlength="50" placeholder="" value="{{soli.9.0.nombre}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text" id="parentescoRPF" name="parentescoRPF" list="parentesco-list" maxlength="50" placeholder="" value="{{soli.9.0.parentesco}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text" id="domicilioRPF" name="domicilioRPF" maxlength="50" placeholder="" value="{{soli.9.0.domicilio}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  id="telefonoRPF" name="telefonoRPF" onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 "  maxlength="9" placeholder="" value="{{soli.9.0.telefono}}" 
+                    required>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  name="nombreRPF" maxlength="50" placeholder="" value="{{soli.9.1.nombre}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  name="parentescoRPF" maxlength="50" list="parentesco-list" placeholder="" value="{{soli.9.1.parentesco}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  name="domicilioRPF" maxlength="50" placeholder="" value="{{soli.9.1.domicilio}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"   name="telefonoRPF" onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 "  maxlength="9" placeholder="" value="{{soli.9.1.telefono}}"
+                    required>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  name="nombreRPF" maxlength="50" placeholder="" value="{{soli.9.2.nombre}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  name="parentescoRPF" maxlength="50" list="parentesco-list" placeholder="" value="{{soli.9.2.parentesco}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"  name="domicilioRPF" maxlength="50" placeholder="" value="{{soli.9.2.domicilio}}" 
+                    required>
+                </div>
+              </td>
+              <td>
+                <div class="form-group form-animate-text  " style="margin-bottom:0px !important;"
+                  style="padding-bottom:0px !important;">
+                  <input type="text" class="form-text"   name="telefonoRPF" onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 "  maxlength="9" placeholder="" value="{{soli.9.2.telefono}}"
+                    required>
+                </div>
+              </td>
+            </tr>
+           
+          </tbody>
+        </table>
+      </div><!-- / fin Referencias personales y familiares -->

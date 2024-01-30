@@ -1,0 +1,121 @@
+<div>            <!-- Datos de deformidad, amputacion o defecto fisico -->
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Tiene alguna deformidad, amputación o defecto fisico, defecto de la vista o del oido</h4>
+      </div>
+    </div>
+      <div  class="col-md-6 col-sm-12 col-xs-12  " >    
+      <label>Si <input type="radio"  name="tiened" id="tiened" value="Si" onchange="HDdef(this.value);"  required />   </label>                      
+      <span class="bar"></span>   
+      <label>No <input type="radio"  name="tiened" id="tiened" value="No" onchange="HDdef(this.value);" checked  required />   </label>                      
+      <span class="bar"></span>
+    </div> 
+</div>
+
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Detalles</h4>
+      <input type="text" class="form-text" id="detalled" name="detalled" maxlength="50" disabled >
+      <span class="bar"></span>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Fuma cigarrillos o pipa?</h4>
+    </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <label> Si <input type="radio"  name="fumacp" id="fumacp" value="Si" onchange="HDcig(this.value);"   required /> </label> 
+      <label> No <input type="radio"  name="fumacp" id="fumacp" value="No" onchange="HDcig(this.value);"  checked required /> </label>                   
+      <span class="bar"></span>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Cuántos al dia?</h4>
+        <input type="text" class="form-text" id="cuantosd" name="cuantosd" maxlength="15" disabled >
+        <span class="bar"></span>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Ingiere bebidads alcoholicas</h4>
+    </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <label> Si <input type="radio"  name="ibebidas" id="ibebidas" value="Si" onchange="HDbeb(this.value);"  required /> </label> 
+      <label> No <input type="radio"  name="ibebidas" id="ibebidas" value="No" onchange="HDbeb(this.value);" checked required /> </label>                   
+      <span class="bar"></span>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Con qué frecuencia?</h4>
+        <input type="text" class="form-text" id="frecuanciab" name="frecuanciab"  maxlength="25" disabled >
+        <span class="bar"></span>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Ha estado en tratamiento con algun medico?</h4>
+    </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <label> Si <input type="radio"  name="tratamientomd" id="tratamientomd" value="Si" onchange="HDtat(this.value);"  required /> </label> 
+      <label> No <input type="radio"  name="tratamientomd" id="tratamientomd" value="No" onchange="HDtat(this.value);" checked  required /> </label>                   
+      <span class="bar"></span>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Detalles</h4>
+        <input type="text" class="form-text" id="detalletm" name="detalletm" maxlength="50"  disabled>
+        <span class="bar"></span>
+      </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Practica alguna actividad o deporte peligroso o extremo?</h4>
+    </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <label> Si <input type="radio"  name="practicaadp" id="practicaadp" value="Si" onchange="HDact(this.value);" required /> </label> 
+      <label> No <input type="radio"  name="practicaadp" id="practicaadp" value="No" onchange="HDact(this.value);" checked required /> </label>                   
+      <span class="bar"></span>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Clase </h4>
+        <input type="text" class="form-text" id="clase" name="clase" maxlength="25" disabled >
+        <span class="bar"></span>
+      </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Frecuencia</h4>
+    <input type="text" class="form-text" id="frecuencia" name="frecuencia"  maxlength="25" disabled >
+    <span class="bar"></span>
+  </div>
+</div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Seguro de Desempleo</h4>
+    </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <label> Si <input type="radio"  name="segurod" id="segurod" value="Si"  required /> </label> 
+      <label> No <input type="radio"  name="segurod" id="segurod" value="No" checked required /> </label>                   
+      <span class="bar"></span>
+    </div>
+  </div>
+  <input type="hidden" id="passDO" name="passDO" value="0">
+</div>

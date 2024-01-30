@@ -1,0 +1,237 @@
+<div class="content"> <!-- tabla para domicilio y lugar de microempresa -->
+    <input type="hidden" id="passDLN" name="passDLN" value="0">
+    <input type="hidden" id="passDLNC" name="passDLNC" value="0">
+    <input type="hidden" id="idDomicilioCCN" name="idDomicilioCCN" value="{{soli.5.id}}">
+  
+  
+  
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <h2>DATOS DE SOLICITANTE</h2>
+        <h3><span></span></h3>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <h2>DATOS DEL FIADOR</h2>
+        <h3><span></span></h3>
+      </div>
+  
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Direccion actual del domicilio</h4>
+          <input type="text" class="form-text" id="direActS" name="direActS" maxlength="50" minlength="6"
+            value="{{soli.0.perfil.direccion}}{{cliente.direccion}}" disabled required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Direccion actual del domicilio</h4>
+          <input type="text" class="form-text" id="direActC" name="direActC" maxlength="50" minlength="6"
+            value="{{soli.5.direccion}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Punto de referencia</h4>
+          <input type="text" class="form-text" id="puntoRefS" name="puntoRefS" maxlength="50" minlength="6"
+            value="{{soli.4.referencia}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Punto de referencia</h4>
+          <input type="text" class="form-text" id="puntoRefC" name="puntoRefC" maxlength="50" minlength="6"
+            value="{{soli.5.referencia}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Telefono</h4>
+          <input type="text" class="form-text"
+            onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 " id="telefonoS" name="telefonoS"
+            maxlength="9" minlength="9" value="{{soli.0.perfil.telefono}}{{cliente.telefono}}" disabled required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Telefono
+          </h4>
+          <input type="text" class="form-text"
+            onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 " id="telefonoC" name="telefonoC"
+            maxlength="9" minlength="9" value="{{soli.5.telefono}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Reside desde</h4>
+          <input type="text" class="form-text" id="resideS" name="resideS" maxlength="50" minlength="4"
+            value="{{soli.4.resideDesde}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Reside desde</h4>
+          <input type="text" class="form-text" id="resideC" name="resideC" maxlength="50" minlength="4"
+            value="{{soli.5.resideDesde}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Condicion de vivienda </h4>
+          <input type="text" class="form-text" id="condicionS" name="condicionS" maxlength="50" minlength="4"
+            value="{{soli.4.condVivienda}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Condicion de vivienda </h4>
+          <input type="text" class="form-text" id="condicionC" name="condicionC" maxlength="50" minlength="4"
+            value="{{soli.5.condVivienda}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Lugar de trabajo o negocio </h4>
+          <input type="text" class="form-text" id="lugrTrabS" name="lugrTrabS" maxlength="50" minlength="4"
+            value="{{soli.4.lugarTrabajo}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Lugar de trabajo o negocio </h4>
+          <input type="text" class="form-text" id="lugrTrabC" name="lugrTrabC" maxlength="50" minlength="4"
+            value="{{soli.5.lugarTrabajo}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Jefe inmediato </h4>
+          <input type="text" class="form-text" id="jefeS" name="jefeS" maxlength="50" minlength="4"
+            value="{{soli.4.jefeInm}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Jefe inmediato </h4>
+          <input type="text" class="form-text" id="jefeC" name="jefeC" maxlength="50" minlength="4"
+            value="{{soli.5.jefeInm}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Tiempo de empleo </h4>
+          <input type="text" class="form-text" id="tiempoS" name="tiempoS" maxlength="50" minlength="4"
+            value="{{soli.4.tiempEmptiempFun}}" required>
+  
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Tiempo de empleo </h4>
+          <input type="text" class="form-text" id="tiempoC" name="tiempoC" maxlength="50" minlength="4"
+            value="{{soli.5.tiempEmptiempFun}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Salario </h4>
+          <input type="text" class="form-text"
+            onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46  " id="salarioS"
+            name="salarioS" maxlength="7" minlength="2" value="{{ingresosf.familiar}} " disabled
+            required>
+          <!-- {{estado.mensual}} -->
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Salario </h4>
+          <input type="text" class="form-text"
+            onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " id="salarioC"
+            name="salarioC" maxlength="7" minlength="2" value="{{soli.5.salarioIngreso}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+
+     <div class="row">
+      <input type="text" class="hidden" id="direccionNS" name="direccionNS" maxlength="100" minlength="4" value="">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Dirección del trabajo </h4>
+          <input type="text" class="form-text" id="lugrNatuS" name="lugrNatuS" maxlength="100" minlength="4" value="{{soli.4.lugarTrabajo}}"
+          required>
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Dirección del trabajo </h4>
+            <input type="text" class="form-text" id="direccionNC" name="direccionNC" maxlength="100" minlength="4"
+            value="{{soli.5.direccionTrabMicro}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Teléfono del trabajo </h4>
+          <input type="text" class="form-text"
+            onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 " id="telefonoNS"
+            name="telefonoNS" maxlength="9" minlength="9" value="{{soli.4.telefonoTrabMicro}}" required>
+  
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Teléfono del trabajo </h4>
+          <input type="text" class="form-text"
+            onkeypress="validarTel(this);return event.charCode>=48 && event.charCode<=57 " id="telefonoNC"
+            name="telefonoNC" maxlength="9" minlength="9" value="{{soli.5.telefonoTrabMicro}}" required>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+  
+  
+  
+  
+  
+  </div><!-- / fin tabla para domicilio y lugar de microempresa -->

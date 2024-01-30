@@ -1,0 +1,470 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Declaración Jurada Clientes{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="done" isdone="1" rel="2">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Declaración bajo Juramento</small> </span>
+      </a>
+    </li>
+
+  </ul>
+
+ 
+    <div class="stepContainer" style="overflow: hidden !important;">
+      <form style="overflow: hidden !important;" id="declaracionj" name="declaracionj"
+        action="../../../DeclaracionJurClienteApp/registrarDj/" method="post" autocomplete="off">{% csrf_token %}
+        <input type="hidden" id="estadoM" name="estadoM" value="Incompleto">
+  
+        <input type="hidden" id="ids" name="ids" value="{{s.id}}">
+        <div id="step-1" class="content" style="display: block;">
+          <div class="x_title">
+            <div class="row">
+              <h4 class="">Datos Generales </h4>
+            </div>
+          </div>
+        
+ 
+    <div class="row"><!--primer row  del formulario -->
+      <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre de la persona natural o representante legal</h4>
+          <input type="text" class="form-text" id="nombrepn" name="nombrepn" value="{{s.perfil.nombres}} {{s.perfil.apellidos}}" disabled  required>
+          <span class="bar"></span>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>No. de DUI</h4>
+        <input type="text" class="form-text" id="ndui" name="ndui" onkeypress=" vdui('ndui');return event.charCode>=48 && event.charCode<=57 " maxlength="10" minlength="10" value="{{s.perfil.dui}}" disabled  required>
+        <span class="bar"></span>
+      </div>
+  </div>
+  </div>
+
+
+<div class="row">
+<div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Tipo de operación</h4>
+      <div class="col-md-10 col-sm-10 ">
+          <select class="form-text" id="tipoop" name="tipoop"  required >
+              <option selected ></option>
+              {% for op in operaciones %}
+              <option value="{{op.id}}" >{{op.nombre}}</option>
+              {% endfor %}
+          </select>
+      </div>
+      <span class="bar"></span>
+  </div>
+</div>
+<div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Crédito N°</h4>
+      <input type="text" class="form-text" id="ncredito" name="ncredito"  required>
+      <span class="bar"></span>
+    </div>
+  </div>
+</div>
+<div class="row">
+<div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Monto $</h4>
+    <input type="text" class="form-text" id="monto" name="monto" value="{{d.monto}}" disabled  required>
+    <span class="bar"></span>
+  </div>
+</div>
+<div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+    <h4>Plazo Años</h4>
+    <input type="text" class="form-text" id="plazo" name="plazo" value="{{d.plazo}}" disabled required>
+    <span class="bar"></span>
+  </div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  derecha-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Cuota $</h4>
+      <input type="text" class="form-text" id="cuota" name="cuota" value="{{d.cuota}}" disabled required>
+      <span class="bar"></span>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Forma de Pago</h4>
+        <div class="col-md-10 col-sm-10 ">
+            <select class="form-text" id="fpago" name="fpago"  required >
+                <option  selected disabled>Seleccione</option>
+                <option value="Efectivo" >Efectivo</option>
+                <option value="Cheque">Cheque</option>
+                <option value="Transferencia">Transferencia</option>
+                
+            </select>
+        </div>
+        <span class="bar"></span>
+    </div>  
+</div>
+  </div>
+</div>
+  <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+  {% include "DeclaracionJurClienteApp/declaracionjcdj.html" %}
+  </div>
+</form>
+</div>
+</div>
+
+
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+     $(document).ready(function(){
+
+
+  $("#fin").click(function () {
+    document.getElementById("nombrepn").disabled = false;
+    document.getElementById("ndui").disabled = false;
+    document.getElementById("monto").disabled = false;
+    document.getElementById("plazo").disabled = false;
+    document.getElementById("cuota").disabled = false;
+  
+   document.getElementById("passAE").value = '1'
+   document.getElementById("passGN").value = '1'
+   
+   if($("#declaracionj").valid()){ 
+  // if (validarDatosA()) {
+  //   if (validarDatosG()) {
+         document.declaracionj.submit()
+       
+  //   }
+  // }
+ 
+  }else{
+      Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'DEBE REGISTRAR DATOS!',
+      imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+      imageWidth: 200,
+      imageHeight: 100
+      }) 
+      return false; // Evita el envío del formulario si la validación falla
+  }
+
+   
+ });
+
+
+$('input').on('keypress', function(e){
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+});
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ.]*$/i.test(value);
+}, "<h2>Ingrese sólo letras ..</h2>");
+
+$.validator.addMethod("validardui", function(value, element) {
+    return /^(?!.*(.)\1{4})\d{8}-\d{1}$/.test(value);
+}, "<h2>Ingrese corecctamente el DUI ..</h2>");
+
+$.validator.addMethod("numero", function(value, element) {
+    return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+$.validator.addMethod("numeroguion", function(value, element) {
+    return /^[0-9-]*$/i.test(value);
+}, "<h2>Ingrese sólo numero y guiones  </h2>");
+
+$.validator.addMethod("letrasn", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+}, "<h2>Ingrese un valor valido ..</h2>");
+
+function validarDatosA() {
+    if (document.getElementById("empleadoen").value != "" &&
+      document.getElementById("profecionind").value != "" &&
+      document.getElementById("conocimientoen").value != "" &&
+      document.getElementById("empresarioen").value != "" 
+    ) {
+      document.getElementById("passAE").value = "1"
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+  function validarDatosG() {
+    if (document.getElementById("empresad").value != "" &&
+      document.getElementById("industiad").value != "" &&
+      document.getElementById("comerciod").value != ""
+    ) {
+      document.getElementById("passGN").value = "1"
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+$("#declaracionj").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    nombrepoe:{    
+      required: true,
+      letras:true,
+      minlength:3,
+      maxlength:60
+    },
+    nregfiscal:{
+      minlength:3,
+      required: false,
+      numeroguion:true,
+      maxlength:15
+    },
+    nombrepno:{
+      minlength:3,
+      required: true,
+      letras:true,
+      maxlength:60
+    },
+
+    ndui:{
+      minlength:10,
+      required: true,
+      validardui:true,
+      maxlength:10
+    },
+    nnitemp:{
+      minlength:9,
+      required: false,
+      numeroguion:true,
+      maxlength:15
+    },
+    tipoop:{
+      required: true,
+      
+    },
+    ncredito:{
+      minlength:3,
+      required: false,
+      numero:true,
+      maxlength:20
+    },
+    plazo:{
+      minlength:1,
+      required: false,
+      letrasn:true,
+      maxlength:20
+    },
+    fpago:{
+      required: false,
+    },
+    
+    empleadoen:{
+      minlength:5,
+      required: false,
+      letras:true,
+      maxlength:50
+
+    },
+    profecionind:{
+      minlength:5,
+      required: false,
+      letras:true,
+      maxlength:50
+
+    },
+    conocimientoen:{
+      minlength:5,
+      required: false,
+      letras:true,
+      maxlength:50
+
+    },
+    empresarioen:{
+      minlength:5,
+      required: false,
+      letras:true,
+      maxlength:50
+
+    },
+    empresad:{
+      minlength:5,
+      required: false,
+      letras:true,
+      maxlength:50
+
+    },
+    industiad:{
+      minlength:5,
+      required: false,
+      letras:true,
+      maxlength:50
+
+    },
+    comerciod:{
+      minlength:5,
+      required: false,
+      letras:true,
+      maxlength:50
+
+    },
+
+
+  },
+  messages: {
+    nombrepoe:{
+        required : "<h2>Debe ingresar los nombres</h2>",
+        minlength : "<h2>EL nombre debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL nombre debe tener un maximo de 60 caracteres</h2>"
+    },
+    nregfiscal:{
+        required : "<h2>Debe ingresar el numero de registro fiscal</h2>",
+        minlength : "<h2>EL numero debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL numero debe tener un maximo de 15 caracteres</h2>"
+    },
+    nombrepno:{
+        required : "<h2>Debe ingresar el nombre</h2>",
+        minlength : "<h2>EL nombre debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL nombre debe tener un maximo de 60 caracteres</h2>"
+    },
+    ndui:{
+        required : "<h2>Debe ingresar el dui</h2>",
+        minlength : "<h2>EL dui debe tener un minimo de 10 caracteres</h2>",
+        maxlength : "<h2>EL dui debe tener un maximo de 10 caracteres</h2>"
+    },
+    nnitemp:{
+        required : "<h2>Debe ingresar el nit</h2>",
+        minlength : "<h2>EL nit debe tener un minimo de 9 caracteres</h2>",
+        maxlength : "<h2>EL nit debe tener un maximo de 15 caracteres</h2>"
+    },
+    tipoop:{
+        required : "<h2>Debe seleccionar el tipo de operación</h2>",
+    },
+    ncredito:{
+        required : "<h2>Debe ingresar el numero de credito</h2>",
+        minlength : "<h2>EL numero de credito debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL numero de credito debe tener un maximo de 20 caracteres</h2>"
+    },
+    plazo:{
+        required : "<h2>Debe ingresar el plazo</h2>",
+        minlength : "<h2>EL plazo debe tener un minimo de 3 caracteres</h2>",
+        maxlength : "<h2>EL plazo debe tener un maximo de 20 caracteres</h2>"
+    },
+    fpago:{
+        required : "<h2>Debe seleccionar la forma de pago</h2>",
+    },
+    empleadoen:{
+        required : "<h2>Debe ingresar el campo</h2>",
+        minlength : "<h2>EL campo debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>EL campo debe tener un maximo de 50 caracteres</h2>"
+    },
+    profecionind:{
+        required : "<h2>Debe ingresar el campo</h2>",
+        minlength : "<h2>EL campo debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>EL campo debe tener un maximo de 50 caracteres</h2>"
+    },
+    conocimientoen:{
+        required : "<h2>Debe ingresar el campo</h2>",
+        minlength : "<h2>EL campo debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>EL campo debe tener un maximo de 50 caracteres</h2>"
+    },
+    empresarioen:{
+        required : "<h2>Debe ingresar el campo</h2>",
+        minlength : "<h2>EL campo debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>EL campo debe tener un maximo de 50 caracteres</h2>"
+    },
+    empresad:{
+        required : "<h2>Debe ingresar el campo</h2>",
+        minlength : "<h2>EL campo debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>EL campo debe tener un maximo de 50 caracteres</h2>"
+    },
+    industiad:{
+        required : "<h2>Debe ingresar el campo</h2>",
+        minlength : "<h2>EL campo debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>EL campo debe tener un maximo de 50 caracteres</h2>"
+    },
+    comerciod:{
+        required : "<h2>Debe ingresar el campo</h2>",
+        minlength : "<h2>EL campo debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>EL campo debe tener un maximo de 50 caracteres</h2>"
+    },
+   
+   
+  }
+});
+
+});
+
+function vdui(id){
+      var num=  document.getElementById(id).value.length;
+      
+      if(num==8)
+      document.getElementById(id).value=document.getElementById(id).value+'-';
+      
+     
+    }
+function HDpa(value) {
+    if (value == "Si") {
+      document.getElementById("procedenciaf").disabled = false;
+      document.getElementById("procedenciaf").focus();
+    } else if (value == "No") {
+      document.getElementById("procedenciaf").value = "";
+      document.getElementById("procedenciaf").blur();
+      document.getElementById("procedenciaf").disabled = true;
+    }
+  }
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,211 @@
+
+<div>
+ 
+    <input type="hidden" id="iddg" name="iddg" value="{{s.id}}">
+    <div class="x_title">
+      <div class="row">
+        <h2 style="text-align: center;">{{cdg.ids.perfil.get.nombres}} {{cdg.ids.perfil.get.apellidos}} </h2>
+      </div><br>
+      <div class="row">
+        <h4 class="">Datos  de la Empresa o Lugar en que Genera sus Ingresos </h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Nombre de la Empresa o Negocio</h4>
+          <input type="text" class="form-text" id="nombreneg" name="nombreneg" value="{{d.lugarTrabajo}}" disabled required>
+          <span class="bar"></span>
+        </div>
+    </div>
+      <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Cargo que Desempeña</h4>
+          <input type="text" class="form-text" id="cargode" name="cargode" value="{{cde.cargodes}}"  required>
+          <span class="bar"></span>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Teléfono</h4>
+        <input type="text" class="form-text" id="telefono" name="telefono" value="{{d.telefonoMicr}}" disabled maxlength="9" minlength="9" required>
+        <span class="bar"></span>
+      </div>
+  </div>
+    <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+         <h4>Fax</h4>
+        <input type="text" class="form-text mask-fax" id="fax" name="fax" value="{{cde.fax}}"  >
+        <span class="bar"></span>
+      </div>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Tiempo de Laborar</h4>
+      <input type="text" class="form-text" id="tiempolab" name="tiempolab" value="{{cde.tiempolaborar}}"  required>
+      <span class="bar"></span>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Actividad del Negocio(cuando aplique)</h4>
+    <input type="text" class="form-text" id="actividadneg" name="actividadneg" value="{{cde.actividadnegocio}}"   >
+    <span class="bar"></span>
+    </div>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Principales Proveedores(cuando aplique)</h4>
+      <input type="text" class="form-text" id="principrov" name="principrov" value="{{cde.prinporoveedores}}"    >
+      <span class="bar"></span>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Dirección</h4> 
+      <input type="text" class="form-text" id="direccionde" name="direccionde" value="{{cde.direccion}}"   required>
+      <span class="bar"></span>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Cantón</h4>
+      <input type="text" class="form-text" id="cantonde" name="cantonde" value="{{cde.canton}}"   >
+      <span class="bar"></span>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Departamento</h4>
+      
+      <select id="departamentode" class="form-text" name="departamentode"  onchange="cambiarMun()" required> 
+        <option value="0" selected disabled>SELECCIONE DEPARTAMENTO... </option> 
+        {% for d in departamento %}
+        {% if d.nombre_depto == cde.municipio.depto.nombre_depto %}
+        <option value="{{d.id}}" selected>{{d.nombre_depto}}</option>
+        {% else %}
+        <option value="{{d.id}}">{{d.nombre_depto}}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+      <span class="bar"></span>
+    </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      
+    <h4>Municipio</h4>
+         <select name="municipiode" id="municipiode" class="form-text" required> 
+          {% for d in Municip %}
+          {% if d.nombre_muni == cde.municipio.nombre_muni %}
+          <option value="{{d.idmuni}}" selected>{{d.nombre_muni}}</option>
+          {% else %}
+          <option value="{{d.idmuni}}">{{d.nombre_muni}}</option>
+          {% endif %}
+          {% endfor %}
+                      
+              </select> 
+      <span class="bar"></span>
+    </div>
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Pais</h4>
+      <input type="text" class="form-text" id="paisde" name="paisde" value="El Salvador " value="{{cde.pais}}"  disabled   required>
+      <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Rango de Ingresos Mensuales por salario o negocio</h4>
+    <input type="text" class="form-text" id="rangoing" name="rangoing" value="{{cde.rangoingresos}}"   required>
+    <span class="bar"></span>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-6 col-xs-6">
+      <h4>Otros Ingresos:</h4>
+  </div>
+  {% if cde.otrosingresos == "Si" %}
+    <div class="col-md-2 col-sm-2 col-xs-4">  
+    <p>Si:<input type="radio"  name="otingresos" id="otingresos" value="Si" checked  onchange="habdesOm(this.value)"  required /></p>
+    </div><div class="col-md-2 col-sm-2 col-xs-4">
+    <p>No:<input type="radio"  name="otingresos"  id="otingresos" value="No"  onchange="habdesOm(this.value)"  required /></p>
+  </div>
+    {% else %}
+    <div class="col-md-2 col-sm-2 col-xs-4"> 
+    <p>Si:<input type="radio"  name="otingresos" id="otingresos" value="Si"  onchange="habdesOm(this.value)"  required /></p>
+  </div><div class="col-md-2 col-sm-2 col-xs-4">
+  <p>No:<input type="radio"  name="otingresos"  id="otingresos" value="No" checked onchange="habdesOm(this.value)"  required /></p>
+   </div> 
+    {% endif %}
+ 
+  </div>
+  <div class="row">
+  <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Procedencia</h4>
+    <input type="text" class="form-text"  id="procedencia" name="procedencia" value="{{cde.procedenciaoi}}" >
+    <span class="bar"></span>
+  </div>
+  </div>
+     <div class="col-md-4 col-sm-6 col-xs-6">
+        <h4>¿Recibe Remesas Familiares?</h4>
+         </div>
+         {% if cde.rremesa == "Si" %} 
+      <div class="col-md-1 col-sm-2 col-xs-4">
+        <p>Si: <input type="radio"  name="remesas" id="remesas" value="Si" checked onchange="habdesRm(this.value);"  required /></p>
+      </div><div class="col-md-1 col-sm-2 col-xs-4">
+        <p>No: <input type="radio"  name="remesas" id="remesas" value="No"  onchange="habdesRm(this.value);" required /></p>
+      </div> 
+      {% else %}
+      <div class="col-md-1 col-sm-2 col-xs-4">
+        <p>Si: <input type="radio"  name="remesas" id="remesas" value="Si"  onchange="habdesRm(this.value);"  required /></p>
+      </div><div class="col-md-1 col-sm-2 col-xs-4">
+        <p>No: <input type="radio"  name="remesas" id="remesas" value="No" checked onchange="habdesRm(this.value);" required /></p>
+      </div> 
+      {% endif %}
+
+
+     </div>
+    <BR>
+     <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Nombre del Remitente</h4>
+          <input type="text" class="form-text" id="nombreremit" name="nombreremit" value="{{cde.nombreremitente}}"  >
+          <span class="bar"></span>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Parentesco</h4>
+        <input type="text" class="form-text" id="parentesco" name="parentesco" value="{{cde.parentesco}}"  >
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Pais de origen de la Remesa</h4>
+          <input type="text" class="form-text" id="paisorgr" name="paisorgr" value="{{cde.paisorigenr}}"  >
+          <span class="bar"></span>
+        </div>
+    </div>
+  </div>
+  <input type="hidden" id="passDE" name="passDE" value="0">
+  </div>
+  
+  

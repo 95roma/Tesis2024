@@ -1,0 +1,221 @@
+<ul class="nav side-menu">
+                 
+    
+    <li><a><i class="fa fa-gear"></i> Configuraciones Generales <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a><i class="fa fa-home"></i> Direcci&oacute;n <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'depto'%}">Registro Departamento</a></li>
+            <li><a href="{% url 'listarDepto'%}">Lista de Departamentos</a></li>
+            <li><a href="{% url 'muni'%}">Registro Municipio</a></li>
+            <li><a href="{% url 'listarMuni'%}">Lista de Municipios</a></li>
+            <li><a href="{% url 'distrito'%}">Registro Distrito</a></li>
+            <li><a href="{% url 'listarDistrito'%}">Lista de Distritos</a></li>
+           
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Agencia <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'registroAgencias'%}">Registro de Agencia</a></li>
+            <li><a href="{% url 'listarAgencias'%}">Lista de Agencias</a></li>
+            
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Zona <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'zonaAgencia'%}">Registro de Zona</a></li>
+            <li><a href="{% url 'asignarZona'%}">Asignar Zona</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Salario <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'salario'%}">Registro de Salario</a></li>
+            <li><a href="{% url 'listaSalario'%} " >Rangos de salario</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Intereses <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'tasa'%}">Registro de tasa</a></li>
+            <li><a href="{% url 'listarTasa'%}">Lista tasa int</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Alternativas  <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'alternativa'%}">Registro de Alternativas</a></li>
+            <li><a href="{% url 'listarAl'%}">Lista de alternativas</a></li>
+            <li><a href="{% url 'rangoFinan'%}">Rango de financiamiento</a></li>
+            <li><a href="{% url 'listaRanFin'%}">Lista de rangos de financiamiento</a></li>
+                        
+          </ul>
+        </li>
+
+        <li><a><i class="fa fa-renren"></i> Modelo de vivienda<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'tvivienda'%}">Registro de Modelos</a></li>
+            <li><a href="{% url 'listaModeloV'%}">Lista de modelo de vivienda</a></li>
+           
+          </ul>
+        </li>
+
+        <li><a><i class="fa fa-renren"></i> DICOM<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'rangoh'%} " >Registrar Rango </a></li> 
+            <li><a href="{% url 'listaRango'%} " >Lista Rangos DICOM</a></li>       
+          </ul>
+        </li>
+        
+        <li><a><i class="fa fa-renren"></i> Ocupacion <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'ocupacion'%} " >Registro de Ocupacion</a></li>
+            <li><a href="{% url 'listaOcupacion'%} " >Lista de Ocupacion</a></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Tipo de operación <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'toperacion'%} " >Registrar tipo de operación</a></li>
+            <li><a href="{% url 'listaToperaciones'%} " >Lista de tipo de operación</a></li>        
+          </ul>
+        </li>  
+
+        <li><a><i class="fa fa-renren"></i> Enfermedades <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'enfermedad'%} " >Registro de Enfermedades</a></li>
+            <li><a href="{% url 'listaEnfer'%} " >Lista de Enfermedades</a></li>
+          </ul>
+        </li>
+        
+        <li><a><i class="fa fa-renren"></i> Infraestructura Lote<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'infraestructura'%} " >Registrar Infraestructura</a></li> 
+            <li><a href="{% url 'listaInfra'%} " >Lista Infraestructura</a></li>       
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Infraestructura Mejora<span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'infraestructuram'%} " >Registrar Infraestructura Mej</a></li> 
+            <li><a href="{% url 'listaInfram'%} " >Lista Infraestructura Mej</a></li>       
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Materiales <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'materiales'%} " >Registro de Materiales</a></li>
+            <li><a href="{% url 'listaMater'%} " >Lista de Materiales</a></li>
+          </ul>
+        </li>
+        
+        
+        
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-users"></i> Cliente <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'perfil'%}">Perfil de Cliente</a></li>
+        <li><a href="{% url 'listaPerfil'%}">Lista de Clientes</a></li>
+        <li><a href="{% url 'listaClientes'%}">Administrar Clientes</a></li>
+        <li><a href="{% url 'listaPerfilNA'%}">Lista de Perfiles NA</a></li>
+        
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-users"></i> Flujo de caja <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaIvE' %}">Lista IvE Personal</a></li>
+        <li><a href="{% url 'listaMicro' %}">Lista IvE Micro</a></li>
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-edit"></i> Solicitud <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a><i class="fa fa-renren"></i> Solicitud Personal <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaSolicitudesPAN'%}">Solicitudes Pendientes de Aprobadas</a></li>
+            <li><a href="{% url 'listaSolicitudesObsN'%}">Solicitudes Observadas</a></li>
+            <li><a href="{% url 'listaSolicitudesDenN'%}">Solicitudes Denegadas</a></li>
+            <li><a href="{% url 'listarSNC'%} " >Listado Solicitudes Completas</a></li>
+            <li><a href="{% url 'listarSN'%} " >Listado Solicitudes Incompletas</a></li>
+            <!--li><a href="# " >Listado Solicitudes por Agencia</a></li-->          
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Solicitud Microempresa <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaSolicitudesPA'%}">Solicitudes Pendientes de Aprobadas</a></li>
+            <li><a href="{% url 'listaSolicitudesObs'%}">Solicitudes Observadas</a></li>
+            <li><a href="{% url 'listaSolicitudesDen'%}">Solicitudes Denegadas</a></li>
+            <li><a href="{% url 'listaSC'%} " >Listado Solicitudes Completas</a></li>
+            <li><a href="{% url 'listaSolicitud'%} " >Listado Solicitudes Incompletas</a></li>
+            <!--li><a href="#" >Listado Solicitudes por Agencia</a></li-->        
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a><i class="fa fa-clone"></i> Lista de Chequeo <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaPC'%}">Registro de Chequeo</a></li>
+        <li><a href="{% url 'listaC'%}">Lista de Chequeo</a></li>
+        
+      </ul>
+    </li>
+    <li><a><i class="fa fa-clone"></i> Historial Crediticio <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaHis'%}">Autorizacion y registro de puntaje</a></li>
+        <li><a href="{% url 'listapuntaje'%}">Lista puntajes solicitantes</a></li>
+        
+      </ul>
+    </li>
+    <li><a><i class="fa fa-clone"></i> Reportes <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaHis'%}">Historial</a></li>
+        <li><a href="{% url 'listaCC'%}">Conozca a su Cliente</a></li>
+        <li><a href="{% url 'listaDJ'%}">Declaración Jurada</a></li>
+        <li><a href="{% url 'listaIS'%}">Inscripción Seguro</a></li>
+        <li><a><i class="fa fa-home"></i> Inspección <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaI'%}">Inspeccion Lote</a></li>
+            <li><a href="{% url 'listaPIL'%}">Primera Inspeccion Lote</a></li>
+            <li><a href="{% url 'listaIM'%}">Inspeccion Mejora</a></li>
+            <li><a href="{% url 'listaPIM'%}">Primera Inspeccion Mejora</a></li>
+          </ul>
+        </li>
+        
+        <li><a><i class="fa fa-home"></i> Lista de Presupuesto <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaPV'%}">Vivienda</a></li>
+            <li><a href="{% url 'listaPVO'%}">Obras Adicionales</a></li>
+            <li><a href="{% url 'listaPM'%}">Mejora</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+ 
+                  
+    <li><a><i class="fa fa-plus-square-o"></i> Revicion de documentos <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'revi'%}">Documentos</a></li>
+        <li><a href="{% url 'listarDocu'%}">Documentos</a></li>
+      </ul>
+    </li>
+
+    <li><a><i class="fa fa-gear"></i>Graficas<span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'grafAgenciaP'%}">Grafica Perfiles por Agencia</a></li>
+        <li><a href="{% url 'grafAgenciaPN'%}">Grafica Perfiles N por Agencia</a></li>
+        <li><a href="{% url 'graficaAT'%}">Grafica Agencia Tipo</a></li>
+        <li><a href="{% url 'graficaATS'%}">Grafica Agencia Tipo Sol</a></li>
+        <li><a href="{% url 'graficaASolic'%}">Grafica Agencia Estado Sol</a></li>
+        <li><a href="{% url 'grafTipoSol'%}">Grafica Tipo Soli</a></li>
+        
+        
+      </ul>
+    </li>
+    <li><a><i class="fa fa-plus-square-o"></i> Bitacora <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaBit'%}">Lista </a></li>
+        
+      </ul>
+    </li>
+
+   </ul>
+
+ 
+

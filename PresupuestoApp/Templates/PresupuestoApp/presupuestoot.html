@@ -1,0 +1,110 @@
+<div>
+    <div class="x_title">
+
+        <div class="row">
+            <h4 class="">Otros </h4>
+        </div>
+    </div>
+    <!-- buscador ocultado -->
+    <div class="row" style="display: none;">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Buscar</h4>
+                <input type="text" id="bscrOtros" placeholder="Buscar por descripcion" class="form-text"
+                    list="otros-list" onchange="cargarOtros()" value="">
+                <input type="hidden" id="idOtro" name="idOtro" value="1">
+
+            </div>
+        </div>
+        <datalist id="otros-list">
+
+        </datalist>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Descripción</h4>
+                <input type="text" class="form-text" id="descripciono" name="descripciono" >
+                <span class="bar"></span>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Unidad</h4>
+                <input type="text" class="form-text" id="unidado" name="unidado" >
+                <span class="bar"></span>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Precio Unitario</h4>
+                <input type="text" class="form-text" id="precioo" name="precioo" pattern="^\d*(\.\d{0,1})?$"
+                onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 "  
+                    onchange="validarNumero(this)" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Cantidad</h4>
+                <input type="text" class="form-text" id="cantidado" name="cantidado" pattern="^\d*(\.\d{0,1})?$"
+                onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " 
+                    onchange="validarNumero(this)" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+
+    </div>
+    <div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-md-offset-2" style="align-items: center; ">
+                    <div class="row" style="align-items: center; display: block;">
+                        <button id="btnagregar-otro" name="btnagregar-otro" type="button" onclick="AgregarTablaOt()"
+                            class="btn btn-success" style="width:200px; height:40px;">Agregar</button>
+                    </div>
+                    <div class="row" style="align-items: center; display: block;">
+                        <button id="btnCancelar-otro" name="btnCancelar-otro" type="button" onclick="cancelarOtro()"
+                            class="btn btn-danger" style="width:200px; height:40px;">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <h4>Total otros</h4>
+                    <input type="text" class="form-text" id="totalOtros" name="totalOtros"
+                    value="0" disabled>
+                    <span class="bar"></span>
+                </div>
+            </div>
+
+        </div>
+        <br><br><br><br>
+        <table class="table table-striped table-bordered" id="potros" name="potros">
+            <thead>
+                <tr
+                    style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+                    <th>#</th>
+                    <th>Descripción</th>
+                    <th>Unidad</th>
+                    <th>PU</th>
+                    <th>Cantidad</th>
+                    <th>subtotal</th>
+                    <th colspan="2"> Opciones </th>
+                </tr>
+            </thead>
+
+
+            <tbody style="color: #27575c;">
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

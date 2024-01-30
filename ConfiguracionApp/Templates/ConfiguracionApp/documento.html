@@ -1,0 +1,122 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block usuario %} 
+
+{% if usuario.nombre is not None %}
+ <input id="usua" name="usua" class="hidden" value="{{usuario.id}}">
+ <input id="nombre" name="nombre" class=hidden value="{{usuario.nombre}}">
+<h2>{{usuario.nombre}}</h2>
+
+{% else %}
+
+<h2>AL SISTEMA</h2><!-- DE LA BASE SACAR EL NOMBRE DEL QUE INGRESO RECORDAR -->
+{% endif %}   
+{% endblock usuario %}
+{% block titulo %}Registro Nombre de Documento{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+
+<form id="contact" name="contact" action="registrarD/" method="post" autocomplete="off">{% csrf_token %}
+    <input type="hidden" id="bandera" name="bandera">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Nombre del Tipo de Documento</h4>
+            <input type="text" class="form-text"  id="nombreD" name="nombreD" required>
+            <span class="bar"></span>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-2">
+            <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+                style="width:200px; height:40px;" onclick="validar()" >Guardar</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ]*$/i.test(value);
+}, "<h2>Ingrese sólo letras </h2>");
+
+
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    nombreD:{
+      minlength:5,
+      required: true,
+      letras:true,
+      maxlength:30
+    }
+  },
+  messages: {
+    nombreD:{
+        required : "<h2>Debe ingresar el nombre del Departamento</h2>",
+        minlength : "<h2>El nombre debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>El nombre debe tener un maximo de 30 caracteres</h2>"
+    }
+  },
+});
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+   
+   
+
+    }else{
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'DEBE REGISTRAR DATOS!',
+  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+  imageWidth: 200,
+  imageHeight: 100
+}) 
+    }
+});
+
+});
+
+
+
+</script>
+{% endblock %}

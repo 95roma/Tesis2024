@@ -1,0 +1,23 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/inicio.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<div><center><h1>Habitad para la humanidad el salvador</h1></center> </div>
+<div><center><h1>Area de credito para vivienda</h1></center> </div>
+<div class="slider">
+    <ul>
+        
+        <li><img src="{% static 'TesisApp/images/r1-1.jpg' %} "  height="400"></li>
+        <li><img src="{% static 'TesisApp/images/r2-2.jpg' %}" height="400"></li>
+        <li><img src="{% static 'TesisApp/images/A3-1.jpg' %}"  height="400"></li>
+       
+       
+    </ul>
+
+</div>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+
+{% endblock %}

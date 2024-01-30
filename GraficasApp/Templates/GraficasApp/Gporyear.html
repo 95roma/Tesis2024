@@ -1,0 +1,71 @@
+
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block usuario %} 
+
+{% if usuario.nombre is not None %}
+ <input id="usua" name="usua" class="hidden" value="{{usuario.id}}">
+ <input id="nombre" name="nombre" class=hidden value="{{usuario.nombre}}">
+<h2>{{usuario.nombre}}</h2>
+
+{% else %}
+
+<h2>AL SISTEMA</h2><!-- DE LA BASE SACAR EL NOMBRE DEL QUE INGRESO RECORDAR -->
+{% endif %}   
+{% endblock usuario %}
+{% block titulo %}Grafica solicitudes por Año{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}<li><a href="{% url 'prueba'%}">Listar Departamento</a></li>   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form id="contact" name="contact" method="post" autocomplete="off">{% csrf_token %}
+<div class="row">
+  <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text "  style="margin-top:5px !important;">
+          <h4>Año inicio</h4>
+          <input  type="text" class="form-text " value="2022"   id="fechai" name="fechaf">
+          <span class="bar"></span>
+  </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Año Fin</h4>
+        <input  type="text" class="form-text " value="2023"   id="fechaf" name="fechaf">
+        <span class="bar"></span>
+</div>
+</div>
+</div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_content">
+              <canvas id="densityChart" width="100" height="100"></canvas> 
+             <!--<canvas id="mybarChart"></canvas>--> 
+            </div></div>
+       
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+var densityCanvas = document.getElementById("densityChart");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 20;
+
+var densityData = {
+  colorByPoint:true,
+  data: ['{{jun}}','{{jul}}','{{ago}}','{{sep}}','{{oct}}','{{nov}}','{{dic}}','{{en}}','{{fe}}','{{mar}}','{{abri}}','{{may}}'],
+  
+  backgroundColor: 'rgb(153,102,153)', // Color de fondo de las barras del grafico
+  borderColor: 'rgba(54, 162, 235, 1)', // Color del borde de las barras
+  borderWidth: 2,// Ancho del borde de las barras
+};
+
+var barChart = new Chart(densityCanvas, {
+  type: 'bar',
+  data: {
+    labels: ["Ju", "Jul","Ag", "Sep","Oc","Nov","Dic","En", "Fe", "Mar", "Abr", "Ma"],
+    datasets: [densityData]
+  }
+});
+</script>
+{% endblock %}

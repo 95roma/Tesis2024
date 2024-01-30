@@ -1,0 +1,331 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}
+{% block titulo %}Solicitud Microempresa{% endblock titulo %}
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+  <ul class="wizard_steps anchor">
+    <li>
+      <a href="#step-1" class="selected" isdone="1" rel="1">
+        <span class="step_no">1</span>
+        <span class="step_descr"><small>Datos generales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-2" class="done" isdone="1" rel="2">
+        <span class="step_no">2</span>
+        <span class="step_descr"><small>Datos personales</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-3" class="done" isdone="1" rel="3">
+        <span class="step_no">3</span>
+        <span class="step_descr"><small>Grupo familiar</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-4" class="done" isdone="1" rel="4">
+        <span class="step_no">4</span>
+        <span class="step_descr"><small>Domicilio y lugar de microempresa</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-5" class="done" isdone="1" rel="5">
+        <span class="step_no">5</span>
+        <span class="step_descr"><small>Datos de la obra a realizar</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-6" class="done" isdone="1" rel="6">
+        <span class="step_no">6</span>
+        <span class="step_descr"><small>Detalle de la solicitud</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-7" class="done" isdone="1" rel="7">
+        <span class="step_no">7</span>
+        <span class="step_descr"><small>Experiencia crediticia</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-8" class="done" isdone="1" rel="8">
+        <span class="step_no">8</span>
+        <span class="step_descr"><small>Referencia personales y familiares</small> </span>
+      </a>
+    </li>
+    <li>
+      <a href="#step-9" class="done" isdone="1" rel="9">
+        <span class="step_no">9</span>
+        <span class="step_descr"><small>Comentarios</small> </span>
+      </a>
+    </li>
+  </ul>
+  <div class="stepContainer" style="overflow: hidden !important;">
+    <form style="overflow: hidden !important;" id="solicitudMicro" name="solicitudMicro"
+      action="../../../SolicitudesApp/registrarDatos/" method="post" autocomplete="off">{% csrf_token %}
+      <input type="hidden" id="estadoM" name="estadoM" value="Incompleto">
+      <div id="step-1" class="content" style="display: block;">
+
+        <div class="x_title">
+          <div class="row">
+            <h2 style="text-align: center;">SOLICITUD DE CREDITO </h2>
+          </div><br>
+          <div class="row">
+            <h2 style="text-align: center;">{{soli.0.perfil.nombres}} {{soli.0.perfil.apellidos}}  </h2>
+          </div>
+          <div class="row">
+            <h4 class="">Para familias con ingresos provenientes de Microempresa </h4>
+          </div>
+        </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:0px !important;">
+            <label>Tipo de obra a realizar:</label> &nbsp;&nbsp;
+            Vivienda
+            <div class="iradio_flat-green ">
+              <input type="radio" class="flat" checked name="tipoobra" value="vivienda" required>
+              <ins class="iCheck-helper"></ins>
+            </div>&nbsp;&nbsp;
+            Mejora
+            <div class="iradio_flat-green ">
+              <input type="radio" class="flat" name="tipoobra" value="mejora" required>
+              <ins class="iCheck-helper"></ins>
+            </div>
+          </div>
+        </div>
+      </div> 
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" disabled id="fechaSM1" name="fechaSM1" maxlength="50"
+                placeholder="Fecha" value="" required>
+              <input type="hidden" id="fechaSM" name="fechaSM">
+              <span class="bar"></span>
+            </div>
+
+          </div><!-- /fin columna  derecha-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" disabled id="" name="" maxlength="50" value="{{cliente.Agencia.nombre}}" 
+                required>
+              <input type="hidden" id="agenciaM" name="agenciaM" value="1">
+              <span class="bar"></span>
+            </div>
+          </div><!-- /fin columna  izquierda-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <!-- /comienzo columna  derecha-->
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text"  id="n" name="n" maxlength="50" placeholder="16607"
+                 required>
+              <span class="bar"></span>
+            </div>
+          </div><!-- /fin columna  izquierda-->
+        </div>
+        <div class="row">
+          <!-- datos de ubicacion  comunidad, municipio y area-->
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" id="comunidadM" name="comunidadM" maxlength="50"
+                placeholder="Comunidad" required>
+              <span class="bar"></span>
+            </div>
+
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <input type="text" class="form-text" id="municipioM" name="municipioM" maxlength="50"
+                value="{{cliente.municipio}}" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:0px !important;">
+              <label>Area:</label> &nbsp;&nbsp;
+              Urbana
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" checked name="areaM" value="Urbana" required>
+                <ins class="iCheck-helper"></ins>
+              </div>&nbsp;
+              Rural
+              <div class="iradio_flat-green ">
+                <input type="radio" class="flat" name="areaM" value="Rural" required>
+                <ins class="iCheck-helper"></ins>
+              </div>
+            </div>
+          </div>
+        </div> <!-- / fin datos de ubicacion-->
+
+      </div>
+      <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+        {% include "SolicitudesApp/datosPerMicro.html" %}
+      </div>
+      <div id="step-3" class="content" style="display: none;">
+        {% include "SolicitudesApp/grupoFMicro.html" %}
+      </div>
+      <div id="step-4" class="content" style="display: none;">
+        {% include "SolicitudesApp/domicilioMicro.html" %}
+      </div>
+      <div id="step-5" class="content" style="display: none;">
+        {% include "SolicitudesApp/datosObraMicro.html" %}
+      </div>
+      <div id="step-6" class="content" style="display: none;">
+        {% include "SolicitudesApp/detalleMicro.html" %}
+      </div>
+      <div id="step-7" class="content" style="display: none;">
+        {% include "SolicitudesApp/experienciaMicro.html" %}
+      </div>
+      <div id="step-8" class="content" style="display: none;">
+        {% include "SolicitudesApp/referenciasMicro.html" %}
+      </div>
+      <div id="step-9" class="content" style="display: none;">
+        {% include "SolicitudesApp/comentariosMicro.html" %}
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="clearfix"></div>
+{% endblock %}
+
+
+{% block js %}
+<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+let montoMinMicro=0
+let montoMaxMicro=0
+
+
+  $(document).ready(function () {//funcion para guardar
+    $("#fin").click(function () {
+      //activo los input parq que puedan guardarse
+      document.getElementById("fechaSM").disabled = false;
+      document.getElementById("edadS").disabled = false;
+      document.getElementById("edadC").disabled = false;
+      document.getElementById("fechNaS").disabled = false;
+      document.getElementById("apellidoS").disabled = false;
+      document.getElementById("duiS").disabled = false;
+      document.getElementById("nombreS").disabled = false;
+      document.getElementById("direActS").disabled = false;
+      document.getElementById("telefonoS").disabled = false;
+      document.getElementById("salarioS").disabled = false;
+      document.getElementById("profecionS").disabled = false;
+      document.getElementById("cuotaME").disabled = false;
+
+      // estas son banderas para no guardar los formularios que estan en blanco
+      // los metodos validar devulven 0 si no estan completos los form
+      // y 1 si los formularios estan completos
+      var passDPM = document.getElementById("passDPM").value = validarDatos(); 
+      var passDPMC = document.getElementById("passDPMC").value = validarDatosC();
+      var passGP = document.getElementById("passGP").value = validarGrupoF();
+      var passDLM = document.getElementById("passDLM").value = validarDomicilioMicro();
+      var passDLMC = document.getElementById("passDLMC").value = validarDomicilioCMicro();
+      var passDOR = document.getElementById("passDOR").value = validarDatosObra();
+      var passDS = document.getElementById("passDS").value = validarDetalle();
+      var passEC = document.getElementById("passEC").value = validarExpeCredi();
+      var passRPF = document.getElementById("passRPF").value = validarReferenciasPF();
+      var passCM = document.getElementById("passCM").value = validarComentarios();
+      
+
+      document.getElementById('direccionMS').value=(document.getElementById('lugrMicroS').value);
+      //document.getElementById("passEC").value = '1';
+      // var passRPF =  document.getElementById("passRPF").value = validarExpeCredi();
+      // fin banderas
+    
+      //comparo que todas las banderas esten en 1 para cambiar el estado de la solicitud a aprobado
+      if (passDPM == '1' &&  passDPMC == '1' && passGP == '1' && passDLMC == '1' && passDLM == '1' && passDOR == '1' && passDS == '1' && passEC == '1' && passRPF =='1' && passCM =='1') {
+        document.getElementById('estadoM').value = 'Completado';
+        document.solicitudMicro.submit();
+      } else {// encaso que una bandera este en 0 muestra el mensaje para comfirmar si desea guardar la solicitud
+        //enfio el mensaje y el formulario para poder enviarlo desde la fucnion
+        // la funcion confirmar esta en TesisApp\static\TesisApp\js\alertas.js
+        confirmar('Formulario incompleto, desea guardarlo para completarlo despues?', document.solicitudMicro);
+      }
+
+
+      /*
+            if (validarDatos()) {
+              if (validarGrupoF()) {
+                if (validarDomicilioMicro()) {
+                  if (validarDatosObra()) {
+                    if (validarDetalle()) {
+                      if (validarExpeCredi()) {
+                        document.solicitudMicro.submit()
+                      }
+                    }
+                  }
+                }
+              }
+            }
+      */
+
+
+    });
+  });
+
+  $(function () {// agregar la fecha actual a la solicitud
+    $(window).load(function () {
+      var fecha = new Date();
+      var f = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+      document.getElementById("fechaSM1").value = f;
+
+      f = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+      document.getElementById("fechaSM").value = f;
+
+      //se agrega la fecha maxima para la fecha de otorgamiento en experiencia crediticia
+      for (i = 0; i < document.getElementsByName('fechaEC').length; i++) {
+        document.getElementsByName('fechaEC')[i].setAttribute("max", f);
+
+      }
+
+      document.getElementById("fechExS").setAttribute("max", f);
+      document.getElementById("fechExC").setAttribute("max", f);
+
+      //para definir la fecha maxima y garantizar solo mayores de edad
+      var max = (fecha.getFullYear() - 18) + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+
+      //se agrega la fecha maxima a los input de fecha de nacimiento
+      document.getElementById("fechNaS").setAttribute("max", max);
+      document.getElementById("fechNaC").setAttribute("max", max);
+      obtenerRangoMicro("-0")
+    });
+
+  });
+
+  
+
+ 
+ 
+ 
+  
+  
+  
+
+ 
+
+</script>
+{% endblock %}
+<!-- /cerrar el bloque de contenido
+             $($this.buttons.finish).click(function() {
+            if(!$(this).hasClass('buttonDisabled')){
+                if($.isFunction($this.options.onFinish)) {
+                    var context = { fromStep: $this.curStepIdx + 1 };
+                    if(!$this.options.onFinish.call(this,$($this.steps), context)){
+                        return false;
+                    }
+                }else{
+                    var frm = $this.target.parents('form');
+                    if(frm && frm.length){
+                        frm.submit();
+                    }
+                }
+            }
+            return false;
+        });
+            -->

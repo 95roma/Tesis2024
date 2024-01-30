@@ -1,0 +1,461 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Domicilio y Lugar de Trabajo{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Municipio  {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form id="contact" name="contact" action="../registrarLugar/" method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden"  id="id" name="id"  value="{{Perfil.id}}" >
+  <input type="hidden"  id="ids" name="ids"  value="{{ids.id}}" >
+                      
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+<h2>DATOS DE SOLICITANTE</h2> <h3><span ></span></h3>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <h2>DATOS DEL FIADOR</h2> <h3><span ></span></h3>
+            </div>
+      
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Direccion actual del domicilio</h4>
+            <input type="text" class="form-text"  id="direA" name="direA" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Direccion actual del domicilio</h4>
+          <input type="text" class="form-text"  value="-"   id="direAc" name="direAc" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Punto de referencia</h4>
+            <input type="text" class="form-text"   id="puntoR" name="puntoR" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Punto de referencia</h4>
+          <input type="text" class="form-text" value="-"   id="puntoRfia" name="puntoRfia" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Telefono</h4>
+            <input type="text" class="form-text mask-telefono " value="{{ids.perfil.telefono}}" disabled id="telefono" name="telefono" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Telefono
+          </h4>
+          <input type="text" class="form-text mask-telefono" value="-"   id="telefonofia" name="telefonofia" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Reside desde</h4>
+            <input type="text" class="form-text"   id="reside" name="reside" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Reside desde</h4>
+          <input type="text" class="form-text" value="-"   id="residefia" name="residefia"  >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Condicion de vivienda </h4>
+            <input type="text" class="form-text" id="condicionV" name="condicionV" >
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Condicion de vivienda </h4>
+          <input type="text" class="form-text" value="-"   id="condicionVfia" name="condicionVfia" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Lugar de trabajo o negocio </h4>
+            <input type="text" class="form-text"   id="lugarT" name="lugarT" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Lugar de trabajo o negocio </h4>
+          <input type="text" class="form-text" value="-"   id="lugarTfia" name="lugarTfia" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>jefe inmediato </h4>
+            <input type="text" class="form-text"   id="jefe" name="jefe" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>jefe inmediato </h4>
+          <input type="text" class="form-text" value="-"   id="jefefia" name="jefefia">
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Tiempo de empleo </h4>
+            <input type="text" class="form-text"    id="tiempo" name="tiempo" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Tiempo de empleo </h4>
+          <input type="text" class="form-text"  value="-"  id="tiempofia" name="tiempofia" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>salario </h4>
+            <input type="text" class="form-text" disabled value="{{ids.perfil.salario}}"   id="salario" name="salario" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>salario </h4>
+          <input type="text" class="form-text"  value="0.0"  id="salariofia" name="salariofia" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Direccion de trabajo </h4>
+            <input type="text" class="form-text"   id="direTrabajo" name="direTrabajo" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Direccion de trabajo </h4>
+          <input type="text" class="form-text"  value="-"  id="direTrabajofia" name="direTrabajofia" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Telefono del trabajo </h4>
+            <input type="text" class="form-text mask-telefono"    id="telefonoT" name="telefonoT" required>
+            <span class="bar"></span>
+    </div>
+    </div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Telefono del trabajo </h4>
+          <input type="text" class="form-text mask-telefono"    id="telefonoTfia" name="telefonoTfia" >
+          <span class="bar"></span>
+  </div>   
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-12 col-md-offset-2">
+        <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+            style="width:200px; height:40px;">Siguente</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+    </div>
+</div>
+
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+
+{% block js %}<!-- bloque para validaciones de input-->
+<!-- bootstrap-datetimepicker -->    
+<script src="{% static 'TesisApp/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+<script>
+
+
+
+  
+
+
+</script>
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+  //this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+
+// para poner validaciones 
+$('.mask-dui').mask('00000000-0');
+$('.mask-telefono').mask('0000-0000');
+$.validator.addMethod("validartelefono", function(value, element) {
+ return  /^[7|6|2]\d{3}-\d{4}$/.test(value);
+    }, "Ingrese correctamente el teléfono ****-****, que comience con 7,6 ó 2");
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ 0-9]*$/i.test(value);
+}, "<h2>Ingrese numeros y letras </h2>");
+$.validator.addMethod("validardui", function(value, element) {
+    return /^(?!.*(.)\1{4})\d{8}-\d{1}$/.test(value);
+}, "<h2>Ingrese corecctamente el DUI ..</h2>");
+$.validator.addMethod("zona", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+}, "<h2>Ingrese una dirección valida ..</h2>");
+$.validator.addMethod("numeros", function(value, element) {
+    return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numeropunto y coma  </h2>");
+$.validator.addMethod("zona1", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.-]*$/i.test(value);
+  }, "<h2>Ingrese una dirección valida ..</h2>");
+  $.validator.addMethod("letras1", function(value, element) {
+    return /^[ A-Za-záéíóúüñ 0-9 -]*$/i.test(value);
+}, "<h2>Ingrese numeros y letras </h2>");
+
+
+//fin de validaciones con ajax
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+   direA:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+    },
+    puntoR:{
+      minlength:3,
+      required: true,
+      zona:true,
+      maxlength:100
+    },
+    reside:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+
+    },
+   condicionV:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+
+    },
+    lugarT:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+
+    },
+    jefe:{
+      minlength:6,
+      required: true,
+      letras:true,
+      maxlength:60
+
+    },
+    Tiempo:{
+      minlength:1,
+      required: true,
+     numeros:true,
+      maxlength:2
+
+    },
+    direTrabajo:{
+      minlength:6,
+      required: true,
+      zona:true,
+      maxlength:100
+
+    },
+   telefonoT:{
+      required: true
+      
+    },
+    direAc:{
+      minlength:1,
+      zona1:true,
+      maxlength:100
+    },
+    puntoRfia:{
+      minlength:1,
+     
+      zona1:true,
+      maxlength:100
+    },
+   
+    residefia:{
+      minlength:1,
+      
+      zona1:true,
+      maxlength:100
+
+    },
+   condicionVfia:{
+      minlength:1,
+    
+      zona1:true,
+      maxlength:100
+
+    },
+    lugarTfia:{
+      minlength:1,
+      
+      zona1:true,
+      maxlength:100
+
+    },
+    jefefia:{
+      minlength:1,
+      
+      letras1:true,
+      maxlength:60
+
+    },
+    Tiempofia:{
+      minlength:1,
+    
+     numeros:true,
+      maxlength:2
+
+    },
+   salariofia:{
+      minlength:1,
+      
+     numeros:true,
+      maxlength:100
+
+    },
+    direTrabajofia:{
+      minlength:1,
+     
+      zona1:true,
+      maxlength:100
+
+    }
+  },
+  messages: {
+   direA:{
+        required : "<h2>Debe ingresar el direccion </h2>",
+        minlength : "<h2>EL nombre debe tener un minimo de 6 caracteres</h2>",
+        maxlength : "<h2>EL nombre debe tener un maximo de 100 caracteres</h2>"
+    }
+  },
+});// fin del form contact 
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+   
+   
+
+    }else{
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'DEBE REGISTRAR DATOS!',
+  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+  imageWidth: 200,
+  imageHeight: 100
+}) 
+    }
+});// fin de btnguardar
+
+
+  $('#fechaduiC').datetimepicker({
+    format: 'DD/MM/YYYY',// darle formato a la fecha
+    //daysOfWeekDisabled: [0, 6],
+        minDate: new Date(), // la fecha minima en el calendario es hoy
+  });
+  $('#fechaduifia').datetimepicker({
+    format: 'DD/MM/YYYY',// darle formato a la fecha
+    //daysOfWeekDisabled: [0, 6],
+        minDate: new Date(), // la fecha minima en el calendario es hoy
+  });
+
+  $('#fechanacifia').datetimepicker({
+    format: 'DD/MM/YYYY',// darle formato a la fecha
+    //daysOfWeekDisabled: [0, 6],
+    //minDate: new Date((new Date().getFullYear()), new Date().getMonth(), new Date().getDate()+10), //10 dias despues es la fecha minima
+   //valida la fecha de hoy y le resta 18 para sacar la fecha maxima para que una persona sea mayor de edad
+    maxDate: new Date(new Date().getFullYear()-18, new Date().getMonth(), new Date().getDate()), 
+   // maxDate: new Date(), // la fecha maxima en el calendario es hoy
+
+  });
+
+  
+
+});// fin de la document
+
+
+
+</script>
+{% endblock %}

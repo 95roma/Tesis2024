@@ -1,0 +1,16 @@
+
+const $contact= document.getElementById('contact');//refereciamos el id del formulario
+// referenciamos los id de cada uno de los input del formulario
+const $nombre= document.getElementById('nombre');
+const $apellido= document.getElementById('apellido');
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+$contact.addEventListener('submit', function(e){
+    e.preventDefault();// previniendo envio predeterminado del formulario
+
+});
+
+(function(){
+    alert("ok");
+
+})()

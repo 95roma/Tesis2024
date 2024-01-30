@@ -1,0 +1,243 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Registro Linea de Financiamiento de Crèdito{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}<li><a href="{% url 'listarAl'%}">Listar Linea de Financiamiento</a></li>   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form id="rangoFin" name="rangoFin" action="/ConfiguracionApp/editRanFin/ " method="post" autocomplete="off">{% csrf_token %}
+  <input type="hidden"  id="id" name="id"  value="{{rangosF.id}}" >
+                      
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Linea de Financiamiento</h4>
+          <div class="col-md-12 col-sm-9 ">
+              <select class="form-text" id="alternativas" name="alternativas" onchange="actMini()" required >
+                  <option value="0">SELECCIONE LA LINEA DE FINANCIAMIENTO</option>
+                  
+                  {% for a in alternativa %}
+                  <option value="{{a.id}}" {% if a.id == rangosF.idalter.id %}selected{% endif %}>{{a.alternativa}}</option>
+                  {% endfor %}
+              </select>
+          </div>
+          <span class="bar"></span>
+      </div>
+  </div>
+  <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Salarios</h4>
+        <div class="col-md-12 col-sm-9 ">
+            <select class="form-text" id="salario" name="salario" required >
+                <option value="0">SELECCIONE EL SALARIO</option>
+                {% for s in salario %}
+                <option value="{{s.id}}" {% if s.id == rangosF.idsal.id %}selected{% endif %}> {{s.tiposalario}}</option>
+                {% endfor %} 
+            </select>
+        </div>
+        <span class="bar"></span>
+    </div>
+</div>
+      
+  </div>
+  <div>
+    <br>
+   </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Monto Minimo</h4>
+        <input type="number" class="form-text" id="montominimo" name="montominimo" value="{{rangosF.montominimo}}" required>
+        <span class="bar"></span>
+      </div>   
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Monto Maximo</h4>
+            <input type="number" class="form-text"   id="montomaximo" name="montomaximo" value="{{rangosF.montomaximo}}" oninput="vecesfinan()" required>
+            <span class="bar"></span>
+
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Veces de  Financiamiento</h4>
+          <input type="number" class="form-text"   id="vecesFin" name="vecesFin" value="{{rangosF.vecesfinan}}" readonly="true" required>
+          <span class="bar"></span>
+
+    </div>
+  </div>
+  </div>
+ 
+ <div>
+  <br>
+ </div>
+
+  <div class="form-group">
+    <div class="col-md-12 col-md-offset-2">
+        <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+            style="width:200px; height:40px;">Guardar</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-warning" style="width:200px; height:40px;">Cancelar</button>
+    </div>
+</div>
+
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+
+{% block js %}<!-- bloque para validaciones de input-->
+<!-- bootstrap-datetimepicker -->    
+<script src="{% static 'TesisApp/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
+<script>
+
+
+
+  
+</script>
+
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+
+// para poner validaciones 
+
+$.validator.addMethod("letras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ ]*$/i.test(value);
+}, "<h2>Ingrese solo letras </h2>");
+$.validator.addMethod("numeros", function(value, element) {
+    return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numero, punto y coma  </h2>");
+$.validator.addMethod("numero", function(value, element) {
+    return /^[0-9]*$/i.test(value);
+}, "<h2>Ingrese  solo numeros positivos, desde 1 en adelante</h2>");
+//fin de validaciones con ajax
+$("#rangoFin").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+     montominimo:{
+      minlength:3,
+      required: true,
+      numeros:true
+    },
+    vecesFin:{
+      minlength:2,
+      required: true,
+      numeros:true,
+      maxlength:10
+
+    },
+     montomaximo:{
+      minlength:3,
+      required: true,
+      numeros:true
+
+    },
+    salario:{
+      
+      required: true
+      
+
+    },
+    alternativa:{
+      required: true
+      
+
+    }
+  },
+  messages: {
+     montominimo:{
+        required : "<h2>Debe ingresar el monto minimo de credito </h2>",
+        minlength : "<h2>EL nombre debe tener un minimo de 3 numeros</h2>"
+    },
+    alternativa:{
+      minlength:"<h2>Debe tener un minimo de 4 caracteres</h2>",
+      required: "<h2>Debe ingresar el dato</h2>",
+      maxlength:"<h2>Debe tener un maximo de 100 caracteres</h2>"
+
+    },
+     montomaximo:{
+      minlength:"<h2>Debe tener un minimo de 3 caracteres</h2>",
+      required: "<h2>Debe ingresar el monto maximo</h2>"
+
+    },
+    plazo:{
+      required: "<h2>Debe ingresar el dato</h2>",
+
+    }
+  },
+});// fin del form contact 
+
+$("#btnguardar").click(function(){
+if($("#rangoFin").valid()){
+   
+   
+
+    }else{
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'DEBE REGISTRAR DATOS!',
+  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+  imageWidth: 200,
+  imageHeight: 100
+}) 
+    }
+});// fin de btnguardar
+ 
+
+
+
+});// fin de la document
+
+var alter = JSON.parse('{{ alter|escapejs }}');
+function actMini(){
+  var lineafin=document.getElementById('alternativas');
+  var selectedOption = lineafin.options[lineafin.selectedIndex];
+  var selectedText = selectedOption.text;
+  for (var i = 0; i < alter.length; i++){
+    var a = alter[i];
+    if(a.alternativa===selectedText){
+      //alert(selectedText);
+      document.getElementById('montominimo').value=a.montominimo;
+    }
+    
+  }
+  if(alter.id=selectedOption.id)
+    alert(selectedText);
+}
+var sal = JSON.parse('{{ sal|escapejs }}');
+function vecesfinan(){
+  //alert("entro");
+  
+  var max=parseFloat(document.getElementById('montomaximo').value);
+  var salmin=0;
+  for (var i = 0; i < sal.length; i++){
+    var s = sal[i];
+    if(salmin===0){
+      salmin=s.salariomaximo;
+    }else if(s.salariomaximo<salmin){
+      salmin=s.salariomaximo;
+    }
+  }
+  //alert(salmin)
+  if (max>0 && salmin>0){
+    numfin=max/salmin;
+    numfin = numfin.toFixed(2);
+    document.getElementById('vecesFin').value=numfin;
+  }else{
+    document.getElementById('vecesFin').value=0;
+  }
+} 
+
+</script>
+{% endblock %}

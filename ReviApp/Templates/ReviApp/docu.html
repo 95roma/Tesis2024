@@ -1,0 +1,12 @@
+{% for u in DocumentoCliente %}
+<tr>
+  <td>{{forloop.counter}}</td>
+  <td>{{u.docu.nombreD}}</td>
+  <td>{{u.fecha | date:"d/m/Y"}}</td>
+  <td>{{u.fecha | date:"h:m"}}</td>
+  <td><a href="{{u.archivo.url}}" >{{u.archivo}}</a> </td>
+ 
+  <td><a href="modiDocu/{{u.id}}"  class="btn btn-info"><i class="fa fa-refresh"></i>   Editar</a></td>
+  
+</tr>
+{% endfor %}

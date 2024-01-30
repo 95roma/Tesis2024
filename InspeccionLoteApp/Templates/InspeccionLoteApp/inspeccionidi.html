@@ -1,0 +1,187 @@
+
+  <div>            <!-- Datos de la infraestructura del inmueble -->
+
+    <div class="x_title">
+        <div class="row">
+          <h2 style="text-align: center;">INFRAESTRUCTURA DEL INMUEBLE </h2>
+        </div>
+    </div>   
+        <div class="row">
+          
+           <table class="table"   style="width: 40%; white-space: nowrap">
+             <thead>
+               <tr>
+                <th width="2%"></th>
+                 <th width="25%">Infraestructura </th>
+                 <th width="15%">Existe</th>
+               </tr>
+             </thead>
+             <tbody id="tbinfraestructurainm"  style="color: #27575c;" style="width: auto; ">
+              {% for ld in listad %}
+               <tr>
+                 <td>
+                  <input type="hidden" id="idenf" name="idenf" value=" {{ld.id}}">
+                  </td>
+                  <td>
+                    <input type="hidden" class="form-text" id="empleadoen" name="empleadoen" value="{{ld.nombre}}"  >
+                    {{ld.nombre}}
+                    </td>
+              
+                 <td> 
+                  Si
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat"  name="existeii[{{ld.id}}]" id="existeii" value="Si" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                  No
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="existeii[{{ld.id}}]" id="existeii" value="No" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>
+               
+                 
+                </td>
+                
+                
+               </tr>
+               {% endfor %}
+             </tbody>
+         
+           </table>
+        
+          
+          <table class="table"   style="width: 40%; white-space: nowrap">
+            <thead>
+              <tr>
+               <th width="2%"></th>
+                <th width="25%">Infraestructura </th>
+                <th width="15%">Existe</th>
+              </tr>
+            </thead>
+            <tbody id="tbinfraestructurainm"  style="color: #27575c;" style="width: auto; ">
+             {% for lt in listat %}
+              <tr>
+                <td>
+                 <input type="hidden" id="idenf" name="idenf" value=" {{lt.id}}">
+                 </td>
+                 <td>
+                   <input type="hidden" class="form-text" id="empleadoen" name="empleadoen" value="{{lt.nombre}}"  >
+                   {{lt.nombre}}
+                   </td>
+             
+                <td> 
+                 Si
+                 <div class="iradio_flat-green ">
+                   <input type="radio" class="flat"  name="existeii[{{lt.id}}]" id="existeii" value="Si" required>
+                   <ins class="iCheck-helper"></ins>
+                 </div>&nbsp;
+                 No
+                 <div class="iradio_flat-green ">
+                   <input type="radio" class="flat" name="existeii[{{lt.id}}]" id="existeii" value="No" checked required>
+                   <ins class="iCheck-helper"></ins>
+                 </div>
+              
+                
+               </td>
+               
+               
+              </tr>
+              {% endfor %}
+            </tbody>
+        
+          </table>
+        </div>
+
+        <div class="row">
+          
+          <table class="table"   style="width: 40%; white-space: nowrap">
+            <thead>
+              <tr>
+               <th width="2%"></th>
+                <th width="25%">Infraestructura </th>
+                <th width="15%">Existe</th>
+              </tr>
+            </thead>
+            <tbody id="tbinfraestructurainm"  style="color: #27575c;" style="width: auto; ">
+             {% for lc in listac %}
+              <tr>
+                <td>
+                 <input type="hidden" id="idenf" name="idenf" value=" {{lc.id}}">
+                 </td>
+                 <td>
+                   <input type="hidden" class="form-text" id="empleadoen" name="empleadoen" value="{{lc.nombre}}"  >
+                   {{lc.nombre}}
+                   </td>
+             
+                <td> 
+                 Si
+                 <div class="iradio_flat-green ">
+                   <input type="radio" class="flat"  name="existeii[{{ii.id}}]" id="existelc" value="Si" required>
+                   <ins class="iCheck-helper"></ins>
+                 </div>&nbsp;
+                 No
+                 <div class="iradio_flat-green ">
+                   <input type="radio" class="flat" name="existeii[{{ii.id}}]" id="existelc" value="No" checked required>
+                   <ins class="iCheck-helper"></ins>
+                 </div>
+              
+                
+               </td>
+               
+               
+              </tr>
+              {% endfor %}
+            </tbody>
+        
+          </table>
+       
+         
+         <table class="table"   style="width: 40%; white-space: nowrap">
+           <thead>
+             <tr>
+              <th width="2%"></th>
+               <th width="25%">Infraestructura </th>
+               <th width="15%">Existe</th>
+             </tr>
+           </thead>
+           <tbody id="tbinfraestructurainm"  style="color: #27575c;" style="width: auto; ">
+            {% for ii in listat %}
+             <tr>
+               <td>
+                <input type="hidden" id="idenf" name="idenf" value=" {{ii.id}}">
+                </td>
+                <td>
+                  <input type="hidden" class="form-text" id="empleadoen" name="empleadoen" value="{{ii.nombre}}"  >
+                  {{ii.nombre}}
+                  </td>
+            
+               <td> 
+                Si
+                <div class="iradio_flat-green ">
+                  <input type="radio" class="flat"  name="existeii[{{ii.id}}]" id="existeii" value="Si" required>
+                  <ins class="iCheck-helper"></ins>
+                </div>&nbsp;
+                No
+                <div class="iradio_flat-green ">
+                  <input type="radio" class="flat" name="existeii[{{ii.id}}]" id="existeii" value="No" checked required>
+                  <ins class="iCheck-helper"></ins>
+                </div>
+             
+               
+              </td>
+              
+              
+             </tr>
+             {% endfor %}
+           </tbody>
+       
+         </table>
+       </div>
+      
+
+   <input type="hidden" id="passDS" name="passDS" value="0">
+</div>
+
+
+
+

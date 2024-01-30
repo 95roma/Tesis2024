@@ -1,0 +1,55 @@
+<input type="hidden" id="passDS" name="passDS" value="0">
+<div> <!-- Detalle de la solicitud -->
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Monto a Solicitar</h4>
+        <input type="text" class="form-text" id="montoME" name="montoME" maxlength="7" minlength="2"
+          value="{{soli.7.monto}}" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " onchange="validarMonto(this)"
+          required>
+        <span class="bar"></span>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Plazo Solicitado</h4>
+        <input type="text" class="form-text" id="plazoME" name="plazoME" maxlength="50" minlength="4"
+          value="{{soli.7.plazo}}" required>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Cuota Proyectada</h4>
+        <input type="text" class="form-text" id="cuotaME" name="cuotaME" maxlength="50" minlength="4"
+          value="{{capacidaPago.cuota }}{{soli.7.cuota}}" disabled required>
+        <span class="bar"></span>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Forma de Pago</h4>
+        <select class="form-text" id="formaPagoME" name="formaPagoME">
+          <option value="Ventanilla">Ventanilla</option>
+          <option value="OPI">OPI</option>
+        </select>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Fecha que solicita pagar</h4>
+        <input type="text" class="form-text" id="FechaPagoME" name="FechaPagoME" maxlength="25" minlength="4"
+          value="{{soli.7.fechaPago}}" required>
+        <span class="bar"></span>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- / fin Detalle de la solicitud -->

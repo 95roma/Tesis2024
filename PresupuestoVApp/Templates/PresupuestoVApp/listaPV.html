@@ -1,0 +1,70 @@
+
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Listado{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %} {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+                    <table id="example" class="table table-striped table-bordered">
+                      <thead>
+                        <tr style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; font-family: cursive;">
+                          <th>#</th>
+                          <th>Fecha</th>
+                          <th>Dui</th>
+                          <th>Nombre</th>
+                          <th>Modelo</th>
+                          <th>Costo Total</th>
+                          <th>Opción</th>
+                          <th>Opción</th>
+                          <th>Opción</th>
+
+                         
+                        </tr>
+                      </thead>
+
+
+                      <tbody style="color: #27575c;">
+                        {% for pv in listap %}
+                        <tr>
+                          <td>{{forloop.counter}}</td>
+                          <td>{{pv.idp.fecha|date:'Y-m-d'}}</td>
+                          <td>{{pv.idp.ids.perfil.dui}} </td>                        
+                          <td>{{pv.idp.ids.perfil.nombres}} {{ pv.idp.ids.perfil.apellidos}}</td>
+                          <td>{{pv.idp.modelo}}</td>
+                          <td>{{pv.idp.costototalv}}</td>
+                          <td><a href="editarPV/{{pv.idp.id}}" class="btn btn-info">Editar</a></td> 
+                          <td><a href="presupuestovoa/{{pv.idp.id}}" class="btn btn-warning">Obras Adic</a></td> 
+                          <td><a href="presupuestoVv/{{pv.idp.id}}" class="btn btn-info">Reporte</a></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                    {% endblock %}
+                    <!-- /cerrar el bloque de contenido-->
+                    {% block js %}
+                    <script>
+                        $(document).ready(function() {
+                            $('#example').DataTable({
+                                responsive: true,
+                                language: {
+                                    url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+                                }
+                            });
+                        });
+                      </script>
+                      
+                      
+                      {% endblock %}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tesis </title>
+    {% load static %}
+    <link href="{% static 'TesisApp/css/esti.css' %}" rel="stylesheet">
+<!-- Bootstrap --><link href="{% static 'TesisApp/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+<!-- Font Awesome --> <link href="{% static 'TesisApp/vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+<!-- NProgress --><link href="{% static 'TesisApp/vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+<!-- Animate.css --><link href="{% static 'TesisApp/vendors/animate.css/animate.min.css' %}" rel="stylesheet">
+<!-- Custom Theme Style --><link href="{% static 'TesisApp/build/css/custom.min.css' %}" rel="stylesheet">
+
+
+
+  </head>
+
+  <body class="login">
+  <!-- top navigation -->
+  <div class="top_nav">
+    <div class="nav_menu">
+      <nav>
+        <div class="nav toggle">
+          <img src="{% static 'TesisApp/images/HH.png' %}" height="50" width="50">
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="">
+            <a href="{% url 'login'%}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              Inicio de Session  
+            </a>
+          </li>
+          <li class="">
+            <a href="{% url 'registroUsuario'%}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              Registro  
+            </a>
+          </li>
+          <li class="">
+            <a href="{% url 'perfilc'%}" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+             Registro de Perfil
+            </a>
+          </li>
+        </ul>
+        
+      </nav>
+    </div>
+  </div>
+  <!-- /top navigation -->
+    
+     
+            {% block content %}
+           
+            {% endblock   %}
+  <!-- jQuery -->
+  <script src="{% static 'TesisApp/vendors/jquery/dist/jquery.min.js' %}"></script>
+
+   <!-- validator -->
+   <script src="{% static 'TesisApp/vendors/validator/validator.js' %}"></script>
+
+   <script src="{% static 'TesisApp/js/jquery.js' %}"></script>
+   <script src="{% static 'TesisApp/js/jquery.validate.js' %}"></script>
+   <script src="{% static 'TesisApp/js/jquery.validate.min.js' %}"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+   <script src="{% static 'TesisApp/js/alertas.js' %}"></script>
+   <script src="{% static 'TesisApp/js/funcionesSolicitudMicro.js' %}"></script>
+   <script src="{% static 'TesisApp/js/sweetalert2.all.min.js' %}"></script>
+
+   {% if messages %} {% for m in messages %}
+   
+    <script>
+      
+      
+    var tags="{{ m.tags }}";
+      if(tags== "warning") {
+        alertA("{{m}}")
+        
+    }else if(tags== "info") {
+      confirmar("{{m}}")
+      
+    }else if(tags== "success") {
+      alertC("{{m}}")
+      
+    }else{
+      alertE("{{m}}")
+    }
+  </script>
+  {% endfor %} {% endif %} 
+{% block js %}
+           
+{% endblock %}
+  </body>
+</html>

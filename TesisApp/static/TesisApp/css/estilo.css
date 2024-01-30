@@ -1,0 +1,226 @@
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+h2{
+	color: #26B99A;/*#81F7BE   #088A85 */
+	font-weight: bold;/*letras en negritas   raglem10R*/
+
+}
+h3{
+	color:#BDBDBD;
+	
+}
+
+h4{
+  color: #598BA2;
+  font-weight: bold;
+}
+
+h5{
+  color: #F47311;
+
+}
+
+.modal {
+   background-color: red;
+}
+
+
+.btn-1{
+ color:  #f3eaea;
+ background-color: #02b3db;
+}
+.can{
+	color:  #228a8a;
+}
+
+.row{
+display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+
+
+ 
+  /* esto es parte de lo que he agregado al css espero funciones jajajajajajajajajajajajjajajaj*/
+
+.messages {
+  background: blue;
+  padding: 10px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+}
+/*=================Form===============*/
+.form-animate-text .form-text,.form-animate-text .form-text:focus {
+  width: 100%;
+ /* border: none !important;   es el codigo que quita lo solido al input*/
+  border-bottom: 1px solid #ddd !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  -ms-box-shadow: none !important;
+  -o-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  -ms-border-radius: 0px !important;
+  -o-border-radius: 0px !important;
+  border-radius: 0px !important;
+  padding: 10px;
+}
+
+.form-group.form-animate-text {
+  position: relative;
+  margin-bottom: 45px;
+}
+ /*cmabia el tamaño de la letras en el input*/
+
+.form-group.form-animate-text .form-text {
+  font-size: 12px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  background:none;
+  border-bottom: 1px solid #757575;
+}
+
+.form-group.form-animate-text .form-text:focus {
+  outline: none;
+}
+
+.form-group.form-animate-text label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+
+.form-group.form-animate-text.form-animate-error label{
+  color:#FF968B !important;
+}
+
+
+.form-group.form-animate-text.form-animate-error .bar:before,.form-group.form-animate-text.form-animate-error .bar:after{
+  background-color: #F9A107 !important;/*cambiar color de la linea para error */
+  width: 50%;
+}
+
+.form-group.form-animate-text.form-animate-error .form-animate-error-msg{
+  color:#FFF000 !important;
+  font-size: 16px;
+  display: none;
+}
+
+.form-group.form-animate-text .form-text:focus ~ label,
+.form-text:valid ~ label {
+  top: -10px;
+  font-size: 14px;
+  color: #999C9E;
+}
+
+.form-group.form-animate-text .bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.form-group.form-animate-text .bar:before,
+.bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #028CF8;/*cambiar color de la linea de bueno */
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -ms-transition: 0.2s ease all;
+  -o-transition: 0.2s ease all;
+  transition: 0.2s ease all;
+}
+
+.form-group.form-animate-text .bar:before {
+  left: 50%;
+}
+
+.form-group.form-animate-text .bar:after {
+  right: 50%;
+}
+
+.form-group.form-animate-text .form-text:focus ~ .bar:before,
+.form-text:focus ~ .bar:after {
+  width: 50%;
+}
+
+.form-group.form-animate-text .form-text:focus ~ .highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  -ms-animation: inputHighlighter 0.3s ease;
+  -o-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  -ms-animation: inputHighlighter 0.3s ease;
+  -o-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  -ms-animation: inputHighlighter 0.3s ease;
+  -o-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+
+.dtp-date-view-ripple .ink.animate {
+  -webkit-animation: rippleDate 0.75s linear;
+  -moz-animation: rippleDate 0.75s linear;
+  -ms-animation: rippleDate 0.75s linear;
+  -o-animation: rippleDate 0.75s linear;
+  animation: rippleDate 0.75s linear;
+  background: #2196F3;
+}
+
+
+.navbar .search .form-animate-text .bar:before,.navbar .search .form-animate-text
+ .bar:after {
+  height: 1px;
+  background: #0c66ae !important;
+}
+

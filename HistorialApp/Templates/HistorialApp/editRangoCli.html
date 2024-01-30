@@ -1,0 +1,223 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %} {% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Rango de historial{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %} {% for mens in messages %} {% endfor %} {% endif %}
+
+<form
+  id="contact"
+  name="contact"
+  action="../modHistCli/"
+  method="post"
+  autocomplete="off"
+>
+  {% csrf_token %}
+
+  <input type="hidden" id="idp" name="idp" value="{{punC.id}}">
+  <input type="hidden" id="idh" name="idh" value=0>
+
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div
+        class="form-group form-animate-text"
+        style="margin-top: 5px !important"
+      >
+        <h4>Nombre</h4>
+        <input
+          type="text"
+          class="form-text"
+          id="est"
+          name="est"
+          maxlength="10"
+          value="{{punC.idsolicitud.perfil.nombres}} {{ punC.idsolicitud.perfil.apellidos}}"
+          disabled
+        />
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div
+        class="form-group form-animate-text"
+        style="margin-top: 5px !important"
+      >
+        <h4>Fecha</h4>
+        <input
+          type="date"
+          class="form-text"
+          id="fec"
+          name="fec"
+          value="{{punC.fecha|date:'Y-m-d'}}"
+          onkeypress=""
+          maxlength="10"
+          disabled
+          required
+        />
+        <span class="bar"></span>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div
+        class="form-group form-animate-text"
+        style="margin-top: 5px !important"
+      >
+        <h4>Puntaje</h4>
+        <input
+          type="number"
+          class="form-text"
+          id="punt"
+          name="punt"
+          onchange="compararPuntaje()"
+          maxlength="10"
+          value="{{punC.puntaje}}"
+          required
+        />
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  <div class="form-group">
+    <div class="col-md-12 col-md-offset-2">
+      <button
+        id="btnguardar"
+        name="btnguardar"
+        type="submit"
+        class="btn btn-success"
+        style="width: 200px; height: 40px"
+      >
+        Guardar
+      </button>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button
+        class="btn btn-warning"
+        style="width: 200px; height: 40px"
+        type="reset"
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+
+
+$.validator.addMethod("letras", function(value, element) {
+return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ.]*$/i.test(value);
+}, "<h2>Ingrese sólo letras ..</h2>");
+
+$.validator.addMethod("numero", function(value, element) {
+return /^[0-9,.]*$/i.test(value);
+}, "<h2>Ingrese sólo numero y puntos  </h2>");
+
+$("#contact").validate({
+errorElement: "em",
+errorPlacement: function(error, element) {
+  $(element.parent("div").addClass("form-animate-error"));
+  error.appendTo(element.parent("div"));
+},
+success: function(label) {
+  $(label.parent("div").removeClass("form-animate-error"));
+},
+
+rules: {
+  est:{
+    minlength:3,
+    required: true,
+    letras:true,
+    maxlength:20
+  },
+  punt:{
+    minlength:2,
+    required: true,
+    numero:true,
+    maxlength:10
+  },
+  histmin:{
+    minlength:3,
+    required: true,
+    numero:true,
+    maxlength:10
+  },
+
+},
+messages: {
+  est:{
+    required : "<h2>Debe ingresar el estado</h2>",
+    minlength : "<h2>El estado debe tener un minimo de 3 digitos</h2>",
+    maxlength : "<h2>El estado debe tener un maximo de 20 digitos</h2>"
+},
+  punt:{
+      required : "<h2>Debe ingresar el valor maximo</h2>",
+      minlength : "<h2>El salario debe tener un minimo de 3 digitos</h2>",
+      maxlength : "<h2>El salario debe tener un maximo de 10 digitos</h2>"
+  },
+  histmin:{
+      required : "<h2>Debe ingresar el valor minimo</h2>",
+      minlength : "<h2>El salario debe tener un minimo de 3 digitos</h2>",
+      maxlength : "<h2>El salario debe tener un maximo de 10 digitos</h2>"
+  },
+
+}
+});
+
+});
+/////////////////////////////////////
+// Obtén la fecha actual
+var fechaActual = new Date();
+var max= fechaActual.toISOString().split("T")[0];
+fechaActual.setMonth(fechaActual.getMonth() - 2);
+var min= fechaActual.toISOString().split("T")[0];
+fec.setAttribute("min", min);
+fec.setAttribute("max", max);
+
+/////////////////
+var rangos = JSON.parse('{{ rango_json|escapejs }}');
+
+
+  function compararPuntaje() {
+    var puntaje = parseInt(document.getElementById('punt').value);
+    
+    
+
+    for (var i = 0; i < rangos.length; i++) {
+      
+      var rango = rangos[i];
+      var phis;
+      //alert("si"+ {{"rango.tipo"}})
+      if (puntaje >= rango.minimo && puntaje <= rango.maximo) {
+        
+        // El puntaje se encuentra dentro del rango
+        //alert('El puntaje está dentro del rango: ' + rango.id);
+        document.getElementById('idh').value=rango.id;
+        phis=rango.id;
+        // Realiza las acciones que deseas cuando el puntaje esté dentro del rango
+        break; // Si deseas salir del bucle cuando se encuentra el rango, puedes utilizar break
+      }else {
+        phis=null;
+      }
+     // alert("si")
+    }
+    if (phis== null){
+      alertE("Debe ingresar un valor dentro del rango")
+    }
+  }
+
+
+</script>
+
+
+{% endblock %}

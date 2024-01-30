@@ -1,0 +1,230 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}
+<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %} SOLICITUD DE CREDITO PARA PERSONAS NATURALES {% endblock titulo %}
+<!-- /el titulo del formulario-->
+{% block uno %}<li><a href="">Datos Personale</a></li>  {% endblock uno %}
+<!-- /Para el menu de formulario em la llave-->
+{% block dos %} {% endblock dos %}
+<!-- /Para el menu de formulario em la llave-->
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+<div class="clearfix"></div>
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel"> 
+      <div class="x_content">
+        
+        
+         
+          
+            <div class="row">
+              <h4 class="">Para familias con ingresos provenientes de empleos y/o remesa familiares</h4>
+            </div>
+        
+
+          <form id="contact" name="contact" action="/NaturalApp/registrar/ " method="post" autocomplete="off">{% csrf_token %}
+            <input type="hidden" id="id" name="id" value="{{Perfil.id}}">
+            <input type="hidden" id="nombre" name="nombre" value="{{Perfil.nombres}}">
+            <input type="hidden" id="apellidos" name="apellidos" value="{{Perfil.apellidos}}">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:0px !important;">
+                  <h4>Tipo de obra a realizar:</h4> &nbsp;&nbsp;
+                  Vivienda
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" checked name="tipoobra" value="vivienda" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;&nbsp;
+                  Mejora
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="tipoobra" value="mejora" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <h4>N°</h4>
+                    <input type="text" class="form-text"  id="n" name="n" required>
+                    <span class="bar"></span>
+                </div>
+            </div>
+            </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <h4>Fecha del dia</h4>
+                <div class="form-group form-animate-text " style="margin-top:0px !important;">
+                  <input type="text" class="form-text"  disabled id="fecha" name="fecha" maxlength="50"
+                   required>
+                   <input type="hidden" id="fechaSN" name="fechaSN">
+                  <span class="bar"></span>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Agencia</h4>
+                  <input type="text" class="form-text" disabled value="{{Perfil.Agencia.nombre}}"  id="agencia" name="agencia" required>
+                  <span class="bar"></span>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Municipio</h4>
+                <input type="text" class="form-text" disabled value="{{Perfil.municipio}}"  id="municipio" name="municipio" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Comunidad</h4>
+                <input type="text" class="form-text"  id="comunidad" name="comunidad" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>&Aacute;rea</h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Urbana:
+                <input type="radio" class="flat" name="area" id="urbana" value="Urbana" checked="" required /> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Rural:
+                <input type="radio" class="flat" name="area" id="rural" value="Rural" />
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Tipo de ingreso</h4>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Empleo:
+                <input type="radio" class="flat" name="tipoingreso" id="ingresoM" value="Empleo" checked="" required /> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Remesa:
+                <input type="radio" class="flat" name="tipoingreso" id="ingresoF" value="Remesa" />
+                <span class="bar"></span>
+            </div>
+        </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12 col-md-offset-2">
+                <button id="btnguardar" name="btnguardar" type="submit" class="btn btn-success" 
+                    style="width:200px; height:40px;">Siguente</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="reset" class="btn btn-warning" style="width:200px; height:40px;" >Cancelar</button>
+            </div>
+        </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+$('input').on('keypress', function(e){
+ // this.value = this.value.toLocaleUpperCase();
+  if (e.keyCode == 25) {
+    // Obtenemos el número del atributo tabindex al que se le dio enter y le sumamos 1
+    var TabIndexActual = $(this).attr('tabindex');
+    var TabIndexSiguiente = parseInt(TabIndexActual) + 1;
+    // Se determina si el tabindex existe en el formulario
+    var CampoSiguiente = $('[tabindex='+TabIndexSiguiente+']');
+    // Si se encuentra el campo entra al if
+    if(CampoSiguiente.length > 0)
+    {
+    CampoSiguiente.focus(); //Hcemos focus al campo encontrado
+    return false; // retornamos false para detener alguna otra ejecucion en el campo
+    }else{// Si no se encontro ningún elemento, se retorna false
+    return false;
+    }
+  }
+ 
+});
+// para poner validaciones 
+ $.validator.addMethod("letras", function(value, element) {
+    return /^[ A-Za-záéíóúüñ 0-9]*$/i.test(value);
+}, "<h2>Ingrese numeros y letras </h2>");
+
+//fin de validaciones con ajax
+$("#contact").validate({
+  errorElement: "em",
+  errorPlacement: function(error, element) {
+    $(element.parent("div").addClass("form-animate-error"));
+    error.appendTo(element.parent("div"));
+  },
+  success: function(label) {
+    $(label.parent("div").removeClass("form-animate-error"));
+  },
+  rules: {
+    comunidad:{
+      minlength:5,
+      required: true,
+      letras:true,
+      maxlength:30
+    }
+  },
+  messages: {
+    comunidad:{
+        required : "<h2>Debe ingresar el nombre de la comunidad</h2>",
+        minlength : "<h2>El nombre debe tener un minimo de 5 caracteres</h2>",
+        maxlength : "<h2>El nombre debe tener un maximo de 30 caracteres</h2>"
+    }
+  },
+});// fin del form contact 
+
+$("#btnguardar").click(function(){
+if($("#contact").valid()){
+    
+
+    }else{
+Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'DEBE REGISTRAR DATOS!',
+  imageUrl: "{% static 'TesisApp/images/iconHabiE.png' %}",
+  imageWidth: 200,
+  imageHeight: 100
+}) 
+    }
+});// fin de btnguardar
+
+$(function () {// agregar la fecha actual al input fecha en la solicitud 
+    $(window).load(function () {
+      var fecha = new Date();
+      var fech = fecha.getDate() + "/" + (fecha.getMonth() + 1) + "/" + fecha.getFullYear();
+      document.getElementById("fecha").value = fech;
+
+      f = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+      document.getElementById("fechaSN").value = f;
+      
+    });
+  });// fin de funtion()
+
+});// fin de la document
+</script>
+{% endblock %}
+

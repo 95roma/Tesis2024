@@ -1,0 +1,208 @@
+<div>
+
+    <div class="x_title">
+      <div class="row">
+        <h2 style="text-align: center;">{{cdg.ids.perfil.get.nombres}} {{cdg.ids.perfil.get.apellidos}}</h2>
+      </div><br>
+      <div class="row">
+        <h4 class="">Actividades Economica del cliente </h4>
+      </div>
+    </div>
+  
+    <div class="row">
+    {% if cdaec.tipoact == "Empleado" %} 
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:10px !important;">
+        <label>Tipo:</label> &nbsp;&nbsp;
+        Empleado
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Empleado" checked required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Negocio Propio
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Negocio Propio" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Dependiente
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Dependiente" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Otro
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Otro" required>
+          <ins class="iCheck-helper"></ins>
+        </div>
+      </div>
+    </div>
+    {% elif cdaec.tipoact == "Negocio Propio"  %}
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:10px !important;">
+        <label>Tipo:</label> &nbsp;&nbsp;
+        Empleado
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat"  name="tipoa" id="tipoa" value="Empleado" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Negocio Propio
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Negocio Propio" checked required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Dependiente
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Dependiente" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Otro
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Otro" required>
+          <ins class="iCheck-helper"></ins>
+        </div>
+      </div>
+    </div>
+    {% elif cdaec.tipoact == "Dependiente"  %}
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:10px !important;">
+        <label>Tipo:</label> &nbsp;&nbsp;
+        Empleado
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat"  name="tipoa" id="tipoa" value="Empleado" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Negocio Propio
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Negocio Propio" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Dependiente
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Dependiente" checked required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Otro
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Otro" required>
+          <ins class="iCheck-helper"></ins>
+        </div>
+      </div>
+    </div>
+    {% elif cdaec.tipoact == "Otro"  %}
+    <div class="col-md-6 col-sm-12 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:10px !important;">
+        <label>Tipo:</label> &nbsp;&nbsp;
+        Empleado
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat"  name="tipoa" id="tipoa" value="Empleado" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Negocio Propio
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Negocio Propio" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Dependiente
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Dependiente" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;
+        Otro
+        <div class="iradio_flat-green ">
+          <input type="radio" class="flat" name="tipoa" id="tipoa" value="Otro" checked required>
+          <ins class="iCheck-helper"></ins>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Especifique el Lugar de Trabajo</h4>
+          <input type="text" class="form-text" id="lugart" name="lugart" value="{{cdaec.lugartrab}}" disabled required>
+          <span class="bar"></span>
+        </div>
+    </div>
+  </div>
+    <div class="row">    
+      <div class="col-md-6 col-sm-6 col-xs-12"><!-- /comienzo columna  derecha-->
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+          <h4>Cargo que Desempeña</h4>
+          <input type="text" class="form-text" id="cargode" name="cargode" value="{{cdaec.cargodes}}"   required>
+          <span class="bar"></span>
+        </div>
+    </div>
+   <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Tiempo de Laborar</h4>
+      <input type="text" class="form-text" id="tiempolab" name="tiempolab" value="{{cdaec.tiempolaborar}}"  required>
+      <span class="bar"></span>
+    </div>
+  </div> 
+  </div>
+  
+  <div class="row">
+  <div class="col-md-6 col-sm-6 col-xs-6"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Procedencia de los Fondos</h4>
+    <input type="text" class="form-text" id="procedenciafonda" name="procedenciafonda" value="{{cdaec.procedenciafod}}"   >
+    <span class="bar"></span>
+    </div>
+  </div>
+    <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+      <div class="form-group form-animate-text " style="margin-top:0px !important;">
+        <h4>Rango de Ingresos Mensuales si es Empleado</h4>
+        <input type="text" class="form-text" id="rangoing" name="rangoing" value="{{cdaec.rangoingresosemp}}"  required>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    {% if cdaec.otrosingresos == "Si" %} 
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:0px !important;">
+        <label>Otros Ingresos:</label> &nbsp;&nbsp;
+        Si
+        <div class="iradio_flat-green ">
+          <input type="radio"  name="otingresos" id="otingresos" value="Si" onchange="habdesO(this.value)" checked   required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;&nbsp;
+        No
+        <div class="iradio_flat-green ">
+          <input type="radio" name="otingresos" id="otingresos" value="No" onchange="habdesO(this.value)" required>
+          <ins class="iCheck-helper"></ins>
+        </div>
+      </div>
+    </div>
+    {% elif cdaec.otrosingresos == "No" %}
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:0px !important;">
+        <label>Otros Ingresos:</label> &nbsp;&nbsp;
+        Si
+        <div class="iradio_flat-green ">
+          <input type="radio"  name="otingresos" id="otingresos" value="Si" onchange="habdesO(this.value)" required>
+          <ins class="iCheck-helper"></ins>
+        </div>&nbsp;&nbsp;
+        No
+        <div class="iradio_flat-green ">
+          <input type="radio" name="otingresos" id="otingresos" value="No" checked onchange="habdesO(this.value)" required>
+          <ins class="iCheck-helper"></ins>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  <div class="col-md-6 col-sm-12 col-xs-12"><!-- /comienzo columna  izquierda-->
+  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+      <h4>Procedencia</h4>
+    <input type="text" class="form-text"  id="procedencia" name="procedencia" value="{{cdaec.procedenciaoi}}"  >
+    <span class="bar"></span>
+  </div>
+  </div>
+  </div>
+  
+  <input type="hidden" id="passAED" name="passAED" value="0">
+  </div>
+  
+  
+  

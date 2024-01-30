@@ -1,0 +1,127 @@
+<ul class="nav side-menu">
+                 
+    
+    <li><a><i class="fa fa-gear"></i> Configuraciones Generales <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        
+        
+        <li><a><i class="fa fa-renren"></i> Ocupacion <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'ocupacion'%} " >Registro de Ocupacion</a></li>
+            <li><a href="{% url 'listaOcupacion'%} " >Lista de Ocupacion</a></li>
+          </ul>
+        </li>
+                
+        <li><a><i class="fa fa-renren"></i> Tipo de operación <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'toperacion'%} " >Registrar tipo de operación</a></li>
+            <li><a href="{% url 'toperacion'%} " >Registrar tipo de operación</a></li>        
+          </ul>
+        </li>
+               
+        
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-users"></i> Cliente <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'perfil'%}">Perfil de Cliente</a></li>
+        
+        <li><a href="{% url 'listaClientes'%}">Administrar Clientes</a></li>
+        <li><a href="{% url 'listaPerfilNA'%}">Lista de Perfiles NA</a></li>
+        
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-users"></i> Flujo de caja <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaIvE' %}">Lista IvE Personal</a></li>
+        <li><a href="{% url 'listaMicro' %}">Lista IvE Micro</a></li>
+      </ul>
+    </li>
+    
+    <li><a><i class="fa fa-edit"></i> Solicitud <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a><i class="fa fa-renren"></i> Solicitud Personal <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaSolicitudesPAN'%}">Solicitudes Pendientes de Aprobadas</a></li>
+            <li><a href="{% url 'listaSolicitudesObsN'%}">Solicitudes Observadas</a></li>
+            <li><a href="{% url 'listaSolicitudesDenN'%}">Solicitudes Denegadas</a></li>
+            <li><a href="{% url 'listarSNC'%} " >Listado Solicitudes Completas</a></li>
+            <li><a href="{% url 'listarSN'%} " >Listado Solicitudes Incompletas</a></li>
+            <!--li><a href="# " >Listado Solicitudes por Agencia</a></li-->          
+          </ul>
+        </li>
+        <li><a><i class="fa fa-renren"></i> Solicitud Microempresa <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaSolicitudesPA'%}">Solicitudes Pendientes de Aprobadas</a></li>
+            <li><a href="{% url 'listaSolicitudesObs'%}">Solicitudes Observadas</a></li>
+            <li><a href="{% url 'listaSolicitudesDen'%}">Solicitudes Denegadas</a></li>
+            <li><a href="{% url 'listaSC'%} " >Listado Solicitudes Completas</a></li>
+            <li><a href="{% url 'listaSolicitud'%} " >Listado Solicitudes Incompletas</a></li>
+            <!--li><a href="#" >Listado Solicitudes por Agencia</a></li-->        
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a><i class="fa fa-clone"></i> Historial Crediticio <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaHis'%}">Autorizacion y registro de puntaje</a></li>
+        <li><a href="{% url 'listapuntaje'%}">Lista puntajes solicitantes</a></li>
+        
+      </ul>
+    </li>
+    <li><a><i class="fa fa-clone"></i> Reportes <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaHis'%}">Historial</a></li>
+        <li><a href="{% url 'listaCC'%}">Conozca a su Cliente</a></li>
+        <li><a href="{% url 'listaDJ'%}">Declaración Jurada</a></li>
+        <li><a href="{% url 'listaIS'%}">Inscripción Seguro</a></li>
+        <li><a><i class="fa fa-home"></i> Inspección <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaI'%}">Inspeccion Lote</a></li>
+            <li><a href="{% url 'listaPIL'%}">Primera Inspeccion Lote</a></li>
+            <li><a href="{% url 'listaIM'%}">Inspeccion Mejora</a></li>
+            <li><a href="{% url 'listaPIM'%}">Primera Inspeccion Mejora</a></li>
+          </ul>
+        </li>
+        
+        <li><a><i class="fa fa-home"></i> Lista de Presupuesto <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="{% url 'listaPV'%}">Vivienda</a></li>
+            <li><a href="{% url 'listaPVO'%}">Obras Adicionales</a></li>
+            <li><a href="{% url 'listaPM'%}">Mejora</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+ 
+                  
+    <li><a><i class="fa fa-plus-square-o"></i> Revicion de documentos <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'revi'%}">Documentos</a></li>
+        <li><a href="{% url 'listarDocu'%}">Documentos</a></li>
+      </ul>
+    </li>
+
+    <li><a><i class="fa fa-gear"></i>Graficas<span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'grafAgenciaP'%}">Grafica Perfiles por Agencia</a></li>
+        <li><a href="{% url 'grafAgenciaPN'%}">Grafica Perfiles N por Agencia</a></li>
+        <li><a href="{% url 'graficaASolic'%}">Grafica Agencia Estado Sol</a></li>
+        <li><a href="{% url 'grafTipoSol'%}">Grafica Tipo Soli</a></li>
+        
+        
+      </ul>
+    </li>
+    <li><a><i class="fa fa-plus-square-o"></i> Bitacora <span class="fa fa-chevron-down"></span></a>
+      <ul class="nav child_menu">
+        <li><a href="{% url 'listaBit'%}">Lista </a></li>
+        
+      </ul>
+    </li>
+
+   </ul>
+
+ 
+

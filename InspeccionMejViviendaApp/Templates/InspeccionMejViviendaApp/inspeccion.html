@@ -1,0 +1,954 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Inspección para mejoramientos de viviendas{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<div id="wizard" class="form_wizard wizard_horizontal" style="overflow: hidden !important;">
+
+    <ul class="wizard_steps anchor">
+      <li>
+        <a href="#step-1" class="selected" isdone="1" rel="1">
+          <span class="step_no">1</span>
+          <span class="step_descr"><small>Información General</small> </span>
+        </a>
+      </li>
+      <li>
+        <a href="#step-2" class="selected" isdone="1" rel="1">
+          <span class="step_no">2</span>
+          <span class="step_descr"><small>Infraestructura del Inmueble</small> </span>
+        </a>
+      </li>
+      <li>
+        <a href="#step-3" class="done" isdone="1" rel="2">
+          <span class="step_no">3</span>
+          <span class="step_descr"><small>Espacios encontrados, Servicios B... </small> </span>
+        </a>
+      </li>
+      <li>
+        <a href="#step-4" class="done" isdone="1" rel="2">
+          <span class="step_no">4</span>
+          <span class="step_descr"><small>Riesgos</small> </span>
+        </a>
+      </li>
+      <li>
+        <a href="#step-5" class="done" isdone="1" rel="2">
+          <span class="step_no">5</span>
+          <span class="step_descr"><small>Plan Mejoramiento, Factibilidad...</small> </span>
+        </a>
+      </li>
+    </ul>
+
+<div class="stepContainer" style="overflow: hidden !important;">
+<form id="inspeccionm" name="inspeccionm" action="" method="post" enctype="multipart/form-data" autocomplete="off">{% csrf_token %}
+  <input type="hidden" id="ids" name="ids" value="{{s.id}}">
+  <input type="hidden" id="idp" name="idp" value="{{s.perfil.id}}">
+    <div id="step-1" class="content" style="display: block;">
+        <div class="x_title">
+          <div class="row">
+            <h4 class="">Información General </h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Agencia</h4>
+                  <input type="text" class="form-text" id="agenciam" name="agenciam" 
+                  value="{{s.perfil.Agencia.nombre}}" disabled  required>
+                <span class="bar"></span>
+                 
+              </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Fecha</h4>
+              <input type="date" class="form-text" id="fecham" name="fecham" onchange="validarFecha(this)" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+              <h4>Hora</h4>
+              <input type="text" class="form-text" id="horam" name="horam" onblur="validarHora()" placeholder="hh:mm am/pm" required>
+              <span class="bar"></span>
+            </div>
+          </div>
+          </div>
+    <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group form-animate-text " style="margin-top:5px !important;">
+            <h4>Solicitante</h4>
+            <input type="text" class="form-text" id="nombresm" name="nombresm"
+            disabled value="{{s.perfil.nombres}} {{s.perfil.apellidos}} " required>
+          <span class="bar"></span>
+           
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Teléfono</h4>
+        <input type="text" class="form-text " id="telpm" name="telpm" value="{{s.perfil.telefono}}"
+        disabled onkeypress=" tel('telpm');return event.charCode>=48 && event.charCode<=57 " maxlength="9" minlength="9"  required>
+          <span class="bar"></span>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+        <h4>Teléfono</h4>
+        <input type="text" class="form-text " id="telsm" name="telsm" onkeypress=" tel('telsm');return event.charCode>=48 && event.charCode<=57 " maxlength="9" minlength="9"  required>
+          <span class="bar"></span>
+      </div>
+    </div>
+    </div>
+    <div class="x_title">
+      <div class="row">
+        <h5 class="">Grupo Familiar </h5>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Tercera edad</h4>
+                <input type="text" class="form-text" id="terceraedm" name="terceraedm"
+                pattern="^\d+$"  onkeypress="return event.charCode>=48 && event.charCode<=57  " onfocus="limpiarValor(this)" minlength="1" maxlength="5" 
+                value="0" required>
+                <span class="bar"></span>
+            </div>
+        </div>
+   
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                    <h4>Adultos</h4>
+                    <input type="text" class="form-text" id="adultosm" name="adultosm"
+                    pattern="^\d+$"  onkeypress="return event.charCode>=48 && event.charCode<=57  " onfocus="limpiarValor(this)" minlength="1" maxlength="5" 
+                    value="0"  required> 
+                    <span class="bar"></span>
+                </div>
+            </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                        <h4>Niños</h4>
+                        <input type="text" class="form-text" id="ninosm" name="ninosm"
+                        pattern="^\d+$"  onkeypress="return event.charCode>=48 && event.charCode<=57  " onfocus="limpiarValor(this)" minlength="1" maxlength="5" 
+                        value="0"  required>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                        <h4>Personas con discapacidad</h4>
+                        <input type="text" class="form-text" id="personadism" name="personadism"
+                        pattern="^\d+$"  onkeypress="return event.charCode>=48 && event.charCode<=57  " onfocus="limpiarValor(this)" minlength="1" maxlength="5" 
+                        value="0"  required>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+    
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                          <h4>Dirección</h4>
+                          <input type="text" class="form-text" id="direccionm" name="direccionm"
+                          disabled value="{{do.direExacta}}" required>
+                          <span class="bar"></span>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                        <h4>Municipio</h4>
+                        <input type="text" class="form-text" id="municipiom" name="municipiom"
+                        disabled value="{{s.perfil.municipio}}  " required>
+                        <span class="bar"></span>
+                    </div>
+                </div> 
+               </div>
+               <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                        <h4>Propietario del Inmueble</h4>
+                        <input type="text" class="form-text" id="propietarioinmm" name="propietarioinmm"
+                        disabled value="{{do.dueno}}"  required>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <h4>Parentesco con solicitante</h4>
+                      <input type="text" class="form-text" id="parentescosm" name="parentescosm"
+                      disabled value="{{do.parentesco}}"  required>
+                      <span class="bar"></span>
+                  </div>
+              </div> 
+             </div>
+             <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                        <h4>Latitud</h4>
+                        <input type="text" class="form-text" id="latitudm" name="latitudm" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                      <h4>Longitud</h4>
+                      <input type="text" class="form-text" id="longitudm" name="longitudm" onkeypress="return event.charCode>=48 && event.charCode<=57 || event.charCode==46 " required>
+                      <span class="bar"></span>
+                  </div>
+              </div> 
+             </div>
+             <div class="row">
+              
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="form-group form-animate-text " style="margin-top:0px !important;">
+                      <label>Inmueble</label> &nbsp;&nbsp;
+                      
+                      Rural
+                      <div class="iradio_flat-green ">
+                        <input type="radio" class="flat"  name="inmueblem" value="Rural" required>
+                        <ins class="iCheck-helper"></ins>
+                      </div>&nbsp;
+                      Urbano
+                      <div class="iradio_flat-green ">
+                        <input type="radio" class="flat" name="inmueblem" value="Urbano" checked required>
+                        <ins class="iCheck-helper"></ins>
+                      </div>
+                    </div>
+                  </div>
+
+             <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:0px !important;">
+                  <label>Uso actual</label> &nbsp;&nbsp;
+                  
+                  Habitado
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat"  name="usoactm" value="Habitado" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                  No Habitado
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="usoactm" value="No Habitado" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                  Bodega
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="usoactm" value="Bodega" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                  Otro
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="usoactm" value="Otro" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>
+
+                </div>
+              </div>
+         </div>
+         <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:0px !important;">
+                  <label>Existencia de otra vivienda dentro del lote</label> &nbsp;&nbsp;
+                  
+                  Si
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat"  name="exotravm" value="Si" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                  No
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="exotravm" value="No" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>
+                </div>
+              </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group form-animate-text " style="margin-top:0px !important;">
+                  <label>Uso actual</label> &nbsp;&nbsp;
+                  
+                  Habitado
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat"  name="usoacotvm" value="Habitado" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                   No Habitado
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="usoacotvm" value="No Habitado" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>
+                </div>
+              </div>
+         </div>
+         <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                  <h4>Comentarios Relevantes</h4>
+                  <input type="text" class="form-text" id="comentariosrl" name="comentariosrl" >
+                  <span class="bar"></span>
+              </div>
+          </div>
+           
+       </div>
+    
+            </div>
+        <div id="step-2" class="content" style="display: none; overflow: hidden !important;">
+              {% include "InspeccionMejViviendaApp/inspeccionidi.html" %}
+        </div>
+        <div id="step-3" class="content" style="display: none; overflow: hidden !important;">
+            {% include "InspeccionMejViviendaApp/inspeccionee.html" %}
+        </div>
+        <div id="step-4" class="content" style="display: none; overflow: hidden !important;">
+            {% include "InspeccionMejViviendaApp/inspeccionr.html" %}
+        </div>
+        <div id="step-5" class="content" style="display: none; overflow: hidden !important;">
+            {% include "InspeccionMejViviendaApp/inspeccionpmfd.html" %}
+        </div>
+     </form>
+   </div>
+</div>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+
+$(document).ready(function () {
+//agregar fecha de hoy al campo fecha
+let fecha = new Date();
+    let ff = ""
+    if ((fecha.getMonth()) >= 9) {
+      ff = fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+    } else {
+      ff = fecha.getFullYear() + "-0" + (fecha.getMonth() + 1) + "-" + fecha.getDate();
+    }
+    document.getElementById("fecham").value = ff;
+
+$("#fin").click(function () {
+
+  var arrayLif=[];
+    let ids=document.getElementById("ids").value || ""; 
+    let fecham=document.getElementById("fecham").value || "";
+    let horam=document.getElementById("horam").value || "";
+    let telpm=document.getElementById("telpm").value  || "";
+    let telsm=document.getElementById("telsm").value  || "";
+    let terceraedm=document.getElementById("terceraedm").value  || "";
+    let adultosm=document.getElementById("adultosm").value  || "";
+    let ninosm=document.getElementById("ninosm").value  || "";
+    let personadism=document.getElementById("personadism").value  || "";
+    let propietarioinmm=document.getElementById("propietarioinmm").value || "";
+    let parentescosm=document.getElementById("parentescosm").value  || ""; 
+    let latitudm=document.getElementById("latitudm").value || ""; 
+    let longitudm=document.getElementById("longitudm").value  || ""; 
+    let inmueblem=$('input[name="inmueblem"]:checked').val(); 
+    let usoactm=$('input[name="usoactm"]:checked').val();
+    let exotravm=$('input[name="exotravm"]:checked').val(); 
+    let usoacotvm=$('input[name="usoacotvm"]:checked').val();  
+    let comentariosrl=document.getElementById("comentariosrl").value || "";  
+
+    var infg= {'ids':ids,'fecham':fecham,'horam':horam,'telpm':telpm,'telsm':telsm,'terceraedm':terceraedm,'adultosm':adultosm,'ninosm':ninosm,'personadism':personadism,'propietarioinmm':propietarioinmm,'parentescosm':parentescosm,'latitudm':latitudm,'longitudm':longitudm,'inmueblem':inmueblem,'usoactm':usoactm,'exotravm':exotravm,'usoacotvm':usoacotvm,'comentariosrl':comentariosrl} 
+    arrayLif.push(infg);
+    var jsonArrayifm = JSON.stringify(arrayLif)
+    console.log(jsonArrayifm)
+
+
+// para tabla  infraestructura inmueble
+var arrayList = [];
+var tablei = document.getElementById('tbinfraestructurainm');
+var lrexisteii = tablei.querySelectorAll('#existeii');
+var lrestadoii = tablei.querySelectorAll('#estadoii');
+
+for (var i = 0; i < lrexisteii.length; i++) {
+  if (lrexisteii[i].checked) {
+    let datos = lrexisteii[i].name;
+    idc = datos.replace("existeii-", "");
+    var vdatosi = {"id": idc, "existeii": lrexisteii[i].value};
+
+    // Buscamos el valor seleccionado del estadoii para el mismo idc
+    for (var j = 0; j < lrestadoii.length; j++) {
+      if (lrestadoii[j].checked && lrestadoii[j].name == "estadoii-" + idc) {
+        vdatosi.estadoii = lrestadoii[j].value;
+        break;
+      }
+    }
+
+  // para asignar valores vacios en caso de que no ingrese un dato
+var tiposistInput = tablei.querySelector("input[name='tiposist-" + idc + "']");
+if (tiposistInput) {
+  vdatosi.tiposist = tiposistInput.value || "";
+} else {
+  vdatosi.tiposist = "";
+}  
+
+//    var tiposistInput = tablei.querySelector("input[name='tiposist-" + idc + "']");
+//if (tiposistInput && tiposistInput.value) {
+//  vdatosi.tiposist = tiposistInput.value;
+//}
+
+
+    
+      //  var vdatosix = {"id":idc,"valor": lrexisteii[i].value,"estado":lrestadoii[i].value ,"tipo":tiposistInput.value  }
+      //  console.log('vdatosix',vdatosix );
+        console.log('vdatosi',vdatosi );
+    arrayList.push(vdatosi);
+
+  }
+}
+
+let jsontinfra = JSON.stringify(arrayList, null, 2);
+console.log(jsontinfra);
+//alert(jsontinfra);
+
+ // para tabla espacios encontrados
+ var arrayListbee=[];
+    var tableee = document.getElementById('tbespaciose');
+    var lrexistele = tableee.querySelectorAll('#existele');
+    
+
+    for (var i = 0; i < lrexistele.length; i++) {
+      //Usar variable con [i]  && lrexisteld[i].value=="Si"
+      
+      if (lrexistele[i].checked ) {
+        let datose;
+        datose = lrexistele[i].name;
+        idc=datose.replace("existele-","")
+
+        console.log("id: " + idc+" valor: " +lrexistele[i].value );
+        var vdatosee = {"ide":idc,"valore": lrexistele[i].value }
+   
+        arrayListbee.push(vdatosee);
+      } 
+    }
+    var jsonArraytbee = JSON.stringify(arrayListbee)
+    console.log("jsonArray 4",jsonArraytbee )
+
+    // para tabla servicios basicos
+ var arrayListbsbm=[];
+    var tablesbm = document.getElementById('tbserviciosb');
+    var lrexistelsb = tablesbm.querySelectorAll('#existesb');
+    
+
+    for (var i = 0; i < lrexistelsb.length; i++) {
+      //Usar variable con [i]  && lrexisteld[i].value=="Si"
+      
+      if (lrexistelsb[i].checked ) {
+        let datossbm;
+        datossbm = lrexistelsb[i].name;
+        idc=datossbm.replace("existesb-","")
+
+        console.log("id: " + idc+" valor: " +lrexistelsb[i].value );
+        var vdatossbm = {"ids":idc,"valors": lrexistelsb[i].value }
+   
+        arrayListbsbm.push(vdatossbm);
+      } 
+    }
+    var jsonArraytbsbm = JSON.stringify(arrayListbsbm)
+    console.log("jsonArray 4",jsonArraytbsbm )
+
+    
+    // para tabla infraestructura
+    var arrayListbsim=[];
+    var tablesim = document.getElementById('tbinfraestructuram');
+    var lrexistelim = tablesim.querySelectorAll('#existelim');
+    
+    for (var i = 0; i < lrexistelim.length; i++) {
+      
+      if (lrexistelim[i].checked ) {
+        let datosim;
+        datosim = lrexistelim[i].name;
+        idc=datosim.replace("existelim-","")
+
+        console.log("id: " + idc+" valor: " +lrexistelim[i].value );
+        var vdatosim = {"idi":idc,"valori": lrexistelim[i].value }
+   
+        arrayListbsim.push(vdatosim);
+      } 
+    }
+    var jsonArraytbim = JSON.stringify(arrayListbsim)
+    console.log("jsonArray 4",jsonArraytbim )
+
+    // para vias de acceso    
+    var arrayLvia=[];
+    let tipovia=$('input[name="tipovia"]:checked').val(); 
+
+    var infv= {'tipovia':tipovia} 
+    arrayLvia.push(infv);
+    var jsonArrayvm = JSON.stringify(arrayLvia)
+    console.log("jsonArray 9",jsonArrayvm )
+
+    // para tabla riesgos mejora
+     var arrayListbrm=[];
+    var tablerm = document.getElementById('tbriesgosm');
+    var lrexisterm = tablerm.querySelectorAll('#existerm');   
+
+    for (var i = 0; i < lrexisterm.length; i++) {
+      
+      if (lrexisterm[i].checked ) {
+        let datosrm;
+        datosrm = lrexisterm[i].name;
+        idc=datosrm.replace("existerm-","")
+        var vdatosrm = {"idr":idc,"valorr": lrexisterm[i].value }
+   
+        arrayListbrm.push(vdatosrm);
+      } 
+    }
+    var jsonArraytbrm = JSON.stringify(arrayListbrm)
+    console.log("jsonArray 7",jsonArraytbrm )
+
+    // para distancias de riesgos mejora
+    var arrayLdrm=[];
+    let distanciatl=document.getElementById("distanciatlm").value || ""; 
+    let distanciarc=document.getElementById("distanciarcm").value || ""; 
+    let distancialc=document.getElementById("distancialcm").value || ""; 
+    let distanciata=document.getElementById("distanciatam").value || "";  
+
+    var infdrm= {'distanciatlm':distanciatl,'distanciarcm':distanciarc,'distancialcm':distancialc,'distanciatam':distanciata} 
+    arrayLdrm.push(infdrm);
+    var jsonArraydrm = JSON.stringify(arrayLdrm)
+    console.log("jsonArray 8",jsonArraydrm )
+
+    // para etapas del plan de mejoramiento de vivienda
+    var arrayLdet=[];
+    var tableetp = document.getElementById('tbetapas');
+    var lval = tableetp.querySelectorAll('#valETP');
+    var letapa = tableetp.querySelectorAll('#etapa');
+    
+    for (var i = 0; i < lval.length; i++) {
+      
+      if (lval[i].value != "" && letapa[i].value != "" ) {
+
+        var infdet= {'valETP':lval[i].value,'etapa':letapa[i].value} 
+        arrayLdet.push(infdet);
+      } 
+    }
+
+    var jsonArraydet = JSON.stringify(arrayLdet)
+    console.log("jsonArray 8",jsonArraydet )
+
+     // para factibilidad tecnica
+    
+    var arrayLft=[];
+    let factpm=$('input[name="factpm"]:checked').val(); 
+
+    var infftm= {'factpm':factpm} 
+    arrayLft.push(infftm);
+    var jsonArrayftm = JSON.stringify(arrayLft)
+    console.log("jsonArray 9",jsonArrayftm )
+
+     // para descripción del mejoramiento acordado
+    var arrayLdm=[];
+    let descripcionma=document.getElementById("descripcionma").value || ""; 
+    let diasestm=document.getElementById("diasestm").value || ""; 
+
+    var infdm= {'descripcionma':descripcionma,'diasestm':diasestm} 
+    arrayLdm.push(infdm);
+    var jsonArraydm = JSON.stringify(arrayLdm)
+    console.log("jsonArray 9",jsonArraydm )
+
+    let idperf= document.getElementById("idp").value 
+    var passD = validarD();
+
+  if($("#inspeccionm").valid() && passD === 1){ 
+
+    $.ajax({
+            headers:{'X-CSRFToken': "{{csrf_token}}"},
+            url: "/InspeccionMejViviendaApp/registrarDIM/", 
+            data:{'valoresifm':jsonArrayifm,'valoresidi':jsontinfra ,'valoresee':jsonArraytbee,'valoressbm':jsonArraytbsbm,'valoresim':jsonArraytbim,'valoresvm': jsonArrayvm,'valorestbrm': jsonArraytbrm,'valorestbdrm': jsonArraydrm,'valorestbetp': jsonArraydet,'valoresftm': jsonArrayftm,'valoresdm': jsonArraydm}  , 
+            type:"POST",
+            success:function(r){
+              console.log("success",r) 
+              //document.inspeccionm.submit()
+              //window.location.href='../../../ClienteApp/listaClientes/administrarPerfil/'+idperf;
+                // Segundo AJAX (enviar datos con archivos)
+                        enviarArchivos();
+            },
+            error: function(jqXHR,textStatus,error){
+              console.log(error)
+              alertE("Error de guardado: " );
+            },
+            complete: function(xhr,status){
+              
+            }
+          })
+
+  }else{
+        alertE("Debe Registrar Datos Validos!");  
+        return false; // Evita el envío del formulario si la validación falla
+     }
+
+
+    }); // fin boton fin
+
+     // Función para enviar datos con archivos (segundo AJAX)
+     function enviarArchivos() {
+        let idperf= document.getElementById("idp").value 
+        // Crear un objeto FormData
+        var formData = new FormData();
+
+        // Obtener los archivos seleccionados y agregarlos al objeto FormData
+        var esquemaubicacionsFile = document.getElementById('esquemaubicacions').files[0];
+        var esquemaubicacionmFile = document.getElementById('esquemaubicacionm').files[0];
+
+        // Agregar al FormData
+        formData.append('esquemaubicacions', esquemaubicacionsFile);
+        formData.append('esquemaubicacionm', esquemaubicacionmFile);
+
+        // Realizar la solicitud Ajax
+        $.ajax({
+            headers: { 'X-CSRFToken': "{{ csrf_token }}" },
+            url: "/InspeccionMejViviendaApp/registrarDIME/",
+            data: formData,
+            type: "POST",
+            processData: false,
+            contentType: false,
+            success: function (r) {
+                console.log("success", r);
+
+                // Ejecutar las acciones después de la segunda solicitud
+                document.inspeccionm.submit();
+                window.location.href = '../../../ClienteApp/listaClientes/administrarPerfil/' + idperf;
+            },
+            error: function (jqXHR, textStatus, error) {
+                console.log(error);
+                alertE("Error de guardado: " );
+            },
+            complete: function (xhr, status) {
+                
+            }
+        });
+    }
+
+
+  }); // fin ready
+
+
+
+function validarD() {
+    if (document.getElementById("fecham").value != "" &&
+      document.getElementById("horam").value != "" &&
+      document.getElementById("terceraedm").value != "" &&
+      document.getElementById("adultosm").value != "" &&
+      document.getElementById("ninosm").value != "" &&
+      document.getElementById("personadism").value != "" &&
+      document.getElementById("latitudm").value != "" &&
+      document.getElementById("longitudm").value != "" &&
+      document.getElementById("distanciatlm").value != "" &&
+      document.getElementById("distanciarcm").value != "" &&
+      document.getElementById("distancialcm").value != "" &&
+      document.getElementById("distanciatam").value != "" &&
+      document.getElementById("etapa").value != "" &&
+      document.getElementById("descripcionma").value != "" &&
+      document.getElementById("diasestm").value != "" 
+      
+    ) {
+      return 1;
+    } else {
+      return 0;
+    }
+
+  }
+
+
+$.validator.addMethod("numero", function (value, element) {
+      return /^[0-9,.]*$/i.test(value);
+    }, "<h2>Ingrese sólo numero y puntos  </h2>");
+    $.validator.addMethod("numerosp", function (value, element) {
+      return /^[0-9]*$/i.test(value);
+    }, "<h2>Ingrese sólo numero  </h2>");
+
+    $.validator.addMethod("letrasn", function(value, element) {
+      return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª.]*$/i.test(value);
+    }, "<h2>Ingrese un valor valido ..</h2>");
+
+    $("#inspeccionm").validate({
+      errorElement: "em",
+      errorPlacement: function (error, element) {
+        $(element.parent("div").addClass("form-animate-error"));
+        error.appendTo(element.parent("div"));
+      },
+      success: function (label) {
+        $(label.parent("div").removeClass("form-animate-error"));
+      },
+
+      rules: {
+        fecham: {
+          required: true      
+        },
+        horam: {
+          required: true,
+        },
+
+        telsm: {
+          minlength: 9,
+          required: false,
+          maxlength: 9
+        },
+        
+        terceraedm: {
+          minlength: 1,
+          required: true,
+          numerosp: true,
+          maxlength: 5
+        },
+        adultosm: {
+          minlength: 1,
+          required: true,
+          numerosp: true,
+          maxlength: 5
+        },
+        ninosm: {
+          minlength: 1,
+          required: true,
+          numerosp: true,
+          maxlength: 5
+        },
+        personadism: {
+          minlength: 1,
+          required: true,
+          numerosp: true,
+          maxlength: 5
+        },
+        latitudm: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 100
+        },
+        longitudm: {
+          minlength: 1,
+          required: true,
+          numero: true,
+          maxlength: 100
+        },
+        comentariosrl: {
+          minlength: 5,
+          required: false,
+          letrasn: true,
+          maxlength: 200
+        },
+
+        distanciatlm: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 15
+        },
+        distanciarcm: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 15
+        },
+        distancialcm: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 15
+        },
+        distanciatam: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 15
+        },
+
+    
+        etapa: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 300
+        },
+        
+        descripcionma: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 300
+        },
+        obst: {
+          minlength: 1,
+          required: true,
+          letrasn: true,
+          maxlength: 10
+        },
+
+
+      },
+      messages: {
+        fecham: {
+          required: "<h2>Debe ingresar la fecha</h2>",
+        },
+        horam: {
+          required: "<h2>Debe ingresar la hora</h2>",
+        },
+        telsm: {
+          required: "<h2>Debe ingresar el numero de teléfono</h2>",
+          minlength: "<h2>El numero de teléfono debe tener un minimo de 9 digitos</h2>",
+          maxlength: "<h2>El numero de teléfono debe tener un maximo de 9 digitos</h2>"
+        },
+        terceraedm: {
+          required: "<h2>Debe ingresar el numero de personas</h2>",
+          minlength: "<h2>EL numero de personas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL numero de personas debe tener un maximo de 5 digitos</h2>"
+        },
+        adultosm: {
+          required: "<h2>Debe ingresar el numero de personas</h2>",
+          minlength: "<h2>El numero de personas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El numero de personas debe tener un maximo de 5 digitos</h2>"
+        },
+        ninosm: {
+          required: "<h2>Debe ingresar el numero de personas</h2>",
+          minlength: "<h2>EL numero de personas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>EL numero de personas debe tener un maximo de 5 digitos</h2>"
+        },
+        personadism: {
+          required: "<h2>Debe ingresar el numero de personas</h2>",
+          minlength: "<h2>El numero de personas debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>El numero de personas debe tener un maximo de 5 digitos</h2>"
+        },
+        latitudm: {
+          required: "<h2>Debe ingresar La latitud</h2>",
+          minlength: "<h2>La latitud debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La latitud debe tener un maximo de 100 digitos</h2>"
+        },
+        longitudm: {
+          required: "<h2>Debe ingresar la longitud</h2>",
+          minlength: "<h2>La longitud debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La longitud debe tener un maximo de 100 digitos</h2>"
+        },
+        comentariosrl: {
+          required: "<h2>Debe ingresar los comentarios</h2>",
+          minlength: "<h2>Los comentarios debe tener un minimo de 5 digitos</h2>",
+          maxlength: "<h2>Los comentarios debe tener un maximo de 200 digitos</h2>"
+        },
+        
+        distanciatlm: {
+          required: "<h2>Debe ingresar la distancia</h2>",
+          minlength: "<h2>La distancia debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La distancia debe tener un maximo de 15 digitos</h2>"
+        },
+        distanciarcm: {
+          required: "<h2>Debe ingresar la distancia</h2>",
+          minlength: "<h2>La distancia debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La distancia debe tener un maximo de 15 digitos</h2>"
+        },
+        distancialcm: {
+          required: "<h2>Debe ingresar la distancia</h2>",
+          minlength: "<h2>La distancia debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La distancia debe tener un maximo de 15 digitos</h2>"
+        },
+        distanciatam: {
+          required: "<h2>Debe ingresar la distancia</h2>",
+          minlength: "<h2>La distancia debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La distancia debe tener un maximo de 15 digitos</h2>"
+        },
+  
+        etapa: {
+          required: "<h2>Debe ingresar la etapa</h2>",
+          minlength: "<h2>La etapa debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>La etapa debe tener un maximo de 300 digitos</h2>"
+        },
+       
+        descripcionma: {
+          required: "<h2>Debe ingresar las actividades</h2>",
+          minlength: "<h2>Las actividades debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>Las actividades debe tener un maximo de 300 digitos</h2>"
+        },  
+        diasestm: {
+          required: "<h2>Debe ingresar los dias estimados</h2>",
+          minlength: "<h2>Los dias estimados debe tener un minimo de 1 digitos</h2>",
+          maxlength: "<h2>Los dias estimados debe tener un maximo de 10 digitos</h2>"
+        },
+
+      }
+    });
+
+    function validarHora() {
+        var horaIngresada = document.getElementById("horam").value;
+        var patron = /^(1[012]|[1-9]):[0-5][0-9]\s*(am|pm)$/i;
+
+        if (!patron.test(horaIngresada)) {
+            alertE("Formato de Hora inválida. ");
+            return false;
+        }
+
+        return true;
+    }
+
+function validarFecha(fecha) {
+    var actual = new Date();
+    var f = Date.parse(fecha.value);
+    var anio = actual.getFullYear();
+    var mes = actual.getMonth();
+    var dia = actual.getDate();
+
+    if (f.getFullYear() > anio) {
+      alertE("Ingrese una fecha valida ");
+      fecha.value = "";
+    } else {
+      if (f.getMonth() > mes && f.getFullYear() == anio) {
+        alertE("Ingrese una fecha valida ");
+        fecha.value = "";
+      } else {
+        if (f.getDate() > dia && f.getMonth() == mes) {
+          alertE("Ingrese una fecha valida ");
+          fecha.value = "";
+        }
+      }
+    }
+  }
+
+  function tel(id){
+      var num=  document.getElementById(id).value.length;
+      var primer = document.getElementById(id).value;
+      if(num==4)
+      document.getElementById(id).value=document.getElementById(id).value+'-';
+
+      if(num==1 ){
+        if( primer=='2' || primer=='7' || primer=="6")
+           return
+           else {
+            document.getElementById(id).value="";
+            document.getElementById(id).title = "El Telefono debe comenzar con 2, 6 o 7";
+                      
+            
+            } 
+      }   
+     
+    }
+
+    function limpiarValor(campo) {
+          if (campo.value === "0") {
+              campo.value = "";
+          }
+      }  
+    
+      function limpiarValorN(campo) {
+          if (campo.value === "No") {
+              campo.value = "";
+          }
+      }  
+
+ 
+
+
+
+</script>
+{% endblock %}
+  

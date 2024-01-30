@@ -1,0 +1,70 @@
+
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+
+{% block titulo %}Grafica solicitudes Para Microempresa{% endblock titulo %}<!-- /el titulo del formulario-->
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+<form id="contact" name="contact" method="post" autocomplete="off">{% csrf_token %}
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_content">
+                <canvas id="densityChart" width="100" height="100"></canvas> 
+               <!--<canvas id="mybarChart"></canvas>--> 
+              </div>
+</form>
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+{% block js %}<!-- bloque para validaciones de input-->
+<script type="text/javascript">
+    var densityCanvas = document.getElementById("densityChart");
+    
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 20;
+    
+    var densityData = {
+      label: 'Nùmero de Solicitudes Para Microempresa',
+      colorByPoint:true,
+      data: ['{{en}}','{{fe}}','{{mar}}','{{abri}}','{{may}}','{{jun}}','{{jul}}','{{ago}}','{{sep}}','{{oct}}','{{nov}}','{{dic}}',],
+      
+      backgroundColor:[
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)',
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)'
+      ], // Color de fondo de las barras del grafico
+  borderColor: [
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)',
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+        'rgba(255, 206, 86, 0.6)',
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)'
+      ], // Color del borde de las barras
+    };
+    
+    var barChart = new Chart(densityCanvas, {
+      type: 'bar',
+      data: {
+        labels: ["En", "Fe", "Mar", "Abr", "Ma","Ju", "Jul","Ag", "Sep","Oc","Nov","Dic"],
+        datasets: [densityData]
+      }
+    });
+    </script>
+{% endblock %}

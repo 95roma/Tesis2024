@@ -1,0 +1,55 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Agencias{% endblock titulo %}<!-- /el titulo del formulario-->
+{% block uno %}Listar Perfil Cliente   {% endblock uno %}<!-- /Para el menu de formulario em la llave-->
+{% block dos %}    {% endblock dos %}<!-- /Para el menu de formulario em la llave-->
+
+{% block content %}<!-- /abrir el bloque de contenido-->
+    
+        
+        <table id="listAgencias" class="table table-striped table-bordered" >
+          <thead style=" background: #1a1b1b; color: #dff0f2; font-weight: bold; font-size: 14px; ">
+            <tr>
+              <th>#</th>
+              <th>Nombre</th>
+              <th>Departamento</th>
+              <th>Municipio</th>
+              <th> Opciones </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for a in agencias %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{a.nombre}}</td>
+              <td>{{a.departamento}}</td>
+              <td>{{a.municipio}}</td>
+              <td><a href="editarAgencia/{{a.id}}" class="btn btn-info">Editar</a></td>
+              
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      
+
+
+
+
+{% endblock %}
+<!-- /cerrar el bloque de contenido-->
+
+{% block js %}
+<script>
+  $(document).ready(function() {    
+      
+      $('#listAgencias').DataTable({
+          responsive: true,
+          language: {
+          url: "{% static 'TesisApp/table/es-ar.json' %}" //Ubicacion del archivo con el json del cambio de idioma.
+          }
+          
+      });
+  });
+</script>
+{% endblock %}

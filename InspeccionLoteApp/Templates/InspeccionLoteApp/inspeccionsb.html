@@ -1,0 +1,55 @@
+
+  <div>            <!-- Datos de declaracion de salud -->
+
+    <div class="x_title">
+        <div class="row">
+          <h2 style="text-align: center;">Servicios Básicos </h2>
+        </div>
+    </div>   
+        <div>
+          
+           <table class="table" >
+             <thead>
+               <tr>
+                <th></th>
+                 <th width="30%">Espacios </th>
+                 <th width="35%">Existe</th>
+               </tr>
+             </thead>
+             <tbody id="lenfermedad" style="color: #27575c;">
+              {% for sb in listasb %}
+               <tr>
+                 <td>
+                  <input type="hidden" id="idenf" name="idenf" value=" {{sb.id}}">
+                  </td>
+                  <td>
+                    <input type="hidden" class="form-text" id="empleadoen" name="empleadoen" value="{{sb.nombre}}"  >
+                    {{sb.nombre}}
+                  </td>
+              
+                 <td> 
+                  Si
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat"  name="existesb" value="Si" required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>&nbsp;
+                  No
+                  <div class="iradio_flat-green ">
+                    <input type="radio" class="flat" name="existesb" value="No" checked required>
+                    <ins class="iCheck-helper"></ins>
+                  </div>                
+                </td>                
+               </tr>
+               {% endfor %}
+             </tbody>
+         
+           </table>
+         </div>
+      
+
+   <input type="hidden" id="passDS" name="passDS" value="0">
+</div>
+
+
+
+

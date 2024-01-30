@@ -1,0 +1,182 @@
+<!-- /con la linea del extends se hereda lo que tiene el index -->
+{% extends "TesisApp/base.html" %}
+{% load static %}
+<!-- /carga lo que esta en la carpeta static para linkear-->
+{% block titulo %}Evaluación de Solicitud{% endblock titulo %}
+<!-- /el titulo del formulario-->
+
+
+{% block content %}
+<!-- /abrir el bloque de contenido-->
+
+{% if messages %}
+{% for mens in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" date-dismiss="alert">&times;</button>
+    <strong class="text-dark"> {{mens}}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+<form id="regEvaluacion" name="regEvaluacion" action="/SolicitudesApp/registrarEvaluacion/" method="POST" 
+autocomplete="off">{%  csrf_token %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <input type="hidden" id="ids" name="ids" value="{{s.id}}">
+                <h4>Cliente</h4>
+                <input type="text" class="form-text" id="nombres" name="nombres" value="{{s.perfil.nombres}} {{s.perfil.apellidos}}" disabled>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>DUI</h4>
+                <input type="text" class="form-text" id="dui" name="dui" value="{{s.perfil.dui}}" disabled>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Teléfono</h4>
+                <input type="text" class="form-text" id="telefono" name="telefono" value="{{s.perfil.telefono}}" disabled>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Tipo de obra a realizar</h4>
+                <input type="text" class="form-text" id="tipoob" name="tipoob" value="{{s.tipoobra}}"  disabled>
+                <span class="bar"></span>
+            </div>
+        </div>
+         <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Monto</h4>
+                <input type="text" class="form-text" id="mont" name="mont" value="{{dt.monto}}"   disabled>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </div>
+    <BR>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="form-group form-animate-text " style="margin-top:10px !important;">
+            <label>Resolución del comite de credito:</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Aprobado
+            <div class="iradio_flat-green ">
+              <input type="radio"   name="evaluacion" id="evaluacion" value="4" onchange="habdesOb(this.value);" checked required>
+              <ins class="iCheck-helper"></ins>
+            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Denegado
+            <div class="iradio_flat-green ">
+              <input type="radio"  name="evaluacion" id="evaluacion" value="6" onchange="habdesOb(this.value);" required>
+              <ins class="iCheck-helper"></ins>
+            </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Observado
+            <div class="iradio_flat-green ">
+              <input type="radio"  name="evaluacion" id="evaluacion" value="5" onchange="habdesOb(this.value);" required>
+              <ins class="iCheck-helper"></ins>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="form-group form-animate-text " style="margin-top:5px !important;">
+                <h4>Observaciones</h4>
+                <input type="text" class="form-text" id="observacion" name="observacion" onkeyup="LetraM(this)"  disabled>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </div>
+
+    <BR><BR>
+        <div class="form-group">
+            <div class="col-md-12 col-md-offset-2">
+                <button id="btnguardar" name="btnguardar"  type="submit" class="btn btn-success"
+                    style="width:200px; height:40px;">Guardar</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-warning" style="width:200px; height:40px;" type="reset">Cancelar</button>
+            </div>
+        </div>
+    </form>
+    {% endblock %}
+    <!-- /cerrar el bloque de contenido-->
+
+    {% block js %}<!-- bloque para validaciones de input-->
+    <script type="text/javascript">
+        $(document).ready(function(){
+    
+    $.validator.addMethod("letras", function(value, element) {
+    return /^(?!.*(.)\1{2})[ a-zA-Záéíóúüñ0-9,ºª#@&%-.]*$/i.test(value);
+    }, "<h2>Ingrese sólo letras sin repetir más de 2 veces o espacios..</h2>");
+    
+    $("#regEvaluacion").validate({
+      errorElement: "em",
+      errorPlacement: function(error, element) {
+        $(element.parent("div").addClass("form-animate-error"));
+        error.appendTo(element.parent("div"));
+      },
+      success: function(label) {
+        $(label.parent("div").removeClass("form-animate-error"));
+      },
+      
+      rules: {
+        evaluacion:{
+            required:true,
+
+        },  
+        observacion:{
+          minlength:5,
+          required: false,
+          letras:true,
+          maxlength:300
+        },
+      
+    
+      },
+      messages: {
+        evaluacion:{
+            required : "<h2>Debe seleccionar la Evaluación</h2>"
+        },
+        observacion:{
+            required : "<h2>Debe ingresar la observación</h2>",
+            minlength : "<h2>La observación debe tener un minimo de 5 caracteres</h2>",
+            maxlength : "<h2>La observación debe tener un maximo de 300 caracteres</h2>"
+        },
+       
+      }
+    });
+    $("#btnguardar").click(function(){
+    if($("#regEvaluacio").valid()){
+    
+    }else{
+      alertE("Debe Registrar Datos Validos!"); 
+      return false;
+    }
+    });// fin de btnguardar
+    
+    });
+
+    function habdesOb(value) {
+    if (value == "5" || value == "6") {
+      document.getElementById("observacion").disabled = false;
+      document.getElementById("observacion").focus();
+    } else if (value == "4" ) {
+        document.getElementById("observacion").value = "";
+        document.getElementById("observacion").blur();
+        document.getElementById("observacion").disabled = true;
+     
+    }
+  }
+
+  function LetraM(input) {
+    input.value = input.value.charAt(0).toUpperCase() + input.value.slice(1);
+  }
+</script>
+{% endblock %}
